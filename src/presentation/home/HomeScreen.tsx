@@ -1,33 +1,77 @@
-import { Text, View } from "react-native"
-import { HomeViewModel, User } from "./HomeScreenViewModel";
+import { Pressable, StyleSheet, Text, View } from "react-native"
+import { HomeViewModel } from "./HomeScreenViewModel";
 import { useEffect, useState } from "react";
+import { User } from "../../domain/models/User";
+import { GetUserListUseCase, RemoveUserUseCase } from "../../domain/useCases/GetUserListUseCase";
 
 
 
 const HomeScreen = () => {
-    const { state, loadInitialData } = HomeViewModel();
+    const { state, loadInitialData, removeUser } = HomeViewModel(
+        GetUserListUseCase,
+        RemoveUserUseCase
+    );
 
     useEffect(() => {
         loadInitialData()
     }, [])
 
 
-    return (<View>
+    return (<View style={styles.rootContainer}>
         <Text>Home Screen</Text>
 
         {state?.type === 'Loading' && <Text>Loading ...</Text>}
-        {state?.type === 'Success' && <Content user={state.data} />}
-        
+        {state?.type === 'Success' && <Content userList={state.data} userPressed={removeUser} />}
+
     </View>)
 }
 
 type ContentProps = {
-    user: User
+    userList: User[]
+    userPressed: (user: User) => void
 }
 
-const Content = ({ user }: ContentProps) => {
-    return (<Text>{`User: ${user.name}`}</Text>)
+const Content = ({ userList, userPressed }: ContentProps) => {
+    return (
+        <View>
+            {userList.map(element => <UserView user={element} onPress={userPressed} />)}
+        </View>
+    )
+};
+
+type UserViewProp = {
+    user: User,
+    onPress: (user: User) => void
 }
+const UserView = ({ user, onPress }: UserViewProp) => {
+    return (
+        <View style={styles.userContainer}>
+            <Pressable
+                android_ripple={{ color: 'gray' }}
+                onPress={() => onPress(user)}>
+                <Text style={styles.userInnerContainer}>{`User: ${user.name}`}</Text>
+            </Pressable>
+        </View>
+    )
+}
+
+const styles = StyleSheet.create({
+    rootContainer: {
+        flex: 1,
+        backgroundColor: 'white',
+        marginTop: 16,
+        overflow: 'hidden'
+    },
+    userContainer: {
+        marginHorizontal: 16,
+        borderRadius : 4,
+        marginBottom: 8,
+        borderWidth: 1
+    },
+    userInnerContainer : {
+        padding: 16,
+    }
+})
 
 export default HomeScreen
 
