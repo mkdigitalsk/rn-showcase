@@ -5,14 +5,13 @@ import {
   Text,
   View,
 } from 'react-native';
+import HomeScreen from '../presentation/home/HomeScreen';
 
 
 function App(): React.JSX.Element {
 
   return (
-    <View>
-      <Text>Home Screen</Text>
-    </View>
+    <HomeScreen/>
   );
 }
 
