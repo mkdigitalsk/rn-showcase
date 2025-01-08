@@ -2,8 +2,18 @@ import delay from "../../../utils/delay"
 import { User, USERS_MOCK } from "../../domain/models/User"
 
 
+export interface UserApi {
 
-export default class UserApi {
+    logOut(): Promise<void>,
+
+    fetchUsers(): Promise<User[]>,
+
+    removeUser(id: number): Promise<void>,
+
+
+}
+
+export class UserApiImpl implements UserApi {
 
     async logOut(): Promise<void> {
         delay(200)
@@ -21,4 +31,4 @@ export default class UserApi {
 
 }
 
-export const provideUserApi = () => new UserApi()
+export const provideUserApi = (): UserApi => new UserApiImpl()

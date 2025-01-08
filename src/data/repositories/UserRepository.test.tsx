@@ -1,48 +1,56 @@
-
 jest.mock('../network/UserApi')
-// import { mockUserApi } from '../network/UserApi.Mock';
-import UserApi from '../network/UserApi';
+
+import { instance, mock, reset, verify, when } from 'ts-mockito';
+import testScenario from '../../../__tests__/base/test';
 import { UserRepository, UserRepositoryImpl } from './UserRepository';
+import { UserApi } from '../network/UserApi';
 
 let classUnderTest: UserRepository
-let api: jest.MockedObjectDeep<UserApi>
+let api: UserApi;
+let apiInstance: UserApi;
 
 beforeEach(() => {
-    jest.clearAllMocks();
-    api = jest.mocked(UserApi).prototype
-    classUnderTest = UserRepositoryImpl(api)
-
+    api = mock<UserApi>()
+    apiInstance = instance(api)
+    classUnderTest = UserRepositoryImpl(apiInstance)
 });
 
-afterEach(() => {
-    jest.resetAllMocks();
-});
+afterEach(() => reset(api));
 
-
-
-test('should call fetchUsers and return data', async () => {
-    // Given
+test('fetch users success', async () => {
     const mockUsers = [{ id: 1, name: 'John' }];
-    api.fetchUsers.mockResolvedValue(mockUsers);
-    // When
-    const result = await classUnderTest.getUsers();
-    // Then
-    expect(api.fetchUsers).toHaveBeenCalledTimes(1);
-    expect(result).toEqual(mockUsers);
+    await testScenario({
+        given: () => when(api.fetchUsers()).thenResolve(mockUsers),
+        whenAction: () => classUnderTest.getUsers(),
+        then: (actual) => {
+            verify(api.fetchUsers()).once();
+            expect(actual).toEqual(mockUsers);
+        },
+    });
 });
 
 test('should call removeUser with correct ID', async () => {
-    // Given
     const userId = 1;
-    // When
-    await classUnderTest.removeUser(userId);
-    // Then
-    expect(api.removeUser).toHaveBeenCalledWith(userId);
+    await testScenario({
+        whenAction: () => classUnderTest.removeUser(userId),
+        then: () => verify(api.removeUser(userId)).once(),
+    });
 });
 
 test('should handle removeUser errors', async () => {
-    // Given
-    api.removeUser.mockRejectedValue(new Error('Remove failed'));
-    // When, Then
-    await expect(classUnderTest.removeUser(1)).rejects.toThrow('Remove failed');
+    const msg = 'Remove failed';
+    when(api.removeUser(1)).thenThrow(new Error(msg));
+    await expect(classUnderTest.removeUser(1)).rejects.toThrow(msg);
+    verify(api.removeUser(1)).once();
+});
+
+test('should return an empty array when no users found', async () => {
+    await testScenario({
+        given: () => when(api.fetchUsers()).thenResolve([]),
+        whenAction: () => classUnderTest.getUsers(),
+        then: (actual) => {
+            expect(actual).toEqual([]);
+            verify(api.fetchUsers()).once();
+        },
+    });
 });
