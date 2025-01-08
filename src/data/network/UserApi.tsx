@@ -12,6 +12,10 @@ export class UserApi {
     async removeUser(id: number): Promise<void> {
         delay (200)
     }
+
+    async logOut() : Promise<void> {
+        delay (200)
+    }
 }
 
 export const provideUserApi = () => new UserApi()

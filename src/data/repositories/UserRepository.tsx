@@ -2,7 +2,7 @@ import delay from "../../../utils/delay";
 import { User } from "../../domain/models/User";
 import { provideUserApi, UserApi } from "../network/UserApi";
 
-const UserRepositoryImpl = (api: UserApi) : UserRepository  => ({
+export const UserRepositoryImpl = (api: UserApi) : UserRepository  => ({
     getUsers: async () =>  api.fetchUsers(),
     removeUser: async (id: number) => api.removeUser(id),
 })
