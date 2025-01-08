@@ -1,6 +1,6 @@
 import delay from "../../../utils/delay";
 import { User } from "../../domain/models/User";
-import { provideUserApi, UserApi } from "../network/UserApi";
+import UserApi, { provideUserApi } from "../network/UserApi";
 
 export const UserRepositoryImpl = (api: UserApi) : UserRepository  => ({
     getUsers: async () =>  api.fetchUsers(),

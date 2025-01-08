@@ -1,18 +1,17 @@
-import { UserApi } from '../network/UserApi';
-import { mockUserApi } from '../network/UserApi.Mock';
+
+jest.mock('../network/UserApi')
+// import { mockUserApi } from '../network/UserApi.Mock';
+import UserApi from '../network/UserApi';
 import { UserRepository, UserRepositoryImpl } from './UserRepository';
 
-jest.mock('../network/UserApi');
-
-
-let userRepository: UserRepository;
-let fetchUsers: any
-let removeUser: any
+let classUnderTest: UserRepository
+let api: jest.MockedObjectDeep<UserApi>
 
 beforeEach(() => {
     jest.clearAllMocks();
-    ({ fetchUsers, removeUser } = mockUserApi());
-    userRepository = UserRepositoryImpl(new UserApi());
+    api = jest.mocked(UserApi).prototype
+    classUnderTest = UserRepositoryImpl(api)
+
 });
 
 afterEach(() => {
@@ -24,13 +23,11 @@ afterEach(() => {
 test('should call fetchUsers and return data', async () => {
     // Given
     const mockUsers = [{ id: 1, name: 'John' }];
-    fetchUsers.mockResolvedValue(mockUsers);
-
+    api.fetchUsers.mockResolvedValue(mockUsers);
     // When
-    const result = await userRepository.getUsers();
-
+    const result = await classUnderTest.getUsers();
     // Then
-    expect(fetchUsers).toHaveBeenCalledTimes(1);
+    expect(api.fetchUsers).toHaveBeenCalledTimes(1);
     expect(result).toEqual(mockUsers);
 });
 
@@ -38,13 +35,14 @@ test('should call removeUser with correct ID', async () => {
     // Given
     const userId = 1;
     // When
-    await userRepository.removeUser(userId);
+    await classUnderTest.removeUser(userId);
     // Then
-    expect(removeUser).toHaveBeenCalledWith(userId);
+    expect(api.removeUser).toHaveBeenCalledWith(userId);
 });
 
 test('should handle removeUser errors', async () => {
-    removeUser.mockRejectedValue(new Error('Remove failed'));
-
-    await expect(userRepository.removeUser(1)).rejects.toThrow('Remove failed');
+    // Given
+    api.removeUser.mockRejectedValue(new Error('Remove failed'));
+    // When, Then
+    await expect(classUnderTest.removeUser(1)).rejects.toThrow('Remove failed');
 });
