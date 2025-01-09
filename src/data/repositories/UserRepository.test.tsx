@@ -1,7 +1,7 @@
 jest.mock('../network/UserApi')
 
 import { instance, mock, reset, verify, when } from 'ts-mockito';
-import testScenario from '../../../__tests__/base/test';
+import testScenario from '../../../utils/testScenario';
 import { UserRepository, UserRepositoryImpl } from './UserRepository';
 import { UserApi } from '../network/UserApi';
 

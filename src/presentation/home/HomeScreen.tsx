@@ -1,15 +1,27 @@
-import { Pressable, StyleSheet, Text, View } from "react-native"
+import { Button, Pressable, StyleSheet, Text, View } from "react-native"
 import { HomeViewModel } from "./HomeScreenViewModel";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { User } from "../../domain/models/User";
-import { GetUserListUseCase, RemoveUserUseCase } from "../../domain/useCases/GetUserListUseCase";
+import { GetUserListUseCase } from "../../domain/useCases/GetUserListUseCase";
+import { RemoveUserUseCase } from "../../domain/useCases/RemoveUserUseCase";
+import { NativeBridgeReturnValUseCase, NativeBridgeSayHeloUseCase } from "../../domain/useCases/NativeBridgeUseCase";
 
 
 
 const HomeScreen = () => {
-    const { state, loadInitialData, removeUser } = HomeViewModel(
+    const {
+        state,
+        nativeText,
+        loadInitialData,
+        removeUser,
+        onNativePressed,
+        withReturnVal,
+
+    } = HomeViewModel(
         GetUserListUseCase,
-        RemoveUserUseCase
+        RemoveUserUseCase,
+        NativeBridgeSayHeloUseCase,
+        NativeBridgeReturnValUseCase
     );
 
     useEffect(() => {
@@ -19,16 +31,19 @@ const HomeScreen = () => {
 
     return (<View style={styles.rootContainer}>
         <Text>Home Screen</Text>
+        <Text>{nativeText}</Text>
+        <Button title="native Say hello" onPress={onNativePressed}/>
+        <Button title="native Return val " onPress={withReturnVal}/>
 
         {state?.type === 'Loading' && <Text>Loading ...</Text>}
-        {state?.type === 'Success' && <Content userList={state.data} userPressed={removeUser} />}
+        {state?.type === 'Success' && <Content userList={state.data} userPressed={removeUser}  />}
 
     </View>)
 }
 
 type ContentProps = {
     userList: User[]
-    userPressed: (user: User) => void
+    userPressed: (user: User) => void,
 }
 
 const Content = ({ userList, userPressed }: ContentProps) => {
@@ -64,14 +79,15 @@ const styles = StyleSheet.create({
     },
     userContainer: {
         marginHorizontal: 16,
-        borderRadius : 4,
+        borderRadius: 4,
         marginBottom: 8,
         borderWidth: 1
     },
-    userInnerContainer : {
+    userInnerContainer: {
         padding: 16,
     }
 })
 
 export default HomeScreen
+
 

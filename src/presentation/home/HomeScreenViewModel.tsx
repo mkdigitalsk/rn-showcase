@@ -1,7 +1,10 @@
 import delay from "../../../utils/delay";
 import { useState } from "react";
 import { User } from "../../domain/models/User";
-import { GetUserListUseCaseType, RemoveUserUseCaseType } from "../../domain/useCases/GetUserListUseCase";
+import { GetUserListUseCaseType } from "../../domain/useCases/GetUserListUseCase";
+import { RemoveUserUseCaseType } from "../../domain/useCases/RemoveUserUseCase";
+import { NativeBridgeSayHelloUseCaseType, NativeBridgeReturnValUseCaseType } from "../../domain/useCases/NativeBridgeUseCase";
+import { NativeModules } from "react-native";
 
 type DefaultLoading = {
     type: 'Loading';
@@ -17,14 +20,16 @@ type HomeState = DefaultLoading | HomeSuccessState;
 
 export const HomeViewModel = (
     getListUseCase: GetUserListUseCaseType,
-    removeUserUseCase: RemoveUserUseCaseType
+    removeUserUseCase: RemoveUserUseCaseType,
+    sayHellUseCase: NativeBridgeSayHelloUseCaseType,
+    returnValUsecase: NativeBridgeReturnValUseCaseType
 ) => {
     const [state, setState] = useState<HomeState | undefined>(undefined)
+    const [nativeText, setNativeText] = useState<string>('initial')
 
 
     const loadInitialData = async () => {
         setState({ type: 'Loading' })
-        // const homes = await fetchHomesUseCase(HomeRepository);
         const initialData = await getListUseCase()
         console.log(initialData);
         setState({ type: 'Success', data: initialData })
@@ -38,9 +43,23 @@ export const HomeViewModel = (
         setState({ type: 'Success', data: newData })
     };
 
+    const onNativePressed = async () => {
+        await sayHellUseCase()
+        setNativeText("onNativePressed")
+    }
+
+    const withReturnVal = async () => {
+        const result = await returnValUsecase()
+        console.log(`onNativePressed : ${result}`)
+        setNativeText(`withReturnVal: ${result}`)
+    }
+
     return {
         state,
+        nativeText,
         loadInitialData,
-        removeUser
+        removeUser,
+        onNativePressed,
+        withReturnVal,
     };
 };
