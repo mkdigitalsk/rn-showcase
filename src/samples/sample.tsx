@@ -1,5 +1,5 @@
 import React, { Component, lazy, memo, Suspense, useEffect, useState } from 'react';
-import { Button, Text, View } from 'react-native';
+import { Appearance, Button, Text, View } from 'react-native';
 
 const Greeting = ({ name }: { name: string }) => {
     return (
@@ -12,23 +12,15 @@ const Greeting = ({ name }: { name: string }) => {
 
 type BoxProps = {
     children: React.ReactNode,
-    ch2?: React.ReactNode,
+    a?: React.ReactNode,
 
 }
 
-const Box = ({ children, ch2}: {children : React.ReactNode, ch2?: React.ReactNode}) => {
+export const Box = ({ children, ch2 =<Text>DefaultText</Text>}: {children : React.ReactNode, ch2?: React.ReactNode}) => {
     return <View>
         {children}
         {ch2}
     </View>;
-};
-
-const App = () => {
-    return (
-        <Box>
-            <Text>This is inside the box!</Text>
-        </Box>
-    );
 };
 
 
@@ -46,61 +38,44 @@ export class ClassExample extends Component<{}, State> {
         };
     }
 
+    componentDidMount() {}
+    componentDidUpdate(prevProps: Readonly<{}>, prevState: Readonly<State>, snapshot?: any) {}
+    componentWillUnmount() {
+    }
     render() {
         return (<View>
             <Text>{this.state.property1}</Text>
             <Text>{this.state.property2}</Text>
-            <Button
-                title={this.state.property1}
-                onPress={this.increment}
-            />
-
-
+            <Button title="increment" onPress={this.increment}/>
         </View>)
     }
 
     increment() {
         this.setState((prev) => ({ property2: prev.property2 + 1 }))
     }
-
-
-    componentDidMount(): void {
-        // load initial data - usecase, repository, api call
-    }
-
-
-
+    
     defaultState() {
         this.setState({ property1: "", property2: 0 })
     }
-
-    componentWillUnmount() {
-        this.defaultState()
-    }
-
 }
 
 
 export const LifecycleExample: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     const [count, setCount] = useState(0);
 
-    // Equivalent to componentDidMount and componentDidUpdate
     useEffect(() => {
-        console.log('Component mounted or updated');
+        //componentDidMount/componentDidUpdate
         return () => {
-            console.log('Component unmounted'); // Equivalent to componentWillUnmount
+             //componentWillUnmount
         };
-    }, [count]); // Dependency array controls when this effect runs
+    }, [count]); //Dependency array controls when this effect runs
 
     return (
         <View>
-            <ClassExample />
             <Text onPress={() => setCount(count + 1)}>Count: {count}</Text>
             {children}
         </View>
-    );
-
-    
+    ); 
 };
 
 // memmo
@@ -114,7 +89,7 @@ const MemoizedComponent = memo(MyComponent);
 
 
 // Lazy loading a component
-const LazyLoadedComponent = lazy(() => import('./LazyComponent'));
+// const LazyLoadedComponent = lazy(() => import('./LazyComponent'));
 
 const App2 = () => {
   return (
@@ -122,7 +97,7 @@ const App2 = () => {
       <Text>Welcome to React Native!</Text>
       {/* Suspense for handling loading state */}
       <Suspense fallback={<Text>Loading...</Text>}>
-        <LazyLoadedComponent />
+        {/* <LazyLoadedComponent /> */}
       </Suspense>
     </View>
   );
@@ -145,4 +120,16 @@ const DynamicComponentLoader = () => {
     </View>
   );
 };
+
+
+// light dark mode
+const [theme, setTheme] = useState(Appearance.getColorScheme())
+
+useEffect(()=> {
+    Appearance.addChangeListener(({colorScheme})=> {
+        setTheme(colorScheme)
+    })
+})
+
+//  theme === 'dark' ? styles.darkBackground : styles.lightBackground,
 

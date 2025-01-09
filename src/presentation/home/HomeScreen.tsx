@@ -5,6 +5,7 @@ import { User } from "../../domain/models/User";
 import { GetUserListUseCase } from "../../domain/useCases/GetUserListUseCase";
 import { RemoveUserUseCase } from "../../domain/useCases/RemoveUserUseCase";
 import { NativeBridgeReturnValUseCase, NativeBridgeSayHeloUseCase } from "../../domain/useCases/NativeBridgeUseCase";
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 
 
@@ -32,11 +33,12 @@ const HomeScreen = () => {
     return (<View style={styles.rootContainer}>
         <Text>Home Screen</Text>
         <Text>{nativeText}</Text>
-        <Button title="native Say hello" onPress={onNativePressed}/>
-        <Button title="native Return val " onPress={withReturnVal}/>
+        <Icon name="home" size={30} color="blue" style={{ fontFamily: 'FontAwesome' }} />
+        <Button title="native Say hello" onPress={onNativePressed} />
+        <Button title="native Return val " onPress={withReturnVal} />
 
         {state?.type === 'Loading' && <Text>Loading ...</Text>}
-        {state?.type === 'Success' && <Content userList={state.data} userPressed={removeUser}  />}
+        {state?.type === 'Success' && <Content userList={state.data} userPressed={removeUser} />}
 
     </View>)
 }

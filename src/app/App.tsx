@@ -6,12 +6,13 @@ import {
   View,
 } from 'react-native';
 import HomeScreen from '../presentation/home/HomeScreen';
+import { Box } from '../samples/sample';
 
 
 function App(): React.JSX.Element {
 
   return (
-    <HomeScreen/>
+    <Box><Text>Child1</Text></Box>
   );
 }
 
