@@ -15,6 +15,7 @@ export const USERS_MOCK: User[] = [
     },
     {
         id: 3,
+        
         name: "Ivan"
     }
 ]

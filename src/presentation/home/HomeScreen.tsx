@@ -1,15 +1,12 @@
 import { Button, Pressable, StyleSheet, Text, View } from "react-native"
-import { HomeViewModel } from "./HomeScreenViewModel";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { User } from "../../domain/models/User";
-import { GetUserListUseCase } from "../../domain/useCases/GetUserListUseCase";
-import { RemoveUserUseCase } from "../../domain/useCases/RemoveUserUseCase";
-import { NativeBridgeReturnValUseCase, NativeBridgeSayHeloUseCase } from "../../domain/useCases/NativeBridgeUseCase";
 import Icon from 'react-native-vector-icons/FontAwesome';
-
+import { provideHomeViewModel } from "../../app/di";
 
 
 const HomeScreen = () => {
+
     const {
         state,
         nativeText,
@@ -17,13 +14,7 @@ const HomeScreen = () => {
         removeUser,
         onNativePressed,
         withReturnVal,
-
-    } = HomeViewModel(
-        GetUserListUseCase,
-        RemoveUserUseCase,
-        NativeBridgeSayHeloUseCase,
-        NativeBridgeReturnValUseCase
-    );
+    } = provideHomeViewModel();
 
     useEffect(() => {
         loadInitialData()

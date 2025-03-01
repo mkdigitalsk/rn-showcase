@@ -12,7 +12,7 @@ import { Box } from '../samples/sample';
 function App(): React.JSX.Element {
 
   return (
-    <Box><Text>Child1</Text></Box>
+    <HomeScreen/>
   );
 }
 

@@ -1,19 +1,26 @@
+import { injectable, singleton } from "tsyringe"
 import delay from "../../../utils/delay"
 import { User, USERS_MOCK } from "../../domain/models/User"
 
 
-export interface UserApi {
+// export interface UserApi {
 
-    logOut(): Promise<void>,
+//     logOut(): Promise<void>,
 
-    fetchUsers(): Promise<User[]>,
+//     fetchUsers(): Promise<User[]>,
 
-    removeUser(id: number): Promise<void>,
+//     removeUser(id: number): Promise<void>,
 
 
-}
+// }
 
-export class UserApiImpl implements UserApi {
+@singleton()
+export class UserApiImpl {
+
+    constructor() {
+        console.log("✅ UserApiImpl instance created!");
+    }
+
 
     async logOut(): Promise<void> {
         delay(200)
@@ -27,8 +34,4 @@ export class UserApiImpl implements UserApi {
     async removeUser(id: number): Promise<void> {
         delay(200)
     }
-
-
 }
-
-export const provideUserApi = (): UserApi => new UserApiImpl()
