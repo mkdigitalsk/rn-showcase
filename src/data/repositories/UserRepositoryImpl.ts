@@ -4,7 +4,7 @@ import { inject, singleton } from "tsyringe";
 import { User } from "../../domain/models/User";
 import { UserApi } from "../network/UserApi";
 import { UserRepository } from "../../domain/repositories/UserRepository";
-import { TYPES } from "../../app/di";
+import { TYPES } from "../../app/diContainer";
 
 @singleton()
 export class UserRepositoryImpl implements UserRepository  {

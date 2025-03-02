@@ -2,7 +2,7 @@ import { Button, Pressable, StyleSheet, Text, View } from "react-native"
 import { useEffect, useState } from "react";
 import { User } from "../../domain/models/User";
 import Icon from 'react-native-vector-icons/FontAwesome';
-import { provideHomeViewModel } from "../../app/di";
+import { provideHomeViewModel } from "../../app/diContainer";
 
 
 const HomeScreen = () => {

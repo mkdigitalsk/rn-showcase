@@ -2,7 +2,7 @@ import "reflect-metadata";  // This is crucial for decorators to work
 import { inject, injectable } from "tsyringe";
 import { User } from "../models/User";
 import { UserRepository } from "../repositories/UserRepository";
-import { TYPES } from "../../app/di";
+import { TYPES } from "../../app/diContainer";
 
 @injectable()
 export class GetUserListUseCase {
