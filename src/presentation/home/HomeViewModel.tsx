@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { User } from "../../domain/models/User";
-import { UserApiImpl } from "../../data/network/UserApi";
 import { GetUserListUseCase } from "../../domain/useCases/GetUserListUseCase";
+import { RemoveUserUseCase } from "../../domain/useCases/RemoveUserUseCase";
+import { NativeBridgeReturnValUseCase, NativeBridgeSayHeloUseCase } from "../../domain/useCases/NativeBridgeUseCase";
 
 type DefaultLoading = {
     type: 'Loading';
@@ -16,6 +17,9 @@ type HomeState = DefaultLoading | HomeSuccessState;
 
 export const HomeViewModel = (
     getListUseCase: GetUserListUseCase,
+    removeUserUseCase: RemoveUserUseCase,
+    sayHelloUseCase: NativeBridgeSayHeloUseCase,
+    returnValUsecase: NativeBridgeReturnValUseCase
 ) => {
     const [state, setState] = useState<HomeState | undefined>(undefined)
     const [nativeText, setNativeText] = useState<string>('initial')
@@ -23,28 +27,27 @@ export const HomeViewModel = (
 
     const loadInitialData = async () => {
         setState({ type: 'Loading' })
-        const initialData = await getListUseCase.getUsers()
-        console.log(`load initial data: ${initialData}`);
+        const initialData = await getListUseCase.call()
         setState({ type: 'Success', data: initialData })
     };
 
     const removeUser = async (user: User) => {
         const prevData = (state as HomeSuccessState).data
         setState({ type: 'Loading' })
-        // await removeUserUseCase(user.id)
+        await removeUserUseCase.call(user.id)
         const newData = prevData.filter(item => item.id != user.id)
         setState({ type: 'Success', data: newData })
     };
 
     const onNativePressed = async () => {
-        // await sayHellUseCase()
+        await sayHelloUseCase.call()
         setNativeText("onNativePressed")
     }
 
     const withReturnVal = async () => {
-        // const result = await returnValUsecase()
-        // console.log(`onNativePressed : ${result}`)
-        // setNativeText(`withReturnVal: ${result}`)
+        const result = await returnValUsecase.call()
+        console.log(`onNativePressed : ${result}`)
+        setNativeText(`withReturnVal: ${result}`)
     }
 
     return {

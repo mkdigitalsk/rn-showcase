@@ -1,16 +1,15 @@
 import "reflect-metadata";  // This is crucial for decorators to work
 import { inject, injectable } from "tsyringe";
 import { User } from "../models/User";
-import { UserRepositoryImpl } from "../../data/repositories/UserRepositoryImpl";
+import { UserRepository } from "../repositories/UserRepository";
+import { TYPES } from "../../app/di";
 
 @injectable()
 export class GetUserListUseCase {
 
-    constructor(
-        @inject(UserRepositoryImpl) private userRepository: UserRepositoryImpl
-    ) {}
+    constructor(@inject(TYPES.UserRepository) private userRepository: UserRepository) { }
 
-    async getUsers(): Promise<User[]> {
+    async call(): Promise<User[]> {
         return this.userRepository.getUsers()
     }
 }

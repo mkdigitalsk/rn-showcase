@@ -1,26 +1,21 @@
-import { injectable, singleton } from "tsyringe"
+import { singleton } from "tsyringe"
 import delay from "../../../utils/delay"
 import { User, USERS_MOCK } from "../../domain/models/User"
 
 
-// export interface UserApi {
+export interface UserApi {
 
-//     logOut(): Promise<void>,
+    logOut(): Promise<void>,
 
-//     fetchUsers(): Promise<User[]>,
+    fetchUsers(): Promise<User[]>,
 
-//     removeUser(id: number): Promise<void>,
+    removeUser(id: number): Promise<void>,
 
 
-// }
+}
 
 @singleton()
-export class UserApiImpl {
-
-    constructor() {
-        console.log("✅ UserApiImpl instance created!");
-    }
-
+export class UserApiImpl implements UserApi{
 
     async logOut(): Promise<void> {
         delay(200)

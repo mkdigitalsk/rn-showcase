@@ -1,13 +1,15 @@
 import "reflect-metadata";
 
-import { inject, injectable, singleton } from "tsyringe";
+import { inject, singleton } from "tsyringe";
 import { User } from "../../domain/models/User";
-import { UserApiImpl } from "../network/UserApi";
+import { UserApi } from "../network/UserApi";
+import { UserRepository } from "../../domain/repositories/UserRepository";
+import { TYPES } from "../../app/di";
 
 @singleton()
-export class UserRepositoryImpl  {
+export class UserRepositoryImpl implements UserRepository  {
 
-    constructor(@inject(UserApiImpl) private api: UserApiImpl) { }
+    constructor(@inject(TYPES.UserApi) private api: UserApi) { }
 
     async getUsers(): Promise<User[]> { return this.api.fetchUsers() }
     async removeUser(id: number): Promise<void> {
