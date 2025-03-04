@@ -4,7 +4,7 @@ import { GetUserListUseCase } from "../../domain/useCases/GetUserListUseCase";
 import { RemoveUserUseCase } from "../../domain/useCases/RemoveUserUseCase";
 import { NativeBridgeReturnValUseCase, NativeBridgeSayHeloUseCase } from "../../domain/useCases/NativeBridgeUseCase";
 
-type DefaultLoading = {
+export type DefaultLoading = {
     type: 'Loading';
 };
 
