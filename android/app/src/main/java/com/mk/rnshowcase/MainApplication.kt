@@ -1,6 +1,7 @@
-package com.rnmvvm
+package com.mk.rnshowcase
 
 import android.app.Application
+import com.mk.rnshowcase.BuildConfig
 import com.facebook.react.PackageList
 import com.facebook.react.ReactApplication
 import com.facebook.react.ReactHost

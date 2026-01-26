@@ -1,4 +1,4 @@
-package com.rnmvvm
+package com.mk.rnshowcase
 
 import com.facebook.react.bridge.Promise
 import com.facebook.react.bridge.ReactApplicationContext
