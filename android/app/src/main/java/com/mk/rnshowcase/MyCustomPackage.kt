@@ -1,4 +1,4 @@
-package com.rnmvvm
+package com.mk.rnshowcase
 
 import com.facebook.react.ReactPackage
 import com.facebook.react.bridge.NativeModule
