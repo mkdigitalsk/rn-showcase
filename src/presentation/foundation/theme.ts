@@ -1,18 +1,14 @@
-import { MD3LightTheme, MD3DarkTheme } from 'react-native-paper';
+import { MD3LightTheme, MD3DarkTheme, useTheme } from 'react-native-paper';
 import { lightColorScheme, darkColorScheme } from './colors';
-import { typography } from './typography';
 
-// Light theme (LightColorPalette equivalent)
 export const lightTheme = {
   ...MD3LightTheme,
   colors: {
     ...MD3LightTheme.colors,
     ...lightColorScheme,
   },
-
 };
 
-// Dark theme (DarkColorPalette equivalent)
 export const darkTheme = {
   ...MD3DarkTheme,
   colors: {
@@ -20,3 +16,12 @@ export const darkTheme = {
     ...darkColorScheme,
   },
 };
+
+// Type for our custom theme
+export type AppTheme = typeof lightTheme;
+
+// Hook to get typed theme
+export const useAppTheme = () => useTheme<AppTheme>();
+
+// Hook to get colors directly
+export const useAppColors = () => useAppTheme().colors;

@@ -1,20 +1,14 @@
 import React from 'react';
-import { StyleSheet } from 'react-native';
-import HomeScreen from '../presentation/home/HomeScreen';
 import { PaperProvider } from 'react-native-paper';
-
+import { lightTheme } from '../presentation/foundation';
+import { HomeScreen } from '../presentation/screens/home/HomeScreen';
 
 function App(): React.JSX.Element {
-
   return (
-    <PaperProvider>
+    <PaperProvider theme={lightTheme}>
       <HomeScreen />
     </PaperProvider>
   );
 }
-
-const styles = StyleSheet.create({
-
-});
 
 export default App;

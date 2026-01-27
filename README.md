@@ -1,79 +1,142 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+# React Native MVVM Showcase
 
-# Getting Started
+Production-ready React Native template with MVVM + Clean Architecture, inspired by KMP Showcase.
 
->**Note**: Make sure you have completed the [React Native - Environment Setup](https://reactnative.dev/docs/environment-setup) instructions till "Creating a new application" step, before proceeding.
+## Setup
 
-## Step 1: Start the Metro Server
-
-First, you will need to start **Metro**, the JavaScript _bundler_ that ships _with_ React Native.
-
-To start Metro, run the following command from the _root_ of your React Native project:
+**IMPORTANT: Rename this folder to `rn-showcase`**
 
 ```bash
-# using npm
-npm start
-
-# OR using Yarn
-yarn start
+cd /Users/miroslavkusnir/Documents/GitHub/
+mv rnmvvm rn-showcase
+cd rn-showcase
 ```
 
-## Step 2: Start your Application
+## Architecture
 
-Let Metro Bundler run in its _own_ terminal. Open a _new_ terminal from the _root_ of your React Native project. Run the following command to start your _Android_ or _iOS_ app:
+```
+src/
+├── presentation/          # UI Layer
+│   ├── screens/          # Screen components (MVVM pattern)
+│   │   └── home/
+│   │       ├── HomeScreen.tsx
+│   │       ├── useHomeViewModel.ts    # Hook = ViewModel
+│   │       ├── HomeUiState.ts
+│   │       ├── Feature.ts
+│   │       └── FeatureCard.tsx
+│   ├── components/       # Reusable UI components
+│   ├── foundation/       # Theme, colors, dimensions
+│   └── navigation/       # React Navigation setup (TODO)
+│
+├── domain/               # Business Logic Layer (TODO)
+│   ├── model/           # Domain models
+│   ├── repository/      # Repository interfaces
+│   └── usecase/         # UseCase classes
+│
+├── data/                # Data Layer (TODO)
+│   ├── repository/      # Repository implementations
+│   ├── api/             # API clients
+│   └── local/           # AsyncStorage, MMKV
+│
+└── di/                  # Dependency Injection (TODO)
+```
 
-### For Android
+## Tech Stack
+
+- **React Native**: 0.76.5
+- **React Native Paper**: 5.14.5 (Material Design 3)
+- **TypeScript**: 5.0.4
+- **Icons**: react-native-vector-icons
+
+## Getting Started
+
+### Install dependencies
 
 ```bash
-# using npm
+npm install
+```
+
+### Run on Android
+
+```bash
 npm run android
-
-# OR using Yarn
-yarn android
 ```
 
-### For iOS
+### Run on iOS
 
 ```bash
-# using npm
 npm run ios
-
-# OR using Yarn
-yarn ios
 ```
 
-If everything is set up _correctly_, you should see your new app running in your _Android Emulator_ or _iOS Simulator_ shortly provided you have set up your emulator/simulator correctly.
+## Components
 
-This is one way to run your app — you can also run it directly from within Android Studio and Xcode respectively.
+### Text Components
+- TextHeadlineMedium / TextHeadlineMediumPrimary
+- TextTitleLarge / TextTitleLargeNeutral80 / TextTitleLargePrimary
+- TextBodyLarge / TextBodyMedium / TextBodySmall (+ color variants)
+- TextLabelLarge / TextLabelMedium / TextLabelSmall (+ color variants)
 
-## Step 3: Modifying your App
+### Buttons
+- ContainedButton
+- OutlinedButton
+- AppTextButton / AppTextButtonError
+- AppFloatingActionButton
 
-Now that you have successfully run the app, let's modify it.
+### Form Components
+- AppTextField
+- AppCheckbox
+- AppSwitch
 
-1. Open `App.tsx` in your text editor of choice and edit some lines.
-2. For **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Developer Menu** (<kbd>Ctrl</kbd> + <kbd>M</kbd> (on Window and Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (on macOS)) to see your changes!
+### UI Components
+- AppCard (elevated / outlined)
+- CircularProgress (default / small)
+- AppDivider
+- ErrorView
+- LoadingView
 
-   For **iOS**: Hit <kbd>Cmd ⌘</kbd> + <kbd>R</kbd> in your iOS Simulator to reload the app and see your changes!
+### Layout
+- ColumnSpacer2/4/6/12
+- RowSpacer (TODO)
 
-## Congratulations! :tada:
+## Architecture Pattern
 
-You've successfully run and modified your React Native App. :partying_face:
+Following KMP Showcase MVVM pattern:
 
-### Now what?
+**Screen** → **ViewModel Hook** → **UiState** → **UseCase** → **Repository** → **API/Storage**
 
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [Introduction to React Native](https://reactnative.dev/docs/getting-started).
+Example:
+```typescript
+// useHomeViewModel.ts
+export const useHomeViewModel = () => {
+  const [uiState] = useState<HomeUiState>(initialHomeUiState);
 
-# Troubleshooting
+  const onFeatureClick = (featureId: FeatureId) => {
+    // TODO: Navigation
+  };
 
-If you can't get this to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
+  return { uiState, onFeatureClick };
+};
 
-# Learn More
+// HomeScreen.tsx
+export const HomeScreen = () => {
+  const { uiState, onFeatureClick } = useHomeViewModel();
+  // ...
+};
+```
 
-To learn more about React Native, take a look at the following resources:
+## TODO
 
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+- [ ] Implement safe areas (status bar, notch)
+- [ ] Handle soft keyboard (lift views)
+- [ ] Add navigation (React Navigation)
+- [ ] Implement domain layer
+- [ ] Implement data layer
+- [ ] Add dependency injection
+
+## Author
+
+Miroslav Kusnir
+
+## License
+
+MIT
