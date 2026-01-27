@@ -1,9 +1,11 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { getFocusedRouteNameFromRoute } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { HomeStackNavigator } from './HomeStackNavigator';
 import { SettingsScreen } from '../screens/settings/SettingsScreen';
 import { useAppColors } from '../foundation/theme';
+import { getRoute } from './routes';
 
 export type BottomTabParamList = {
   Home: undefined;
@@ -33,19 +35,22 @@ export const BottomTabNavigator = () => {
       <Tab.Screen
         name="Home"
         component={HomeStackNavigator}
-        options={{
-          headerShown: false,
-          title: 'Home',
-          tabBarIcon: ({ color, size }) => (
-            <Icon name="home-outline" size={size} color={color} />
-          ),
+        options={({ route }) => {
+          const routeName = getFocusedRouteNameFromRoute(route) ?? 'HomeMain';
+          const screenRoute = getRoute(routeName);
+          return {
+            title: screenRoute.title,
+            tabBarIcon: ({ color, size }) => (
+              <Icon name="home-outline" size={size} color={color} />
+            ),
+          };
         }}
       />
       <Tab.Screen
         name="Settings"
         component={SettingsScreen}
         options={{
-          title: 'Settings',
+          title: getRoute('Settings').title,
           tabBarIcon: ({ color, size }) => (
             <Icon name="cog-outline" size={size} color={color} />
           ),
