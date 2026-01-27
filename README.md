@@ -2,16 +2,6 @@
 
 Production-ready React Native template with MVVM + Clean Architecture, inspired by KMP Showcase.
 
-## Setup
-
-**IMPORTANT: Rename this folder to `rn-showcase`**
-
-```bash
-cd /Users/miroslavkusnir/Documents/GitHub/
-mv rnmvvm rn-showcase
-cd rn-showcase
-```
-
 ## Architecture
 
 ```
