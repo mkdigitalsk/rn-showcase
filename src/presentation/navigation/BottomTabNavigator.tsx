@@ -34,6 +34,7 @@ export const BottomTabNavigator = () => {
         name="Home"
         component={HomeStackNavigator}
         options={{
+          headerShown: false,
           title: 'Home',
           tabBarIcon: ({ color, size }) => (
             <Icon name="home-outline" size={size} color={color} />

@@ -17,6 +17,12 @@ export const useHomeViewModel = () => {
         case FeatureId.UI_COMPONENTS:
           navigation.navigate('UiComponents');
           break;
+        case FeatureId.NETWORKING:
+          navigation.navigate('Networking');
+          break;
+        case FeatureId.STORAGE:
+          navigation.navigate('Storage');
+          break;
         default:
           // TODO: Implement other features
           console.log('Feature not implemented:', featureId);
