@@ -1,14 +1,29 @@
-import { useState } from 'react';
+import { useCallback } from 'react';
+import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { HomeUiState, initialHomeUiState } from './HomeUiState';
 import { FeatureId } from './Feature';
+import { HomeStackParamList } from '../../navigation/HomeStackNavigator';
+
+type HomeNavigationProp = NativeStackNavigationProp<HomeStackParamList, 'HomeMain'>;
 
 export const useHomeViewModel = () => {
-  const [uiState] = useState<HomeUiState>(initialHomeUiState);
+  const navigation = useNavigation<HomeNavigationProp>();
+  const uiState: HomeUiState = initialHomeUiState;
 
-  const onFeatureClick = (featureId: FeatureId) => {
-    // TODO: Navigation will be implemented later
-    console.log('Feature clicked:', featureId);
-  };
+  const onFeatureClick = useCallback(
+    (featureId: FeatureId) => {
+      switch (featureId) {
+        case FeatureId.UI_COMPONENTS:
+          navigation.navigate('UiComponents');
+          break;
+        default:
+          // TODO: Implement other features
+          console.log('Feature not implemented:', featureId);
+      }
+    },
+    [navigation],
+  );
 
   return {
     uiState,
