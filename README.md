@@ -1,127 +1,156 @@
-# React Native MVVM Showcase
+# RN Showcase
 
-Production-ready React Native template with MVVM + Clean Architecture, inspired by KMP Showcase.
+A production-ready React Native demo app showcasing modern mobile development with MVVM + Clean Architecture, TypeScript, and native platform integrations.
+
+[![React Native](https://img.shields.io/badge/React_Native-0.76-61DAFB.svg?logo=react&logoColor=white)](https://reactnative.dev)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.0-3178C6.svg?logo=typescript&logoColor=white)](https://www.typescriptlang.org)
+![Android](https://img.shields.io/badge/Android-API_24+-3DDC84.svg?logo=android&logoColor=white)
+![iOS](https://img.shields.io/badge/iOS-15+-000000.svg?logo=apple&logoColor=white)
+
+**100% shared code** across Android & iOS
+
+---
+
+<table>
+<tr>
+<td style="width:50%">
+
+### UI & Navigation
+- React Navigation 6+
+- Material Design 3 (react-native-paper)
+- Dark Mode Support
+- 20+ Custom Components
+
+</td>
+<td style="width:50%">
+
+### Platform APIs
+- Biometrics (Face ID / Fingerprint)
+- Camera & Gallery
+- QR/Barcode Scanner
+- Permissions
+
+</td>
+</tr>
+<tr>
+<td style="width:50%">
+
+### Data & Network
+- Axios HTTP Client
+- MMKV Storage
+- SQLite Database
+- Clean Architecture
+
+</td>
+<td style="width:50%">
+
+### Notifications
+- Push (FCM / APNs)
+- Local Notifications
+- Permission Handling
+
+</td>
+</tr>
+</table>
+
+---
+
+## Tech Stack
+
+![React Native](https://img.shields.io/badge/React_Native-61DAFB?logo=react&logoColor=black)
+![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?logo=typescript&logoColor=white)
+![tsyringe](https://img.shields.io/badge/tsyringe-DI-blue)
+![Axios](https://img.shields.io/badge/Axios-5A29E4?logo=axios&logoColor=white)
+![Jest](https://img.shields.io/badge/Jest-C21325?logo=jest&logoColor=white)
+
+---
 
 ## Architecture
 
 ```
+Presentation  →  Domain  →  Data
+  (Screen/VM)    (UseCase)   (Repository)
+```
+
+---
+
+## Quick Start
+
+```bash
+# Install dependencies
+yarn install
+
+# iOS (first time)
+cd ios && pod install && cd ..
+
+# Run Android
+yarn android
+
+# Run iOS
+yarn ios
+```
+
+---
+
+## Project Structure
+
+```
 src/
-├── presentation/          # UI Layer
-│   ├── screens/          # Screen components (MVVM pattern)
-│   │   └── home/
-│   │       ├── HomeScreen.tsx
-│   │       ├── useHomeViewModel.ts    # Hook = ViewModel
-│   │       ├── HomeUiState.ts
-│   │       ├── Feature.ts
-│   │       └── FeatureCard.tsx
-│   ├── components/       # Reusable UI components
-│   ├── foundation/       # Theme, colors, dimensions
-│   └── navigation/       # React Navigation setup (TODO)
-│
-├── domain/               # Business Logic Layer (TODO)
-│   ├── model/           # Domain models
-│   ├── repository/      # Repository interfaces
-│   └── usecase/         # UseCase classes
-│
-├── data/                # Data Layer (TODO)
-│   ├── repository/      # Repository implementations
-│   ├── api/             # API clients
-│   └── local/           # AsyncStorage, MMKV
-│
-└── di/                  # Dependency Injection (TODO)
+├── app/                    # App entry, DI setup
+│   └── di/                 # Dependency injection (tsyringe)
+├── presentation/           # UI Layer
+│   ├── screens/            # Feature screens
+│   │   └── xxx/
+│   │       ├── XxxScreen.tsx
+│   │       ├── useXxxViewModel.ts
+│   │       └── XxxUiState.ts
+│   ├── components/         # Reusable components
+│   ├── navigation/         # React Navigation
+│   └── foundation/         # Theme, colors, dimensions
+├── domain/                 # Business Logic
+│   ├── models/             # Domain models
+│   ├── repositories/       # Repository interfaces
+│   ├── useCases/           # UseCase classes
+│   └── exceptions/         # Custom exceptions
+└── data/                   # Data Layer
+    ├── repositories/       # Repository implementations
+    ├── network/            # API clients (Axios)
+    ├── dto/                # Data Transfer Objects
+    └── mappers/            # DTO → Domain mappers
 ```
 
-## Tech Stack
+---
 
-- **React Native**: 0.76.5
-- **React Native Paper**: 5.14.5 (Material Design 3)
-- **TypeScript**: 5.0.4
-- **Icons**: react-native-vector-icons
+## Roadmap
 
-## Getting Started
+### Done
+- [x] UI Components (20+ components)
+- [x] Theme system (Light/Dark mode)
+- [x] Navigation (Bottom tabs + Stack)
+- [x] Networking (Axios + REST API)
+- [x] Clean Architecture (UseCase pattern)
+- [x] Dependency Injection (tsyringe)
+- [x] Custom components (LoadingView, ErrorView, Spacers)
 
-### Install dependencies
+### In Progress
+- [ ] Storage feature (MMKV)
 
-```bash
-npm install
-```
+### Planned
+- [ ] Database feature (SQLite/WatermelonDB)
+- [ ] Platform APIs (biometrics, camera, gallery)
+- [ ] QR/Barcode Scanner
+- [ ] Calendar integration
+- [ ] Push Notifications (FCM/APNs)
+- [ ] Local Notifications
+- [ ] Login/Auth flow
+- [ ] Form validation (react-hook-form + zod)
+- [ ] Pagination
+- [ ] Offline-first support
+- [ ] Unit tests setup
+- [ ] E2E tests (Detox)
+- [ ] Screenshot tests
 
-### Run on Android
-
-```bash
-npm run android
-```
-
-### Run on iOS
-
-```bash
-npm run ios
-```
-
-## Components
-
-### Text Components
-- TextHeadlineMedium / TextHeadlineMediumPrimary
-- TextTitleLarge / TextTitleLargeNeutral80 / TextTitleLargePrimary
-- TextBodyLarge / TextBodyMedium / TextBodySmall (+ color variants)
-- TextLabelLarge / TextLabelMedium / TextLabelSmall (+ color variants)
-
-### Buttons
-- ContainedButton
-- OutlinedButton
-- AppTextButton / AppTextButtonError
-- AppFloatingActionButton
-
-### Form Components
-- AppTextField
-- AppCheckbox
-- AppSwitch
-
-### UI Components
-- AppCard (elevated / outlined)
-- CircularProgress (default / small)
-- AppDivider
-- ErrorView
-- LoadingView
-
-### Layout
-- ColumnSpacer2/4/6/12
-- RowSpacer (TODO)
-
-## Architecture Pattern
-
-Following KMP Showcase MVVM pattern:
-
-**Screen** → **ViewModel Hook** → **UiState** → **UseCase** → **Repository** → **API/Storage**
-
-Example:
-```typescript
-// useHomeViewModel.ts
-export const useHomeViewModel = () => {
-  const [uiState] = useState<HomeUiState>(initialHomeUiState);
-
-  const onFeatureClick = (featureId: FeatureId) => {
-    // TODO: Navigation
-  };
-
-  return { uiState, onFeatureClick };
-};
-
-// HomeScreen.tsx
-export const HomeScreen = () => {
-  const { uiState, onFeatureClick } = useHomeViewModel();
-  // ...
-};
-```
-
-## TODO
-
-- [ ] Implement safe areas (status bar, notch)
-- [ ] Handle soft keyboard (lift views)
-- [ ] Add navigation (React Navigation)
-- [ ] Implement domain layer
-- [ ] Implement data layer
-- [ ] Add dependency injection
+---
 
 ## Author
 

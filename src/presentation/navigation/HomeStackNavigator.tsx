@@ -4,39 +4,22 @@ import { HomeScreen } from '../screens/home/HomeScreen';
 import { UiComponentsScreen } from '../screens/uiComponents/UiComponentsScreen';
 import { NetworkingScreen } from '../screens/networking/NetworkingScreen';
 import { StorageScreen } from '../screens/storage/StorageScreen';
+import { HomeSection } from './routes';
 
-export type HomeStackParamList = {
-  HomeMain: undefined;
-  UiComponents: undefined;
-  Networking: undefined;
-  Storage: undefined;
+// Derived from HomeSection routes
+export type HomeStackProps = {
+  [K in keyof typeof HomeSection]: undefined;
 };
 
-const Stack = createNativeStackNavigator<HomeStackParamList>();
+const Stack = createNativeStackNavigator<HomeStackProps>();
 
 export const HomeStackNavigator = () => {
   return (
-    <Stack.Navigator>
-      <Stack.Screen
-        name="HomeMain"
-        component={HomeScreen}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name="UiComponents"
-        component={UiComponentsScreen}
-        options={{ title: 'UI Components' }}
-      />
-      <Stack.Screen
-        name="Networking"
-        component={NetworkingScreen}
-        options={{ title: 'Networking' }}
-      />
-      <Stack.Screen
-        name="Storage"
-        component={StorageScreen}
-        options={{ title: 'Storage' }}
-      />
+    <Stack.Navigator screenOptions={{ headerShown: false }}>
+      <Stack.Screen name={HomeSection.HomeMain.name} component={HomeScreen} />
+      <Stack.Screen name={HomeSection.UiComponents.name} component={UiComponentsScreen} />
+      <Stack.Screen name={HomeSection.Networking.name} component={NetworkingScreen} />
+      <Stack.Screen name={HomeSection.Storage.name} component={StorageScreen} />
     </Stack.Navigator>
   );
 };

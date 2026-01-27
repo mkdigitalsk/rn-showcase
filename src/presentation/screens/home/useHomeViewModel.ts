@@ -3,9 +3,9 @@ import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { HomeUiState, initialHomeUiState } from './HomeUiState';
 import { FeatureId } from './Feature';
-import { HomeStackParamList } from '../../navigation/HomeStackNavigator';
+import { HomeRoutes } from '../../navigation/HomeStackNavigator';
 
-type HomeNavigationProp = NativeStackNavigationProp<HomeStackParamList, 'HomeMain'>;
+type HomeNavigationProp = NativeStackNavigationProp<HomeRoutes, 'HomeMain'>;
 
 export const useHomeViewModel = () => {
   const navigation = useNavigation<HomeNavigationProp>();
