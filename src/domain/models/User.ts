@@ -1,21 +1,8 @@
-export type User = {
-    id: number
-    name: string
+import { Address } from './Address';
+
+export interface User {
+  id: number;
+  name: string;
+  email: string;
+  address: Address;
 }
-
-
-export const USERS_MOCK: User[] = [
-    {
-        id: 1,
-        name: "Miro"
-    },
-    {
-        id: 2,
-        name: "Adam"
-    },
-    {
-        id: 3,
-        
-        name: "Ivan"
-    }
-]

@@ -1,32 +1,18 @@
-import { singleton } from "tsyringe"
-import delay from "../../../utils/delay"
-import { User, USERS_MOCK } from "../../domain/models/User"
-
+import { singleton } from 'tsyringe';
+import { httpClient } from './httpClient';
+import { handleApiCall } from './apiCallHandler';
+import { UserDTO } from '../dto/UserDTO';
 
 export interface UserApi {
-
-    logOut(): Promise<void>,
-
-    fetchUsers(): Promise<User[]>,
-
-    removeUser(id: number): Promise<void>,
-
-
+  fetchUsers(): Promise<UserDTO[]>;
 }
 
 @singleton()
-export class UserApiImpl implements UserApi{
-
-    async logOut(): Promise<void> {
-        delay(200)
-    }
-
-    async fetchUsers(): Promise<User[]> {
-        delay(500)
-        return USERS_MOCK
-    }
-
-    async removeUser(id: number): Promise<void> {
-        delay(200)
-    }
+export class UserApiImpl implements UserApi {
+  async fetchUsers(): Promise<UserDTO[]> {
+    return handleApiCall(async () => {
+      const response = await httpClient.get('/users');
+      return response.data as UserDTO[];
+    });
+  }
 }
