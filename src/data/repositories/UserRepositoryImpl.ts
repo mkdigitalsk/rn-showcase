@@ -1,6 +1,6 @@
 import "reflect-metadata";
 
-import { delay, inject, singleton } from "tsyringe";
+import { inject, singleton } from "tsyringe";
 import { User } from "../../domain/models/User";
 import { UserApi } from "../network/UserApi";
 import { UserRepository } from "../../domain/repositories/UserRepository";
@@ -13,7 +13,7 @@ export class UserRepositoryImpl implements UserRepository {
 
     async getUsers(): Promise<User[]> { return this.api.fetchUsers() }
     async getUser(id: number): Promise<User> {
-        delay(500)
+        // TODO: Implement API call
         return { id: 1, name: "Miro" }
     }
 

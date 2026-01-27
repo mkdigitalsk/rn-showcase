@@ -16,53 +16,54 @@ export interface Feature {
   icon: string;
 }
 
+// Icon names from MaterialCommunityIcons
 export const showcaseFeatures: Feature[] = [
   {
     id: FeatureId.UI_COMPONENTS,
     title: 'UI Components',
     subtitle: 'Material Design 3 components',
-    icon: 'palette',
+    icon: 'palette-outline',
   },
   {
     id: FeatureId.NETWORKING,
     title: 'Networking',
     subtitle: 'REST API integration with Axios',
-    icon: 'cloud',
+    icon: 'cloud-outline',
   },
   {
     id: FeatureId.STORAGE,
     title: 'Storage',
     subtitle: 'Local storage with MMKV',
-    icon: 'storage',
+    icon: 'content-save-outline',
   },
   {
     id: FeatureId.DATABASE,
     title: 'Database',
     subtitle: 'SQLite database integration',
-    icon: 'dataset',
+    icon: 'database-outline',
   },
   {
     id: FeatureId.PLATFORM_APIS,
     title: 'Platform APIs',
     subtitle: 'Native platform integrations',
-    icon: 'phone-android',
+    icon: 'cellphone',
   },
   {
     id: FeatureId.SCANNER,
     title: 'Scanner',
     subtitle: 'QR code and barcode scanning',
-    icon: 'qr-code-2',
+    icon: 'qrcode-scan',
   },
   {
     id: FeatureId.CALENDAR,
     title: 'Calendar',
     subtitle: 'Calendar events integration',
-    icon: 'calendar-month',
+    icon: 'calendar-outline',
   },
   {
     id: FeatureId.NOTIFICATIONS,
     title: 'Notifications',
     subtitle: 'Push and local notifications',
-    icon: 'notifications',
+    icon: 'bell-outline',
   },
 ];
