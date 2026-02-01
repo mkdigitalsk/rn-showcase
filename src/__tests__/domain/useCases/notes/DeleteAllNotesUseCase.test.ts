@@ -7,6 +7,7 @@ function createMockNoteRepository(): NoteRepository {
   return {
     subscribe: jest.fn(),
     insert: jest.fn(),
+    update: jest.fn(),
     delete: jest.fn(),
     deleteAll: jest.fn().mockResolvedValue(undefined),
   };

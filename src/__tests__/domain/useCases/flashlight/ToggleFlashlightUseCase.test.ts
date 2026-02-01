@@ -7,6 +7,7 @@ function createMockFlashlightRepository(): FlashlightRepository {
   return {
     isAvailable: jest.fn(),
     toggle: jest.fn().mockResolvedValue(true),
+    turnOff: jest.fn().mockResolvedValue(false),
   };
 }
 

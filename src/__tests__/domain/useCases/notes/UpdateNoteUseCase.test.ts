@@ -1,44 +1,45 @@
 import { BaseTest } from '../../../BaseTest';
 import { test } from '../../../TestFunctions';
-import { InsertNoteUseCase } from '../../../../domain/useCases/notes/InsertNoteUseCase';
+import { UpdateNoteUseCase } from '../../../../domain/useCases/notes/UpdateNoteUseCase';
 import { NoteRepository } from '../../../../domain/repositories/NoteRepository';
 import { Note } from '../../../../domain/model/Note';
 
 function createMockNoteRepository(): NoteRepository {
   return {
     subscribe: jest.fn(),
-    insert: jest.fn().mockResolvedValue(undefined),
-    update: jest.fn(),
+    insert: jest.fn(),
+    update: jest.fn().mockResolvedValue(undefined),
     delete: jest.fn(),
     deleteAll: jest.fn(),
   };
 }
 
-class InsertNoteUseCaseTest extends BaseTest<InsertNoteUseCase> {
-  classUnderTest!: InsertNoteUseCase;
+class UpdateNoteUseCaseTest extends BaseTest<UpdateNoteUseCase> {
+  classUnderTest!: UpdateNoteUseCase;
   mockRepo!: NoteRepository;
 
   beforeEach() {
     this.mockRepo = createMockNoteRepository();
-    this.classUnderTest = new InsertNoteUseCase(this.mockRepo);
+    this.classUnderTest = new UpdateNoteUseCase(this.mockRepo);
   }
 }
 
-describe('InsertNoteUseCase', () => {
-  const t = new InsertNoteUseCaseTest();
+describe('UpdateNoteUseCase', () => {
+  const t = new UpdateNoteUseCaseTest();
   beforeEach(() => t.setup());
 
-  it('calls repository with note data', async () => {
-    const note: Omit<Note, 'id'> = {
-      title: 'Test Note',
-      content: 'Test Content',
+  it('calls repository update with note', async () => {
+    const note: Note = {
+      id: 1,
+      title: 'Updated Title',
+      content: 'Updated Content',
       createdAt: 1234567890,
     };
 
     await test({
       whenAction: () => t.classUnderTest.execute(note),
       then: () => {
-        expect(t.mockRepo.insert).toHaveBeenCalledWith(note);
+        expect(t.mockRepo.update).toHaveBeenCalledWith(note);
       },
     });
   });

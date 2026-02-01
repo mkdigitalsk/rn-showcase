@@ -1,5 +1,5 @@
 export type RegisterNameError = 'empty';
-export type RegisterEmailError = 'empty' | 'invalid_format';
+export type RegisterEmailError = 'empty' | 'invalid_format' | 'already_exists';
 export type RegisterPasswordError = 'empty' | 'too_short' | 'weak';
 export type RegisterConfirmPasswordError = 'empty' | 'mismatch';
 

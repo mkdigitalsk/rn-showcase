@@ -43,11 +43,8 @@ export const LoginScreen = () => {
     }
   }, [login, navigation]);
 
-  const handleBiometricLogin = useCallback(async () => {
-    const success = await authenticateWithBiometrics();
-    if (success) {
-      navigation.replace('Main');
-    }
+  const handleBiometricLogin = useCallback(() => {
+    authenticateWithBiometrics(() => navigation.replace('Main'));
   }, [authenticateWithBiometrics, navigation]);
 
   const handleSkip = useCallback(() => {

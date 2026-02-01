@@ -1,31 +1,22 @@
-import { useState, useCallback, useEffect, useMemo } from 'react';
-import { container, TYPES } from '../../../app/di/diContainer';
+import { useState, useCallback, useEffect } from 'react';
+import { TYPES } from '../../../app/diTypes';
 import { GetUsersUseCase } from '../../../domain/useCases/GetUsersUseCase';
-import { BaseException } from '../../../domain/exceptions/BaseException';
+import { useResolve } from '../../hooks/useResolve';
+import { execute } from '../../hooks/useExecute';
 import { NetworkingUiState, initialNetworkingUiState } from './NetworkingUiState';
 
 export const useNetworkingViewModel = () => {
   const [uiState, setUiState] = useState<NetworkingUiState>(initialNetworkingUiState);
 
-  // Resolve once, not on every render
-  const getUsersUseCase = useMemo(
-    () => container.resolve<GetUsersUseCase>(TYPES.GetUsersUseCase),
-    []
-  );
+  const getUsersUseCase = useResolve<GetUsersUseCase>(TYPES.GetUsersUseCase);
 
-  const loadUsers = useCallback(async () => {
-    setUiState((prev) => ({ ...prev, isLoading: true, error: null }));
-
-    try {
-      const users = await getUsersUseCase.execute();
-      setUiState({ users, isLoading: false, error: null });
-    } catch (error) {
-      const errorMessage =
-        error instanceof BaseException
-          ? error.userMessage
-          : 'An unexpected error occurred';
-      setUiState((prev) => ({ ...prev, isLoading: false, error: errorMessage }));
-    }
+  const loadUsers = useCallback(() => {
+    execute({
+      action: () => getUsersUseCase.execute(),
+      onLoading: () => setUiState(prev => ({ ...prev, isLoading: true, error: null })),
+      onSuccess: (users) => setUiState({ users, isLoading: false, error: null }),
+      onError: (e) => setUiState(prev => ({ ...prev, isLoading: false, error: e.userMessage })),
+    });
   }, [getUsersUseCase]);
 
   useEffect(() => {

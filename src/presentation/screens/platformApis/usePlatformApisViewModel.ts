@@ -1,5 +1,5 @@
-import { useState, useEffect, useCallback, useMemo, useRef } from 'react';
-import { container, TYPES } from '../../../app/di/diContainer';
+import { useState, useEffect, useCallback, useRef } from 'react';
+import { TYPES } from '../../../app/diTypes';
 import { ShareUseCase } from '../../../domain/useCases/platform/ShareUseCase';
 import { DialUseCase } from '../../../domain/useCases/platform/DialUseCase';
 import { OpenLinkUseCase } from '../../../domain/useCases/platform/OpenLinkUseCase';
@@ -11,6 +11,8 @@ import { AuthenticateWithBiometricUseCase } from '../../../domain/useCases/biome
 import { IsFlashlightAvailableUseCase } from '../../../domain/useCases/flashlight/IsFlashlightAvailableUseCase';
 import { ToggleFlashlightUseCase } from '../../../domain/useCases/flashlight/ToggleFlashlightUseCase';
 import { LocationRepository } from '../../../domain/repositories/LocationRepository';
+import { useResolve } from '../../hooks/useResolve';
+import { execute } from '../../hooks/useExecute';
 import { PlatformApisUiState, initialPlatformApisUiState } from './PlatformApisUiState';
 
 const DEMO_PHONE_NUMBER = '+1234567890';
@@ -25,56 +27,33 @@ export const usePlatformApisViewModel = () => {
   const [uiState, setUiState] = useState<PlatformApisUiState>(initialPlatformApisUiState);
   const stopTrackingRef = useRef<(() => void) | null>(null);
 
-  const shareUseCase = useMemo(
-    () => container.resolve<ShareUseCase>(TYPES.ShareUseCase), []
-  );
-  const dialUseCase = useMemo(
-    () => container.resolve<DialUseCase>(TYPES.DialUseCase), []
-  );
-  const openLinkUseCase = useMemo(
-    () => container.resolve<OpenLinkUseCase>(TYPES.OpenLinkUseCase), []
-  );
-  const sendEmailUseCase = useMemo(
-    () => container.resolve<SendEmailUseCase>(TYPES.SendEmailUseCase), []
-  );
-  const copyToClipboardUseCase = useMemo(
-    () => container.resolve<CopyToClipboardUseCase>(TYPES.CopyToClipboardUseCase), []
-  );
-  const getLocationUseCase = useMemo(
-    () => container.resolve<GetLocationUseCase>(TYPES.GetLocationUseCase), []
-  );
-  const isBiometricEnabledUseCase = useMemo(
-    () => container.resolve<IsBiometricEnabledUseCase>(TYPES.IsBiometricEnabledUseCase), []
-  );
-  const authenticateWithBiometricUseCase = useMemo(
-    () => container.resolve<AuthenticateWithBiometricUseCase>(TYPES.AuthenticateWithBiometricUseCase), []
-  );
-  const isFlashlightAvailableUseCase = useMemo(
-    () => container.resolve<IsFlashlightAvailableUseCase>(TYPES.IsFlashlightAvailableUseCase), []
-  );
-  const toggleFlashlightUseCase = useMemo(
-    () => container.resolve<ToggleFlashlightUseCase>(TYPES.ToggleFlashlightUseCase), []
-  );
-  const locationRepository = useMemo(
-    () => container.resolve<LocationRepository>(TYPES.LocationRepository), []
-  );
+  const shareUseCase = useResolve<ShareUseCase>(TYPES.ShareUseCase);
+  const dialUseCase = useResolve<DialUseCase>(TYPES.DialUseCase);
+  const openLinkUseCase = useResolve<OpenLinkUseCase>(TYPES.OpenLinkUseCase);
+  const sendEmailUseCase = useResolve<SendEmailUseCase>(TYPES.SendEmailUseCase);
+  const copyToClipboardUseCase = useResolve<CopyToClipboardUseCase>(TYPES.CopyToClipboardUseCase);
+  const getLocationUseCase = useResolve<GetLocationUseCase>(TYPES.GetLocationUseCase);
+  const isBiometricEnabledUseCase = useResolve<IsBiometricEnabledUseCase>(TYPES.IsBiometricEnabledUseCase);
+  const authenticateWithBiometricUseCase = useResolve<AuthenticateWithBiometricUseCase>(TYPES.AuthenticateWithBiometricUseCase);
+  const isFlashlightAvailableUseCase = useResolve<IsFlashlightAvailableUseCase>(TYPES.IsFlashlightAvailableUseCase);
+  const toggleFlashlightUseCase = useResolve<ToggleFlashlightUseCase>(TYPES.ToggleFlashlightUseCase);
+  const locationRepository = useResolve<LocationRepository>(TYPES.LocationRepository);
 
   // Check biometrics and flashlight availability on mount
   useEffect(() => {
-    const checkAvailability = async () => {
-      try {
-        const [biometrics, flashlight] = await Promise.all([
-          isBiometricEnabledUseCase.execute(),
-          isFlashlightAvailableUseCase.execute(),
-        ]);
+    execute({
+      action: () => Promise.all([
+        isBiometricEnabledUseCase.execute(),
+        isFlashlightAvailableUseCase.execute(),
+      ]),
+      onSuccess: ([biometrics, flashlight]) => {
         setUiState(prev => ({
           ...prev,
           biometricsAvailable: biometrics,
           flashlightAvailable: flashlight,
         }));
-      } catch {}
-    };
-    checkAvailability();
+      },
+    });
   }, [isBiometricEnabledUseCase, isFlashlightAvailableUseCase]);
 
   // Cleanup location tracking on unmount
@@ -86,42 +65,47 @@ export const usePlatformApisViewModel = () => {
     };
   }, []);
 
-  const share = useCallback(async () => {
-    await shareUseCase.execute(DEMO_SHARE_TEXT);
+  const share = useCallback(() => {
+    execute({ action: () => shareUseCase.execute(DEMO_SHARE_TEXT) });
   }, [shareUseCase]);
 
-  const dial = useCallback(async () => {
-    await dialUseCase.execute(DEMO_PHONE_NUMBER);
+  const dial = useCallback(() => {
+    execute({ action: () => dialUseCase.execute(DEMO_PHONE_NUMBER) });
   }, [dialUseCase]);
 
-  const openLink = useCallback(async () => {
-    await openLinkUseCase.execute(DEMO_URL);
+  const openLink = useCallback(() => {
+    execute({ action: () => openLinkUseCase.execute(DEMO_URL) });
   }, [openLinkUseCase]);
 
-  const sendEmail = useCallback(async () => {
-    await sendEmailUseCase.execute({
-      to: DEMO_EMAIL,
-      subject: DEMO_EMAIL_SUBJECT,
-      body: DEMO_EMAIL_BODY,
+  const sendEmail = useCallback(() => {
+    execute({
+      action: () => sendEmailUseCase.execute({
+        to: DEMO_EMAIL,
+        subject: DEMO_EMAIL_SUBJECT,
+        body: DEMO_EMAIL_BODY,
+      }),
     });
   }, [sendEmailUseCase]);
 
-  const copyToClipboard = useCallback(async () => {
-    await copyToClipboardUseCase.execute(DEMO_COPY_TEXT);
-    setUiState(prev => ({ ...prev, copiedToClipboard: true }));
-    setTimeout(() => {
-      setUiState(prev => ({ ...prev, copiedToClipboard: false }));
-    }, 2000);
+  const copyToClipboard = useCallback(() => {
+    execute({
+      action: () => copyToClipboardUseCase.execute(DEMO_COPY_TEXT),
+      onSuccess: () => {
+        setUiState(prev => ({ ...prev, copiedToClipboard: true }));
+        setTimeout(() => {
+          setUiState(prev => ({ ...prev, copiedToClipboard: false }));
+        }, 2000);
+      },
+    });
   }, [copyToClipboardUseCase]);
 
-  const getLocation = useCallback(async () => {
-    setUiState(prev => ({ ...prev, locationLoading: true, locationError: false }));
-    try {
-      const location = await getLocationUseCase.execute();
-      setUiState(prev => ({ ...prev, location, locationLoading: false }));
-    } catch {
-      setUiState(prev => ({ ...prev, locationLoading: false, locationError: true }));
-    }
+  const getLocation = useCallback(() => {
+    execute({
+      action: () => getLocationUseCase.execute(),
+      onLoading: () => setUiState(prev => ({ ...prev, locationLoading: true, locationError: false })),
+      onSuccess: (location) => setUiState(prev => ({ ...prev, location, locationLoading: false })),
+      onError: () => setUiState(prev => ({ ...prev, locationLoading: false, locationError: true })),
+    });
   }, [getLocationUseCase]);
 
   const startLocationUpdates = useCallback(() => {
@@ -156,26 +140,24 @@ export const usePlatformApisViewModel = () => {
     }
   }, [uiState.isTrackingLocation, startLocationUpdates, stopLocationUpdates]);
 
-  const authenticateWithBiometrics = useCallback(async () => {
-    setUiState(prev => ({ ...prev, biometricsLoading: true, biometricsResult: null }));
-    try {
-      const result = await authenticateWithBiometricUseCase.execute();
-      setUiState(prev => ({ ...prev, biometricsLoading: false, biometricsResult: result }));
-    } catch (error) {
-      const message = error instanceof Error ? error.message : 'Unknown error';
-      setUiState(prev => ({
+  const authenticateWithBiometrics = useCallback(() => {
+    execute({
+      action: () => authenticateWithBiometricUseCase.execute(),
+      onLoading: () => setUiState(prev => ({ ...prev, biometricsLoading: true, biometricsResult: null })),
+      onSuccess: (result) => setUiState(prev => ({ ...prev, biometricsLoading: false, biometricsResult: result })),
+      onError: (error) => setUiState(prev => ({
         ...prev,
         biometricsLoading: false,
-        biometricsResult: { type: 'failed', message },
-      }));
-    }
+        biometricsResult: { type: 'failed', message: error.userMessage },
+      })),
+    });
   }, [authenticateWithBiometricUseCase]);
 
-  const toggleFlashlight = useCallback(async () => {
-    try {
-      const newState = await toggleFlashlightUseCase.execute(uiState.flashlightOn);
-      setUiState(prev => ({ ...prev, flashlightOn: newState }));
-    } catch {}
+  const toggleFlashlight = useCallback(() => {
+    execute({
+      action: () => toggleFlashlightUseCase.execute(uiState.flashlightOn),
+      onSuccess: (newState) => setUiState(prev => ({ ...prev, flashlightOn: newState })),
+    });
   }, [toggleFlashlightUseCase, uiState.flashlightOn]);
 
   return {

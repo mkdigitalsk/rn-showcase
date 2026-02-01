@@ -34,10 +34,7 @@ export const RegisterScreen = () => {
   } = useRegisterViewModel();
 
   const handleRegister = useCallback(() => {
-    const valid = register();
-    if (valid) {
-      navigation.replace('Main');
-    }
+    register(() => navigation.replace('Main'));
   }, [register, navigation]);
 
   const handleToLogin = useCallback(() => {
@@ -55,6 +52,7 @@ export const RegisterScreen = () => {
     switch (uiState.emailError) {
       case 'empty': return t('register_email_error_empty');
       case 'invalid_format': return t('register_email_error_invalid');
+      case 'already_exists': return t('register_email_error_already_exists');
       default: return undefined;
     }
   };
@@ -147,7 +145,7 @@ export const RegisterScreen = () => {
 
           <ColumnSpacer4 />
 
-          <ContainedButton text={t('register_button')} onPress={handleRegister} />
+          <ContainedButton text={t('register_button')} onPress={handleRegister} loading={uiState.isLoading} disabled={uiState.isLoading} />
         </AppCard>
 
         <ColumnSpacer4 />

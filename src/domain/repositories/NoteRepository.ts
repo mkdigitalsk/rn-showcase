@@ -9,6 +9,7 @@ export interface NoteRepository {
     listener: NoteListener,
   ): () => void;
   insert(note: Omit<Note, 'id'>): Promise<void>;
+  update(note: Note): Promise<void>;
   delete(id: number): Promise<void>;
   deleteAll(): Promise<void>;
 }

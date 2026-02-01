@@ -244,6 +244,7 @@ export const sk: Record<StringKey, string> = {
   register_name_error_empty: 'Meno je povinné',
   register_email_error_empty: 'Email je povinný',
   register_email_error_invalid: 'Neplatný formát emailu',
+  register_email_error_already_exists: 'Tento email je už zaregistrovaný',
   register_password_error_empty: 'Heslo je povinné',
   register_password_error_short: 'Heslo musí mať aspoň 8 znakov',
   register_password_error_weak: 'Heslo musí obsahovať veľké, malé písmeno, číslicu a špeciálny znak',
