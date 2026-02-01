@@ -19,4 +19,13 @@ export class FlashlightClient {
     }
     return newState;
   }
+
+  async turnOff(): Promise<boolean> {
+    if (Platform.OS === 'ios') {
+      Torch.switchState(false);
+    } else {
+      await Torch.switchState(false);
+    }
+    return false;
+  }
 }

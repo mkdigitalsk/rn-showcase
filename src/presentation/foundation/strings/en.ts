@@ -242,6 +242,7 @@ export const en = {
   register_name_error_empty: 'Name is required',
   register_email_error_empty: 'Email is required',
   register_email_error_invalid: 'Invalid email format',
+  register_email_error_already_exists: 'This email is already registered',
   register_password_error_empty: 'Password is required',
   register_password_error_short: 'Password must be at least 8 characters',
   register_password_error_weak: 'Password must contain uppercase, lowercase, digit, and special character',

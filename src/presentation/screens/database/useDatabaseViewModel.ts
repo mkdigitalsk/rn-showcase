@@ -1,10 +1,12 @@
-import { useState, useEffect, useCallback, useMemo, useRef } from 'react';
-import { container, TYPES } from '../../../app/di/diContainer';
+import { useState, useEffect, useCallback, useRef } from 'react';
+import { TYPES } from '../../../app/diTypes';
 import { SearchNotesUseCase } from '../../../domain/useCases/notes/SearchNotesUseCase';
 import { InsertNoteUseCase } from '../../../domain/useCases/notes/InsertNoteUseCase';
 import { DeleteNoteUseCase } from '../../../domain/useCases/notes/DeleteNoteUseCase';
 import { DeleteAllNotesUseCase } from '../../../domain/useCases/notes/DeleteAllNotesUseCase';
 import { NoteSortOption } from '../../../domain/model/Note';
+import { useResolve } from '../../hooks/useResolve';
+import { execute } from '../../hooks/useExecute';
 import { DatabaseUiState, initialDatabaseUiState } from './DatabaseUiState';
 
 const SEARCH_DEBOUNCE_MS = 300;
@@ -14,18 +16,10 @@ export const useDatabaseViewModel = () => {
   const debounceTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const subscriptionRef = useRef<{ unsubscribe: () => void } | null>(null);
 
-  const searchNotesUseCase = useMemo(
-    () => container.resolve<SearchNotesUseCase>(TYPES.SearchNotesUseCase), []
-  );
-  const insertNoteUseCase = useMemo(
-    () => container.resolve<InsertNoteUseCase>(TYPES.InsertNoteUseCase), []
-  );
-  const deleteNoteUseCase = useMemo(
-    () => container.resolve<DeleteNoteUseCase>(TYPES.DeleteNoteUseCase), []
-  );
-  const deleteAllNotesUseCase = useMemo(
-    () => container.resolve<DeleteAllNotesUseCase>(TYPES.DeleteAllNotesUseCase), []
-  );
+  const searchNotesUseCase = useResolve<SearchNotesUseCase>(TYPES.SearchNotesUseCase);
+  const insertNoteUseCase = useResolve<InsertNoteUseCase>(TYPES.InsertNoteUseCase);
+  const deleteNoteUseCase = useResolve<DeleteNoteUseCase>(TYPES.DeleteNoteUseCase);
+  const deleteAllNotesUseCase = useResolve<DeleteAllNotesUseCase>(TYPES.DeleteAllNotesUseCase);
 
   const subscribeToNotes = useCallback((query: string, sortOption: NoteSortOption) => {
     subscriptionRef.current?.unsubscribe();
@@ -81,25 +75,30 @@ export const useDatabaseViewModel = () => {
     setUiState(prev => ({ ...prev, newNoteContent: content }));
   }, []);
 
-  const addNote = useCallback(async () => {
+  const addNote = useCallback(() => {
     const { newNoteTitle, newNoteContent } = uiState;
     if (!newNoteTitle.trim() || !newNoteContent.trim()) { return; }
 
-    await insertNoteUseCase.execute({
-      title: newNoteTitle.trim(),
-      content: newNoteContent.trim(),
-      createdAt: Date.now(),
+    execute({
+      action: () => insertNoteUseCase.execute({
+        title: newNoteTitle.trim(),
+        content: newNoteContent.trim(),
+        createdAt: Date.now(),
+      }),
+      onSuccess: () => setUiState(prev => ({ ...prev, newNoteTitle: '', newNoteContent: '' })),
     });
-
-    setUiState(prev => ({ ...prev, newNoteTitle: '', newNoteContent: '' }));
   }, [uiState.newNoteTitle, uiState.newNoteContent, insertNoteUseCase]);
 
-  const deleteNote = useCallback(async (id: number) => {
-    await deleteNoteUseCase.execute(id);
+  const deleteNote = useCallback((id: number) => {
+    execute({
+      action: () => deleteNoteUseCase.execute(id),
+    });
   }, [deleteNoteUseCase]);
 
-  const deleteAllNotes = useCallback(async () => {
-    await deleteAllNotesUseCase.execute();
+  const deleteAllNotes = useCallback(() => {
+    execute({
+      action: () => deleteAllNotesUseCase.execute(),
+    });
   }, [deleteAllNotesUseCase]);
 
   return {

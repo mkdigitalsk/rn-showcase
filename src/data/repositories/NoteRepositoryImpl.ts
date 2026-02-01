@@ -40,6 +40,11 @@ export class NoteRepositoryImpl implements NoteRepository {
     this.notifyAll();
   }
 
+  async update(note: Note): Promise<void> {
+    this.client.update(note.id, note.title, note.content);
+    this.notifyAll();
+  }
+
   async delete(id: number): Promise<void> {
     this.client.deleteById(id);
     this.notifyAll();

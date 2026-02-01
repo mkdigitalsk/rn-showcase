@@ -14,6 +14,11 @@ export const TYPES = {
   SetPersistentCounterUseCase: Symbol.for('SetPersistentCounterUseCase'),
   ClearSessionUseCase: Symbol.for('ClearSessionUseCase'),
 
+  // Auth
+  AuthRepository: Symbol.for('AuthRepository'),
+  RegisterUserUseCase: Symbol.for('RegisterUserUseCase'),
+  CheckEmailExistsUseCase: Symbol.for('CheckEmailExistsUseCase'),
+
   // Platform APIs
   PlatformClient: Symbol.for('PlatformClient'),
   PlatformRepository: Symbol.for('PlatformRepository'),
@@ -27,6 +32,7 @@ export const TYPES = {
   LocationClient: Symbol.for('LocationClient'),
   LocationRepository: Symbol.for('LocationRepository'),
   GetLocationUseCase: Symbol.for('GetLocationUseCase'),
+  ObserveLocationUpdatesUseCase: Symbol.for('ObserveLocationUpdatesUseCase'),
 
   // Biometric
   BiometricClient: Symbol.for('BiometricClient'),
@@ -39,12 +45,14 @@ export const TYPES = {
   FlashlightRepository: Symbol.for('FlashlightRepository'),
   IsFlashlightAvailableUseCase: Symbol.for('IsFlashlightAvailableUseCase'),
   ToggleFlashlightUseCase: Symbol.for('ToggleFlashlightUseCase'),
+  TurnOffFlashlightUseCase: Symbol.for('TurnOffFlashlightUseCase'),
 
   // Database
   DatabaseClient: Symbol.for('DatabaseClient'),
   NoteRepository: Symbol.for('NoteRepository'),
   SearchNotesUseCase: Symbol.for('SearchNotesUseCase'),
   InsertNoteUseCase: Symbol.for('InsertNoteUseCase'),
+  UpdateNoteUseCase: Symbol.for('UpdateNoteUseCase'),
   DeleteNoteUseCase: Symbol.for('DeleteNoteUseCase'),
   DeleteAllNotesUseCase: Symbol.for('DeleteAllNotesUseCase'),
 

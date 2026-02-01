@@ -1,7 +1,9 @@
-import { useState, useEffect, useCallback, useMemo } from 'react';
-import { container, TYPES } from '../../../app/di/diContainer';
+import { useState, useEffect, useCallback } from 'react';
+import { TYPES } from '../../../app/diTypes';
 import { GetTodayDateUseCase } from '../../../domain/useCases/calendar/GetTodayDateUseCase';
 import { SelectionState } from '../../../domain/model/Calendar';
+import { useResolve } from '../../hooks/useResolve';
+import { execute } from '../../hooks/useExecute';
 import { CalendarUiState, initialCalendarUiState } from './CalendarUiState';
 
 const generateDisabledDates = (today: string): Set<string> => {
@@ -45,17 +47,16 @@ const hasDisabledDateInRange = (
 export const useCalendarViewModel = () => {
   const [uiState, setUiState] = useState<CalendarUiState>(initialCalendarUiState);
 
-  const getTodayDateUseCase = useMemo(
-    () => container.resolve<GetTodayDateUseCase>(TYPES.GetTodayDateUseCase), []
-  );
+  const getTodayDateUseCase = useResolve<GetTodayDateUseCase>(TYPES.GetTodayDateUseCase);
 
   useEffect(() => {
-    const load = async () => {
-      const today = await getTodayDateUseCase.execute();
-      const disabledDates = generateDisabledDates(today);
-      setUiState(prev => ({ ...prev, today, disabledDates }));
-    };
-    load();
+    execute({
+      action: () => getTodayDateUseCase.execute(),
+      onSuccess: (today) => {
+        const disabledDates = generateDisabledDates(today);
+        setUiState(prev => ({ ...prev, today, disabledDates }));
+      },
+    });
   }, [getTodayDateUseCase]);
 
   const onDateClick = useCallback((dateString: string) => {

@@ -14,6 +14,7 @@ import { BiometricClient } from '../biometric/BiometricClient';
 import { BiometricRepositoryImpl } from '../repositories/BiometricRepositoryImpl';
 import { FlashlightClient } from '../flashlight/FlashlightClient';
 import { FlashlightRepositoryImpl } from '../repositories/FlashlightRepositoryImpl';
+import { AuthRepositoryImpl } from '../repositories/AuthRepositoryImpl';
 import { DatabaseClient } from '../database/DatabaseClient';
 import { NoteRepositoryImpl } from '../repositories/NoteRepositoryImpl';
 import { DateRepositoryImpl } from '../repositories/DateRepositoryImpl';
@@ -46,6 +47,9 @@ export const dataModule = () => {
     // Flashlight
     container.registerSingleton(TYPES.FlashlightClient, FlashlightClient);
     container.registerSingleton(TYPES.FlashlightRepository, FlashlightRepositoryImpl);
+
+    // Auth
+    container.registerSingleton(TYPES.AuthRepository, AuthRepositoryImpl);
 
     // Database
     container.registerSingleton(TYPES.DatabaseClient, DatabaseClient);

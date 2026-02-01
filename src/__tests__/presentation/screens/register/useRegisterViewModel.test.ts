@@ -1,8 +1,32 @@
-import { renderHook, act } from '@testing-library/react-native';
+import { renderHook, act, waitFor } from '@testing-library/react-native';
 import { test } from '../../../TestFunctions';
+
+// Mock tsyringe container.resolve before importing the hook
+const mockCheckEmailExists = { execute: jest.fn().mockResolvedValue(false) };
+const mockRegisterUser = { execute: jest.fn().mockResolvedValue({ id: 1, name: 'John', email: 'john@example.com', password: 'Test123!', createdAt: 1234567890 }) };
+
+jest.mock('tsyringe', () => ({
+  container: {
+    resolve: jest.fn((token: symbol) => {
+      const key = token.toString();
+      if (key.includes('CheckEmailExists')) { return mockCheckEmailExists; }
+      if (key.includes('RegisterUser')) { return mockRegisterUser; }
+      return {};
+    }),
+  },
+  injectable: () => (target: any) => target,
+  inject: () => () => {},
+}));
+
 import { useRegisterViewModel } from '../../../../presentation/screens/register/useRegisterViewModel';
 
 describe('useRegisterViewModel', () => {
+  beforeEach(() => {
+    jest.clearAllMocks();
+    mockCheckEmailExists.execute.mockResolvedValue(false);
+    mockRegisterUser.execute.mockResolvedValue({ id: 1, name: 'John', email: 'john@example.com', password: 'Test123!', createdAt: 1234567890 });
+  });
+
   // === Default State ===
 
   it('default state has empty fields', () => {
@@ -99,15 +123,11 @@ describe('useRegisterViewModel', () => {
       result.current.onConfirmPasswordChange('Test123!');
     });
 
-    let valid: boolean = true;
-    act(() => { valid = result.current.register(); });
+    act(() => result.current.register());
 
     test({
-      whenAction: () => ({ valid, error: result.current.uiState.nameError }),
-      then: ({ valid, error }) => {
-        expect(valid).toBe(false);
-        expect(error).toBe('empty');
-      },
+      whenAction: () => result.current.uiState.nameError,
+      then: (error) => expect(error).toBe('empty'),
     });
   });
 
@@ -235,7 +255,7 @@ describe('useRegisterViewModel', () => {
 
   // === Successful Registration ===
 
-  it('register with all valid fields returns true and has no errors', () => {
+  it('register with valid fields calls use cases and invokes callback', async () => {
     const { result } = renderHook(() => useRegisterViewModel());
     act(() => {
       result.current.onNameChange('John Doe');
@@ -244,18 +264,44 @@ describe('useRegisterViewModel', () => {
       result.current.onConfirmPasswordChange('Test123!');
     });
 
-    let valid: boolean = false;
-    act(() => { valid = result.current.register(); });
+    const onRegistered = jest.fn();
+    act(() => result.current.register(onRegistered));
 
-    test({
-      whenAction: () => ({ valid, state: result.current.uiState }),
-      then: ({ valid, state }) => {
-        expect(valid).toBe(true);
-        expect(state.nameError).toBeNull();
-        expect(state.emailError).toBeNull();
-        expect(state.passwordError).toBeNull();
-        expect(state.confirmPasswordError).toBeNull();
-      },
+    await waitFor(() => {
+      expect(onRegistered).toHaveBeenCalled();
     });
+
+    expect(mockCheckEmailExists.execute).toHaveBeenCalledWith('john@example.com');
+    expect(mockRegisterUser.execute).toHaveBeenCalledWith({
+      name: 'John Doe',
+      email: 'john@example.com',
+      password: 'Test123!',
+    });
+    expect(result.current.uiState.isLoading).toBe(false);
+  });
+
+  // === Email Already Exists ===
+
+  it('register with existing email shows already_exists error', async () => {
+    mockCheckEmailExists.execute.mockResolvedValue(true);
+
+    const { result } = renderHook(() => useRegisterViewModel());
+    act(() => {
+      result.current.onNameChange('John Doe');
+      result.current.onEmailChange('existing@example.com');
+      result.current.onPasswordChange('Test123!');
+      result.current.onConfirmPasswordChange('Test123!');
+    });
+
+    const onRegistered = jest.fn();
+    act(() => result.current.register(onRegistered));
+
+    await waitFor(() => {
+      expect(result.current.uiState.emailError).toBe('already_exists');
+    });
+
+    expect(onRegistered).not.toHaveBeenCalled();
+    expect(mockRegisterUser.execute).not.toHaveBeenCalled();
+    expect(result.current.uiState.isLoading).toBe(false);
   });
 });

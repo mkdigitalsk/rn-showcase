@@ -16,4 +16,8 @@ export class FlashlightRepositoryImpl implements FlashlightRepository {
   async toggle(currentState: boolean): Promise<boolean> {
     return this.client.toggle(currentState);
   }
+
+  async turnOff(): Promise<boolean> {
+    return this.client.turnOff();
+  }
 }

@@ -1,10 +1,11 @@
-import { useState, useCallback, useEffect, useMemo } from 'react';
-import { container } from 'tsyringe';
+import { useState, useCallback, useEffect } from 'react';
 import { TYPES } from '../../../app/diTypes';
 import { IsBiometricEnabledUseCase } from '../../../domain/useCases/biometric/IsBiometricEnabledUseCase';
 import { AuthenticateWithBiometricUseCase } from '../../../domain/useCases/biometric/AuthenticateWithBiometricUseCase';
+import { useResolve } from '../../hooks/useResolve';
+import { execute } from '../../hooks/useExecute';
 import { LoginUiState, initialLoginUiState, EmailError, PasswordError } from './LoginUiState';
-import { isValidEmail, isPasswordLongEnough, isValidPassword, MIN_PASSWORD_LENGTH } from '../../foundation/ValidationPatterns';
+import { isValidEmail, isPasswordLongEnough, isValidPassword } from '../../foundation/ValidationPatterns';
 
 const TEST_EMAIL = 'test@example.com';
 const TEST_PASSWORD = 'Test123!';
@@ -12,19 +13,14 @@ const TEST_PASSWORD = 'Test123!';
 export const useLoginViewModel = () => {
   const [uiState, setUiState] = useState<LoginUiState>(initialLoginUiState);
 
-  const isBiometricEnabledUseCase = useMemo(
-    () => container.resolve<IsBiometricEnabledUseCase>(TYPES.IsBiometricEnabledUseCase), [],
-  );
-  const authenticateWithBiometricUseCase = useMemo(
-    () => container.resolve<AuthenticateWithBiometricUseCase>(TYPES.AuthenticateWithBiometricUseCase), [],
-  );
+  const isBiometricEnabledUseCase = useResolve<IsBiometricEnabledUseCase>(TYPES.IsBiometricEnabledUseCase);
+  const authenticateWithBiometricUseCase = useResolve<AuthenticateWithBiometricUseCase>(TYPES.AuthenticateWithBiometricUseCase);
 
   useEffect(() => {
-    const checkBiometrics = async () => {
-      const available = await isBiometricEnabledUseCase.execute();
-      setUiState(prev => ({ ...prev, biometricsAvailable: available }));
-    };
-    checkBiometrics();
+    execute({
+      action: () => isBiometricEnabledUseCase.execute(),
+      onSuccess: (available) => setUiState(prev => ({ ...prev, biometricsAvailable: available })),
+    });
   }, [isBiometricEnabledUseCase]);
 
   const onEmailChange = useCallback((email: string) => {
@@ -60,15 +56,26 @@ export const useLoginViewModel = () => {
     return true;
   }, [uiState.email, uiState.password, validateEmail, validatePassword]);
 
-  const authenticateWithBiometrics = useCallback(async (): Promise<boolean> => {
-    setUiState(prev => ({ ...prev, biometricsLoading: true }));
-    const result = await authenticateWithBiometricUseCase.execute();
-    setUiState(prev => ({
-      ...prev,
-      biometricsLoading: false,
-      biometricsResult: result,
-    }));
-    return result.type === 'success';
+  const authenticateWithBiometrics = useCallback((onAuthenticated?: () => void): void => {
+    execute({
+      action: () => authenticateWithBiometricUseCase.execute(),
+      onLoading: () => setUiState(prev => ({ ...prev, biometricsLoading: true })),
+      onSuccess: (result) => {
+        setUiState(prev => ({
+          ...prev,
+          biometricsLoading: false,
+          biometricsResult: result,
+        }));
+        if (result.type === 'success') {
+          onAuthenticated?.();
+        }
+      },
+      onError: (error) => setUiState(prev => ({
+        ...prev,
+        biometricsLoading: false,
+        biometricsResult: { type: 'failed', message: error.userMessage },
+      })),
+    });
   }, [authenticateWithBiometricUseCase]);
 
   const fillTestAccount = useCallback(() => {
