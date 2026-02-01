@@ -16,6 +16,10 @@ export const en = {
   settings_dark_mode: 'Dark Mode',
   settings_about: 'About',
   settings_version: 'Version',
+  settings_appearance: 'Appearance',
+  settings_theme_light: 'Light',
+  settings_theme_dark: 'Dark',
+  settings_theme_system: 'System',
 
   // Languages
   language_en: 'English',

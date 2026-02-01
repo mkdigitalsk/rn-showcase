@@ -18,6 +18,10 @@ export const sk: Record<StringKey, string> = {
   settings_dark_mode: 'Tmavý režim',
   settings_about: 'O aplikácii',
   settings_version: 'Verzia',
+  settings_appearance: 'Vzhľad',
+  settings_theme_light: 'Svetlý',
+  settings_theme_dark: 'Tmavý',
+  settings_theme_system: 'Systém',
 
   // Languages
   language_en: 'Angličtina',
