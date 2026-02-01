@@ -49,17 +49,6 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		35FA84112D300539009EDA00 /* bridge */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			exceptions = (
-			);
-			explicitFileTypes = {
-			};
-			explicitFolders = (
-			);
-			path = bridge;
-			sourceTree = "<group>";
-		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,7 +91,6 @@
 		13B07FAE1A68108700A75B9A /* rnshowcase */ = {
 			isa = PBXGroup;
 			children = (
-				35FA84112D300539009EDA00 /* bridge */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.mm */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
@@ -209,7 +197,6 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
-				35FA84112D300539009EDA00 /* bridge */,
 			);
 			name = rnshowcase;
 			productName = rnshowcase;
