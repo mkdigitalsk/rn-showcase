@@ -1,0 +1,18 @@
+[versions]
+agp = "8.6.0"
+kotlin = "1.9.24"
+google-services = "4.4.2"
+firebase-crashlytics-gradle = "3.0.3"
+build-tools = "35.0.0"
+min-sdk = "26"
+compile-sdk = "36"
+target-sdk = "36"
+ndk = "26.1.10909125"
+
+[plugins]
+android-application = { id = "com.android.application", version.ref = "agp" }
+kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+google-services = { id = "com.google.gms.google-services", version.ref = "google-services" }
+firebase-crashlytics = { id = "com.google.firebase.crashlytics", version.ref = "firebase-crashlytics-gradle" }
+react-native = { id = "com.facebook.react" }
+react-native-root = { id = "com.facebook.react.rootproject" }
