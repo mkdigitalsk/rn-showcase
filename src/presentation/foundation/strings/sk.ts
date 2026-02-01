@@ -27,6 +27,15 @@ export const sk: Record<StringKey, string> = {
   language_en: 'Angličtina',
   language_sk: 'Slovenčina',
 
+  // Storage
+  storage_title: 'Lokálne úložisko',
+  storage_subtitle: 'Demonštrácia session vs perzistentného úložiska pomocou MMKV',
+  storage_session_label: 'Session počítadlo',
+  storage_session_hint: 'Resetuje sa pri zatvorení aplikácie alebo vyčistení session',
+  storage_persistent_label: 'Perzistentné počítadlo',
+  storage_persistent_hint: 'Prežije reštart aplikácie (uložené v MMKV)',
+  storage_clear_session: 'Vyčistiť session',
+
   // Common
   common_loading: 'Načítavam...',
   common_error: 'Chyba',

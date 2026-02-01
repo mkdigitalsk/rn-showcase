@@ -21,9 +21,14 @@ export const OutlinedButton: React.FC<OutlinedButtonProps> = ({
       mode="outlined"
       onPress={onPress}
       textColor={theme.colors.primary}
-      style={{ alignSelf: 'flex-start' }}
+      style={{
+        alignSelf: 'flex-start',
+        borderRadius: cardCornerRadius6,
+        borderColor: theme.colors.primary,
+      }}
+      contentStyle={{ paddingHorizontal: space4 }}
     >
-      {text.toUpperCase()}
+      {text}
     </Button>
   );
 };
