@@ -51,4 +51,12 @@ export const TYPES = {
   // Calendar
   DateRepository: Symbol.for('DateRepository'),
   GetTodayDateUseCase: Symbol.for('GetTodayDateUseCase'),
+
+  // Notifications
+  LocalNotificationService: Symbol.for('LocalNotificationService'),
+  GetPermissionStatusUseCase: Symbol.for('GetPermissionStatusUseCase'),
+  RequestPermissionUseCase: Symbol.for('RequestPermissionUseCase'),
+  ShowNotificationUseCase: Symbol.for('ShowNotificationUseCase'),
+  CancelAllNotificationsUseCase: Symbol.for('CancelAllNotificationsUseCase'),
+  OpenNotificationSettingsUseCase: Symbol.for('OpenNotificationSettingsUseCase'),
 };

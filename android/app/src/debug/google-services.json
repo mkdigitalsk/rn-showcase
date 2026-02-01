@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "872144893233",
+    "project_id": "rn-showcase-bf039",
+    "storage_bucket": "rn-showcase-bf039.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:872144893233:android:cc6fe16a874e1de1a22c10",
+        "android_client_info": {
+          "package_name": "com.mk.rnshowcase"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBNuxdNvtUOXqyGi-JLjm10_iFHObG9jA4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

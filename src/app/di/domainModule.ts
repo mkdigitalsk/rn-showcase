@@ -20,6 +20,11 @@ import { InsertNoteUseCase } from '../../domain/useCases/notes/InsertNoteUseCase
 import { DeleteNoteUseCase } from '../../domain/useCases/notes/DeleteNoteUseCase';
 import { DeleteAllNotesUseCase } from '../../domain/useCases/notes/DeleteAllNotesUseCase';
 import { GetTodayDateUseCase } from '../../domain/useCases/calendar/GetTodayDateUseCase';
+import { GetPermissionStatusUseCase } from '../../domain/useCases/notifications/GetPermissionStatusUseCase';
+import { RequestPermissionUseCase } from '../../domain/useCases/notifications/RequestPermissionUseCase';
+import { ShowNotificationUseCase } from '../../domain/useCases/notifications/ShowNotificationUseCase';
+import { CancelAllNotificationsUseCase } from '../../domain/useCases/notifications/CancelAllNotificationsUseCase';
+import { OpenNotificationSettingsUseCase } from '../../domain/useCases/notifications/OpenNotificationSettingsUseCase';
 import { TYPES } from '../diTypes';
 
 export const domainModule = () => {
@@ -58,4 +63,11 @@ export const domainModule = () => {
 
     // Calendar
     container.register(TYPES.GetTodayDateUseCase, { useClass: GetTodayDateUseCase });
+
+    // Notifications
+    container.register(TYPES.GetPermissionStatusUseCase, { useClass: GetPermissionStatusUseCase });
+    container.register(TYPES.RequestPermissionUseCase, { useClass: RequestPermissionUseCase });
+    container.register(TYPES.ShowNotificationUseCase, { useClass: ShowNotificationUseCase });
+    container.register(TYPES.CancelAllNotificationsUseCase, { useClass: CancelAllNotificationsUseCase });
+    container.register(TYPES.OpenNotificationSettingsUseCase, { useClass: OpenNotificationSettingsUseCase });
 }

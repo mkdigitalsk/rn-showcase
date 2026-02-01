@@ -64,6 +64,12 @@ export const HomeSection = {
     title: 'Calendar',
     analyticsName: 'calendar_screen',
   },
+  Notifications: {
+    name: 'Notifications',
+    ...defaults,
+    title: 'Notifications',
+    analyticsName: 'notifications_screen',
+  },
 } as const satisfies Record<string, Route>;
 
 // Top-level routes

@@ -108,6 +108,26 @@ export const en = {
   calendar_no_selection: 'Tap a date to start selecting a range',
   calendar_disabled_in_range: 'Range contains disabled dates, selection reset',
 
+  // Notifications
+  notifications_title: 'Notifications',
+  notifications_subtitle: 'Local notifications with channels, permissions, and settings',
+  notifications_permission_title: 'Permission',
+  notifications_permission_granted: 'Notification permission granted',
+  notifications_permission_denied: 'Notification permission denied',
+  notifications_permission_unknown: 'Permission not yet requested',
+  notifications_request_permission: 'Request Permission',
+  notifications_send_title: 'Send Notifications',
+  notifications_last_sent: 'Last sent',
+  notifications_send_reminder: 'Reminder',
+  notifications_send_promo: 'Promo',
+  notifications_reminder_title: 'Reminder',
+  notifications_reminder_message: 'Don\'t forget to check your tasks!',
+  notifications_promo_title: 'Special Offer',
+  notifications_promo_message: 'Check out our latest deals and updates!',
+  notifications_cancel_title: 'Manage',
+  notifications_open_settings: 'Settings',
+  notifications_cancel_all: 'Cancel All',
+
   // Common
   common_loading: 'Loading...',
   common_error: 'Error',

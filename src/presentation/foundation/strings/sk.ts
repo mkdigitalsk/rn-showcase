@@ -110,6 +110,26 @@ export const sk: Record<StringKey, string> = {
   calendar_no_selection: 'Ťuknite na dátum pre začatie výberu rozsahu',
   calendar_disabled_in_range: 'Rozsah obsahuje deaktivované dátumy, výber resetovaný',
 
+  // Notifications
+  notifications_title: 'Notifikácie',
+  notifications_subtitle: 'Lokálne notifikácie s kanálmi, povoleniami a nastaveniami',
+  notifications_permission_title: 'Povolenie',
+  notifications_permission_granted: 'Povolenie pre notifikácie udelené',
+  notifications_permission_denied: 'Povolenie pre notifikácie zamietnuté',
+  notifications_permission_unknown: 'Povolenie ešte nebolo vyžiadané',
+  notifications_request_permission: 'Vyžiadať povolenie',
+  notifications_send_title: 'Odoslať notifikácie',
+  notifications_last_sent: 'Posledná odoslaná',
+  notifications_send_reminder: 'Pripomienka',
+  notifications_send_promo: 'Promo',
+  notifications_reminder_title: 'Pripomienka',
+  notifications_reminder_message: 'Nezabudnite skontrolovať svoje úlohy!',
+  notifications_promo_title: 'Špeciálna ponuka',
+  notifications_promo_message: 'Pozrite si naše najnovšie ponuky a novinky!',
+  notifications_cancel_title: 'Správa',
+  notifications_open_settings: 'Nastavenia',
+  notifications_cancel_all: 'Zrušiť všetky',
+
   // Common
   common_loading: 'Načítavam...',
   common_error: 'Chyba',

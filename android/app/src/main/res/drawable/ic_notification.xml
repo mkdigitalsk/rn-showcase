@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+    <!-- Letters RN - monochrome notification icon -->
+    <!-- White fill with transparent background for proper status bar rendering -->
+    <!-- Letter R -->
+    <path
+        android:fillColor="@android:color/white"
+        android:pathData="M2,4 L2,20 L6,20 L6,14 L8,14 L11,20 L15,20 L11.5,13.5
+                          C13,13 14,11.5 14,10 C14,7 12,4 8,4 Z
+                          M6,7 L8,7 C10,7 11,8 11,10 C11,12 10,13 8,13 L6,13 Z" />
+    <!-- Letter N -->
+    <path
+        android:fillColor="@android:color/white"
+        android:pathData="M16,4 L16,20 L19,20 L19,10 L22,20 L22,20 L22,4 L19,4 L19,14 L16,4 Z" />
+</vector>
