@@ -4,7 +4,7 @@ A production-ready React Native demo app showcasing modern mobile development wi
 
 [![React Native](https://img.shields.io/badge/React_Native-0.76-61DAFB.svg?logo=react&logoColor=white)](https://reactnative.dev)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.0-3178C6.svg?logo=typescript&logoColor=white)](https://www.typescriptlang.org)
-![Android](https://img.shields.io/badge/Android-API_24+-3DDC84.svg?logo=android&logoColor=white)
+![Android](https://img.shields.io/badge/Android-26-3DDC84.svg?logo=android&logoColor=white)
 ![iOS](https://img.shields.io/badge/iOS-15+-000000.svg?logo=apple&logoColor=white)
 
 **100% shared code** across Android & iOS
@@ -17,18 +17,18 @@ A production-ready React Native demo app showcasing modern mobile development wi
 
 ### UI & Navigation
 - React Navigation 6+
-- Material Design 3 (react-native-paper)
-- Dark Mode Support
-- 20+ Custom Components
+- Material Design 3
+- Dark Mode + System Theme
+- 40+ Components
 
 </td>
 <td style="width:50%">
 
 ### Platform APIs
 - Biometrics (Face ID / Fingerprint)
-- Camera & Gallery
-- QR/Barcode Scanner
-- Permissions
+- Camera & QR/Barcode Scanner
+- Location & Permissions
+- Flashlight
 
 </td>
 </tr>
@@ -38,18 +38,49 @@ A production-ready React Native demo app showcasing modern mobile development wi
 ### Data & Network
 - Axios HTTP Client
 - MMKV Storage
-- SQLite Database
+- SQLite Database (op-sqlite)
 - Clean Architecture
 
 </td>
 <td style="width:50%">
 
 ### Notifications
-- Push (FCM / APNs)
 - Local Notifications
+- Notification Channels
 - Permission Handling
 
 </td>
+</tr>
+</table>
+
+---
+
+## Screenshots
+
+<table>
+<tr>
+<td><img src="screenshots/login.png" width="180" alt="Login"/></td>
+<td><img src="screenshots/home.png" width="180" alt="Home"/></td>
+<td><img src="screenshots/ui_components.png" width="180" alt="UI Components"/></td>
+<td><img src="screenshots/storage.png" width="180" alt="Storage"/></td>
+</tr>
+<tr>
+<td style="text-align:center">Login</td>
+<td style="text-align:center">Home</td>
+<td style="text-align:center">UI Components</td>
+<td style="text-align:center">Storage</td>
+</tr>
+<tr>
+<td><img src="screenshots/platform_apis_1.png" width="180" alt="Platform APIs"/></td>
+<td><img src="screenshots/platform_apis_2.png" width="180" alt="Platform APIs"/></td>
+<td><img src="screenshots/notifications.png" width="180" alt="Notifications"/></td>
+<td><img src="screenshots/settings.png" width="180" alt="Settings"/></td>
+</tr>
+<tr>
+<td style="text-align:center">Platform APIs</td>
+<td style="text-align:center">Platform APIs</td>
+<td style="text-align:center">Notifications</td>
+<td style="text-align:center">Settings</td>
 </tr>
 </table>
 
@@ -61,6 +92,8 @@ A production-ready React Native demo app showcasing modern mobile development wi
 ![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?logo=typescript&logoColor=white)
 ![tsyringe](https://img.shields.io/badge/tsyringe-DI-blue)
 ![Axios](https://img.shields.io/badge/Axios-5A29E4?logo=axios&logoColor=white)
+![MMKV](https://img.shields.io/badge/MMKV-Storage-orange)
+![Firebase](https://img.shields.io/badge/Firebase-FFCA28?logo=firebase&logoColor=black)
 ![Jest](https://img.shields.io/badge/Jest-C21325?logo=jest&logoColor=white)
 
 ---
@@ -78,16 +111,19 @@ Presentation  →  Domain  →  Data
 
 ```bash
 # Install dependencies
-yarn install
+npm install
 
 # iOS (first time)
 cd ios && pod install && cd ..
 
 # Run Android
-yarn android
+npx react-native run-android
 
 # Run iOS
-yarn ios
+npx react-native run-ios
+
+# Run tests
+npx jest
 ```
 
 ---
@@ -106,7 +142,7 @@ src/
 │   │       └── XxxUiState.ts
 │   ├── components/         # Reusable components
 │   ├── navigation/         # React Navigation
-│   └── foundation/         # Theme, colors, dimensions
+│   └── foundation/         # Theme, colors, strings
 ├── domain/                 # Business Logic
 │   ├── models/             # Domain models
 │   ├── repositories/       # Repository interfaces
@@ -115,43 +151,10 @@ src/
 └── data/                   # Data Layer
     ├── repositories/       # Repository implementations
     ├── network/            # API clients (Axios)
+    ├── analytics/          # Firebase Analytics & Crashlytics
     ├── dto/                # Data Transfer Objects
-    └── mappers/            # DTO → Domain mappers
+    └── local/              # MMKV, SQLite
 ```
-
----
-
-## Roadmap
-
-### Done
-- [x] UI Components (20+ components)
-- [x] Theme system (Light/Dark mode)
-- [x] Navigation (Bottom tabs + Stack)
-- [x] Networking (Axios + REST API)
-- [x] Clean Architecture (UseCase pattern)
-- [x] Dependency Injection (tsyringe)
-- [x] Custom components (LoadingView, ErrorView, Spacers)
-- [x] Type-safe Routes (KMP-style Route config)
-- [x] Localization (EN/SK with StringsProvider)
-- [x] Deep Links (Android)
-
-### In Progress
-- [ ] Storage feature (MMKV)
-
-### Planned
-- [ ] Database feature (SQLite/WatermelonDB)
-- [ ] Platform APIs (biometrics, camera, gallery)
-- [ ] QR/Barcode Scanner
-- [ ] Calendar integration
-- [ ] Push Notifications (FCM/APNs)
-- [ ] Local Notifications
-- [ ] Login/Auth flow
-- [ ] Form validation (react-hook-form + zod)
-- [ ] Pagination
-- [ ] Offline-first support
-- [ ] Unit tests setup
-- [ ] E2E tests (Detox)
-- [ ] Screenshot tests
 
 
 ---
