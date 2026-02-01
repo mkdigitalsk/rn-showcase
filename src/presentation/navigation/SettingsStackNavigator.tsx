@@ -1,8 +1,8 @@
 import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { useAppColors } from '../foundation/theme';
+import { useStrings } from '../foundation/strings';
 import { SettingsScreen } from '../screens/settings/SettingsScreen';
-import { Routes } from './routes';
 
 export type SettingsStackProps = {
   SettingsMain: undefined;
@@ -12,6 +12,7 @@ const Stack = createNativeStackNavigator<SettingsStackProps>();
 
 export const SettingsStackNavigator = () => {
   const colors = useAppColors();
+  const { t } = useStrings();
 
   return (
     <Stack.Navigator
@@ -23,7 +24,7 @@ export const SettingsStackNavigator = () => {
       <Stack.Screen
         name="SettingsMain"
         component={SettingsScreen}
-        options={{ title: Routes.Settings.title }}
+        options={{ title: t('screen_settings') }}
       />
     </Stack.Navigator>
   );

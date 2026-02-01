@@ -1,6 +1,7 @@
 import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { useAppColors } from '../foundation/theme';
+import { useStrings } from '../foundation/strings';
 import { HomeScreen } from '../screens/home/HomeScreen';
 import { UiComponentsScreen } from '../screens/uiComponents/UiComponentsScreen';
 import { NetworkingScreen } from '../screens/networking/NetworkingScreen';
@@ -21,6 +22,7 @@ const Stack = createNativeStackNavigator<HomeStackProps>();
 
 export const HomeStackNavigator = () => {
   const colors = useAppColors();
+  const { t } = useStrings();
 
   return (
     <Stack.Navigator
@@ -33,47 +35,47 @@ export const HomeStackNavigator = () => {
       <Stack.Screen
         name={HomeSection.HomeMain.name}
         component={HomeScreen}
-        options={{ title: HomeSection.HomeMain.title }}
+        options={{ title: t('screen_home') }}
       />
       <Stack.Screen
         name={HomeSection.UiComponents.name}
         component={UiComponentsScreen}
-        options={{ title: HomeSection.UiComponents.title }}
+        options={{ title: t('screen_ui_components') }}
       />
       <Stack.Screen
         name={HomeSection.Networking.name}
         component={NetworkingScreen}
-        options={{ title: HomeSection.Networking.title }}
+        options={{ title: t('screen_networking') }}
       />
       <Stack.Screen
         name={HomeSection.Storage.name}
         component={StorageScreen}
-        options={{ title: HomeSection.Storage.title }}
+        options={{ title: t('screen_storage') }}
       />
       <Stack.Screen
         name={HomeSection.PlatformApis.name}
         component={PlatformApisScreen}
-        options={{ title: HomeSection.PlatformApis.title }}
+        options={{ title: t('screen_platform_apis') }}
       />
       <Stack.Screen
         name={HomeSection.Database.name}
         component={DatabaseScreen}
-        options={{ title: HomeSection.Database.title }}
+        options={{ title: t('screen_database') }}
       />
       <Stack.Screen
         name={HomeSection.Scanner.name}
         component={ScannerScreen}
-        options={{ title: HomeSection.Scanner.title }}
+        options={{ title: t('screen_scanner') }}
       />
       <Stack.Screen
         name={HomeSection.Calendar.name}
         component={CalendarScreen}
-        options={{ title: HomeSection.Calendar.title }}
+        options={{ title: t('screen_calendar') }}
       />
       <Stack.Screen
         name={HomeSection.Notifications.name}
         component={NotificationsScreen}
-        options={{ title: HomeSection.Notifications.title }}
+        options={{ title: t('screen_notifications') }}
       />
     </Stack.Navigator>
   );

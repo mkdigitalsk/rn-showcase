@@ -40,9 +40,11 @@ import {
 } from '../../components';
 import { space4, space2 } from '../../foundation/dimensions';
 import { useAppColors } from '../../foundation/theme';
+import { useStrings } from '../../foundation/strings';
 
 export const UiComponentsScreen = () => {
   const colors = useAppColors();
+  const { t } = useStrings();
 
   // Local state for interactive components
   const [checkboxChecked, setCheckboxChecked] = useState(false);
@@ -68,6 +70,9 @@ export const UiComponentsScreen = () => {
     });
   };
 
+  const radioLabels = [t('ui_option_1'), t('ui_option_2'), t('ui_option_3')];
+  const filterLabels = [t('ui_filter_1'), t('ui_filter_2'), t('ui_filter_3')];
+
   return (
     <View style={{ flex: 1, backgroundColor: colors.background }}>
       <ScrollView
@@ -75,26 +80,26 @@ export const UiComponentsScreen = () => {
         contentContainerStyle={styles.content}
       >
         {/* ===== BUTTONS ===== */}
-        <SectionTitle title="Buttons" />
+        <SectionTitle title={t('ui_section_buttons')} />
         <ColumnSpacer2 />
-        <ContainedButton text="Contained Button" onPress={() => {}} />
+        <ContainedButton text={t('ui_contained_button')} onPress={() => {}} />
         <ColumnSpacer2 />
-        <OutlinedButton text="Outlined Button" onPress={() => {}} />
+        <OutlinedButton text={t('ui_outlined_button')} onPress={() => {}} />
         <ColumnSpacer2 />
-        <AppTextButton text="Text Button" onPress={() => {}} />
+        <AppTextButton text={t('ui_text_button')} onPress={() => {}} />
         <ColumnSpacer2 />
-        <AppTextButtonError text="Error Text Button" onPress={() => {}} />
+        <AppTextButtonError text={t('ui_error_text_button')} onPress={() => {}} />
 
         <ColumnSpacer4 />
 
         {/* ===== SEGMENTED BUTTON ===== */}
-        <SectionTitle title="Segmented Button" />
+        <SectionTitle title={t('ui_section_segmented')} />
         <ColumnSpacer2 />
         <AppSegmentedButton
           options={[
-            { value: 'day', label: 'Day' },
-            { value: 'week', label: 'Week' },
-            { value: 'month', label: 'Month' },
+            { value: 'day', label: t('ui_segment_day') },
+            { value: 'week', label: t('ui_segment_week') },
+            { value: 'month', label: t('ui_segment_month') },
           ]}
           selectedValue={selectedSegment}
           onValueChanged={setSelectedSegment}
@@ -103,72 +108,72 @@ export const UiComponentsScreen = () => {
         <ColumnSpacer4 />
 
         {/* ===== TYPOGRAPHY ===== */}
-        <SectionTitle title="Typography" />
+        <SectionTitle title={t('ui_section_typography')} />
         <ColumnSpacer2 />
-        <TextHeadlineMediumPrimary>Headline Medium</TextHeadlineMediumPrimary>
-        <TextTitleLargeNeutral80>Title Large</TextTitleLargeNeutral80>
-        <TextBodyLargeNeutral80>Body Large</TextBodyLargeNeutral80>
-        <TextBodyMediumNeutral80>Body Medium</TextBodyMediumNeutral80>
-        <TextBodySmallNeutral80>Body Small</TextBodySmallNeutral80>
-        <TextLabelLargePrimary>Label Large</TextLabelLargePrimary>
-        <TextLabelMediumNeutral80>Label Medium</TextLabelMediumNeutral80>
+        <TextHeadlineMediumPrimary>{t('ui_headline_medium')}</TextHeadlineMediumPrimary>
+        <TextTitleLargeNeutral80>{t('ui_title_large')}</TextTitleLargeNeutral80>
+        <TextBodyLargeNeutral80>{t('ui_body_large')}</TextBodyLargeNeutral80>
+        <TextBodyMediumNeutral80>{t('ui_body_medium')}</TextBodyMediumNeutral80>
+        <TextBodySmallNeutral80>{t('ui_body_small')}</TextBodySmallNeutral80>
+        <TextLabelLargePrimary>{t('ui_label_large')}</TextLabelLargePrimary>
+        <TextLabelMediumNeutral80>{t('ui_label_medium')}</TextLabelMediumNeutral80>
 
         <ColumnSpacer4 />
 
         {/* ===== CARDS ===== */}
-        <SectionTitle title="Cards" />
+        <SectionTitle title={t('ui_section_cards')} />
         <ColumnSpacer2 />
         <AppCard elevated onPress={() => {}}>
-          <TextBodyMediumNeutral80>Elevated Card (clickable)</TextBodyMediumNeutral80>
+          <TextBodyMediumNeutral80>{t('ui_elevated_card')}</TextBodyMediumNeutral80>
         </AppCard>
         <ColumnSpacer2 />
         <AppCard elevated={false} onPress={() => {}}>
-          <TextBodyMediumNeutral80>Contained Card (clickable)</TextBodyMediumNeutral80>
+          <TextBodyMediumNeutral80>{t('ui_contained_card')}</TextBodyMediumNeutral80>
         </AppCard>
 
         <ColumnSpacer4 />
 
         {/* ===== TEXT FIELD ===== */}
-        <SectionTitle title="Text Fields" />
+        <SectionTitle title={t('ui_section_text_fields')} />
         <ColumnSpacer2 />
         <AppTextField
           value={textFieldValue}
           onChangeText={setTextFieldValue}
-          label="Label"
-          placeholder="Type something..."
+          label={t('ui_text_field_label')}
+          placeholder={t('ui_text_field_placeholder')}
         />
 
         <ColumnSpacer4 />
 
         {/* ===== CHECKBOX ===== */}
-        <SectionTitle title="Checkbox" />
+        <SectionTitle title={t('ui_section_checkbox')} />
         <ColumnSpacer2 />
         <View style={styles.row}>
           <AppCheckbox checked={checkboxChecked} onPress={() => setCheckboxChecked(!checkboxChecked)} />
           <TextBodyMediumNeutral80>
-            {checkboxChecked ? 'Checked' : 'Unchecked'}
+            {checkboxChecked ? t('ui_checked') : t('ui_unchecked')}
           </TextBodyMediumNeutral80>
         </View>
 
         <ColumnSpacer4 />
 
         {/* ===== SWITCH ===== */}
-        <SectionTitle title="Switch" />
+        <SectionTitle title={t('ui_section_switch')} />
         <ColumnSpacer2 />
         <View style={styles.row}>
           <AppSwitch value={switchChecked} onValueChange={setSwitchChecked} />
           <RowSpacer2 />
           <TextBodyMediumNeutral80>
-            {switchChecked ? 'On' : 'Off'}
+            {switchChecked ? t('ui_on') : t('ui_off')}
           </TextBodyMediumNeutral80>
         </View>
 
         <ColumnSpacer4 />
 
         {/* ===== RADIO BUTTONS ===== */}
-        <SectionTitle title="Radio Buttons" />
+        <SectionTitle title={t('ui_section_radio')} />
         <ColumnSpacer2 />
-        {['Option 1', 'Option 2', 'Option 3'].map((label, index) => (
+        {radioLabels.map((label, index) => (
           <View key={label} style={styles.row}>
             <AppRadioButton
               selected={selectedRadio === index}
@@ -181,10 +186,10 @@ export const UiComponentsScreen = () => {
         <ColumnSpacer4 />
 
         {/* ===== CHIPS ===== */}
-        <SectionTitle title="Chips" />
+        <SectionTitle title={t('ui_section_chips')} />
         <ColumnSpacer2 />
         <View style={styles.chipRow}>
-          {['Filter 1', 'Filter 2', 'Filter 3'].map((label, index) => (
+          {filterLabels.map((label, index) => (
             <React.Fragment key={label}>
               <AppFilterChip
                 label={label}
@@ -197,17 +202,17 @@ export const UiComponentsScreen = () => {
         </View>
         <ColumnSpacer2 />
         <View style={styles.chipRow}>
-          <AppAssistChip label="Assist" onPress={() => {}} icon="help-circle-outline" />
+          <AppAssistChip label={t('ui_chip_assist')} onPress={() => {}} icon="help-circle-outline" />
           <RowSpacer2 />
-          <AppInputChip label="Input" selected={false} onPress={() => {}} onClose={() => {}} />
+          <AppInputChip label={t('ui_chip_input')} selected={false} onPress={() => {}} onClose={() => {}} />
           <RowSpacer2 />
-          <AppSuggestionChip label="Suggestion" onPress={() => {}} />
+          <AppSuggestionChip label={t('ui_chip_suggestion')} onPress={() => {}} />
         </View>
 
         <ColumnSpacer4 />
 
         {/* ===== SLIDER ===== */}
-        <SectionTitle title="Slider" />
+        <SectionTitle title={t('ui_section_slider')} />
         <ColumnSpacer2 />
         <AppSlider value={sliderValue} onValueChange={setSliderValue} />
         <TextBodySmallNeutral80>{`Value: ${sliderValue.toFixed(2)}`}</TextBodySmallNeutral80>
@@ -215,14 +220,14 @@ export const UiComponentsScreen = () => {
         <ColumnSpacer4 />
 
         {/* ===== DIVIDER ===== */}
-        <SectionTitle title="Divider" />
+        <SectionTitle title={t('ui_section_divider')} />
         <ColumnSpacer2 />
         <AppDividerPrimary />
 
         <ColumnSpacer4 />
 
         {/* ===== LOADING / PROGRESS ===== */}
-        <SectionTitle title="Loading & Progress" />
+        <SectionTitle title={t('ui_section_loading')} />
         <ColumnSpacer2 />
         <View style={styles.row}>
           <CircularProgress size="small" />
@@ -237,7 +242,7 @@ export const UiComponentsScreen = () => {
         <ColumnSpacer4 />
 
         {/* ===== BADGES ===== */}
-        <SectionTitle title="Badges" />
+        <SectionTitle title={t('ui_section_badges')} />
         <ColumnSpacer2 />
         <View style={styles.row}>
           <AppBadge count={5} />
@@ -250,33 +255,33 @@ export const UiComponentsScreen = () => {
         <ColumnSpacer4 />
 
         {/* ===== SNACKBAR ===== */}
-        <SectionTitle title="Snackbar" />
+        <SectionTitle title={t('ui_section_snackbar')} />
         <ColumnSpacer2 />
         <View style={styles.chipRow}>
-          <ContainedButton text="Default" onPress={() => setSnackbar({ visible: true, message: 'Default snackbar', type: 'default' })} />
+          <ContainedButton text={t('ui_snackbar_default')} onPress={() => setSnackbar({ visible: true, message: t('ui_snackbar_default_message'), type: 'default' })} />
           <RowSpacer2 />
-          <ContainedButton text="Success" onPress={() => setSnackbar({ visible: true, message: 'Success!', type: 'success' })} />
+          <ContainedButton text={t('ui_snackbar_success')} onPress={() => setSnackbar({ visible: true, message: t('ui_snackbar_success_message'), type: 'success' })} />
         </View>
         <ColumnSpacer2 />
         <View style={styles.chipRow}>
-          <ContainedButton text="Error" onPress={() => setSnackbar({ visible: true, message: 'Error occurred', type: 'error' })} />
+          <ContainedButton text={t('ui_snackbar_error')} onPress={() => setSnackbar({ visible: true, message: t('ui_snackbar_error_message'), type: 'error' })} />
           <RowSpacer2 />
-          <ContainedButton text="Warning" onPress={() => setSnackbar({ visible: true, message: 'Warning!', type: 'warning' })} />
+          <ContainedButton text={t('ui_snackbar_warning')} onPress={() => setSnackbar({ visible: true, message: t('ui_snackbar_warning_message'), type: 'warning' })} />
         </View>
 
         <ColumnSpacer4 />
 
         {/* ===== BOTTOM SHEET ===== */}
-        <SectionTitle title="Bottom Sheet" />
+        <SectionTitle title={t('ui_section_bottom_sheet')} />
         <ColumnSpacer2 />
-        <ContainedButton text="Show Bottom Sheet" onPress={() => setShowBottomSheet(true)} />
+        <ContainedButton text={t('ui_show_bottom_sheet')} onPress={() => setShowBottomSheet(true)} />
 
         <ColumnSpacer4 />
 
         {/* ===== DIALOG ===== */}
-        <SectionTitle title="Dialog" />
+        <SectionTitle title={t('ui_section_dialog')} />
         <ColumnSpacer2 />
-        <ContainedButton text="Show Dialog" onPress={() => setShowDialog(true)} />
+        <ContainedButton text={t('ui_show_dialog')} onPress={() => setShowDialog(true)} />
 
         {/* Bottom padding for FAB */}
         <View style={{ height: 80 }} />
@@ -288,8 +293,8 @@ export const UiComponentsScreen = () => {
       {/* Overlays */}
       <AppConfirmDialog
         visible={showDialog}
-        title="Confirm"
-        text="This is a confirm dialog example."
+        title={t('ui_dialog_title')}
+        text={t('ui_dialog_text')}
         onConfirm={() => setShowDialog(false)}
         onDismiss={() => setShowDialog(false)}
       />
@@ -298,13 +303,13 @@ export const UiComponentsScreen = () => {
         visible={showBottomSheet}
         onDismiss={() => setShowBottomSheet(false)}
       >
-        <TextTitleLargeNeutral80>Bottom Sheet</TextTitleLargeNeutral80>
+        <TextTitleLargeNeutral80>{t('ui_bottom_sheet_title')}</TextTitleLargeNeutral80>
         <ColumnSpacer2 />
         <TextBodyMediumNeutral80>
-          This is a bottom sheet content area.
+          {t('ui_bottom_sheet_content')}
         </TextBodyMediumNeutral80>
         <ColumnSpacer4 />
-        <ContainedButton text="Close" onPress={() => setShowBottomSheet(false)} />
+        <ContainedButton text={t('ui_close')} onPress={() => setShowBottomSheet(false)} />
       </AppBottomSheet>
 
       <AppSnackbar

@@ -1,3 +1,5 @@
+import { StringKey } from '../../foundation/strings/en';
+
 export enum FeatureId {
   UI_COMPONENTS = 'UI_COMPONENTS',
   NETWORKING = 'NETWORKING',
@@ -11,8 +13,8 @@ export enum FeatureId {
 
 export interface Feature {
   id: FeatureId;
-  title: string;
-  subtitle: string;
+  titleKey: StringKey;
+  subtitleKey: StringKey;
   icon: string;
 }
 
@@ -20,50 +22,50 @@ export interface Feature {
 export const showcaseFeatures: Feature[] = [
   {
     id: FeatureId.UI_COMPONENTS,
-    title: 'UI Components',
-    subtitle: 'Material Design 3 components',
+    titleKey: 'screen_ui_components',
+    subtitleKey: 'feature_ui_components_subtitle',
     icon: 'palette-outline',
   },
   {
     id: FeatureId.NETWORKING,
-    title: 'Networking',
-    subtitle: 'REST API integration with Axios',
+    titleKey: 'screen_networking',
+    subtitleKey: 'feature_networking_subtitle',
     icon: 'cloud-outline',
   },
   {
     id: FeatureId.STORAGE,
-    title: 'Storage',
-    subtitle: 'Local storage with MMKV',
+    titleKey: 'screen_storage',
+    subtitleKey: 'feature_storage_subtitle',
     icon: 'content-save-outline',
   },
   {
     id: FeatureId.DATABASE,
-    title: 'Database',
-    subtitle: 'SQLite database integration',
+    titleKey: 'screen_database',
+    subtitleKey: 'feature_database_subtitle',
     icon: 'database-outline',
   },
   {
     id: FeatureId.PLATFORM_APIS,
-    title: 'Platform APIs',
-    subtitle: 'Native platform integrations',
+    titleKey: 'screen_platform_apis',
+    subtitleKey: 'feature_platform_apis_subtitle',
     icon: 'cellphone',
   },
   {
     id: FeatureId.SCANNER,
-    title: 'Scanner',
-    subtitle: 'QR code and barcode scanning',
+    titleKey: 'screen_scanner',
+    subtitleKey: 'feature_scanner_subtitle',
     icon: 'qrcode-scan',
   },
   {
     id: FeatureId.CALENDAR,
-    title: 'Calendar',
-    subtitle: 'Calendar events integration',
+    titleKey: 'screen_calendar',
+    subtitleKey: 'feature_calendar_subtitle',
     icon: 'calendar-outline',
   },
   {
     id: FeatureId.NOTIFICATIONS,
-    title: 'Notifications',
-    subtitle: 'Push and local notifications',
+    titleKey: 'screen_notifications',
+    subtitleKey: 'feature_notifications_subtitle',
     icon: 'bell-outline',
   },
 ];

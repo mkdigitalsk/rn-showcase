@@ -5,6 +5,7 @@ import { TextBodyMediumNeutral80 } from './text/bodyMedium/TextBodyMedium';
 import { ContainedButton } from './buttons/ContainedButton';
 import { ColumnSpacer2 } from './spacers/Spacers';
 import { space4 } from '../foundation/dimensions';
+import { useStrings } from '../foundation/strings';
 
 interface ErrorViewProps {
   message: string;
@@ -17,15 +18,17 @@ export const ErrorView: React.FC<ErrorViewProps> = ({
   onRetry,
   style,
 }) => {
+  const { t } = useStrings();
+
   return (
     <View style={[styles.container, style]}>
-      <TextHeadlineMediumPrimary>Error</TextHeadlineMediumPrimary>
+      <TextHeadlineMediumPrimary>{t('common_error')}</TextHeadlineMediumPrimary>
       <ColumnSpacer2 />
       <TextBodyMediumNeutral80>{message}</TextBodyMediumNeutral80>
       {onRetry && (
         <>
           <ColumnSpacer2 />
-          <ContainedButton text="Retry" onPress={onRetry} />
+          <ContainedButton text={t('common_retry')} onPress={onRetry} />
         </>
       )}
     </View>
