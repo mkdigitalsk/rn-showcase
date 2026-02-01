@@ -25,6 +25,10 @@ import { RequestPermissionUseCase } from '../../domain/useCases/notifications/Re
 import { ShowNotificationUseCase } from '../../domain/useCases/notifications/ShowNotificationUseCase';
 import { CancelAllNotificationsUseCase } from '../../domain/useCases/notifications/CancelAllNotificationsUseCase';
 import { OpenNotificationSettingsUseCase } from '../../domain/useCases/notifications/OpenNotificationSettingsUseCase';
+import { GetThemeModeUseCase } from '../../domain/useCases/settings/GetThemeModeUseCase';
+import { SetThemeModeUseCase } from '../../domain/useCases/settings/SetThemeModeUseCase';
+import { GetLanguageUseCase } from '../../domain/useCases/settings/GetLanguageUseCase';
+import { SetLanguageUseCase } from '../../domain/useCases/settings/SetLanguageUseCase';
 import { TYPES } from '../diTypes';
 
 export const domainModule = () => {
@@ -63,6 +67,12 @@ export const domainModule = () => {
 
     // Calendar
     container.register(TYPES.GetTodayDateUseCase, { useClass: GetTodayDateUseCase });
+
+    // Settings
+    container.register(TYPES.GetThemeModeUseCase, { useClass: GetThemeModeUseCase });
+    container.register(TYPES.SetThemeModeUseCase, { useClass: SetThemeModeUseCase });
+    container.register(TYPES.GetLanguageUseCase, { useClass: GetLanguageUseCase });
+    container.register(TYPES.SetLanguageUseCase, { useClass: SetLanguageUseCase });
 
     // Notifications
     container.register(TYPES.GetPermissionStatusUseCase, { useClass: GetPermissionStatusUseCase });
