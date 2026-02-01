@@ -10,7 +10,7 @@ import { IsBiometricEnabledUseCase } from '../../../domain/useCases/biometric/Is
 import { AuthenticateWithBiometricUseCase } from '../../../domain/useCases/biometric/AuthenticateWithBiometricUseCase';
 import { IsFlashlightAvailableUseCase } from '../../../domain/useCases/flashlight/IsFlashlightAvailableUseCase';
 import { ToggleFlashlightUseCase } from '../../../domain/useCases/flashlight/ToggleFlashlightUseCase';
-import { LocationRepository } from '../../../domain/repositories/LocationRepository';
+import { ObserveLocationUpdatesUseCase } from '../../../domain/useCases/location/ObserveLocationUpdatesUseCase';
 import { useResolve } from '../../hooks/useResolve';
 import { execute } from '../../hooks/useExecute';
 import { PlatformApisUiState, initialPlatformApisUiState } from './PlatformApisUiState';
@@ -37,7 +37,7 @@ export const usePlatformApisViewModel = () => {
   const authenticateWithBiometricUseCase = useResolve<AuthenticateWithBiometricUseCase>(TYPES.AuthenticateWithBiometricUseCase);
   const isFlashlightAvailableUseCase = useResolve<IsFlashlightAvailableUseCase>(TYPES.IsFlashlightAvailableUseCase);
   const toggleFlashlightUseCase = useResolve<ToggleFlashlightUseCase>(TYPES.ToggleFlashlightUseCase);
-  const locationRepository = useResolve<LocationRepository>(TYPES.LocationRepository);
+  const observeLocationUpdatesUseCase = useResolve<ObserveLocationUpdatesUseCase>(TYPES.ObserveLocationUpdatesUseCase);
 
   // Check biometrics and flashlight availability on mount
   useEffect(() => {
@@ -112,7 +112,7 @@ export const usePlatformApisViewModel = () => {
     if (stopTrackingRef.current) return;
 
     setUiState(prev => ({ ...prev, isTrackingLocation: true, locationUpdatesError: false }));
-    const stop = locationRepository.startLocationUpdates(
+    const subscription = observeLocationUpdatesUseCase.execute().subscribe(
       (location) => {
         setUiState(prev => ({ ...prev, trackedLocation: location }));
       },
@@ -121,8 +121,8 @@ export const usePlatformApisViewModel = () => {
         stopTrackingRef.current = null;
       },
     );
-    stopTrackingRef.current = stop;
-  }, [locationRepository]);
+    stopTrackingRef.current = () => subscription.unsubscribe();
+  }, [observeLocationUpdatesUseCase]);
 
   const stopLocationUpdates = useCallback(() => {
     if (stopTrackingRef.current) {

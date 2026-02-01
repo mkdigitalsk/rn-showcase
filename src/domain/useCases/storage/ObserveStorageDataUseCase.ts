@@ -1,6 +1,6 @@
 import 'reflect-metadata';
 import { inject, injectable } from 'tsyringe';
-import { StorageData } from '../../models/StorageData';
+import { StorageData } from '../../model/StorageData';
 import { StorageRepository } from '../../repositories/StorageRepository';
 import { TYPES } from '../../../app/diTypes';
 import { FlowUseCase, Subscription } from '../base/UseCase';

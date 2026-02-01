@@ -1,4 +1,4 @@
-import { Address } from '../../domain/models/Address';
+import { Address } from '../../domain/model/Address';
 import { Mapper } from '../base/Mapper';
 import { AddressDTO } from '../dto/AddressDTO';
 

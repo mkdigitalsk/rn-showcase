@@ -19,7 +19,7 @@ const buildMarkedDates = (
   primaryColor: string,
   rangeColor: string,
 ) => {
-  const marked: Record<string, any> = {};
+  const marked: Record<string, Record<string, unknown>> = {};
 
   // Disabled dates
   disabledDates.forEach(date => {

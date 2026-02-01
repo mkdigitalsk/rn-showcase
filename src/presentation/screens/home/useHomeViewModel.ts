@@ -4,8 +4,10 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { HomeUiState, initialHomeUiState } from './HomeUiState';
 import { FeatureId } from './Feature';
 import { HomeStackProps } from '../../navigation/HomeStackNavigator';
+import { Logger } from '../../../util/Logger';
 
 type HomeNavigationProp = NativeStackNavigationProp<HomeStackProps, 'HomeMain'>;
+const logger = new Logger();
 
 export const useHomeViewModel = () => {
   const navigation = useNavigation<HomeNavigationProp>();
@@ -39,7 +41,7 @@ export const useHomeViewModel = () => {
           navigation.navigate('Notifications');
           break;
         default:
-          console.log('Feature not implemented:', featureId);
+          logger.d(`Feature not implemented: ${featureId}`);
       }
     },
     [navigation],

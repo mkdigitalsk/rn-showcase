@@ -109,12 +109,12 @@ export class DatabaseClient {
     }
   }
 
-  private mapRows(rows: any[]): Note[] {
+  private mapRows(rows: Record<string, unknown>[]): Note[] {
     return rows.map(row => ({
-      id: row.id,
-      title: row.title,
-      content: row.content,
-      createdAt: row.createdAt,
+      id: row.id as number,
+      title: row.title as string,
+      content: row.content as string,
+      createdAt: row.createdAt as number,
     }));
   }
 }

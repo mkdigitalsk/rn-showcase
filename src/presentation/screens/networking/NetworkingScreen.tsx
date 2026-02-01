@@ -2,7 +2,7 @@ import React from 'react';
 import { View, FlatList } from 'react-native';
 import { useNetworkingViewModel } from './useNetworkingViewModel';
 import { UserCard } from './UserCard';
-import { User } from '../../../domain/models/User';
+import { User } from '../../../domain/model/User';
 import { LoadingView } from '../../components/LoadingView';
 import { ErrorView } from '../../components/ErrorView';
 import { space4 } from '../../foundation/dimensions';

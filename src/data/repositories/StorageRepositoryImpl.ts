@@ -1,6 +1,6 @@
 import 'reflect-metadata';
 import { inject, injectable } from 'tsyringe';
-import { StorageData } from '../../domain/models/StorageData';
+import { StorageData } from '../../domain/model/StorageData';
 import { StorageRepository } from '../../domain/repositories/StorageRepository';
 import { StorageLocalStore } from '../local/StorageLocalStore';
 import { TYPES } from '../../app/diTypes';
