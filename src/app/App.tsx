@@ -2,8 +2,7 @@ import React, { useEffect } from 'react';
 import { Linking, Alert } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-import { PaperProvider } from 'react-native-paper';
-import { lightTheme } from '../presentation/foundation';
+import { ThemeProvider } from '../presentation/foundation';
 import { RootStackNavigator } from '../presentation/navigation';
 import { StringsProvider } from '../presentation/foundation/strings';
 
@@ -33,11 +32,11 @@ function App(): React.JSX.Element {
   return (
     <StringsProvider>
       <SafeAreaProvider>
-        <PaperProvider theme={lightTheme}>
+        <ThemeProvider>
           <NavigationContainer>
             <RootStackNavigator />
           </NavigationContainer>
-        </PaperProvider>
+        </ThemeProvider>
       </SafeAreaProvider>
     </StringsProvider>
   );
