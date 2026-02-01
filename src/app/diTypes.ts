@@ -39,4 +39,12 @@ export const TYPES = {
   FlashlightRepository: Symbol.for('FlashlightRepository'),
   IsFlashlightAvailableUseCase: Symbol.for('IsFlashlightAvailableUseCase'),
   ToggleFlashlightUseCase: Symbol.for('ToggleFlashlightUseCase'),
+
+  // Database
+  DatabaseClient: Symbol.for('DatabaseClient'),
+  NoteRepository: Symbol.for('NoteRepository'),
+  SearchNotesUseCase: Symbol.for('SearchNotesUseCase'),
+  InsertNoteUseCase: Symbol.for('InsertNoteUseCase'),
+  DeleteNoteUseCase: Symbol.for('DeleteNoteUseCase'),
+  DeleteAllNotesUseCase: Symbol.for('DeleteAllNotesUseCase'),
 };

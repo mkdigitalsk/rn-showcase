@@ -46,6 +46,12 @@ export const HomeSection = {
     title: 'Platform APIs',
     analyticsName: 'platform_apis_screen',
   },
+  Database: {
+    name: 'Database',
+    ...defaults,
+    title: 'Database',
+    analyticsName: 'database_screen',
+  },
 } as const satisfies Record<string, Route>;
 
 // Top-level routes

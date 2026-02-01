@@ -6,6 +6,7 @@ import { UiComponentsScreen } from '../screens/uiComponents/UiComponentsScreen';
 import { NetworkingScreen } from '../screens/networking/NetworkingScreen';
 import { StorageScreen } from '../screens/storage/StorageScreen';
 import { PlatformApisScreen } from '../screens/platformApis/PlatformApisScreen';
+import { DatabaseScreen } from '../screens/database/DatabaseScreen';
 import { HomeSection } from './routes';
 
 // Derived from HomeSection routes
@@ -50,6 +51,11 @@ export const HomeStackNavigator = () => {
         name={HomeSection.PlatformApis.name}
         component={PlatformApisScreen}
         options={{ title: HomeSection.PlatformApis.title }}
+      />
+      <Stack.Screen
+        name={HomeSection.Database.name}
+        component={DatabaseScreen}
+        options={{ title: HomeSection.Database.title }}
       />
     </Stack.Navigator>
   );

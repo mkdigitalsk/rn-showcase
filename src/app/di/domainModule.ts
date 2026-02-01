@@ -15,6 +15,10 @@ import { IsBiometricEnabledUseCase } from '../../domain/useCases/biometric/IsBio
 import { AuthenticateWithBiometricUseCase } from '../../domain/useCases/biometric/AuthenticateWithBiometricUseCase';
 import { IsFlashlightAvailableUseCase } from '../../domain/useCases/flashlight/IsFlashlightAvailableUseCase';
 import { ToggleFlashlightUseCase } from '../../domain/useCases/flashlight/ToggleFlashlightUseCase';
+import { SearchNotesUseCase } from '../../domain/useCases/notes/SearchNotesUseCase';
+import { InsertNoteUseCase } from '../../domain/useCases/notes/InsertNoteUseCase';
+import { DeleteNoteUseCase } from '../../domain/useCases/notes/DeleteNoteUseCase';
+import { DeleteAllNotesUseCase } from '../../domain/useCases/notes/DeleteAllNotesUseCase';
 import { TYPES } from '../diTypes';
 
 export const domainModule = () => {
@@ -44,4 +48,10 @@ export const domainModule = () => {
     // Flashlight
     container.register(TYPES.IsFlashlightAvailableUseCase, { useClass: IsFlashlightAvailableUseCase });
     container.register(TYPES.ToggleFlashlightUseCase, { useClass: ToggleFlashlightUseCase });
+
+    // Database
+    container.register(TYPES.SearchNotesUseCase, { useClass: SearchNotesUseCase });
+    container.register(TYPES.InsertNoteUseCase, { useClass: InsertNoteUseCase });
+    container.register(TYPES.DeleteNoteUseCase, { useClass: DeleteNoteUseCase });
+    container.register(TYPES.DeleteAllNotesUseCase, { useClass: DeleteAllNotesUseCase });
 }

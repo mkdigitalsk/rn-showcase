@@ -68,6 +68,21 @@ export const en = {
   platform_apis_flashlight_off: 'Turn Off',
   platform_apis_flashlight_not_available: 'Flashlight not available',
 
+  // Database
+  database_title: 'Database',
+  database_subtitle: 'SQLite database with CRUD operations, search, and sorting',
+  database_search_placeholder: 'Search notes...',
+  database_sort_date_desc: 'Newest first',
+  database_sort_date_asc: 'Oldest first',
+  database_sort_title_asc: 'Title A-Z',
+  database_sort_title_desc: 'Title Z-A',
+  database_add_title_placeholder: 'Note title',
+  database_add_content_placeholder: 'Note content',
+  database_add_button: 'Add Note',
+  database_delete_all: 'Clear All',
+  database_empty: 'No notes yet. Add your first note above.',
+  database_no_results: 'No notes match your search.',
+
   // Common
   common_loading: 'Loading...',
   common_error: 'Error',

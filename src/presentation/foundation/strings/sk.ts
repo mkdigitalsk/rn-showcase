@@ -70,6 +70,21 @@ export const sk: Record<StringKey, string> = {
   platform_apis_flashlight_off: 'Vypnúť',
   platform_apis_flashlight_not_available: 'Baterka nie je dostupná',
 
+  // Database
+  database_title: 'Databáza',
+  database_subtitle: 'SQLite databáza s CRUD operáciami, vyhľadávaním a triedením',
+  database_search_placeholder: 'Hľadať poznámky...',
+  database_sort_date_desc: 'Najnovšie',
+  database_sort_date_asc: 'Najstaršie',
+  database_sort_title_asc: 'Názov A-Z',
+  database_sort_title_desc: 'Názov Z-A',
+  database_add_title_placeholder: 'Názov poznámky',
+  database_add_content_placeholder: 'Obsah poznámky',
+  database_add_button: 'Pridať poznámku',
+  database_delete_all: 'Vymazať všetko',
+  database_empty: 'Žiadne poznámky. Pridajte prvú poznámku vyššie.',
+  database_no_results: 'Žiadne poznámky nezodpovedajú vyhľadávaniu.',
+
   // Common
   common_loading: 'Načítavam...',
   common_error: 'Chyba',
