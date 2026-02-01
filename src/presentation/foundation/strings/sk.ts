@@ -101,6 +101,8 @@ export const sk: Record<StringKey, string> = {
   settings_theme_light: 'Svetlý',
   settings_theme_dark: 'Tmavý',
   settings_theme_system: 'Systém',
+  settings_test_crash_title: 'Testovací pád',
+  settings_test_crash_subtitle: 'Vyvolať pád aplikácie pre test Crashlytics',
 
   // Languages
   language_en: 'Angličtina',

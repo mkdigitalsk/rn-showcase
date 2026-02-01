@@ -20,6 +20,7 @@ import { NoteRepositoryImpl } from '../repositories/NoteRepositoryImpl';
 import { DateRepositoryImpl } from '../repositories/DateRepositoryImpl';
 import { NotificationClient } from '../notification/NotificationClient';
 import { SettingsRepositoryImpl } from '../repositories/SettingsRepositoryImpl';
+import { FirebaseAnalyticsClient } from '../analytics/FirebaseAnalyticsClient';
 import { TYPES } from '../../app/diTypes';
 
 export const dataModule = () => {
@@ -54,6 +55,9 @@ export const dataModule = () => {
     // Database
     container.registerSingleton(TYPES.DatabaseClient, DatabaseClient);
     container.registerSingleton(TYPES.NoteRepository, NoteRepositoryImpl);
+
+    // Analytics
+    container.registerSingleton(TYPES.AnalyticsClient, FirebaseAnalyticsClient);
 
     // Calendar
     container.registerSingleton(TYPES.DateRepository, DateRepositoryImpl);

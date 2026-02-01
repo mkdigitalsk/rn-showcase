@@ -3,6 +3,7 @@ import { ThemeMode } from '../../foundation/themeMode';
 import { useThemeMode } from '../../foundation/ThemeProvider';
 import { useStrings, Language } from '../../foundation/strings';
 import { SettingsUiState } from './SettingsUiState';
+import { getCrashlytics, crash } from '@react-native-firebase/crashlytics';
 
 const APP_VERSION = '0.0.1';
 
@@ -18,6 +19,7 @@ export const useSettingsViewModel = () => {
     versionName: APP_VERSION,
     showThemeDialog,
     showLanguageDialog,
+    showCrashButton: __DEV__,
   }), [themeMode, language, showThemeDialog, showLanguageDialog]);
 
   const onThemeClick = useCallback(() => {
@@ -46,6 +48,10 @@ export const useSettingsViewModel = () => {
     setShowLanguageDialog(false);
   }, []);
 
+  const triggerTestCrash = useCallback(() => {
+    crash(getCrashlytics());
+  }, []);
+
   return {
     uiState,
     t,
@@ -55,5 +61,6 @@ export const useSettingsViewModel = () => {
     onLanguageClick,
     onLanguageSelected,
     onLanguageDialogDismiss,
+    triggerTestCrash,
   };
 };

@@ -30,6 +30,7 @@ export const SettingsScreen = () => {
     onLanguageClick,
     onLanguageSelected,
     onLanguageDialogDismiss,
+    triggerTestCrash,
   } = useSettingsViewModel();
 
   const themeModeLabel = (mode: ThemeMode): string => {
@@ -77,6 +78,17 @@ export const SettingsScreen = () => {
             value={languageLabel(uiState.language)}
           />
         </AppCard>
+
+        {/* Debug Section */}
+        {uiState.showCrashButton && (
+          <AppCard elevated onPress={triggerTestCrash}>
+            <SettingsItem
+              icon={<Icon name="bug-outline" size={24} color={colors.primary} />}
+              title={t('settings_test_crash_title')}
+              value={t('settings_test_crash_subtitle')}
+            />
+          </AppCard>
+        )}
 
         {/* Version Footer */}
         <View style={{ alignItems: 'flex-end', marginTop: space4 }}>
