@@ -6,6 +6,7 @@ import { TextTitleLarge } from '../../components/text/titleLarge/TextTitleLarge'
 import { TextBodyMedium } from '../../components/text/bodyMedium/TextBodyMedium';
 import { ColumnSpacer2 } from '../../components/spacers/Spacers';
 import { useAppColors } from '../../foundation/theme';
+import { useStrings } from '../../foundation/strings';
 import { Feature } from './Feature';
 import { space2, space4 } from '../../foundation/dimensions';
 
@@ -18,6 +19,7 @@ interface FeatureCardProps {
 
 export const FeatureCard = ({ feature, onClick }: FeatureCardProps) => {
   const colors = useAppColors();
+  const { t } = useStrings();
 
   return (
     <AppCard elevated onPress={onClick}>
@@ -28,9 +30,9 @@ export const FeatureCard = ({ feature, onClick }: FeatureCardProps) => {
           color={colors.primary}
         />
         <View style={styles.textContainer}>
-          <TextTitleLarge color={colors.neutral80}>{feature.title}</TextTitleLarge>
+          <TextTitleLarge color={colors.neutral80}>{t(feature.titleKey)}</TextTitleLarge>
           <ColumnSpacer2 />
-          <TextBodyMedium color={colors.neutral80}>{feature.subtitle}</TextBodyMedium>
+          <TextBodyMedium color={colors.neutral80}>{t(feature.subtitleKey)}</TextBodyMedium>
         </View>
       </View>
     </AppCard>

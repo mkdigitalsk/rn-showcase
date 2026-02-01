@@ -5,6 +5,7 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { HomeStackNavigator } from './HomeStackNavigator';
 import { SettingsStackNavigator } from './SettingsStackNavigator';
 import { useAppColors } from '../foundation/theme';
+import { useStrings } from '../foundation/strings';
 import { getRoute, Routes } from './routes';
 
 export type BottomTabParamList = {
@@ -16,6 +17,7 @@ const Tab = createBottomTabNavigator<BottomTabParamList>();
 
 export const BottomTabNavigator = () => {
   const colors = useAppColors();
+  const { t } = useStrings();
 
   return (
     <Tab.Navigator
@@ -36,6 +38,7 @@ export const BottomTabNavigator = () => {
           const routeName = getFocusedRouteNameFromRoute(route) ?? Routes.HomeMain.name;
           const screenRoute = getRoute(routeName);
           return {
+            tabBarLabel: t('nav_home'),
             tabBarStyle: screenRoute.showBottomNav
               ? { backgroundColor: colors.surface, borderTopColor: colors.neutral10 }
               : { display: 'none' as const },
@@ -49,6 +52,7 @@ export const BottomTabNavigator = () => {
         name="Settings"
         component={SettingsStackNavigator}
         options={{
+          tabBarLabel: t('nav_settings'),
           tabBarIcon: ({ color, size }) => (
             <Icon name="cog-outline" size={size} color={color} />
           ),
