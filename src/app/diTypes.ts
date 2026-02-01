@@ -47,4 +47,8 @@ export const TYPES = {
   InsertNoteUseCase: Symbol.for('InsertNoteUseCase'),
   DeleteNoteUseCase: Symbol.for('DeleteNoteUseCase'),
   DeleteAllNotesUseCase: Symbol.for('DeleteAllNotesUseCase'),
+
+  // Calendar
+  DateRepository: Symbol.for('DateRepository'),
+  GetTodayDateUseCase: Symbol.for('GetTodayDateUseCase'),
 };

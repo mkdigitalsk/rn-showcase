@@ -8,6 +8,7 @@ import { StorageScreen } from '../screens/storage/StorageScreen';
 import { PlatformApisScreen } from '../screens/platformApis/PlatformApisScreen';
 import { DatabaseScreen } from '../screens/database/DatabaseScreen';
 import { ScannerScreen } from '../screens/scanner/ScannerScreen';
+import { CalendarScreen } from '../screens/calendar/CalendarScreen';
 import { HomeSection } from './routes';
 
 // Derived from HomeSection routes
@@ -62,6 +63,11 @@ export const HomeStackNavigator = () => {
         name={HomeSection.Scanner.name}
         component={ScannerScreen}
         options={{ title: HomeSection.Scanner.title }}
+      />
+      <Stack.Screen
+        name={HomeSection.Calendar.name}
+        component={CalendarScreen}
+        options={{ title: HomeSection.Calendar.title }}
       />
     </Stack.Navigator>
   );

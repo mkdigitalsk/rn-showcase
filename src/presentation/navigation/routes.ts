@@ -58,6 +58,12 @@ export const HomeSection = {
     title: 'Scanner',
     analyticsName: 'scanner_screen',
   },
+  Calendar: {
+    name: 'Calendar',
+    ...defaults,
+    title: 'Calendar',
+    analyticsName: 'calendar_screen',
+  },
 } as const satisfies Record<string, Route>;
 
 // Top-level routes

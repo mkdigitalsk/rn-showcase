@@ -19,6 +19,7 @@ import { SearchNotesUseCase } from '../../domain/useCases/notes/SearchNotesUseCa
 import { InsertNoteUseCase } from '../../domain/useCases/notes/InsertNoteUseCase';
 import { DeleteNoteUseCase } from '../../domain/useCases/notes/DeleteNoteUseCase';
 import { DeleteAllNotesUseCase } from '../../domain/useCases/notes/DeleteAllNotesUseCase';
+import { GetTodayDateUseCase } from '../../domain/useCases/calendar/GetTodayDateUseCase';
 import { TYPES } from '../diTypes';
 
 export const domainModule = () => {
@@ -54,4 +55,7 @@ export const domainModule = () => {
     container.register(TYPES.InsertNoteUseCase, { useClass: InsertNoteUseCase });
     container.register(TYPES.DeleteNoteUseCase, { useClass: DeleteNoteUseCase });
     container.register(TYPES.DeleteAllNotesUseCase, { useClass: DeleteAllNotesUseCase });
+
+    // Calendar
+    container.register(TYPES.GetTodayDateUseCase, { useClass: GetTodayDateUseCase });
 }

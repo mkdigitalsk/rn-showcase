@@ -98,6 +98,16 @@ export const en = {
   scanner_permission_denied: 'Camera permission denied',
   scanner_request_permission: 'Grant permission',
 
+  // Calendar
+  calendar_title: 'Calendar',
+  calendar_subtitle: 'Date range picker with disabled dates and selection validation',
+  calendar_selected_range: 'Selected range',
+  calendar_start_date: 'Start',
+  calendar_end_date: 'End',
+  calendar_clear_selection: 'Clear selection',
+  calendar_no_selection: 'Tap a date to start selecting a range',
+  calendar_disabled_in_range: 'Range contains disabled dates, selection reset',
+
   // Common
   common_loading: 'Loading...',
   common_error: 'Error',
