@@ -17,6 +17,7 @@ import { FlashlightRepositoryImpl } from '../repositories/FlashlightRepositoryIm
 import { DatabaseClient } from '../database/DatabaseClient';
 import { NoteRepositoryImpl } from '../repositories/NoteRepositoryImpl';
 import { DateRepositoryImpl } from '../repositories/DateRepositoryImpl';
+import { NotificationClient } from '../notification/NotificationClient';
 import { TYPES } from '../../app/diTypes';
 
 export const dataModule = () => {
@@ -51,4 +52,7 @@ export const dataModule = () => {
 
     // Calendar
     container.registerSingleton(TYPES.DateRepository, DateRepositoryImpl);
+
+    // Notifications
+    container.registerSingleton(TYPES.LocalNotificationService, NotificationClient);
 }
