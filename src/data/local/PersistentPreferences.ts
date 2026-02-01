@@ -4,12 +4,15 @@ import { Preferences } from './Preferences';
 
 const PERSISTENT_COUNTER_KEY = 'persistent_counter';
 const THEME_MODE_KEY = 'theme_mode';
+const LANGUAGE_KEY = 'language';
 
 export interface PersistentPreferences {
   getPersistentCounter(): number;
   setPersistentCounter(value: number): void;
   getThemeMode(): string;
   setThemeMode(mode: string): void;
+  getLanguage(): string | undefined;
+  setLanguage(language: string): void;
 }
 
 @injectable()
@@ -34,5 +37,13 @@ export class PersistentPreferencesImpl implements PersistentPreferences {
 
   setThemeMode(mode: string): void {
     this.preferences.setString(THEME_MODE_KEY, mode);
+  }
+
+  getLanguage(): string | undefined {
+    return this.preferences.getString(LANGUAGE_KEY);
+  }
+
+  setLanguage(language: string): void {
+    this.preferences.setString(LANGUAGE_KEY, language);
   }
 }

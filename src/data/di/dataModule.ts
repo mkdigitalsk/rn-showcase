@@ -18,6 +18,7 @@ import { DatabaseClient } from '../database/DatabaseClient';
 import { NoteRepositoryImpl } from '../repositories/NoteRepositoryImpl';
 import { DateRepositoryImpl } from '../repositories/DateRepositoryImpl';
 import { NotificationClient } from '../notification/NotificationClient';
+import { SettingsRepositoryImpl } from '../repositories/SettingsRepositoryImpl';
 import { TYPES } from '../../app/diTypes';
 
 export const dataModule = () => {
@@ -52,6 +53,9 @@ export const dataModule = () => {
 
     // Calendar
     container.registerSingleton(TYPES.DateRepository, DateRepositoryImpl);
+
+    // Settings
+    container.registerSingleton(TYPES.SettingsRepository, SettingsRepositoryImpl);
 
     // Notifications
     container.registerSingleton(TYPES.LocalNotificationService, NotificationClient);

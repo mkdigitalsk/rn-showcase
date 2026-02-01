@@ -52,6 +52,13 @@ export const TYPES = {
   DateRepository: Symbol.for('DateRepository'),
   GetTodayDateUseCase: Symbol.for('GetTodayDateUseCase'),
 
+  // Settings
+  SettingsRepository: Symbol.for('SettingsRepository'),
+  GetThemeModeUseCase: Symbol.for('GetThemeModeUseCase'),
+  SetThemeModeUseCase: Symbol.for('SetThemeModeUseCase'),
+  GetLanguageUseCase: Symbol.for('GetLanguageUseCase'),
+  SetLanguageUseCase: Symbol.for('SetLanguageUseCase'),
+
   // Notifications
   LocalNotificationService: Symbol.for('LocalNotificationService'),
   GetPermissionStatusUseCase: Symbol.for('GetPermissionStatusUseCase'),

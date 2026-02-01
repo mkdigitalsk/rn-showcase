@@ -6,8 +6,12 @@ import {
   DarkTheme as NavigationDarkTheme,
   Theme as NavigationTheme,
 } from '@react-navigation/native';
+import { container } from 'tsyringe';
 import { ThemeMode } from './themeMode';
 import { lightTheme, darkTheme } from './theme';
+import { TYPES } from '../../app/diTypes';
+import { GetThemeModeUseCase } from '../../domain/useCases/settings/GetThemeModeUseCase';
+import { SetThemeModeUseCase } from '../../domain/useCases/settings/SetThemeModeUseCase';
 
 interface ThemeContextType {
   themeMode: ThemeMode;
@@ -20,12 +24,26 @@ const ThemeContext = createContext<ThemeContextType | null>(null);
 
 interface ThemeProviderProps {
   children: React.ReactNode;
-  defaultMode?: ThemeMode;
 }
 
-export const ThemeProvider = ({ children, defaultMode = 'system' }: ThemeProviderProps) => {
+export const ThemeProvider = ({ children }: ThemeProviderProps) => {
   const systemColorScheme = useColorScheme();
-  const [themeMode, setThemeMode] = useState<ThemeMode>(defaultMode);
+
+  const getThemeModeUseCase = useMemo(
+    () => container.resolve<GetThemeModeUseCase>(TYPES.GetThemeModeUseCase), [],
+  );
+  const setThemeModeUseCase = useMemo(
+    () => container.resolve<SetThemeModeUseCase>(TYPES.SetThemeModeUseCase), [],
+  );
+
+  const [themeMode, setThemeModeState] = useState<ThemeMode>(
+    () => getThemeModeUseCase.execute(),
+  );
+
+  const setThemeMode = useCallback((mode: ThemeMode) => {
+    setThemeModeUseCase.execute(mode);
+    setThemeModeState(mode);
+  }, [setThemeModeUseCase]);
 
   const isDark = useMemo(() => {
     switch (themeMode) {
@@ -55,7 +73,7 @@ export const ThemeProvider = ({ children, defaultMode = 'system' }: ThemeProvide
 
   const value = useMemo(
     () => ({ themeMode, setThemeMode, isDark, navigationTheme }),
-    [themeMode, isDark, navigationTheme],
+    [themeMode, setThemeMode, isDark, navigationTheme],
   );
 
   return (
