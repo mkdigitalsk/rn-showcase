@@ -79,10 +79,10 @@ export const AppTextField: React.FC<AppTextFieldProps> = ({
       keyboardType={keyboardType}
       autoCapitalize={autoCapitalize}
       onSubmitEditing={onSubmitEditing}
-      outlineColor={theme.colors.neutral80}
+      outlineColor={theme.colors.outline}
       activeOutlineColor={theme.colors.primary}
       textColor={theme.colors.onSurface}
-      placeholderTextColor={theme.colors.neutral80}
+      placeholderTextColor={theme.colors.neutral40}
     />
   );
 };

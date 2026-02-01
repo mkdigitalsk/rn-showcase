@@ -20,7 +20,7 @@ export const ContainedButton: React.FC<ContainedButtonProps> = ({
       mode="contained"
       onPress={onPress}
       buttonColor={theme.colors.primary}
-      textColor={theme.colors.neutral0}
+      textColor={theme.colors.onPrimary}
       style={{ alignSelf: 'flex-start' }}
     >
       {text}
