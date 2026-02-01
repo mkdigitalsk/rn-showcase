@@ -13,4 +13,30 @@ export const TYPES = {
   SetSessionCounterUseCase: Symbol.for('SetSessionCounterUseCase'),
   SetPersistentCounterUseCase: Symbol.for('SetPersistentCounterUseCase'),
   ClearSessionUseCase: Symbol.for('ClearSessionUseCase'),
+
+  // Platform APIs
+  PlatformClient: Symbol.for('PlatformClient'),
+  PlatformRepository: Symbol.for('PlatformRepository'),
+  ShareUseCase: Symbol.for('ShareUseCase'),
+  DialUseCase: Symbol.for('DialUseCase'),
+  OpenLinkUseCase: Symbol.for('OpenLinkUseCase'),
+  SendEmailUseCase: Symbol.for('SendEmailUseCase'),
+  CopyToClipboardUseCase: Symbol.for('CopyToClipboardUseCase'),
+
+  // Location
+  LocationClient: Symbol.for('LocationClient'),
+  LocationRepository: Symbol.for('LocationRepository'),
+  GetLocationUseCase: Symbol.for('GetLocationUseCase'),
+
+  // Biometric
+  BiometricClient: Symbol.for('BiometricClient'),
+  BiometricRepository: Symbol.for('BiometricRepository'),
+  IsBiometricEnabledUseCase: Symbol.for('IsBiometricEnabledUseCase'),
+  AuthenticateWithBiometricUseCase: Symbol.for('AuthenticateWithBiometricUseCase'),
+
+  // Flashlight
+  FlashlightClient: Symbol.for('FlashlightClient'),
+  FlashlightRepository: Symbol.for('FlashlightRepository'),
+  IsFlashlightAvailableUseCase: Symbol.for('IsFlashlightAvailableUseCase'),
+  ToggleFlashlightUseCase: Symbol.for('ToggleFlashlightUseCase'),
 };

@@ -23,6 +23,9 @@ export const useHomeViewModel = () => {
         case FeatureId.STORAGE:
           navigation.navigate('Storage');
           break;
+        case FeatureId.PLATFORM_APIS:
+          navigation.navigate('PlatformApis');
+          break;
         default:
           // TODO: Implement other features
           console.log('Feature not implemented:', featureId);
