@@ -7,6 +7,7 @@ import { NetworkingScreen } from '../screens/networking/NetworkingScreen';
 import { StorageScreen } from '../screens/storage/StorageScreen';
 import { PlatformApisScreen } from '../screens/platformApis/PlatformApisScreen';
 import { DatabaseScreen } from '../screens/database/DatabaseScreen';
+import { ScannerScreen } from '../screens/scanner/ScannerScreen';
 import { HomeSection } from './routes';
 
 // Derived from HomeSection routes
@@ -56,6 +57,11 @@ export const HomeStackNavigator = () => {
         name={HomeSection.Database.name}
         component={DatabaseScreen}
         options={{ title: HomeSection.Database.title }}
+      />
+      <Stack.Screen
+        name={HomeSection.Scanner.name}
+        component={ScannerScreen}
+        options={{ title: HomeSection.Scanner.title }}
       />
     </Stack.Navigator>
   );

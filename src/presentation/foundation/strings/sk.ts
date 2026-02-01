@@ -85,6 +85,21 @@ export const sk: Record<StringKey, string> = {
   database_empty: 'Žiadne poznámky. Pridajte prvú poznámku vyššie.',
   database_no_results: 'Žiadne poznámky nezodpovedajú vyhľadávaniu.',
 
+  // Scanner
+  scanner_title: 'Skener',
+  scanner_subtitle: 'Skenovanie a generovanie QR kódov a čiarových kódov',
+  scanner_mode_generate: 'Generovať',
+  scanner_mode_scan: 'Skenovať',
+  scanner_format_qr: 'QR kód',
+  scanner_format_barcode: 'Čiarový kód',
+  scanner_input_placeholder: 'Zadajte text pre generovanie kódu',
+  scanner_generate_button: 'Generovať',
+  scanner_scanned_result: 'Výsledok skenovania',
+  scanner_clear_result: 'Vyčistiť',
+  scanner_no_camera: 'Kamera nebola nájdená',
+  scanner_permission_denied: 'Prístup ku kamere zamietnutý',
+  scanner_request_permission: 'Povoliť prístup',
+
   // Common
   common_loading: 'Načítavam...',
   common_error: 'Chyba',
