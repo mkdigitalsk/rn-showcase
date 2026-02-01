@@ -34,6 +34,8 @@ import { GetThemeModeUseCase } from '../../domain/useCases/settings/GetThemeMode
 import { SetThemeModeUseCase } from '../../domain/useCases/settings/SetThemeModeUseCase';
 import { GetLanguageUseCase } from '../../domain/useCases/settings/GetLanguageUseCase';
 import { SetLanguageUseCase } from '../../domain/useCases/settings/SetLanguageUseCase';
+import { TrackScreenUseCase } from '../../domain/useCases/analytics/TrackScreenUseCase';
+import { TrackButtonClickUseCase } from '../../domain/useCases/analytics/TrackButtonClickUseCase';
 import { TYPES } from '../diTypes';
 
 export const domainModule = () => {
@@ -76,6 +78,10 @@ export const domainModule = () => {
     container.register(TYPES.UpdateNoteUseCase, { useClass: UpdateNoteUseCase });
     container.register(TYPES.DeleteNoteUseCase, { useClass: DeleteNoteUseCase });
     container.register(TYPES.DeleteAllNotesUseCase, { useClass: DeleteAllNotesUseCase });
+
+    // Analytics
+    container.register(TYPES.TrackScreenUseCase, { useClass: TrackScreenUseCase });
+    container.register(TYPES.TrackButtonClickUseCase, { useClass: TrackButtonClickUseCase });
 
     // Calendar
     container.register(TYPES.GetTodayDateUseCase, { useClass: GetTodayDateUseCase });

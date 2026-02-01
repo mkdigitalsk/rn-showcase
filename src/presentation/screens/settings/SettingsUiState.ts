@@ -7,4 +7,5 @@ export interface SettingsUiState {
   versionName: string;
   showThemeDialog: boolean;
   showLanguageDialog: boolean;
+  showCrashButton: boolean;
 }

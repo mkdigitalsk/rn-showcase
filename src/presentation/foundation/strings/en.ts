@@ -99,6 +99,8 @@ export const en = {
   settings_theme_light: 'Light',
   settings_theme_dark: 'Dark',
   settings_theme_system: 'System',
+  settings_test_crash_title: 'Test Crash',
+  settings_test_crash_subtitle: 'Trigger a crash to test Crashlytics',
 
   // Languages
   language_en: 'English',
