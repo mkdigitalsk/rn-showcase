@@ -6,6 +6,14 @@ import { SessionPreferencesImpl } from '../local/SessionPreferences';
 import { PersistentPreferencesImpl } from '../local/PersistentPreferences';
 import { StorageLocalStoreImpl } from '../local/StorageLocalStore';
 import { StorageRepositoryImpl } from '../repositories/StorageRepositoryImpl';
+import { PlatformClient } from '../platform/PlatformClient';
+import { PlatformRepositoryImpl } from '../repositories/PlatformRepositoryImpl';
+import { LocationClient } from '../location/LocationClient';
+import { LocationRepositoryImpl } from '../repositories/LocationRepositoryImpl';
+import { BiometricClient } from '../biometric/BiometricClient';
+import { BiometricRepositoryImpl } from '../repositories/BiometricRepositoryImpl';
+import { FlashlightClient } from '../flashlight/FlashlightClient';
+import { FlashlightRepositoryImpl } from '../repositories/FlashlightRepositoryImpl';
 import { TYPES } from '../../app/diTypes';
 
 export const dataModule = () => {
@@ -17,4 +25,20 @@ export const dataModule = () => {
     container.registerSingleton(TYPES.PersistentPreferences, PersistentPreferencesImpl);
     container.registerSingleton(TYPES.StorageLocalStore, StorageLocalStoreImpl);
     container.registerSingleton(TYPES.StorageRepository, StorageRepositoryImpl);
+
+    // Platform APIs
+    container.registerSingleton(TYPES.PlatformClient, PlatformClient);
+    container.registerSingleton(TYPES.PlatformRepository, PlatformRepositoryImpl);
+
+    // Location
+    container.registerSingleton(TYPES.LocationClient, LocationClient);
+    container.registerSingleton(TYPES.LocationRepository, LocationRepositoryImpl);
+
+    // Biometric
+    container.registerSingleton(TYPES.BiometricClient, BiometricClient);
+    container.registerSingleton(TYPES.BiometricRepository, BiometricRepositoryImpl);
+
+    // Flashlight
+    container.registerSingleton(TYPES.FlashlightClient, FlashlightClient);
+    container.registerSingleton(TYPES.FlashlightRepository, FlashlightRepositoryImpl);
 }

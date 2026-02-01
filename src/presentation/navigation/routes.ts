@@ -40,6 +40,12 @@ export const HomeSection = {
     title: 'Storage',
     analyticsName: 'storage_screen',
   },
+  PlatformApis: {
+    name: 'PlatformApis',
+    ...defaults,
+    title: 'Platform APIs',
+    analyticsName: 'platform_apis_screen',
+  },
 } as const satisfies Record<string, Route>;
 
 // Top-level routes
