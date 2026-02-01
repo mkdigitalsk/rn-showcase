@@ -29,6 +29,9 @@ export const useHomeViewModel = () => {
         case FeatureId.DATABASE:
           navigation.navigate('Database');
           break;
+        case FeatureId.SCANNER:
+          navigation.navigate('Scanner');
+          break;
         default:
           // TODO: Implement other features
           console.log('Feature not implemented:', featureId);

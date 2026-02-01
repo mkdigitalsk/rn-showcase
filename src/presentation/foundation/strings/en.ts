@@ -83,6 +83,21 @@ export const en = {
   database_empty: 'No notes yet. Add your first note above.',
   database_no_results: 'No notes match your search.',
 
+  // Scanner
+  scanner_title: 'Scanner',
+  scanner_subtitle: 'QR code and barcode scanning and generation',
+  scanner_mode_generate: 'Generate',
+  scanner_mode_scan: 'Scan',
+  scanner_format_qr: 'QR Code',
+  scanner_format_barcode: 'Barcode',
+  scanner_input_placeholder: 'Enter text to generate code',
+  scanner_generate_button: 'Generate',
+  scanner_scanned_result: 'Scanned result',
+  scanner_clear_result: 'Clear',
+  scanner_no_camera: 'No camera device found',
+  scanner_permission_denied: 'Camera permission denied',
+  scanner_request_permission: 'Grant permission',
+
   // Common
   common_loading: 'Loading...',
   common_error: 'Error',

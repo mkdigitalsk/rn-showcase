@@ -52,6 +52,12 @@ export const HomeSection = {
     title: 'Database',
     analyticsName: 'database_screen',
   },
+  Scanner: {
+    name: 'Scanner',
+    ...defaults,
+    title: 'Scanner',
+    analyticsName: 'scanner_screen',
+  },
 } as const satisfies Record<string, Route>;
 
 // Top-level routes
