@@ -1,4 +1,4 @@
-import { singleton } from 'tsyringe';
+import { injectable } from 'tsyringe';
 import { httpClient } from './httpClient';
 import { handleApiCall } from './apiCallHandler';
 import { UserDTO } from '../dto/UserDTO';
@@ -7,7 +7,7 @@ export interface UserApi {
   fetchUsers(): Promise<UserDTO[]>;
 }
 
-@singleton()
+@injectable()
 export class UserApiImpl implements UserApi {
   async fetchUsers(): Promise<UserDTO[]> {
     return handleApiCall(async () => {

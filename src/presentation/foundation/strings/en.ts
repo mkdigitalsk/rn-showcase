@@ -25,6 +25,15 @@ export const en = {
   language_en: 'English',
   language_sk: 'Slovak',
 
+  // Storage
+  storage_title: 'Local Storage',
+  storage_subtitle: 'Demonstrates session vs persistent storage using MMKV',
+  storage_session_label: 'Session Counter',
+  storage_session_hint: 'Resets when app is killed or session is cleared',
+  storage_persistent_label: 'Persistent Counter',
+  storage_persistent_hint: 'Survives app restarts (stored in MMKV)',
+  storage_clear_session: 'Clear Session',
+
   // Common
   common_loading: 'Loading...',
   common_error: 'Error',
