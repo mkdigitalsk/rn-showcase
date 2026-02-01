@@ -5,7 +5,7 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { HomeStackNavigator } from './HomeStackNavigator';
 import { SettingsScreen } from '../screens/settings/SettingsScreen';
 import { useAppColors } from '../foundation/theme';
-import { getRoute } from './routes';
+import { getRoute, Routes } from './routes';
 
 export type BottomTabParamList = {
   Home: undefined;
@@ -36,7 +36,7 @@ export const BottomTabNavigator = () => {
         name="Home"
         component={HomeStackNavigator}
         options={({ route }) => {
-          const routeName = getFocusedRouteNameFromRoute(route) ?? 'HomeMain';
+          const routeName = getFocusedRouteNameFromRoute(route) ?? Routes.HomeMain.name;
           const screenRoute = getRoute(routeName);
           return {
             title: screenRoute.title,
@@ -50,7 +50,7 @@ export const BottomTabNavigator = () => {
         name="Settings"
         component={SettingsScreen}
         options={{
-          title: getRoute('Settings').title,
+          title: getRoute(Routes.Settings.name).title,
           tabBarIcon: ({ color, size }) => (
             <Icon name="cog-outline" size={size} color={color} />
           ),

@@ -131,6 +131,9 @@ src/
 - [x] Clean Architecture (UseCase pattern)
 - [x] Dependency Injection (tsyringe)
 - [x] Custom components (LoadingView, ErrorView, Spacers)
+- [x] Type-safe Routes (KMP-style Route config)
+- [x] Localization (EN/SK with StringsProvider)
+- [x] Deep Links (Android)
 
 ### In Progress
 - [ ] Storage feature (MMKV)
@@ -149,6 +152,7 @@ src/
 - [ ] Unit tests setup
 - [ ] E2E tests (Detox)
 - [ ] Screenshot tests
+
 
 ---
 
