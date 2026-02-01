@@ -1,3 +1,5 @@
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
@@ -12,7 +14,14 @@ react {
     autolinkLibrariesWithApp()
 }
 
-val enableProguardInReleaseBuilds = false
+val keystorePropertiesFile = project.file("keystore.properties")
+val keystoreProperties = Properties()
+
+if (keystorePropertiesFile.exists()) {
+    keystoreProperties.load(keystorePropertiesFile.inputStream())
+}
+
+val hasSigningProperties = keystoreProperties.isNotEmpty()
 
 android {
     ndkVersion = libs.versions.ndk.get()
@@ -31,7 +40,7 @@ android {
         minSdk = libs.versions.min.sdk.get().toInt()
         targetSdk = libs.versions.target.sdk.get().toInt()
         versionCode = 1
-        versionName = "1.0"
+        versionName = "1.0.0"
     }
 
     signingConfigs {
@@ -41,6 +50,14 @@ android {
             keyAlias = "androiddebugkey"
             keyPassword = "android"
         }
+        if (hasSigningProperties) {
+            create("release") {
+                storeFile = file(keystoreProperties["storeFile"] as String)
+                storePassword = keystoreProperties["storePassword"] as String
+                keyAlias = keystoreProperties["keyAlias"] as String
+                keyPassword = keystoreProperties["keyPassword"] as String
+            }
+        }
     }
 
     buildTypes {
@@ -48,9 +65,22 @@ android {
             signingConfig = signingConfigs.getByName("debug")
         }
         release {
-            signingConfig = signingConfigs.getByName("debug")
-            isMinifyEnabled = enableProguardInReleaseBuilds
-            proguardFiles(getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro")
+            isMinifyEnabled = true
+            isShrinkResources = true
+            isDebuggable = false
+
+            val extraProguardFiles = fileTree("$projectDir/proguard") {
+                include("*.pro")
+            }.files.toTypedArray()
+
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                *extraProguardFiles
+            )
+
+            if (hasSigningProperties) {
+                signingConfig = signingConfigs.getByName("release")
+            }
         }
     }
 }
