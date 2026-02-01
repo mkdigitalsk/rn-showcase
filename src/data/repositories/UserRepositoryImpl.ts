@@ -1,6 +1,6 @@
 import 'reflect-metadata';
 import { inject, injectable } from 'tsyringe';
-import { User } from '../../domain/models/User';
+import { User } from '../../domain/model/User';
 import { UserApi } from '../network/UserApi';
 import { UserRepository } from '../../domain/repositories/UserRepository';
 import { TYPES } from '../../app/diTypes';

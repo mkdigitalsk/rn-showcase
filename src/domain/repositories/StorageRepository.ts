@@ -1,4 +1,4 @@
-import { StorageData } from '../models/StorageData';
+import { StorageData } from '../model/StorageData';
 
 export interface StorageRepository {
   loadInitialData(): Promise<StorageData>;

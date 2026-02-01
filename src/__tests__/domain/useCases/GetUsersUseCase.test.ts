@@ -2,7 +2,7 @@ import { BaseTest } from '../../BaseTest';
 import { test } from '../../TestFunctions';
 import { GetUsersUseCase } from '../../../domain/useCases/GetUsersUseCase';
 import { UserRepository } from '../../../domain/repositories/UserRepository';
-import { User } from '../../../domain/models/User';
+import { User } from '../../../domain/model/User';
 
 function createMockUserRepository(): UserRepository {
   return {

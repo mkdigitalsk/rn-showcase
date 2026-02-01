@@ -2,7 +2,7 @@ import { BaseTest } from '../../../BaseTest';
 import { test } from '../../../TestFunctions';
 import { LoadStorageDataUseCase } from '../../../../domain/useCases/storage/LoadStorageDataUseCase';
 import { StorageRepository } from '../../../../domain/repositories/StorageRepository';
-import { StorageData } from '../../../../domain/models/StorageData';
+import { StorageData } from '../../../../domain/model/StorageData';
 
 function createMockStorageRepository(): StorageRepository {
   return {

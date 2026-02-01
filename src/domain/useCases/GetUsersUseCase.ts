@@ -1,6 +1,6 @@
 import 'reflect-metadata';
 import { inject, injectable } from 'tsyringe';
-import { User } from '../models/User';
+import { User } from '../model/User';
 import { UserRepository } from '../repositories/UserRepository';
 import { TYPES } from '../../app/diTypes';
 import { UseCase } from './base/UseCase';

@@ -1,4 +1,4 @@
-import { User } from '../../domain/models/User';
+import { User } from '../../domain/model/User';
 import { Mapper } from '../base/Mapper';
 import { UserDTO } from '../dto/UserDTO';
 import { AddressMapper } from './AddressMapper';

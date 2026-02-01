@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
 import { Text } from 'react-native-paper';
-import { User } from '../../../domain/models/User';
+import { User } from '../../../domain/model/User';
 import { space2, space4 } from '../../foundation/dimensions';
 import { AppCard } from '../../components';
 

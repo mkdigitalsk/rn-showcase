@@ -1,6 +1,6 @@
 import 'reflect-metadata';
 import { inject, injectable } from 'tsyringe';
-import { StorageData } from '../../domain/models/StorageData';
+import { StorageData } from '../../domain/model/StorageData';
 import { SessionPreferences } from './SessionPreferences';
 import { PersistentPreferences } from './PersistentPreferences';
 import { TYPES } from '../../app/diTypes';

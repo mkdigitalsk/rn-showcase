@@ -14,7 +14,10 @@ export class AuthRepositoryImpl implements AuthRepository {
     const createdAt = Date.now();
     this.client.insertUser(name, email, password, createdAt);
     const user = this.client.selectUserByEmail(email);
-    return user!;
+    if (!user) {
+      throw new Error(`Registration failed: user not found after insert (${email})`);
+    }
+    return user;
   }
 
   async emailExists(email: string): Promise<boolean> {
