@@ -1,0 +1,1 @@
+npx jest src/__tests__ --no-coverage && npx tsc --noEmit
