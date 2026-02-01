@@ -32,6 +32,9 @@ export const useHomeViewModel = () => {
         case FeatureId.SCANNER:
           navigation.navigate('Scanner');
           break;
+        case FeatureId.CALENDAR:
+          navigation.navigate('Calendar');
+          break;
         default:
           // TODO: Implement other features
           console.log('Feature not implemented:', featureId);

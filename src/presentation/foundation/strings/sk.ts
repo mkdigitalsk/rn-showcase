@@ -100,6 +100,16 @@ export const sk: Record<StringKey, string> = {
   scanner_permission_denied: 'Prístup ku kamere zamietnutý',
   scanner_request_permission: 'Povoliť prístup',
 
+  // Calendar
+  calendar_title: 'Kalendár',
+  calendar_subtitle: 'Výber rozsahu dátumov s deaktivovanými dňami a validáciou',
+  calendar_selected_range: 'Vybraný rozsah',
+  calendar_start_date: 'Začiatok',
+  calendar_end_date: 'Koniec',
+  calendar_clear_selection: 'Zrušiť výber',
+  calendar_no_selection: 'Ťuknite na dátum pre začatie výberu rozsahu',
+  calendar_disabled_in_range: 'Rozsah obsahuje deaktivované dátumy, výber resetovaný',
+
   // Common
   common_loading: 'Načítavam...',
   common_error: 'Chyba',
