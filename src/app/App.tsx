@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
-import { Linking, Alert } from 'react-native';
+import { Linking, Alert, StatusBar } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-import { ThemeProvider } from '../presentation/foundation';
+import { ThemeProvider, useThemeMode } from '../presentation/foundation/ThemeProvider';
 import { RootStackNavigator } from '../presentation/navigation';
 import { StringsProvider } from '../presentation/foundation/strings';
 
@@ -14,14 +14,14 @@ const handleDeepLink = (url: string) => {
   }
 };
 
-function App(): React.JSX.Element {
+const AppContent = () => {
+  const { navigationTheme } = useThemeMode();
+
   useEffect(() => {
-    // Handle deep link when app is already open
     const subscription = Linking.addEventListener('url', ({ url }) => {
       handleDeepLink(url);
     });
 
-    // Handle deep link that opened the app
     Linking.getInitialURL().then(url => {
       if (url) handleDeepLink(url);
     });
@@ -30,12 +30,24 @@ function App(): React.JSX.Element {
   }, []);
 
   return (
+    <>
+      <StatusBar
+        barStyle="light-content"
+        backgroundColor={navigationTheme.colors.primary}
+      />
+      <NavigationContainer theme={navigationTheme}>
+        <RootStackNavigator />
+      </NavigationContainer>
+    </>
+  );
+};
+
+function App(): React.JSX.Element {
+  return (
     <StringsProvider>
       <SafeAreaProvider>
         <ThemeProvider>
-          <NavigationContainer>
-            <RootStackNavigator />
-          </NavigationContainer>
+          <AppContent />
         </ThemeProvider>
       </SafeAreaProvider>
     </StringsProvider>

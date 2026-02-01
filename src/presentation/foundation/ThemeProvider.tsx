@@ -1,6 +1,11 @@
 import React, { createContext, useContext, useState, useCallback, useMemo } from 'react';
 import { useColorScheme } from 'react-native';
 import { PaperProvider } from 'react-native-paper';
+import {
+  DefaultTheme as NavigationDefaultTheme,
+  DarkTheme as NavigationDarkTheme,
+  Theme as NavigationTheme,
+} from '@react-navigation/native';
 import { ThemeMode } from './themeMode';
 import { lightTheme, darkTheme } from './theme';
 
@@ -8,6 +13,7 @@ interface ThemeContextType {
   themeMode: ThemeMode;
   setThemeMode: (mode: ThemeMode) => void;
   isDark: boolean;
+  navigationTheme: NavigationTheme;
 }
 
 const ThemeContext = createContext<ThemeContextType | null>(null);
@@ -31,9 +37,25 @@ export const ThemeProvider = ({ children, defaultMode = 'system' }: ThemeProvide
 
   const theme = isDark ? darkTheme : lightTheme;
 
+  const navigationTheme: NavigationTheme = useMemo(() => {
+    const base = isDark ? NavigationDarkTheme : NavigationDefaultTheme;
+    return {
+      ...base,
+      colors: {
+        ...base.colors,
+        primary: theme.colors.primary,
+        background: theme.colors.background,
+        card: theme.colors.surface,
+        text: theme.colors.onSurface,
+        border: theme.colors.outline,
+        notification: theme.colors.error,
+      },
+    };
+  }, [isDark, theme]);
+
   const value = useMemo(
-    () => ({ themeMode, setThemeMode, isDark }),
-    [themeMode, isDark],
+    () => ({ themeMode, setThemeMode, isDark, navigationTheme }),
+    [themeMode, isDark, navigationTheme],
   );
 
   return (
