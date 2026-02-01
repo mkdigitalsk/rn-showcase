@@ -27,7 +27,7 @@ export const AppFloatingActionButton: React.FC<AppFloatingActionButtonProps> = (
         bottom: 16,
       }}
       label={label}
-      color={theme.colors.neutral0}
+      color={theme.colors.onPrimary}
       customSize={56}
     />
   );
