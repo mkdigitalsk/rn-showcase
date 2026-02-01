@@ -26,6 +26,9 @@ export const useHomeViewModel = () => {
         case FeatureId.PLATFORM_APIS:
           navigation.navigate('PlatformApis');
           break;
+        case FeatureId.DATABASE:
+          navigation.navigate('Database');
+          break;
         default:
           // TODO: Implement other features
           console.log('Feature not implemented:', featureId);
