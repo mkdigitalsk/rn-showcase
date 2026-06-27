@@ -8,6 +8,8 @@ export interface LoginUiState {
   password: string;
   emailError: EmailError | null;
   passwordError: PasswordError | null;
+  isLoading: boolean;
+  loginFailed: boolean;
   biometricsAvailable: boolean;
   biometricsLoading: boolean;
   biometricsResult: BiometricResult | null;
@@ -18,6 +20,8 @@ export const initialLoginUiState: LoginUiState = {
   password: '',
   emailError: null,
   passwordError: null,
+  isLoading: false,
+  loginFailed: false,
   biometricsAvailable: false,
   biometricsLoading: false,
   biometricsResult: null,

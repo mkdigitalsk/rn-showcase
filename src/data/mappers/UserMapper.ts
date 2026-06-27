@@ -1,7 +1,6 @@
 import { User } from '../../domain/model/User';
 import { Mapper } from '../base/Mapper';
 import { UserDTO } from '../dto/UserDTO';
-import { AddressMapper } from './AddressMapper';
 
 export const UserMapper: Mapper<UserDTO, User> = {
   map(from: UserDTO): User {
@@ -9,7 +8,7 @@ export const UserMapper: Mapper<UserDTO, User> = {
       id: from.id,
       name: from.name,
       email: from.email,
-      address: AddressMapper.map(from.address),
+      createdAt: from.createdAt,
     };
   },
 };

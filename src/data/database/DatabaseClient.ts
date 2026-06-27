@@ -1,7 +1,6 @@
 import { injectable } from 'tsyringe';
 import { open, type DB } from '@op-engineering/op-sqlite';
 import { Note, NoteSortOption } from '../../domain/model/Note';
-import { RegisteredUser } from '../../domain/model/RegisteredUser';
 
 const DATABASE_NAME = 'app.db';
 
@@ -14,16 +13,6 @@ const CREATE_NOTE_TABLE = `
   );
 `;
 
-const CREATE_USER_TABLE = `
-  CREATE TABLE IF NOT EXISTS RegisteredUser (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    name TEXT NOT NULL,
-    email TEXT NOT NULL UNIQUE,
-    password TEXT NOT NULL,
-    createdAt INTEGER NOT NULL
-  );
-`;
-
 @injectable()
 export class DatabaseClient {
   private db: DB;
@@ -31,7 +20,6 @@ export class DatabaseClient {
   constructor() {
     this.db = open({ name: DATABASE_NAME });
     this.db.executeSync(CREATE_NOTE_TABLE);
-    this.db.executeSync(CREATE_USER_TABLE);
   }
 
   queryNotes(query: string, sortOption: NoteSortOption): Note[] {
@@ -72,32 +60,6 @@ export class DatabaseClient {
 
   deleteAll(): void {
     this.db.executeSync('DELETE FROM Note');
-  }
-
-  // --- RegisteredUser ---
-
-  insertUser(name: string, email: string, password: string, createdAt: number): void {
-    this.db.executeSync(
-      'INSERT INTO RegisteredUser (name, email, password, createdAt) VALUES (?, ?, ?, ?)',
-      [name, email, password, createdAt],
-    );
-  }
-
-  selectUserByEmail(email: string): RegisteredUser | null {
-    const result = this.db.executeSync(
-      'SELECT * FROM RegisteredUser WHERE email = ?',
-      [email],
-    );
-    const rows = result.rows ?? [];
-    if (rows.length === 0) { return null; }
-    const row = rows[0];
-    return {
-      id: row.id as number,
-      name: row.name as string,
-      email: row.email as string,
-      password: row.password as string,
-      createdAt: row.createdAt as number,
-    };
   }
 
   private getOrderBy(sortOption: NoteSortOption): string {

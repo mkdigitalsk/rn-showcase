@@ -228,6 +228,7 @@ export const sk: Record<StringKey, string> = {
   login_password_error_empty: 'Heslo je povinné',
   login_password_error_short: 'Heslo musí mať aspoň 8 znakov',
   login_password_error_weak: 'Heslo musí obsahovať veľké, malé písmeno, číslicu a špeciálny znak',
+  login_server_error: 'Nesprávny email alebo heslo',
   login_to_register: 'Nemáte účet? Zaregistrujte sa',
 
   // Register

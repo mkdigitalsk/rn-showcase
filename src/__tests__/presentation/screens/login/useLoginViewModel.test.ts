@@ -1,7 +1,8 @@
-import { renderHook, act } from '@testing-library/react-native';
+import { renderHook, act, waitFor } from '@testing-library/react-native';
 import { test } from '../../../TestFunctions';
 
 // Mock tsyringe container.resolve before importing the hook
+const mockLogin = { execute: jest.fn().mockResolvedValue({ id: 1, name: 'Test', email: 'test@example.com' }) };
 const mockIsBiometricEnabled = { execute: jest.fn().mockResolvedValue(false) };
 const mockAuthenticateWithBiometric = { execute: jest.fn().mockResolvedValue({ type: 'success' }) };
 
@@ -9,6 +10,7 @@ jest.mock('tsyringe', () => ({
   container: {
     resolve: jest.fn((token: symbol) => {
       const key = token.toString();
+      if (key.includes('LoginUseCase')) { return mockLogin; }
       if (key.includes('IsBiometricEnabled')) { return mockIsBiometricEnabled; }
       if (key.includes('AuthenticateWithBiometric')) { return mockAuthenticateWithBiometric; }
       return {};
@@ -116,8 +118,8 @@ describe('useLoginViewModel', () => {
     test({
       whenAction: () => result.current.uiState,
       then: (state) => {
-        expect(state.email).toBe('test@example.com');
-        expect(state.password).toBe('Test123!');
+        expect(state.email).toBe('test01@mkdigital.sk');
+        expect(state.password).toBe('Kmpshowcase1@');
       },
     });
   });
@@ -143,15 +145,11 @@ describe('useLoginViewModel', () => {
     const { result } = renderHook(() => useLoginViewModel());
     act(() => result.current.onPasswordChange('Test123!'));
 
-    let valid: boolean = true;
-    act(() => { valid = result.current.login(); });
+    act(() => result.current.login());
 
     test({
-      whenAction: () => ({ valid, error: result.current.uiState.emailError }),
-      then: ({ valid, error }) => {
-        expect(valid).toBe(false);
-        expect(error).toBe('empty');
-      },
+      whenAction: () => result.current.uiState.emailError,
+      then: (error) => expect(error).toBe('empty'),
     });
   });
 
@@ -216,24 +214,43 @@ describe('useLoginViewModel', () => {
 
   // === Successful Login ===
 
-  it('login with valid credentials returns true and has no errors', () => {
+  it('login with valid credentials calls use case and invokes callback', async () => {
     const { result } = renderHook(() => useLoginViewModel());
     act(() => {
       result.current.onEmailChange('test@example.com');
       result.current.onPasswordChange('Test123!');
     });
 
-    let valid: boolean = false;
-    act(() => { valid = result.current.login(); });
+    const onLoggedIn = jest.fn();
+    act(() => result.current.login(onLoggedIn));
 
-    test({
-      whenAction: () => ({ valid, state: result.current.uiState }),
-      then: ({ valid, state }) => {
-        expect(valid).toBe(true);
-        expect(state.emailError).toBeNull();
-        expect(state.passwordError).toBeNull();
-      },
+    await waitFor(() => {
+      expect(onLoggedIn).toHaveBeenCalled();
     });
+
+    expect(mockLogin.execute).toHaveBeenCalledWith({ email: 'test@example.com', password: 'Test123!' });
+    expect(result.current.uiState.emailError).toBeNull();
+    expect(result.current.uiState.passwordError).toBeNull();
+    expect(result.current.uiState.loginFailed).toBe(false);
+  });
+
+  it('login with invalid credentials sets loginFailed', async () => {
+    mockLogin.execute.mockRejectedValueOnce(new Error('401'));
+    const { result } = renderHook(() => useLoginViewModel());
+    act(() => {
+      result.current.onEmailChange('test@example.com');
+      result.current.onPasswordChange('Test123!');
+    });
+
+    const onLoggedIn = jest.fn();
+    act(() => result.current.login(onLoggedIn));
+
+    await waitFor(() => {
+      expect(result.current.uiState.loginFailed).toBe(true);
+    });
+
+    expect(onLoggedIn).not.toHaveBeenCalled();
+    expect(result.current.uiState.isLoading).toBe(false);
   });
 
   // === Password Strength Edge Cases ===
