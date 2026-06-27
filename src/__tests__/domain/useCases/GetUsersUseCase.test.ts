@@ -26,8 +26,8 @@ describe('GetUsersUseCase', () => {
 
   it('returns list of users from repository', async () => {
     const users: User[] = [
-      { id: 1, name: 'John Doe', email: 'john@example.com', address: { street: 'Main St', suite: '1A', city: 'Bratislava', zipcode: '81101' } },
-      { id: 2, name: 'Jane Doe', email: 'jane@example.com', address: { street: 'Oak Ave', suite: '2B', city: 'Praha', zipcode: '10000' } },
+      { id: 1, name: 'John Doe', email: 'john@example.com', createdAt: 1781638908169 },
+      { id: 2, name: 'Jane Doe', email: 'jane@example.com', createdAt: 1781638908542 },
     ];
 
     await test({

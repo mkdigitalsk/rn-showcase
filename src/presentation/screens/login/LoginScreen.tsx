@@ -37,10 +37,7 @@ export const LoginScreen = () => {
   } = useLoginViewModel();
 
   const handleLogin = useCallback(() => {
-    const valid = login();
-    if (valid) {
-      navigation.replace('Main');
-    }
+    login(() => navigation.replace('Main'));
   }, [login, navigation]);
 
   const handleBiometricLogin = useCallback(() => {
@@ -113,9 +110,23 @@ export const LoginScreen = () => {
             secureTextEntry
           />
 
+          {uiState.loginFailed && (
+            <>
+              <ColumnSpacer4 />
+              <TextLabelSmall color={colors.error}>
+                {t('login_server_error')}
+              </TextLabelSmall>
+            </>
+          )}
+
           <ColumnSpacer4 />
 
-          <ContainedButton text={t('login_button')} onPress={handleLogin} />
+          <ContainedButton
+            text={t('login_button')}
+            onPress={handleLogin}
+            loading={uiState.isLoading}
+            disabled={uiState.isLoading}
+          />
         </AppCard>
 
         {uiState.biometricsAvailable && (
