@@ -9,7 +9,7 @@ import { LoginUiState, initialLoginUiState, EmailError, PasswordError } from './
 import { isValidEmail, isPasswordLongEnough, isValidPassword } from '../../foundation/ValidationPatterns';
 
 const TEST_EMAIL = 'test01@mkdigital.sk';
-const TEST_PASSWORD = 'Kmpshowcase1@';
+const TEST_PASSWORD = 'MKDigitalTest1@';
 
 export const useLoginViewModel = () => {
   const [uiState, setUiState] = useState<LoginUiState>(initialLoginUiState);
