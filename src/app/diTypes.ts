@@ -15,7 +15,9 @@ export const TYPES = {
   ClearSessionUseCase: Symbol.for('ClearSessionUseCase'),
 
   // Auth
+  AuthApi: Symbol.for('AuthApi'),
   AuthRepository: Symbol.for('AuthRepository'),
+  LoginUseCase: Symbol.for('LoginUseCase'),
   RegisterUserUseCase: Symbol.for('RegisterUserUseCase'),
   CheckEmailExistsUseCase: Symbol.for('CheckEmailExistsUseCase'),
 

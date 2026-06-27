@@ -6,6 +6,7 @@ import { RegisteredUser } from '../../../../domain/model/RegisteredUser';
 
 function createMockAuthRepository(): AuthRepository {
   return {
+    login: jest.fn(),
     register: jest.fn(),
     emailExists: jest.fn(),
   };
@@ -30,8 +31,6 @@ describe('RegisterUserUseCase', () => {
       id: 1,
       name: 'John',
       email: 'john@example.com',
-      password: 'Test123!',
-      createdAt: 1234567890,
     };
     (t.mockRepo.register as jest.Mock).mockResolvedValue(expectedUser);
 

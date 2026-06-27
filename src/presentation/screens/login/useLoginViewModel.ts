@@ -1,5 +1,6 @@
 import { useState, useCallback, useEffect } from 'react';
 import { TYPES } from '../../../app/diTypes';
+import { LoginUseCase } from '../../../domain/useCases/auth/LoginUseCase';
 import { IsBiometricEnabledUseCase } from '../../../domain/useCases/biometric/IsBiometricEnabledUseCase';
 import { AuthenticateWithBiometricUseCase } from '../../../domain/useCases/biometric/AuthenticateWithBiometricUseCase';
 import { useResolve } from '../../hooks/useResolve';
@@ -7,12 +8,13 @@ import { execute } from '../../hooks/useExecute';
 import { LoginUiState, initialLoginUiState, EmailError, PasswordError } from './LoginUiState';
 import { isValidEmail, isPasswordLongEnough, isValidPassword } from '../../foundation/ValidationPatterns';
 
-const TEST_EMAIL = 'test@example.com';
-const TEST_PASSWORD = 'Test123!';
+const TEST_EMAIL = 'test01@mkdigital.sk';
+const TEST_PASSWORD = 'Kmpshowcase1@';
 
 export const useLoginViewModel = () => {
   const [uiState, setUiState] = useState<LoginUiState>(initialLoginUiState);
 
+  const loginUseCase = useResolve<LoginUseCase>(TYPES.LoginUseCase);
   const isBiometricEnabledUseCase = useResolve<IsBiometricEnabledUseCase>(TYPES.IsBiometricEnabledUseCase);
   const authenticateWithBiometricUseCase = useResolve<AuthenticateWithBiometricUseCase>(TYPES.AuthenticateWithBiometricUseCase);
 
@@ -44,17 +46,25 @@ export const useLoginViewModel = () => {
     return null;
   }, []);
 
-  const login = useCallback((): boolean => {
+  const login = useCallback((onLoggedIn?: () => void): void => {
     const emailError = validateEmail(uiState.email);
     const passwordError = validatePassword(uiState.password);
 
     if (emailError || passwordError) {
-      setUiState(prev => ({ ...prev, emailError, passwordError }));
-      return false;
+      setUiState(prev => ({ ...prev, emailError, passwordError, loginFailed: false }));
+      return;
     }
 
-    return true;
-  }, [uiState.email, uiState.password, validateEmail, validatePassword]);
+    execute({
+      action: () => loginUseCase.execute({ email: uiState.email, password: uiState.password }),
+      onLoading: () => setUiState(prev => ({ ...prev, isLoading: true, loginFailed: false })),
+      onSuccess: () => {
+        setUiState(prev => ({ ...prev, isLoading: false }));
+        onLoggedIn?.();
+      },
+      onError: () => setUiState(prev => ({ ...prev, isLoading: false, loginFailed: true })),
+    });
+  }, [uiState.email, uiState.password, validateEmail, validatePassword, loginUseCase]);
 
   const authenticateWithBiometrics = useCallback((onAuthenticated?: () => void): void => {
     execute({

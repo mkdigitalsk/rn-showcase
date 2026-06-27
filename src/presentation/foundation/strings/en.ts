@@ -226,6 +226,7 @@ export const en = {
   login_password_error_empty: 'Password is required',
   login_password_error_short: 'Password must be at least 8 characters',
   login_password_error_weak: 'Password must contain uppercase, lowercase, digit, and special character',
+  login_server_error: 'Invalid email or password',
   login_to_register: 'Don\'t have an account? Register',
 
   // Register
