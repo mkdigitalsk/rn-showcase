@@ -119,7 +119,7 @@ describe('useLoginViewModel', () => {
       whenAction: () => result.current.uiState,
       then: (state) => {
         expect(state.email).toBe('test01@mkdigital.sk');
-        expect(state.password).toBe('Kmpshowcase1@');
+        expect(state.password).toBe('MKDigitalTest1@');
       },
     });
   });
