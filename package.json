@@ -13,6 +13,7 @@
   "dependencies": {
     "@babel/plugin-proposal-decorators": "^7.25.9",
     "@babel/plugin-syntax-decorators": "^7.25.9",
+    "@mkdigitalsk/design-system": "^1.0.0",
     "@notifee/react-native": "^9.1.8",
     "@op-engineering/op-sqlite": "^15.2.5",
     "@react-native-clipboard/clipboard": "^1.16.3",
