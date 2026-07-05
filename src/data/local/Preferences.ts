@@ -1,10 +1,10 @@
-import { MMKV } from 'react-native-mmkv';
+import { MMKV, createMMKV } from 'react-native-mmkv';
 
 export class Preferences {
   private storage: MMKV;
 
   constructor(storageName: string) {
-    this.storage = new MMKV({ id: storageName });
+    this.storage = createMMKV({ id: storageName });
   }
 
   getString(key: string): string | undefined {
@@ -33,7 +33,7 @@ export class Preferences {
   }
 
   remove(key: string): void {
-    this.storage.delete(key);
+    this.storage.remove(key);
   }
 
   clear(): void {
