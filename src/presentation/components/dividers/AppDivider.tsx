@@ -1,6 +1,5 @@
 import React from 'react';
 import { Divider } from 'react-native-paper';
-import { StyleProp, ViewStyle } from 'react-native';
 import { useAppTheme } from '../../foundation/theme';
 
 

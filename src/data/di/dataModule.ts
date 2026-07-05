@@ -69,4 +69,4 @@ export const dataModule = () => {
 
     // Notifications
     container.registerSingleton(TYPES.LocalNotificationService, NotificationClient);
-}
+};

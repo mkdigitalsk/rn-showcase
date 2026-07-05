@@ -38,7 +38,7 @@ import {
   RowSpacer2,
   RowSpacer4,
 } from '../../components';
-import { space4, space2 } from '../../foundation/dimensions';
+import { space4 } from '../../foundation/dimensions';
 import { useAppColors } from '../../foundation/theme';
 import { useStrings } from '../../foundation/strings';
 

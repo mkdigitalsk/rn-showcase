@@ -42,7 +42,7 @@ export abstract class FlowUseCase<Params, Result> {
         return typeof result === 'function'
           ? { unsubscribe: result }
           : result;
-      }
+      },
     };
   }
 }

@@ -8,7 +8,7 @@ import { ColumnSpacer2 } from '../../components/spacers/Spacers';
 import { useAppColors } from '../../foundation/theme';
 import { useStrings } from '../../foundation/strings';
 import { Feature } from './Feature';
-import { space2, space4 } from '../../foundation/dimensions';
+import { space4 } from '../../foundation/dimensions';
 
 const FEATURE_CARD_ICON_SIZE = 40;
 
