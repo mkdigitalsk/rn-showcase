@@ -23,7 +23,7 @@ const AppContent = () => {
     });
 
     Linking.getInitialURL().then(url => {
-      if (url) handleDeepLink(url);
+      if (url) {handleDeepLink(url);}
     });
 
     return () => subscription.remove();

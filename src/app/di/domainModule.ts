@@ -100,4 +100,4 @@ export const domainModule = () => {
     container.register(TYPES.ShowNotificationUseCase, { useClass: ShowNotificationUseCase });
     container.register(TYPES.CancelAllNotificationsUseCase, { useClass: CancelAllNotificationsUseCase });
     container.register(TYPES.OpenNotificationSettingsUseCase, { useClass: OpenNotificationSettingsUseCase });
-}
+};

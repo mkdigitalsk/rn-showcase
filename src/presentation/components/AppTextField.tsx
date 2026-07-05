@@ -1,6 +1,6 @@
 import React from 'react';
 import { TextInput } from 'react-native-paper';
-import { StyleProp, ViewStyle, TextStyle, KeyboardTypeOptions } from 'react-native';
+import { StyleProp, ViewStyle, KeyboardTypeOptions } from 'react-native';
 import { useAppTheme } from '../foundation/theme';
 
 interface AppTextFieldProps {
@@ -40,7 +40,6 @@ export const AppTextField: React.FC<AppTextFieldProps> = ({
   right,
   showClearButton = true,
   onClear,
-  helperText,
   secureTextEntry = false,
   keyboardType,
   autoCapitalize,

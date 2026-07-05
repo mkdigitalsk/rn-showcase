@@ -1,4 +1,4 @@
-import "reflect-metadata";
+import 'reflect-metadata';
 import { initDI } from './src/app/di/diContainer';
 import {AppRegistry} from 'react-native';
 import App from './src/app/App';

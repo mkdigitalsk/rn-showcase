@@ -87,7 +87,7 @@ export const useDatabaseViewModel = () => {
       }),
       onSuccess: () => setUiState(prev => ({ ...prev, newNoteTitle: '', newNoteContent: '' })),
     });
-  }, [uiState.newNoteTitle, uiState.newNoteContent, insertNoteUseCase]);
+  }, [uiState, insertNoteUseCase]);
 
   const deleteNote = useCallback((id: number) => {
     execute({
