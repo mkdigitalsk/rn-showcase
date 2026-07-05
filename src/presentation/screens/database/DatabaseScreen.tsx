@@ -13,17 +13,7 @@ import { TextBodySmallNeutral80 } from '../../components/text/bodySmall/TextBody
 import { TextTitleLargeNeutral80 } from '../../components/text/titleLarge/TextTitleLarge';
 import { ColumnSpacer2, ColumnSpacer4 } from '../../components/spacers/Spacers';
 import { space2, space4, defaultIconSize } from '../../foundation/dimensions';
-
-const formatDate = (timestamp: number): string => {
-  const date = new Date(timestamp);
-  return date.toLocaleDateString(undefined, {
-    year: 'numeric',
-    month: 'short',
-    day: 'numeric',
-    hour: '2-digit',
-    minute: '2-digit',
-  });
-};
+import { formatDate } from '../../../util/formatDate';
 
 interface NoteCardProps {
   note: Note;
