@@ -22,7 +22,7 @@ httpClient.interceptors.request.use(
   (config) => {
     const token = tokenStore.getString(AUTH_TOKEN_KEY);
     if (token) {
-      config.headers = { ...config.headers, Authorization: `Bearer ${token}` };
+      config.headers.set('Authorization', `Bearer ${token}`);
     }
     if (__DEV__) {
       console.log(`[HTTP] ${config.method?.toUpperCase()} ${config.url}`);
