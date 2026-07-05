@@ -1,15 +1,15 @@
 export default async function testScenario<T>({
     given,
     whenAction,
-    then
+    then,
 }: {
     given?: () => void,
     whenAction: () => Promise<T>,
     then?: (actual: T) => void
 }) {
-    given?.()
-    const actual = await whenAction()
-    then?.(actual)
+    given?.();
+    const actual = await whenAction();
+    then?.(actual);
 }
 
 
@@ -33,6 +33,6 @@ export abstract class BaseTest<T> {
 }
 
 export function createMock<M>(Class: new () => M): jest.MaybeMockedDeep<M> {
-    return jest.mocked(new Class())
+    return jest.mocked(new Class());
 }
 

@@ -109,7 +109,7 @@ export const usePlatformApisViewModel = () => {
   }, [getLocationUseCase]);
 
   const startLocationUpdates = useCallback(() => {
-    if (stopTrackingRef.current) return;
+    if (stopTrackingRef.current) {return;}
 
     setUiState(prev => ({ ...prev, isTrackingLocation: true, locationUpdatesError: false }));
     const subscription = observeLocationUpdatesUseCase.execute().subscribe(

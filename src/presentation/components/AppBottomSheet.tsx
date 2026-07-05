@@ -1,6 +1,6 @@
 import React from 'react';
 import { Modal, Portal } from 'react-native-paper';
-import { View, StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { useAppTheme } from '../foundation/theme';
 import { space4 } from '../foundation/dimensions';
 
