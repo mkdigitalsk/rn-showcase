@@ -27,8 +27,8 @@ export const HomeStackNavigator = () => {
   return (
     <Stack.Navigator
       screenOptions={{
-        headerStyle: { backgroundColor: colors.primary },
-        headerTintColor: colors.neutral80,
+        headerStyle: { backgroundColor: colors.brandBar },
+        headerTintColor: colors.onBrandBar,
         headerBackTitle: '',
       }}
     >
