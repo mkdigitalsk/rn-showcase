@@ -4,8 +4,8 @@ import { SESSION_STORAGE_ID } from '../local/SessionPreferences';
 
 // Debug builds → staging, release builds → prod (RN's build-type flag, mirrors Android BuildConfig.DEBUG).
 const BASE_URL = __DEV__
-  ? 'https://kmp-showcase-staging.up.railway.app/api/v1'
-  : 'https://kmp-showcase-production.up.railway.app/api/v1';
+  ? 'https://api.staging.mkdigital.sk/v1'
+  : 'https://api.mkdigital.sk/v1';
 const TIMEOUT_MS = 30000;
 const AUTH_TOKEN_KEY = 'auth_token';
 
