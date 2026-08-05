@@ -1,3 +1,4 @@
+import com.google.firebase.appdistribution.gradle.firebaseAppDistribution
 import java.util.Properties
 
 plugins {
@@ -6,12 +7,16 @@ plugins {
     alias(libs.plugins.react.native)
     alias(libs.plugins.google.services)
     alias(libs.plugins.firebase.crashlytics)
+    alias(libs.plugins.firebase.distribution)
 }
 
 apply(from = "../../node_modules/react-native-vector-icons/fonts.gradle")
 
 react {
     autolinkLibrariesWithApp()
+    if (project.hasProperty("bundleDebugJs")) {
+        debuggableVariants.set(listOf("debugOptimized"))
+    }
 }
 
 val keystorePropertiesFile = project.file("keystore.properties")
@@ -19,6 +24,13 @@ val keystoreProperties = Properties()
 
 if (keystorePropertiesFile.exists()) {
     keystoreProperties.load(keystorePropertiesFile.inputStream())
+}
+
+val localPropertiesFile = rootProject.file("local.properties")
+val localProperties = Properties()
+
+if (localPropertiesFile.exists()) {
+    localProperties.load(localPropertiesFile.inputStream())
 }
 
 val hasSigningProperties = keystoreProperties.isNotEmpty()
@@ -62,11 +74,14 @@ android {
 
     buildTypes {
         debug {
-            // A debuggable build never occupies the production identity: it installs beside the release
-            // instead of replacing it, its crashes and analytics stay out of the testers' stream, and no
-            // one ends up with a debugger-attachable app under the real application id.
             applicationIdSuffix = ".debug"
             signingConfig = signingConfigs.getByName("debug")
+
+            firebaseAppDistribution {
+                appId = "1:398615081925:android:0fcfefbdaf1112fb5611ac"
+                artifactType = "APK"
+                groups = localProperties["fb.test.group"]?.toString() ?: "testers"
+            }
         }
         release {
             isMinifyEnabled = true
@@ -84,6 +99,12 @@ android {
 
             if (hasSigningProperties) {
                 signingConfig = signingConfigs.getByName("release")
+            }
+
+            firebaseAppDistribution {
+                appId = "1:398615081925:android:d7c6a6e6061a32fa5611ac"
+                artifactType = "APK"
+                groups = localProperties["fb.test.group"]?.toString() ?: "testers"
             }
         }
     }
