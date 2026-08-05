@@ -1,4 +1,4 @@
-package com.mk.rnshowcase
+package sk.mkdigital.rnshowcase
 
 import com.facebook.react.ReactActivity
 import com.facebook.react.ReactActivityDelegate

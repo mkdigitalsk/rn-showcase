@@ -1,4 +1,4 @@
-package com.mk.rnshowcase
+package sk.mkdigital.rnshowcase
 
 import android.app.Application
 import com.facebook.react.PackageList

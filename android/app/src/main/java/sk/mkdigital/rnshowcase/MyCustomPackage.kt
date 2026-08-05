@@ -1,4 +1,4 @@
-package com.mk.rnshowcase
+package sk.mkdigital.rnshowcase
 
 import com.facebook.react.ReactPackage
 import com.facebook.react.bridge.NativeModule
