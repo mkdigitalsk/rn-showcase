@@ -25,6 +25,29 @@ target 'rnshowcase' do
     :app_path => "#{Pod::Config.instance.installation_root}/.."
   )
 
+  # One Firebase app per build configuration, mirroring android/app/src/<buildType>/google-services.json.
+  # Declared here rather than added in Xcode so it is reproducible from source control, and positioned
+  # :before_compile because Crashlytics' upload-symbols reads the plist out of the built bundle — it must
+  # already be the right one by the time [CP-User] [RNFB] Crashlytics Configuration runs.
+  script_phase :name => 'Select GoogleService-Info.plist',
+               :execution_position => :before_compile,
+               :input_files => ['$(SRCROOT)/firebase/$(CONFIGURATION)/GoogleService-Info.plist'],
+               :output_files => ['$(BUILT_PRODUCTS_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/GoogleService-Info.plist'],
+               :script => <<~SH
+                 set -eu
+
+                 src="${SRCROOT}/firebase/${CONFIGURATION}/GoogleService-Info.plist"
+                 dest="${BUILT_PRODUCTS_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleService-Info.plist"
+
+                 [ -f "$src" ] || { echo "error: no GoogleService-Info.plist for configuration ${CONFIGURATION} at $src" >&2; exit 1; }
+
+                 plist_id=$(/usr/libexec/PlistBuddy -c "Print :BUNDLE_ID" "$src")
+                 [ "$plist_id" = "$PRODUCT_BUNDLE_IDENTIFIER" ] || { echo "error: $src is registered to $plist_id, this build is $PRODUCT_BUNDLE_IDENTIFIER" >&2; exit 1; }
+
+                 mkdir -p "$(dirname "$dest")"
+                 cp "$src" "$dest"
+               SH
+
   target 'rnshowcaseTests' do
     inherit! :complete
     # Pods for testing
