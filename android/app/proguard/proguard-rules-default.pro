@@ -24,7 +24,6 @@
 # ----------------------------
 # DTOs
 # ----------------------------
--keep class com.mk.rnshowcase.data.dto.** { *; }
 
 # ----------------------------
 # Logs — strip verbose/debug in release

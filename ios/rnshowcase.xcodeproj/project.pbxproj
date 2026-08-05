@@ -460,7 +460,7 @@
 					"-lc++",
 					"$(inherited)",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.mk.rnshowcase;
+				PRODUCT_BUNDLE_IDENTIFIER = sk.mkdigital.rnshowcase;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/rnshowcase.app/rnshowcase";
 			};
@@ -484,7 +484,7 @@
 					"-lc++",
 					"$(inherited)",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.mk.rnshowcase;
+				PRODUCT_BUNDLE_IDENTIFIER = sk.mkdigital.rnshowcase;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/rnshowcase.app/rnshowcase";
 			};
@@ -510,7 +510,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.mk.rnshowcase;
+				PRODUCT_BUNDLE_IDENTIFIER = sk.mkdigital.rnshowcase;
 				PRODUCT_NAME = rnshowcase;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -537,7 +537,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.mk.rnshowcase;
+				PRODUCT_BUNDLE_IDENTIFIER = sk.mkdigital.rnshowcase;
 				PRODUCT_NAME = rnshowcase;
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";

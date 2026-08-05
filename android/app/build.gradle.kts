@@ -28,7 +28,7 @@ android {
     buildToolsVersion = libs.versions.build.tools.get()
     compileSdk = libs.versions.compile.sdk.get().toInt()
 
-    namespace = "com.mk.rnshowcase"
+    namespace = "sk.mkdigital.rnshowcase"
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_21
@@ -36,7 +36,7 @@ android {
     }
 
     defaultConfig {
-        applicationId = "com.mk.rnshowcase"
+        applicationId = "sk.mkdigital.rnshowcase"
         minSdk = libs.versions.min.sdk.get().toInt()
         targetSdk = libs.versions.target.sdk.get().toInt()
         versionCode = 1
@@ -62,6 +62,10 @@ android {
 
     buildTypes {
         debug {
+            // A debuggable build never occupies the production identity: it installs beside the release
+            // instead of replacing it, its crashes and analytics stay out of the testers' stream, and no
+            // one ends up with a debugger-attachable app under the real application id.
+            applicationIdSuffix = ".debug"
             signingConfig = signingConfigs.getByName("debug")
         }
         release {

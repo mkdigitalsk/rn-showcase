@@ -161,7 +161,7 @@ src/
 
 ## Author
 
-Miroslav Kusnir
+MK Digital s. r. o.
 
 ## License
 
