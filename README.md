@@ -115,7 +115,8 @@ Presentation  →  Domain  →  Data
 ## Quick Start
 
 ```bash
-# Install dependencies
+# Install dependencies — needs NODE_AUTH_TOKEN, a GitHub token with read:packages,
+# for the private @mkdigitalsk/design-system package
 npm install
 
 # iOS (first time)
