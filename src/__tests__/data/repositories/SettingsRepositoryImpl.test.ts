@@ -8,12 +8,24 @@ class FakePersistentPreferences implements PersistentPreferences {
   private language: string | undefined = undefined;
   private counter = 0;
 
-  getPersistentCounter(): number { return this.counter; }
-  setPersistentCounter(value: number): void { this.counter = value; }
-  getThemeMode(): string { return this.themeMode; }
-  setThemeMode(mode: string): void { this.themeMode = mode; }
-  getLanguage(): string | undefined { return this.language; }
-  setLanguage(language: string): void { this.language = language; }
+  getPersistentCounter(): number {
+    return this.counter;
+  }
+  setPersistentCounter(value: number): void {
+    this.counter = value;
+  }
+  getThemeMode(): string {
+    return this.themeMode;
+  }
+  setThemeMode(mode: string): void {
+    this.themeMode = mode;
+  }
+  getLanguage(): string | undefined {
+    return this.language;
+  }
+  setLanguage(language: string): void {
+    this.language = language;
+  }
 }
 
 class SettingsRepositoryImplTest extends BaseTest<SettingsRepositoryImpl> {
@@ -36,7 +48,7 @@ describe('SettingsRepositoryImpl', () => {
     it('returns system as default', () => {
       test({
         whenAction: () => t.classUnderTest.getThemeMode(),
-        then: (result) => expect(result).toBe('system'),
+        then: result => expect(result).toBe('system'),
       });
     });
 
@@ -44,7 +56,7 @@ describe('SettingsRepositoryImpl', () => {
       test({
         given: () => t.fakePreferences.setThemeMode('light'),
         whenAction: () => t.classUnderTest.getThemeMode(),
-        then: (result) => expect(result).toBe('light'),
+        then: result => expect(result).toBe('light'),
       });
     });
 
@@ -52,7 +64,7 @@ describe('SettingsRepositoryImpl', () => {
       test({
         given: () => t.fakePreferences.setThemeMode('dark'),
         whenAction: () => t.classUnderTest.getThemeMode(),
-        then: (result) => expect(result).toBe('dark'),
+        then: result => expect(result).toBe('dark'),
       });
     });
 
@@ -60,7 +72,7 @@ describe('SettingsRepositoryImpl', () => {
       test({
         given: () => t.fakePreferences.setThemeMode('invalid'),
         whenAction: () => t.classUnderTest.getThemeMode(),
-        then: (result) => expect(result).toBe('system'),
+        then: result => expect(result).toBe('system'),
       });
     });
   });
@@ -72,7 +84,7 @@ describe('SettingsRepositoryImpl', () => {
           t.classUnderTest.setThemeMode('dark');
           return t.fakePreferences.getThemeMode();
         },
-        then: (result) => expect(result).toBe('dark'),
+        then: result => expect(result).toBe('dark'),
       });
     });
   });
@@ -83,7 +95,7 @@ describe('SettingsRepositoryImpl', () => {
     it('returns undefined when no language stored', () => {
       test({
         whenAction: () => t.classUnderTest.getLanguage(),
-        then: (result) => expect(result).toBeUndefined(),
+        then: result => expect(result).toBeUndefined(),
       });
     });
 
@@ -91,7 +103,7 @@ describe('SettingsRepositoryImpl', () => {
       test({
         given: () => t.fakePreferences.setLanguage('en'),
         whenAction: () => t.classUnderTest.getLanguage(),
-        then: (result) => expect(result).toBe('en'),
+        then: result => expect(result).toBe('en'),
       });
     });
 
@@ -99,7 +111,7 @@ describe('SettingsRepositoryImpl', () => {
       test({
         given: () => t.fakePreferences.setLanguage('sk'),
         whenAction: () => t.classUnderTest.getLanguage(),
-        then: (result) => expect(result).toBe('sk'),
+        then: result => expect(result).toBe('sk'),
       });
     });
 
@@ -107,7 +119,7 @@ describe('SettingsRepositoryImpl', () => {
       test({
         given: () => t.fakePreferences.setLanguage('fr'),
         whenAction: () => t.classUnderTest.getLanguage(),
-        then: (result) => expect(result).toBeUndefined(),
+        then: result => expect(result).toBeUndefined(),
       });
     });
   });
@@ -119,7 +131,7 @@ describe('SettingsRepositoryImpl', () => {
           t.classUnderTest.setLanguage('sk');
           return t.fakePreferences.getLanguage();
         },
-        then: (result) => expect(result).toBe('sk'),
+        then: result => expect(result).toBe('sk'),
       });
     });
   });

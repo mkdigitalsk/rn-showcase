@@ -7,9 +7,7 @@ import { UseCase } from '../base/UseCase';
 
 @injectable()
 export class LoadStorageDataUseCase extends UseCase<void, StorageData> {
-  constructor(
-    @inject(TYPES.StorageRepository) private storageRepository: StorageRepository
-  ) {
+  constructor(@inject(TYPES.StorageRepository) private storageRepository: StorageRepository) {
     super();
   }
 

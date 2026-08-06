@@ -5,9 +5,7 @@ import { TYPES } from '../../../app/diTypes';
 
 @injectable()
 export class ToggleFlashlightUseCase extends UseCase<boolean, boolean> {
-  constructor(
-    @inject(TYPES.FlashlightRepository) private flashlightRepository: FlashlightRepository,
-  ) {
+  constructor(@inject(TYPES.FlashlightRepository) private flashlightRepository: FlashlightRepository) {
     super();
   }
 

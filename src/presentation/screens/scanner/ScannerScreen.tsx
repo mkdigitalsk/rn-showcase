@@ -1,11 +1,6 @@
 import React, { useCallback } from 'react';
 import { View, ScrollView, StyleSheet } from 'react-native';
-import {
-  Camera,
-  useCameraDevice,
-  useCameraPermission,
-  useCodeScanner,
-} from 'react-native-vision-camera';
+import { Camera, useCameraDevice, useCameraPermission, useCodeScanner } from 'react-native-vision-camera';
 import QRCode from 'react-native-qrcode-svg';
 import { useScannerViewModel } from './useScannerViewModel';
 import { ScannerMode, CodeFormat } from './ScannerUiState';
@@ -51,11 +46,7 @@ const GenerateSection = ({
       />
       <ColumnSpacer4 />
       <AppCard elevated>
-        <AppTextField
-          value={inputText}
-          onChangeText={onTextChanged}
-          placeholder={t('scanner_input_placeholder')}
-        />
+        <AppTextField value={inputText} onChangeText={onTextChanged} placeholder={t('scanner_input_placeholder')} />
         <ColumnSpacer4 />
         <ContainedButton text={t('scanner_generate_button')} onPress={generateCode} />
       </AppCard>
@@ -64,12 +55,7 @@ const GenerateSection = ({
           <ColumnSpacer4 />
           <AppCard elevated>
             <View style={styles.codeContainer}>
-              <QRCode
-                value={inputText}
-                size={QR_CODE_SIZE}
-                color={colors.neutral80}
-                backgroundColor={colors.surface}
-              />
+              <QRCode value={inputText} size={QR_CODE_SIZE} color={colors.neutral80} backgroundColor={colors.surface} />
             </View>
           </AppCard>
         </>
@@ -94,12 +80,15 @@ const ScanSection = ({
 
   const codeScanner = useCodeScanner({
     codeTypes: ['qr', 'ean-13', 'ean-8', 'code-128', 'code-39'],
-    onCodeScanned: useCallback((codes) => {
-      const value = codes[0]?.value;
-      if (value) {
-        onCodeScanned(value);
-      }
-    }, [onCodeScanned]),
+    onCodeScanned: useCallback(
+      codes => {
+        const value = codes[0]?.value;
+        if (value) {
+          onCodeScanned(value);
+        }
+      },
+      [onCodeScanned]
+    ),
   });
 
   if (!hasPermission) {
@@ -123,12 +112,7 @@ const ScanSection = ({
   return (
     <>
       <View style={[styles.cameraContainer, { borderColor: colors.outline }]}>
-        <Camera
-          style={StyleSheet.absoluteFill}
-          device={device}
-          isActive={true}
-          codeScanner={codeScanner}
-        />
+        <Camera style={StyleSheet.absoluteFill} device={device} isActive={true} codeScanner={codeScanner} />
       </View>
       {scannedResult && (
         <>
@@ -149,15 +133,7 @@ const ScanSection = ({
 export const ScannerScreen = () => {
   const colors = useAppColors();
   const { t } = useStrings();
-  const {
-    uiState,
-    onModeChanged,
-    onFormatChanged,
-    onTextChanged,
-    generateCode,
-    onCodeScanned,
-    clearScannedResult,
-  } = useScannerViewModel();
+  const { uiState, onModeChanged, onFormatChanged, onTextChanged, generateCode, onCodeScanned, clearScannedResult } = useScannerViewModel();
 
   return (
     <ScrollView
@@ -165,9 +141,7 @@ export const ScannerScreen = () => {
       contentContainerStyle={{ padding: space4, paddingBottom: 100 }}
       keyboardShouldPersistTaps="handled"
     >
-      <TextHeadlineMedium color={colors.primary}>
-        {t('scanner_title')}
-      </TextHeadlineMedium>
+      <TextHeadlineMedium color={colors.primary}>{t('scanner_title')}</TextHeadlineMedium>
       <ColumnSpacer2 />
       <TextBodyMediumNeutral80>{t('scanner_subtitle')}</TextBodyMediumNeutral80>
 
@@ -194,11 +168,7 @@ export const ScannerScreen = () => {
           generateCode={generateCode}
         />
       ) : (
-        <ScanSection
-          onCodeScanned={onCodeScanned}
-          scannedResult={uiState.scannedResult}
-          clearScannedResult={clearScannedResult}
-        />
+        <ScanSection onCodeScanned={onCodeScanned} scannedResult={uiState.scannedResult} clearScannedResult={clearScannedResult} />
       )}
     </ScrollView>
   );

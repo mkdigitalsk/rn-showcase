@@ -30,7 +30,7 @@ describe('GetLanguageUseCase', () => {
   it('returns undefined when no language stored', () => {
     test({
       whenAction: () => t.classUnderTest.execute(),
-      then: (result) => expect(result).toBeUndefined(),
+      then: result => expect(result).toBeUndefined(),
     });
   });
 
@@ -40,7 +40,7 @@ describe('GetLanguageUseCase', () => {
         (t.mockRepo.getLanguage as jest.Mock).mockReturnValue('en');
       },
       whenAction: () => t.classUnderTest.execute(),
-      then: (result) => expect(result).toBe('en'),
+      then: result => expect(result).toBe('en'),
     });
   });
 
@@ -50,7 +50,7 @@ describe('GetLanguageUseCase', () => {
         (t.mockRepo.getLanguage as jest.Mock).mockReturnValue('sk');
       },
       whenAction: () => t.classUnderTest.execute(),
-      then: (result) => expect(result).toBe('sk'),
+      then: result => expect(result).toBe('sk'),
     });
   });
 });

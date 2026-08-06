@@ -5,9 +5,7 @@ import { TYPES } from '../../../app/diTypes';
 
 @injectable()
 export class GetTodayDateUseCase extends UseCase<void, string> {
-  constructor(
-    @inject(TYPES.DateRepository) private dateRepository: DateRepository,
-  ) {
+  constructor(@inject(TYPES.DateRepository) private dateRepository: DateRepository) {
     super();
   }
 

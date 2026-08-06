@@ -5,9 +5,7 @@ import { TYPES } from '../../../app/diTypes';
 
 @injectable()
 export class TurnOffFlashlightUseCase extends UseCase<void, boolean> {
-  constructor(
-    @inject(TYPES.FlashlightRepository) private flashlightRepository: FlashlightRepository,
-  ) {
+  constructor(@inject(TYPES.FlashlightRepository) private flashlightRepository: FlashlightRepository) {
     super();
   }
 

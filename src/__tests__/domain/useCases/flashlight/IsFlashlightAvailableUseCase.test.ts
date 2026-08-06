@@ -31,7 +31,7 @@ describe('IsFlashlightAvailableUseCase', () => {
         (t.mockRepo.isAvailable as jest.Mock).mockReturnValue(true);
       },
       whenAction: () => t.classUnderTest.execute(),
-      then: (result) => {
+      then: result => {
         expect(result).toBe(true);
       },
     });
@@ -40,7 +40,7 @@ describe('IsFlashlightAvailableUseCase', () => {
   it('returns false when flashlight is not available', async () => {
     await test({
       whenAction: () => t.classUnderTest.execute(),
-      then: (result) => {
+      then: result => {
         expect(result).toBe(false);
       },
     });

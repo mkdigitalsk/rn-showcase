@@ -8,11 +8,7 @@ interface AppCheckboxProps {
   enabled?: boolean;
 }
 
-export const AppCheckbox: React.FC<AppCheckboxProps> = ({
-  checked = false,
-  onPress,
-  enabled = true,
-}) => {
+export const AppCheckbox: React.FC<AppCheckboxProps> = ({ checked = false, onPress, enabled = true }) => {
   const theme = useAppTheme();
 
   return (

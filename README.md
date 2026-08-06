@@ -17,6 +17,7 @@ A production-ready React Native demo app showcasing modern mobile development wi
 <td style="width:50%">
 
 ### UI & Navigation
+
 - React Navigation 6+
 - Material Design 3
 - Dark Mode + System Theme
@@ -26,6 +27,7 @@ A production-ready React Native demo app showcasing modern mobile development wi
 <td style="width:50%">
 
 ### Platform APIs
+
 - Biometrics (Face ID / Fingerprint)
 - Camera & QR/Barcode Scanner
 - Location & Permissions
@@ -37,6 +39,7 @@ A production-ready React Native demo app showcasing modern mobile development wi
 <td style="width:50%">
 
 ### Data & Network
+
 - Axios HTTP Client
 - MMKV Storage
 - SQLite Database (op-sqlite)
@@ -46,6 +49,7 @@ A production-ready React Native demo app showcasing modern mobile development wi
 <td style="width:50%">
 
 ### Notifications
+
 - Local Notifications
 - Notification Channels
 - Permission Handling
@@ -156,7 +160,6 @@ src/
     ├── dto/                # Data Transfer Objects
     └── local/              # MMKV, SQLite
 ```
-
 
 ---
 

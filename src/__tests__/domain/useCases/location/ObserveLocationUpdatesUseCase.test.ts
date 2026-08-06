@@ -36,12 +36,10 @@ describe('ObserveLocationUpdatesUseCase', () => {
 
   it('emits location updates', () => {
     const location: Location = { lat: 48.1486, lon: 17.1077 };
-    (t.mockRepo.startLocationUpdates as jest.Mock).mockImplementation(
-      (onLocation: (loc: Location) => void) => {
-        onLocation(location);
-        return jest.fn();
-      },
-    );
+    (t.mockRepo.startLocationUpdates as jest.Mock).mockImplementation((onLocation: (loc: Location) => void) => {
+      onLocation(location);
+      return jest.fn();
+    });
 
     const onValue = jest.fn();
     t.classUnderTest.execute().subscribe(onValue);

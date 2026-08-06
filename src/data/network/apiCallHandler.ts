@@ -1,10 +1,5 @@
 import { AxiosError } from 'axios';
-import {
-  NetworkException,
-  ApiException,
-  DataException,
-  NetworkErrorCode,
-} from '../../domain/exceptions/BaseException';
+import { NetworkException, ApiException, DataException, NetworkErrorCode } from '../../domain/exceptions/BaseException';
 import { ErrorStrings } from '../../presentation/strings/errorStrings';
 
 export async function handleApiCall<T>(call: () => Promise<T>): Promise<T> {
@@ -14,11 +9,7 @@ export async function handleApiCall<T>(call: () => Promise<T>): Promise<T> {
     if (error instanceof AxiosError) {
       // Timeout
       if (error.code === 'ECONNABORTED') {
-        throw new NetworkException(
-          `Request timeout: ${error.message}`,
-          ErrorStrings.NETWORK_TIMEOUT,
-          NetworkErrorCode.TIMEOUT
-        );
+        throw new NetworkException(`Request timeout: ${error.message}`, ErrorStrings.NETWORK_TIMEOUT, NetworkErrorCode.TIMEOUT);
       }
 
       // Network error (no connection)
@@ -40,26 +31,16 @@ export async function handleApiCall<T>(call: () => Promise<T>): Promise<T> {
 
     // JSON parsing error
     if (error instanceof SyntaxError) {
-      throw new DataException(
-        `JSON parsing error: ${error.message}`,
-        ErrorStrings.DATA_PARSING
-      );
+      throw new DataException(`JSON parsing error: ${error.message}`, ErrorStrings.DATA_PARSING);
     }
 
     // Re-throw if already our exception
-    if (
-      error instanceof NetworkException ||
-      error instanceof ApiException ||
-      error instanceof DataException
-    ) {
+    if (error instanceof NetworkException || error instanceof ApiException || error instanceof DataException) {
       throw error;
     }
 
     // Unknown error
-    throw new NetworkException(
-      error instanceof Error ? error.message : 'Unknown error',
-      ErrorStrings.NETWORK_UNEXPECTED
-    );
+    throw new NetworkException(error instanceof Error ? error.message : 'Unknown error', ErrorStrings.NETWORK_UNEXPECTED);
   }
 }
 

@@ -1,7 +1,6 @@
 const TAG = 'Logger';
 
 export class Logger {
-
   e(log: string): void;
   e(error: Error): void;
   e(log: string, error: Error): void;

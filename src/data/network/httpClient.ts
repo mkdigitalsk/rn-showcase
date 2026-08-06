@@ -3,9 +3,7 @@ import { Preferences } from '../local/Preferences';
 import { SESSION_STORAGE_ID } from '../local/SessionPreferences';
 
 // Debug builds → staging, release builds → prod (RN's build-type flag, mirrors Android BuildConfig.DEBUG).
-const BASE_URL = __DEV__
-  ? 'https://api.showcase.mkdigital.sk/v1'
-  : 'https://api.showcase.mkdigital.sk/v1';
+const BASE_URL = __DEV__ ? 'https://api.showcase.mkdigital.sk/v1' : 'https://api.showcase.mkdigital.sk/v1';
 const TIMEOUT_MS = 30000;
 const AUTH_TOKEN_KEY = 'auth_token';
 
@@ -22,7 +20,7 @@ export const httpClient: AxiosInstance = axios.create({
 
 // Request interceptor — attach bearer token + log
 httpClient.interceptors.request.use(
-  (config) => {
+  config => {
     const token = tokenStore.getString(AUTH_TOKEN_KEY);
     if (token) {
       config.headers.set('Authorization', `Bearer ${token}`);
@@ -32,12 +30,12 @@ httpClient.interceptors.request.use(
     }
     return config;
   },
-  (error) => Promise.reject(error)
+  error => Promise.reject(error)
 );
 
 // Response interceptor
 httpClient.interceptors.response.use(
-  (response) => {
+  response => {
     if (__DEV__) {
       console.log(`[HTTP] ${response.status} ${response.config.url}`);
       console.log('[HTTP] Response:', JSON.stringify(response.data, null, 2));

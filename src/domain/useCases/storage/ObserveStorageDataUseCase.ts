@@ -7,17 +7,11 @@ import { FlowUseCase, Subscription } from '../base/UseCase';
 
 @injectable()
 export class ObserveStorageDataUseCase extends FlowUseCase<void, StorageData> {
-  constructor(
-    @inject(TYPES.StorageRepository) private storageRepository: StorageRepository
-  ) {
+  constructor(@inject(TYPES.StorageRepository) private storageRepository: StorageRepository) {
     super();
   }
 
-  protected doExecute(
-    _params: void,
-    emit: (value: StorageData) => void,
-    _onError: (error: Error) => void
-  ): Subscription {
+  protected doExecute(_params: void, emit: (value: StorageData) => void, _onError: (error: Error) => void): Subscription {
     const unsubscribe = this.storageRepository.observe(emit);
     return { unsubscribe };
   }

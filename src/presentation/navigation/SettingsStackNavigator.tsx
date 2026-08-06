@@ -21,11 +21,7 @@ export const SettingsStackNavigator = () => {
         headerTintColor: colors.onBrandBar,
       }}
     >
-      <Stack.Screen
-        name="SettingsMain"
-        component={SettingsScreen}
-        options={{ title: t('screen_settings') }}
-      />
+      <Stack.Screen name="SettingsMain" component={SettingsScreen} options={{ title: t('screen_settings') }} />
     </Stack.Navigator>
   );
 };

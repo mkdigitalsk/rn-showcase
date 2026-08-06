@@ -6,9 +6,7 @@ import { TYPES } from '../../../app/diTypes';
 
 @injectable()
 export class GetLocationUseCase extends UseCase<void, Location> {
-  constructor(
-    @inject(TYPES.LocationRepository) private locationRepository: LocationRepository,
-  ) {
+  constructor(@inject(TYPES.LocationRepository) private locationRepository: LocationRepository) {
     super();
   }
 

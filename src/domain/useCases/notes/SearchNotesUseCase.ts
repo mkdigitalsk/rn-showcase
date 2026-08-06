@@ -11,22 +11,12 @@ export interface SearchNotesParams {
 
 @injectable()
 export class SearchNotesUseCase extends FlowUseCase<SearchNotesParams, Note[]> {
-  constructor(
-    @inject(TYPES.NoteRepository) private noteRepository: NoteRepository,
-  ) {
+  constructor(@inject(TYPES.NoteRepository) private noteRepository: NoteRepository) {
     super();
   }
 
-  protected doExecute(
-    params: SearchNotesParams,
-    emit: (value: Note[]) => void,
-    _onError: (error: Error) => void,
-  ): Subscription {
-    const unsubscribe = this.noteRepository.subscribe(
-      params.query,
-      params.sortOption,
-      emit,
-    );
+  protected doExecute(params: SearchNotesParams, emit: (value: Note[]) => void, _onError: (error: Error) => void): Subscription {
+    const unsubscribe = this.noteRepository.subscribe(params.query, params.sortOption, emit);
     return { unsubscribe };
   }
 }

@@ -7,9 +7,7 @@ import { UseCase } from './base/UseCase';
 
 @injectable()
 export class GetUsersUseCase extends UseCase<void, User[]> {
-  constructor(
-    @inject(TYPES.UserRepository) private userRepository: UserRepository
-  ) {
+  constructor(@inject(TYPES.UserRepository) private userRepository: UserRepository) {
     super();
   }
 

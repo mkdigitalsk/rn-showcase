@@ -12,23 +12,29 @@ export const useSettingsViewModel = () => {
   const [showThemeDialog, setShowThemeDialog] = useState(false);
   const [showLanguageDialog, setShowLanguageDialog] = useState(false);
 
-  const uiState: SettingsUiState = useMemo(() => ({
-    themeMode,
-    language,
-    versionName: version,
-    showThemeDialog,
-    showLanguageDialog,
-    showCrashButton: __DEV__,
-  }), [themeMode, language, showThemeDialog, showLanguageDialog]);
+  const uiState: SettingsUiState = useMemo(
+    () => ({
+      themeMode,
+      language,
+      versionName: version,
+      showThemeDialog,
+      showLanguageDialog,
+      showCrashButton: __DEV__,
+    }),
+    [themeMode, language, showThemeDialog, showLanguageDialog]
+  );
 
   const onThemeClick = useCallback(() => {
     setShowThemeDialog(true);
   }, []);
 
-  const onThemeSelected = useCallback((mode: ThemeMode) => {
-    setThemeMode(mode);
-    setShowThemeDialog(false);
-  }, [setThemeMode]);
+  const onThemeSelected = useCallback(
+    (mode: ThemeMode) => {
+      setThemeMode(mode);
+      setShowThemeDialog(false);
+    },
+    [setThemeMode]
+  );
 
   const onThemeDialogDismiss = useCallback(() => {
     setShowThemeDialog(false);
@@ -38,10 +44,13 @@ export const useSettingsViewModel = () => {
     setShowLanguageDialog(true);
   }, []);
 
-  const onLanguageSelected = useCallback((lang: Language) => {
-    setLanguage(lang);
-    setShowLanguageDialog(false);
-  }, [setLanguage]);
+  const onLanguageSelected = useCallback(
+    (lang: Language) => {
+      setLanguage(lang);
+      setShowLanguageDialog(false);
+    },
+    [setLanguage]
+  );
 
   const onLanguageDialogDismiss = useCallback(() => {
     setShowLanguageDialog(false);

@@ -30,7 +30,7 @@ describe('CheckEmailExistsUseCase', () => {
 
     await test({
       whenAction: () => t.classUnderTest.execute('existing@example.com'),
-      then: (result) => {
+      then: result => {
         expect(t.mockRepo.emailExists).toHaveBeenCalledWith('existing@example.com');
         expect(result).toBe(true);
       },
@@ -42,7 +42,7 @@ describe('CheckEmailExistsUseCase', () => {
 
     await test({
       whenAction: () => t.classUnderTest.execute('new@example.com'),
-      then: (result) => {
+      then: result => {
         expect(t.mockRepo.emailExists).toHaveBeenCalledWith('new@example.com');
         expect(result).toBe(false);
       },

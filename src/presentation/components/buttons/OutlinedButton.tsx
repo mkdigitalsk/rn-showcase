@@ -10,10 +10,7 @@ interface OutlinedButtonProps {
   style?: StyleProp<ViewStyle>;
 }
 
-export const OutlinedButton: React.FC<OutlinedButtonProps> = ({
-  text,
-  onPress,
-}) => {
+export const OutlinedButton: React.FC<OutlinedButtonProps> = ({ text, onPress }) => {
   const theme = useAppTheme();
 
   return (

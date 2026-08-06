@@ -31,7 +31,7 @@ describe('RequestPermissionUseCase', () => {
   it('returns GRANTED when permission granted', async () => {
     await test({
       whenAction: () => t.classUnderTest.execute(),
-      then: (result) => {
+      then: result => {
         expect(result).toBe(PushPermissionStatus.GRANTED);
         expect(t.mockService.requestPermission).toHaveBeenCalled();
       },
@@ -44,7 +44,7 @@ describe('RequestPermissionUseCase', () => {
         (t.mockService.requestPermission as jest.Mock).mockResolvedValue(PushPermissionStatus.DENIED);
       },
       whenAction: () => t.classUnderTest.execute(),
-      then: (result) => {
+      then: result => {
         expect(result).toBe(PushPermissionStatus.DENIED);
       },
     });

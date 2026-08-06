@@ -5,8 +5,8 @@ import { dataModule } from '../../data/di/dataModule';
 import { domainModule } from './domainModule';
 
 export const initDI = () => {
-    dataModule();
-    domainModule();
+  dataModule();
+  domainModule();
 };
 
 export { container, TYPES };

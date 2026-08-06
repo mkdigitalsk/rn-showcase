@@ -5,9 +5,7 @@ import { TYPES } from '../../../app/diTypes';
 
 @injectable()
 export class AuthenticateWithBiometricUseCase extends UseCase<void, BiometricResult> {
-  constructor(
-    @inject(TYPES.BiometricRepository) private biometricRepository: BiometricRepository,
-  ) {
+  constructor(@inject(TYPES.BiometricRepository) private biometricRepository: BiometricRepository) {
     super();
   }
 

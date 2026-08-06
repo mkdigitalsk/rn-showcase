@@ -5,9 +5,7 @@ import { TYPES } from '../../../app/diTypes';
 
 @injectable()
 export class DialUseCase extends UseCase<string, void> {
-  constructor(
-    @inject(TYPES.PlatformRepository) private platformRepository: PlatformRepository,
-  ) {
+  constructor(@inject(TYPES.PlatformRepository) private platformRepository: PlatformRepository) {
     super();
   }
 

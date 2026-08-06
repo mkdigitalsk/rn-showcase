@@ -28,7 +28,7 @@ describe('TurnOffFlashlightUseCase', () => {
   it('turns off flashlight and returns false', async () => {
     await test({
       whenAction: () => t.classUnderTest.execute(),
-      then: (result) => {
+      then: result => {
         expect(result).toBe(false);
         expect(t.mockRepo.turnOff).toHaveBeenCalled();
       },

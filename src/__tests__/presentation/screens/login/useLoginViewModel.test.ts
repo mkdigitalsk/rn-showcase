@@ -10,9 +10,15 @@ jest.mock('tsyringe', () => ({
   container: {
     resolve: jest.fn((token: symbol) => {
       const key = token.toString();
-      if (key.includes('LoginUseCase')) { return mockLogin; }
-      if (key.includes('IsBiometricEnabled')) { return mockIsBiometricEnabled; }
-      if (key.includes('AuthenticateWithBiometric')) { return mockAuthenticateWithBiometric; }
+      if (key.includes('LoginUseCase')) {
+        return mockLogin;
+      }
+      if (key.includes('IsBiometricEnabled')) {
+        return mockIsBiometricEnabled;
+      }
+      if (key.includes('AuthenticateWithBiometric')) {
+        return mockAuthenticateWithBiometric;
+      }
       return {};
     }),
   },
@@ -35,7 +41,7 @@ describe('useLoginViewModel', () => {
     const { result } = renderHook(() => useLoginViewModel());
     test({
       whenAction: () => result.current.uiState,
-      then: (state) => expect(state.email).toBe(''),
+      then: state => expect(state.email).toBe(''),
     });
   });
 
@@ -43,7 +49,7 @@ describe('useLoginViewModel', () => {
     const { result } = renderHook(() => useLoginViewModel());
     test({
       whenAction: () => result.current.uiState,
-      then: (state) => expect(state.password).toBe(''),
+      then: state => expect(state.password).toBe(''),
     });
   });
 
@@ -51,7 +57,7 @@ describe('useLoginViewModel', () => {
     const { result } = renderHook(() => useLoginViewModel());
     test({
       whenAction: () => result.current.uiState,
-      then: (state) => {
+      then: state => {
         expect(state.emailError).toBeNull();
         expect(state.passwordError).toBeNull();
       },
@@ -66,7 +72,7 @@ describe('useLoginViewModel', () => {
 
     test({
       whenAction: () => result.current.uiState.email,
-      then: (email) => expect(email).toBe('test@example.com'),
+      then: email => expect(email).toBe('test@example.com'),
     });
   });
 
@@ -79,7 +85,7 @@ describe('useLoginViewModel', () => {
 
     test({
       whenAction: () => result.current.uiState.emailError,
-      then: (error) => expect(error).toBeNull(),
+      then: error => expect(error).toBeNull(),
     });
   });
 
@@ -91,7 +97,7 @@ describe('useLoginViewModel', () => {
 
     test({
       whenAction: () => result.current.uiState.password,
-      then: (password) => expect(password).toBe('Test123!'),
+      then: password => expect(password).toBe('Test123!'),
     });
   });
 
@@ -104,7 +110,7 @@ describe('useLoginViewModel', () => {
 
     test({
       whenAction: () => result.current.uiState.passwordError,
-      then: (error) => expect(error).toBeNull(),
+      then: error => expect(error).toBeNull(),
     });
   });
 
@@ -117,7 +123,7 @@ describe('useLoginViewModel', () => {
 
     test({
       whenAction: () => result.current.uiState,
-      then: (state) => {
+      then: state => {
         expect(state.email).toBe('test01@mkdigital.sk');
         expect(state.password).toBe('MKDigitalTest1@');
       },
@@ -132,7 +138,7 @@ describe('useLoginViewModel', () => {
 
     test({
       whenAction: () => result.current.uiState,
-      then: (state) => {
+      then: state => {
         expect(state.emailError).toBeNull();
         expect(state.passwordError).toBeNull();
       },
@@ -149,7 +155,7 @@ describe('useLoginViewModel', () => {
 
     test({
       whenAction: () => result.current.uiState.emailError,
-      then: (error) => expect(error).toBe('empty'),
+      then: error => expect(error).toBe('empty'),
     });
   });
 
@@ -164,7 +170,7 @@ describe('useLoginViewModel', () => {
 
     test({
       whenAction: () => result.current.uiState.emailError,
-      then: (error) => expect(error).toBe('invalid_format'),
+      then: error => expect(error).toBe('invalid_format'),
     });
   });
 
@@ -178,7 +184,7 @@ describe('useLoginViewModel', () => {
 
     test({
       whenAction: () => result.current.uiState.passwordError,
-      then: (error) => expect(error).toBe('empty'),
+      then: error => expect(error).toBe('empty'),
     });
   });
 
@@ -193,7 +199,7 @@ describe('useLoginViewModel', () => {
 
     test({
       whenAction: () => result.current.uiState.passwordError,
-      then: (error) => expect(error).toBe('too_short'),
+      then: error => expect(error).toBe('too_short'),
     });
   });
 
@@ -208,7 +214,7 @@ describe('useLoginViewModel', () => {
 
     test({
       whenAction: () => result.current.uiState.passwordError,
-      then: (error) => expect(error).toBe('weak'),
+      then: error => expect(error).toBe('weak'),
     });
   });
 

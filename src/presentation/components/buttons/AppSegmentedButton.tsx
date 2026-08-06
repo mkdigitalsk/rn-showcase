@@ -8,11 +8,7 @@ interface AppSegmentedButtonProps {
   onValueChanged: (value: string) => void;
 }
 
-export const AppSegmentedButton: React.FC<AppSegmentedButtonProps> = ({
-  options,
-  selectedValue,
-  onValueChanged,
-}): React.JSX.Element => {
+export const AppSegmentedButton: React.FC<AppSegmentedButtonProps> = ({ options, selectedValue, onValueChanged }): React.JSX.Element => {
   const theme = useAppTheme();
   return (
     <SegmentedButtons
@@ -24,12 +20,8 @@ export const AppSegmentedButton: React.FC<AppSegmentedButtonProps> = ({
         checkedColor: theme.colors.onPrimary,
         uncheckedColor: theme.colors.onSurface,
         style: {
-          backgroundColor: selectedValue === opt.value
-            ? theme.colors.primary
-            : theme.colors.surface,
-          borderColor: selectedValue === opt.value
-            ? theme.colors.primary
-            : theme.colors.outline,
+          backgroundColor: selectedValue === opt.value ? theme.colors.primary : theme.colors.surface,
+          borderColor: selectedValue === opt.value ? theme.colors.primary : theme.colors.outline,
         },
       }))}
     />

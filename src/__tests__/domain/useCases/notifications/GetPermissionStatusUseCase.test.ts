@@ -34,7 +34,7 @@ describe('GetPermissionStatusUseCase', () => {
         (t.mockService.getPermissionStatus as jest.Mock).mockResolvedValue(PushPermissionStatus.GRANTED);
       },
       whenAction: () => t.classUnderTest.execute(),
-      then: (result) => {
+      then: result => {
         expect(result).toBe(PushPermissionStatus.GRANTED);
       },
     });
@@ -46,7 +46,7 @@ describe('GetPermissionStatusUseCase', () => {
         (t.mockService.getPermissionStatus as jest.Mock).mockResolvedValue(PushPermissionStatus.DENIED);
       },
       whenAction: () => t.classUnderTest.execute(),
-      then: (result) => {
+      then: result => {
         expect(result).toBe(PushPermissionStatus.DENIED);
       },
     });
@@ -55,7 +55,7 @@ describe('GetPermissionStatusUseCase', () => {
   it('returns NOT_DETERMINED status', async () => {
     await test({
       whenAction: () => t.classUnderTest.execute(),
-      then: (result) => {
+      then: result => {
         expect(result).toBe(PushPermissionStatus.NOT_DETERMINED);
       },
     });

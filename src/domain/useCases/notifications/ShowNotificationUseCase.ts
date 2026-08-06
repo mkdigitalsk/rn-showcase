@@ -6,9 +6,7 @@ import { TYPES } from '../../../app/diTypes';
 
 @injectable()
 export class ShowNotificationUseCase extends UseCase<AppNotification, void> {
-  constructor(
-    @inject(TYPES.LocalNotificationService) private service: LocalNotificationService,
-  ) {
+  constructor(@inject(TYPES.LocalNotificationService) private service: LocalNotificationService) {
     super();
   }
 

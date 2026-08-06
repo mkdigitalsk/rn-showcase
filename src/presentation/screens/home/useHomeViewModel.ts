@@ -44,7 +44,7 @@ export const useHomeViewModel = () => {
           logger.d(`Feature not implemented: ${featureId}`);
       }
     },
-    [navigation],
+    [navigation]
   );
 
   return {

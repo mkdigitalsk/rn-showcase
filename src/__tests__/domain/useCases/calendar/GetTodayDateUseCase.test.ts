@@ -26,7 +26,7 @@ describe('GetTodayDateUseCase', () => {
   it('returns today date from repository', async () => {
     await test({
       whenAction: () => t.classUnderTest.execute(),
-      then: (result) => {
+      then: result => {
         expect(result).toBe('2026-02-01');
         expect(t.mockRepo.today).toHaveBeenCalled();
       },

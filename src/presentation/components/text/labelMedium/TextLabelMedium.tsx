@@ -4,7 +4,9 @@ import { TextBaseProps, TextVariantProps } from '../TextProps';
 import { useAppColors } from '../../../foundation';
 
 export const TextLabelMedium = ({ children, color }: TextBaseProps) => (
-  <Text variant="labelMedium" style={{ color }}>{children}</Text>
+  <Text variant="labelMedium" style={{ color }}>
+    {children}
+  </Text>
 );
 
 export const TextLabelMediumNeutral80 = ({ children }: TextVariantProps) => {

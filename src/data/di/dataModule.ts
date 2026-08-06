@@ -25,48 +25,48 @@ import { FirebaseAnalyticsClient } from '../analytics/FirebaseAnalyticsClient';
 import { TYPES } from '../../app/diTypes';
 
 export const dataModule = () => {
-    container.register<UserApi>(TYPES.UserApi, { useClass: UserApiImpl });
-    container.register<UserRepository>(TYPES.UserRepository, { useClass: UserRepositoryImpl });
+  container.register<UserApi>(TYPES.UserApi, { useClass: UserApiImpl });
+  container.register<UserRepository>(TYPES.UserRepository, { useClass: UserRepositoryImpl });
 
-    // Storage
-    container.registerSingleton(TYPES.SessionPreferences, SessionPreferencesImpl);
-    container.registerSingleton(TYPES.PersistentPreferences, PersistentPreferencesImpl);
-    container.registerSingleton(TYPES.StorageLocalStore, StorageLocalStoreImpl);
-    container.registerSingleton(TYPES.StorageRepository, StorageRepositoryImpl);
+  // Storage
+  container.registerSingleton(TYPES.SessionPreferences, SessionPreferencesImpl);
+  container.registerSingleton(TYPES.PersistentPreferences, PersistentPreferencesImpl);
+  container.registerSingleton(TYPES.StorageLocalStore, StorageLocalStoreImpl);
+  container.registerSingleton(TYPES.StorageRepository, StorageRepositoryImpl);
 
-    // Platform APIs
-    container.registerSingleton(TYPES.PlatformClient, PlatformClient);
-    container.registerSingleton(TYPES.PlatformRepository, PlatformRepositoryImpl);
+  // Platform APIs
+  container.registerSingleton(TYPES.PlatformClient, PlatformClient);
+  container.registerSingleton(TYPES.PlatformRepository, PlatformRepositoryImpl);
 
-    // Location
-    container.registerSingleton(TYPES.LocationClient, LocationClient);
-    container.registerSingleton(TYPES.LocationRepository, LocationRepositoryImpl);
+  // Location
+  container.registerSingleton(TYPES.LocationClient, LocationClient);
+  container.registerSingleton(TYPES.LocationRepository, LocationRepositoryImpl);
 
-    // Biometric
-    container.registerSingleton(TYPES.BiometricClient, BiometricClient);
-    container.registerSingleton(TYPES.BiometricRepository, BiometricRepositoryImpl);
+  // Biometric
+  container.registerSingleton(TYPES.BiometricClient, BiometricClient);
+  container.registerSingleton(TYPES.BiometricRepository, BiometricRepositoryImpl);
 
-    // Flashlight
-    container.registerSingleton(TYPES.FlashlightClient, FlashlightClient);
-    container.registerSingleton(TYPES.FlashlightRepository, FlashlightRepositoryImpl);
+  // Flashlight
+  container.registerSingleton(TYPES.FlashlightClient, FlashlightClient);
+  container.registerSingleton(TYPES.FlashlightRepository, FlashlightRepositoryImpl);
 
-    // Auth
-    container.register<AuthApi>(TYPES.AuthApi, { useClass: AuthApiImpl });
-    container.registerSingleton(TYPES.AuthRepository, AuthRepositoryImpl);
+  // Auth
+  container.register<AuthApi>(TYPES.AuthApi, { useClass: AuthApiImpl });
+  container.registerSingleton(TYPES.AuthRepository, AuthRepositoryImpl);
 
-    // Database
-    container.registerSingleton(TYPES.DatabaseClient, DatabaseClient);
-    container.registerSingleton(TYPES.NoteRepository, NoteRepositoryImpl);
+  // Database
+  container.registerSingleton(TYPES.DatabaseClient, DatabaseClient);
+  container.registerSingleton(TYPES.NoteRepository, NoteRepositoryImpl);
 
-    // Analytics
-    container.registerSingleton(TYPES.AnalyticsClient, FirebaseAnalyticsClient);
+  // Analytics
+  container.registerSingleton(TYPES.AnalyticsClient, FirebaseAnalyticsClient);
 
-    // Calendar
-    container.registerSingleton(TYPES.DateRepository, DateRepositoryImpl);
+  // Calendar
+  container.registerSingleton(TYPES.DateRepository, DateRepositoryImpl);
 
-    // Settings
-    container.registerSingleton(TYPES.SettingsRepository, SettingsRepositoryImpl);
+  // Settings
+  container.registerSingleton(TYPES.SettingsRepository, SettingsRepositoryImpl);
 
-    // Notifications
-    container.registerSingleton(TYPES.LocalNotificationService, NotificationClient);
+  // Notifications
+  container.registerSingleton(TYPES.LocalNotificationService, NotificationClient);
 };

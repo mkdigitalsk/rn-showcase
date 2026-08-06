@@ -8,11 +8,7 @@ interface AppFilterChipProps {
   onPress: () => void;
 }
 
-export const AppFilterChip: React.FC<AppFilterChipProps> = ({
-  label,
-  selected,
-  onPress,
-}): React.JSX.Element => {
+export const AppFilterChip: React.FC<AppFilterChipProps> = ({ label, selected, onPress }): React.JSX.Element => {
   const theme = useAppTheme();
   return (
     <Chip
@@ -38,11 +34,7 @@ interface AppAssistChipProps {
   icon?: string;
 }
 
-export const AppAssistChip: React.FC<AppAssistChipProps> = ({
-  label,
-  onPress,
-  icon,
-}): React.JSX.Element => {
+export const AppAssistChip: React.FC<AppAssistChipProps> = ({ label, onPress, icon }): React.JSX.Element => {
   const theme = useAppTheme();
   return (
     <Chip
@@ -65,12 +57,7 @@ interface AppInputChipProps {
   onClose?: () => void;
 }
 
-export const AppInputChip: React.FC<AppInputChipProps> = ({
-  label,
-  selected,
-  onPress,
-  onClose,
-}): React.JSX.Element => {
+export const AppInputChip: React.FC<AppInputChipProps> = ({ label, selected, onPress, onClose }): React.JSX.Element => {
   const theme = useAppTheme();
   return (
     <Chip
@@ -95,10 +82,7 @@ interface AppSuggestionChipProps {
   onPress: () => void;
 }
 
-export const AppSuggestionChip: React.FC<AppSuggestionChipProps> = ({
-  label,
-  onPress,
-}): React.JSX.Element => {
+export const AppSuggestionChip: React.FC<AppSuggestionChipProps> = ({ label, onPress }): React.JSX.Element => {
   const theme = useAppTheme();
   return (
     <Chip

@@ -5,9 +5,7 @@ import { TYPES } from '../../../app/diTypes';
 
 @injectable()
 export class TrackButtonClickUseCase extends UseCase<string, void> {
-  constructor(
-    @inject(TYPES.AnalyticsClient) private analyticsClient: AnalyticsClient,
-  ) {
+  constructor(@inject(TYPES.AnalyticsClient) private analyticsClient: AnalyticsClient) {
     super();
   }
 

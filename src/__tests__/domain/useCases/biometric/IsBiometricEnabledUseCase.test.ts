@@ -30,7 +30,7 @@ describe('IsBiometricEnabledUseCase', () => {
         (t.mockRepo.isAvailable as jest.Mock).mockResolvedValue(true);
       },
       whenAction: () => t.classUnderTest.execute(),
-      then: (result) => {
+      then: result => {
         expect(result).toBe(true);
         expect(t.mockRepo.isAvailable).toHaveBeenCalled();
       },
@@ -40,7 +40,7 @@ describe('IsBiometricEnabledUseCase', () => {
   it('returns false when biometric is not available', async () => {
     await test({
       whenAction: () => t.classUnderTest.execute(),
-      then: (result) => {
+      then: result => {
         expect(result).toBe(false);
       },
     });

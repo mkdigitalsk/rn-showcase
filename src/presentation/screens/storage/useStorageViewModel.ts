@@ -20,7 +20,7 @@ export const useStorageViewModel = () => {
 
   useEffect(() => {
     const { subscribe } = observeStorageDataUseCase.execute();
-    const subscription = subscribe((data) => {
+    const subscription = subscribe(data => {
       setUiState({
         sessionCounter: data.sessionCounter,
         persistentCounter: data.persistentCounter,

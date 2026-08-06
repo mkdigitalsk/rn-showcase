@@ -18,18 +18,12 @@ interface AppBadgedBoxProps {
   iconSize?: number;
 }
 
-export const AppBadgedBox: React.FC<AppBadgedBoxProps> = ({
-  count,
-  icon,
-  iconSize = 24,
-}): React.JSX.Element => {
+export const AppBadgedBox: React.FC<AppBadgedBoxProps> = ({ count, icon, iconSize = 24 }): React.JSX.Element => {
   const theme = useAppTheme();
   return (
     <View>
       <Icon name={icon} size={iconSize} color={theme.colors.neutral80} />
-      <Badge style={{ position: 'absolute', top: -4, right: -8 }}>
-        {count > 99 ? '99+' : count}
-      </Badge>
+      <Badge style={{ position: 'absolute', top: -4, right: -8 }}>{count > 99 ? '99+' : count}</Badge>
     </View>
   );
 };
@@ -40,18 +34,12 @@ interface AppDotBadgedBoxProps {
   iconSize?: number;
 }
 
-export const AppDotBadgedBox: React.FC<AppDotBadgedBoxProps> = ({
-  showBadge,
-  icon,
-  iconSize = 24,
-}): React.JSX.Element => {
+export const AppDotBadgedBox: React.FC<AppDotBadgedBoxProps> = ({ showBadge, icon, iconSize = 24 }): React.JSX.Element => {
   const theme = useAppTheme();
   return (
     <View>
       <Icon name={icon} size={iconSize} color={theme.colors.neutral80} />
-      {showBadge && (
-        <Badge size={8} style={{ position: 'absolute', top: -2, right: -2 }} />
-      )}
+      {showBadge && <Badge size={8} style={{ position: 'absolute', top: -2, right: -2 }} />}
     </View>
   );
 };

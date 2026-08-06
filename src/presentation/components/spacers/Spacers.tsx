@@ -1,14 +1,6 @@
 import React from 'react';
 import { View } from 'react-native';
-import {
-  space,
-  space2,
-  space3,
-  space4,
-  space6,
-  space8,
-  space12,
-} from '../../foundation/dimensions';
+import { space, space2, space3, space4, space6, space8, space12 } from '../../foundation/dimensions';
 
 // Column Spacers (vertical spacing)
 export const ColumnSpacer1: React.FC = () => <View style={{ height: space }} />;

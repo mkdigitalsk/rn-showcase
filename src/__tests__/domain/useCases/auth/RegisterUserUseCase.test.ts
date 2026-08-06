@@ -35,12 +35,13 @@ describe('RegisterUserUseCase', () => {
     (t.mockRepo.register as jest.Mock).mockResolvedValue(expectedUser);
 
     await test({
-      whenAction: () => t.classUnderTest.execute({
-        name: 'John',
-        email: 'john@example.com',
-        password: 'Test123!',
-      }),
-      then: (result) => {
+      whenAction: () =>
+        t.classUnderTest.execute({
+          name: 'John',
+          email: 'john@example.com',
+          password: 'Test123!',
+        }),
+      then: result => {
         expect(t.mockRepo.register).toHaveBeenCalledWith('John', 'john@example.com', 'Test123!');
         expect(result).toEqual(expectedUser);
       },

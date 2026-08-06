@@ -3,14 +3,20 @@ import { test } from '../../../TestFunctions';
 
 // Mock tsyringe container.resolve before importing the hook
 const mockCheckEmailExists = { execute: jest.fn().mockResolvedValue(false) };
-const mockRegisterUser = { execute: jest.fn().mockResolvedValue({ id: 1, name: 'John', email: 'john@example.com', password: 'Test123!', createdAt: 1234567890 }) };
+const mockRegisterUser = {
+  execute: jest.fn().mockResolvedValue({ id: 1, name: 'John', email: 'john@example.com', password: 'Test123!', createdAt: 1234567890 }),
+};
 
 jest.mock('tsyringe', () => ({
   container: {
     resolve: jest.fn((token: symbol) => {
       const key = token.toString();
-      if (key.includes('CheckEmailExists')) { return mockCheckEmailExists; }
-      if (key.includes('RegisterUser')) { return mockRegisterUser; }
+      if (key.includes('CheckEmailExists')) {
+        return mockCheckEmailExists;
+      }
+      if (key.includes('RegisterUser')) {
+        return mockRegisterUser;
+      }
       return {};
     }),
   },
@@ -24,7 +30,13 @@ describe('useRegisterViewModel', () => {
   beforeEach(() => {
     jest.clearAllMocks();
     mockCheckEmailExists.execute.mockResolvedValue(false);
-    mockRegisterUser.execute.mockResolvedValue({ id: 1, name: 'John', email: 'john@example.com', password: 'Test123!', createdAt: 1234567890 });
+    mockRegisterUser.execute.mockResolvedValue({
+      id: 1,
+      name: 'John',
+      email: 'john@example.com',
+      password: 'Test123!',
+      createdAt: 1234567890,
+    });
   });
 
   // === Default State ===
@@ -33,7 +45,7 @@ describe('useRegisterViewModel', () => {
     const { result } = renderHook(() => useRegisterViewModel());
     test({
       whenAction: () => result.current.uiState,
-      then: (state) => {
+      then: state => {
         expect(state.name).toBe('');
         expect(state.email).toBe('');
         expect(state.password).toBe('');
@@ -46,7 +58,7 @@ describe('useRegisterViewModel', () => {
     const { result } = renderHook(() => useRegisterViewModel());
     test({
       whenAction: () => result.current.uiState,
-      then: (state) => {
+      then: state => {
         expect(state.nameError).toBeNull();
         expect(state.emailError).toBeNull();
         expect(state.passwordError).toBeNull();
@@ -64,7 +76,7 @@ describe('useRegisterViewModel', () => {
 
     test({
       whenAction: () => result.current.uiState,
-      then: (state) => {
+      then: state => {
         expect(state.name).toBe('John');
         expect(state.nameError).toBeNull();
       },
@@ -78,7 +90,7 @@ describe('useRegisterViewModel', () => {
 
     test({
       whenAction: () => result.current.uiState,
-      then: (state) => {
+      then: state => {
         expect(state.email).toBe('test@example.com');
         expect(state.emailError).toBeNull();
       },
@@ -92,7 +104,7 @@ describe('useRegisterViewModel', () => {
 
     test({
       whenAction: () => result.current.uiState,
-      then: (state) => {
+      then: state => {
         expect(state.password).toBe('Test123!');
         expect(state.passwordError).toBeNull();
       },
@@ -106,7 +118,7 @@ describe('useRegisterViewModel', () => {
 
     test({
       whenAction: () => result.current.uiState,
-      then: (state) => {
+      then: state => {
         expect(state.confirmPassword).toBe('Test123!');
         expect(state.confirmPasswordError).toBeNull();
       },
@@ -127,7 +139,7 @@ describe('useRegisterViewModel', () => {
 
     test({
       whenAction: () => result.current.uiState.nameError,
-      then: (error) => expect(error).toBe('empty'),
+      then: error => expect(error).toBe('empty'),
     });
   });
 
@@ -145,7 +157,7 @@ describe('useRegisterViewModel', () => {
 
     test({
       whenAction: () => result.current.uiState.emailError,
-      then: (error) => expect(error).toBe('empty'),
+      then: error => expect(error).toBe('empty'),
     });
   });
 
@@ -162,7 +174,7 @@ describe('useRegisterViewModel', () => {
 
     test({
       whenAction: () => result.current.uiState.emailError,
-      then: (error) => expect(error).toBe('invalid_format'),
+      then: error => expect(error).toBe('invalid_format'),
     });
   });
 
@@ -180,7 +192,7 @@ describe('useRegisterViewModel', () => {
 
     test({
       whenAction: () => result.current.uiState.passwordError,
-      then: (error) => expect(error).toBe('empty'),
+      then: error => expect(error).toBe('empty'),
     });
   });
 
@@ -197,7 +209,7 @@ describe('useRegisterViewModel', () => {
 
     test({
       whenAction: () => result.current.uiState.passwordError,
-      then: (error) => expect(error).toBe('too_short'),
+      then: error => expect(error).toBe('too_short'),
     });
   });
 
@@ -214,7 +226,7 @@ describe('useRegisterViewModel', () => {
 
     test({
       whenAction: () => result.current.uiState.passwordError,
-      then: (error) => expect(error).toBe('weak'),
+      then: error => expect(error).toBe('weak'),
     });
   });
 
@@ -232,7 +244,7 @@ describe('useRegisterViewModel', () => {
 
     test({
       whenAction: () => result.current.uiState.confirmPasswordError,
-      then: (error) => expect(error).toBe('empty'),
+      then: error => expect(error).toBe('empty'),
     });
   });
 
@@ -249,7 +261,7 @@ describe('useRegisterViewModel', () => {
 
     test({
       whenAction: () => result.current.uiState.confirmPasswordError,
-      then: (error) => expect(error).toBe('mismatch'),
+      then: error => expect(error).toBe('mismatch'),
     });
   });
 

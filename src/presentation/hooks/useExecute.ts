@@ -28,7 +28,7 @@ export function execute<T>(params: {
   onLoading?.();
 
   action()
-    .then((result) => {
+    .then(result => {
       onSuccess?.(result);
     })
     .catch((e: unknown) => {

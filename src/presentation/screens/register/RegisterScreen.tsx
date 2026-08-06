@@ -6,14 +6,7 @@ import { useRegisterViewModel } from './useRegisterViewModel';
 import { useAppColors } from '../../foundation/theme';
 import { useStrings } from '../../foundation/strings';
 import { RootStackParamList } from '../../navigation/RootStackNavigator';
-import {
-  AppCard,
-  AppTextField,
-  ContainedButton,
-  AppTextButton,
-  ColumnSpacer2,
-  ColumnSpacer4,
-} from '../../components';
+import { AppCard, AppTextField, ContainedButton, AppTextButton, ColumnSpacer2, ColumnSpacer4 } from '../../components';
 import { TextHeadlineMedium } from '../../components/text/headlineMedium/TextHeadlineMedium';
 import { TextBodyMediumNeutral80 } from '../../components/text/bodyMedium/TextBodyMedium';
 import { space4, space8 } from '../../foundation/dimensions';
@@ -24,14 +17,7 @@ export const RegisterScreen = () => {
   const colors = useAppColors();
   const { t } = useStrings();
   const navigation = useNavigation<RegisterNavigationProp>();
-  const {
-    uiState,
-    onNameChange,
-    onEmailChange,
-    onPasswordChange,
-    onConfirmPasswordChange,
-    register,
-  } = useRegisterViewModel();
+  const { uiState, onNameChange, onEmailChange, onPasswordChange, onConfirmPasswordChange, register } = useRegisterViewModel();
 
   const handleRegister = useCallback(() => {
     register(() => navigation.replace('Main'));
@@ -43,42 +29,52 @@ export const RegisterScreen = () => {
 
   const getNameErrorText = (): string | undefined => {
     switch (uiState.nameError) {
-      case 'empty': return t('register_name_error_empty');
-      default: return undefined;
+      case 'empty':
+        return t('register_name_error_empty');
+      default:
+        return undefined;
     }
   };
 
   const getEmailErrorText = (): string | undefined => {
     switch (uiState.emailError) {
-      case 'empty': return t('register_email_error_empty');
-      case 'invalid_format': return t('register_email_error_invalid');
-      case 'already_exists': return t('register_email_error_already_exists');
-      default: return undefined;
+      case 'empty':
+        return t('register_email_error_empty');
+      case 'invalid_format':
+        return t('register_email_error_invalid');
+      case 'already_exists':
+        return t('register_email_error_already_exists');
+      default:
+        return undefined;
     }
   };
 
   const getPasswordErrorText = (): string | undefined => {
     switch (uiState.passwordError) {
-      case 'empty': return t('register_password_error_empty');
-      case 'too_short': return t('register_password_error_short');
-      case 'weak': return t('register_password_error_weak');
-      default: return undefined;
+      case 'empty':
+        return t('register_password_error_empty');
+      case 'too_short':
+        return t('register_password_error_short');
+      case 'weak':
+        return t('register_password_error_weak');
+      default:
+        return undefined;
     }
   };
 
   const getConfirmPasswordErrorText = (): string | undefined => {
     switch (uiState.confirmPasswordError) {
-      case 'empty': return t('register_confirm_error_empty');
-      case 'mismatch': return t('register_confirm_error_mismatch');
-      default: return undefined;
+      case 'empty':
+        return t('register_confirm_error_empty');
+      case 'mismatch':
+        return t('register_confirm_error_mismatch');
+      default:
+        return undefined;
     }
   };
 
   return (
-    <KeyboardAvoidingView
-      style={{ flex: 1, backgroundColor: colors.background }}
-      behavior={Platform.OS === 'ios' ? 'padding' : undefined}
-    >
+    <KeyboardAvoidingView style={{ flex: 1, backgroundColor: colors.background }} behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
       <ScrollView
         contentContainerStyle={{
           flexGrow: 1,
@@ -87,9 +83,7 @@ export const RegisterScreen = () => {
         }}
         keyboardShouldPersistTaps="handled"
       >
-        <TextHeadlineMedium color={colors.primary}>
-          {t('register_title')}
-        </TextHeadlineMedium>
+        <TextHeadlineMedium color={colors.primary}>{t('register_title')}</TextHeadlineMedium>
         <ColumnSpacer2 />
         <TextBodyMediumNeutral80>{t('register_subtitle')}</TextBodyMediumNeutral80>
 

@@ -21,7 +21,7 @@ export const useLoginViewModel = () => {
   useEffect(() => {
     execute({
       action: () => isBiometricEnabledUseCase.execute(),
-      onSuccess: (available) => setUiState(prev => ({ ...prev, biometricsAvailable: available })),
+      onSuccess: available => setUiState(prev => ({ ...prev, biometricsAvailable: available })),
     });
   }, [isBiometricEnabledUseCase]);
 
@@ -34,59 +34,76 @@ export const useLoginViewModel = () => {
   }, []);
 
   const validateEmail = useCallback((email: string): EmailError | null => {
-    if (email.trim().length === 0) { return 'empty'; }
-    if (!isValidEmail(email)) { return 'invalid_format'; }
+    if (email.trim().length === 0) {
+      return 'empty';
+    }
+    if (!isValidEmail(email)) {
+      return 'invalid_format';
+    }
     return null;
   }, []);
 
   const validatePassword = useCallback((password: string): PasswordError | null => {
-    if (password.length === 0) { return 'empty'; }
-    if (!isPasswordLongEnough(password)) { return 'too_short'; }
-    if (!isValidPassword(password)) { return 'weak'; }
+    if (password.length === 0) {
+      return 'empty';
+    }
+    if (!isPasswordLongEnough(password)) {
+      return 'too_short';
+    }
+    if (!isValidPassword(password)) {
+      return 'weak';
+    }
     return null;
   }, []);
 
-  const login = useCallback((onLoggedIn?: () => void): void => {
-    const emailError = validateEmail(uiState.email);
-    const passwordError = validatePassword(uiState.password);
+  const login = useCallback(
+    (onLoggedIn?: () => void): void => {
+      const emailError = validateEmail(uiState.email);
+      const passwordError = validatePassword(uiState.password);
 
-    if (emailError || passwordError) {
-      setUiState(prev => ({ ...prev, emailError, passwordError, loginFailed: false }));
-      return;
-    }
+      if (emailError || passwordError) {
+        setUiState(prev => ({ ...prev, emailError, passwordError, loginFailed: false }));
+        return;
+      }
 
-    execute({
-      action: () => loginUseCase.execute({ email: uiState.email, password: uiState.password }),
-      onLoading: () => setUiState(prev => ({ ...prev, isLoading: true, loginFailed: false })),
-      onSuccess: () => {
-        setUiState(prev => ({ ...prev, isLoading: false }));
-        onLoggedIn?.();
-      },
-      onError: () => setUiState(prev => ({ ...prev, isLoading: false, loginFailed: true })),
-    });
-  }, [uiState.email, uiState.password, validateEmail, validatePassword, loginUseCase]);
+      execute({
+        action: () => loginUseCase.execute({ email: uiState.email, password: uiState.password }),
+        onLoading: () => setUiState(prev => ({ ...prev, isLoading: true, loginFailed: false })),
+        onSuccess: () => {
+          setUiState(prev => ({ ...prev, isLoading: false }));
+          onLoggedIn?.();
+        },
+        onError: () => setUiState(prev => ({ ...prev, isLoading: false, loginFailed: true })),
+      });
+    },
+    [uiState.email, uiState.password, validateEmail, validatePassword, loginUseCase]
+  );
 
-  const authenticateWithBiometrics = useCallback((onAuthenticated?: () => void): void => {
-    execute({
-      action: () => authenticateWithBiometricUseCase.execute(),
-      onLoading: () => setUiState(prev => ({ ...prev, biometricsLoading: true })),
-      onSuccess: (result) => {
-        setUiState(prev => ({
-          ...prev,
-          biometricsLoading: false,
-          biometricsResult: result,
-        }));
-        if (result.type === 'success') {
-          onAuthenticated?.();
-        }
-      },
-      onError: (error) => setUiState(prev => ({
-        ...prev,
-        biometricsLoading: false,
-        biometricsResult: { type: 'failed', message: error.userMessage },
-      })),
-    });
-  }, [authenticateWithBiometricUseCase]);
+  const authenticateWithBiometrics = useCallback(
+    (onAuthenticated?: () => void): void => {
+      execute({
+        action: () => authenticateWithBiometricUseCase.execute(),
+        onLoading: () => setUiState(prev => ({ ...prev, biometricsLoading: true })),
+        onSuccess: result => {
+          setUiState(prev => ({
+            ...prev,
+            biometricsLoading: false,
+            biometricsResult: result,
+          }));
+          if (result.type === 'success') {
+            onAuthenticated?.();
+          }
+        },
+        onError: error =>
+          setUiState(prev => ({
+            ...prev,
+            biometricsLoading: false,
+            biometricsResult: { type: 'failed', message: error.userMessage },
+          })),
+      });
+    },
+    [authenticateWithBiometricUseCase]
+  );
 
   const fillTestAccount = useCallback(() => {
     setUiState(prev => ({

@@ -23,7 +23,9 @@ const AppContent = () => {
     });
 
     Linking.getInitialURL().then(url => {
-      if (url) {handleDeepLink(url);}
+      if (url) {
+        handleDeepLink(url);
+      }
     });
 
     return () => subscription.remove();
@@ -31,10 +33,7 @@ const AppContent = () => {
 
   return (
     <>
-      <StatusBar
-        barStyle="light-content"
-        backgroundColor={navigationTheme.colors.primary}
-      />
+      <StatusBar barStyle="light-content" backgroundColor={navigationTheme.colors.primary} />
       <NavigationContainer theme={navigationTheme}>
         <RootStackNavigator />
       </NavigationContainer>

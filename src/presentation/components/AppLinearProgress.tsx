@@ -7,10 +7,7 @@ interface AppLinearProgressProps {
   indeterminate?: boolean;
 }
 
-export const AppLinearProgress: React.FC<AppLinearProgressProps> = ({
-  progress,
-  indeterminate = false,
-}): React.JSX.Element => {
+export const AppLinearProgress: React.FC<AppLinearProgressProps> = ({ progress, indeterminate = false }): React.JSX.Element => {
   const theme = useAppTheme();
   return (
     <ProgressBar

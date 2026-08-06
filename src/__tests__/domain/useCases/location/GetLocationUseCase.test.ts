@@ -33,7 +33,7 @@ describe('GetLocationUseCase', () => {
         (t.mockRepo.getLastKnownLocation as jest.Mock).mockResolvedValue(expected);
       },
       whenAction: () => t.classUnderTest.execute(),
-      then: (result) => {
+      then: result => {
         expect(result).toEqual(expected);
         expect(t.mockRepo.getLastKnownLocation).toHaveBeenCalled();
       },

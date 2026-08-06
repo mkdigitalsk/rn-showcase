@@ -10,22 +10,11 @@ interface AppBottomSheetProps {
   children: React.ReactNode;
 }
 
-export const AppBottomSheet: React.FC<AppBottomSheetProps> = ({
-  visible,
-  onDismiss,
-  children,
-}): React.JSX.Element => {
+export const AppBottomSheet: React.FC<AppBottomSheetProps> = ({ visible, onDismiss, children }): React.JSX.Element => {
   const theme = useAppTheme();
   return (
     <Portal>
-      <Modal
-        visible={visible}
-        onDismiss={onDismiss}
-        contentContainerStyle={[
-          styles.container,
-          { backgroundColor: theme.colors.surface },
-        ]}
-      >
+      <Modal visible={visible} onDismiss={onDismiss} contentContainerStyle={[styles.container, { backgroundColor: theme.colors.surface }]}>
         {children}
       </Modal>
     </Portal>

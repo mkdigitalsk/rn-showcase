@@ -10,11 +10,7 @@ interface AppFloatingActionButtonProps {
   label?: string;
 }
 
-export const AppFloatingActionButton: React.FC<AppFloatingActionButtonProps> = ({
-  icon = 'plus',
-  onPress,
-  label,
-}) => {
+export const AppFloatingActionButton: React.FC<AppFloatingActionButtonProps> = ({ icon = 'plus', onPress, label }) => {
   const theme = useAppTheme();
   return (
     <FAB

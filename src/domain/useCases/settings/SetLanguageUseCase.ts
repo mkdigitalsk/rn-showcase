@@ -6,9 +6,7 @@ import { Language } from '../../../presentation/foundation/strings/StringsProvid
 
 @injectable()
 export class SetLanguageUseCase {
-  constructor(
-    @inject(TYPES.SettingsRepository) private settingsRepository: SettingsRepository,
-  ) {}
+  constructor(@inject(TYPES.SettingsRepository) private settingsRepository: SettingsRepository) {}
 
   execute(language: Language): void {
     this.settingsRepository.setLanguage(language);

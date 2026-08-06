@@ -11,9 +11,7 @@ export interface SendEmailParams {
 
 @injectable()
 export class SendEmailUseCase extends UseCase<SendEmailParams, void> {
-  constructor(
-    @inject(TYPES.PlatformRepository) private platformRepository: PlatformRepository,
-  ) {
+  constructor(@inject(TYPES.PlatformRepository) private platformRepository: PlatformRepository) {
     super();
   }
 

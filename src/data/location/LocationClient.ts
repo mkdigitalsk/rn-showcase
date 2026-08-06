@@ -11,9 +11,7 @@ export class LocationClient {
       return status === 'granted';
     }
 
-    const granted = await PermissionsAndroid.request(
-      PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
-    );
+    const granted = await PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION);
     return granted === PermissionsAndroid.RESULTS.GRANTED;
   }
 
@@ -32,15 +30,12 @@ export class LocationClient {
           });
         },
         error => reject(new Error(error.message)),
-        { enableHighAccuracy: true, timeout: 15000, maximumAge: 10000 },
+        { enableHighAccuracy: true, timeout: 15000, maximumAge: 10000 }
       );
     });
   }
 
-  startUpdates(
-    onLocation: (location: Location) => void,
-    onError: (error: Error) => void,
-  ): () => void {
+  startUpdates(onLocation: (location: Location) => void, onError: (error: Error) => void): () => void {
     const watchId = Geolocation.watchPosition(
       position => {
         onLocation({
@@ -54,7 +49,7 @@ export class LocationClient {
         distanceFilter: 10,
         interval: 5000,
         fastestInterval: 2000,
-      },
+      }
     );
 
     return () => Geolocation.clearWatch(watchId);

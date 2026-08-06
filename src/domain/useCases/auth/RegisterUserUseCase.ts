@@ -12,9 +12,7 @@ export interface RegisterUserParams {
 
 @injectable()
 export class RegisterUserUseCase extends UseCase<RegisterUserParams, RegisteredUser> {
-  constructor(
-    @inject(TYPES.AuthRepository) private authRepository: AuthRepository,
-  ) {
+  constructor(@inject(TYPES.AuthRepository) private authRepository: AuthRepository) {
     super();
   }
 

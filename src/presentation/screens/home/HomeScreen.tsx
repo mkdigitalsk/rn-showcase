@@ -11,9 +11,7 @@ export const HomeScreen = () => {
   const colors = useAppColors();
   const { uiState, onFeatureClick } = useHomeViewModel();
 
-  const renderItem = ({ item }: { item: Feature }) => (
-    <FeatureCard feature={item} onClick={() => onFeatureClick(item.id)} />
-  );
+  const renderItem = ({ item }: { item: Feature }) => <FeatureCard feature={item} onClick={() => onFeatureClick(item.id)} />;
 
   const keyExtractor = (item: Feature) => item.id;
 

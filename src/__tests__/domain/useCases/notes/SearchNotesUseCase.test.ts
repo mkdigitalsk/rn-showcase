@@ -43,12 +43,10 @@ describe('SearchNotesUseCase', () => {
       { id: 1, title: 'Note 1', content: 'Content 1', createdAt: 1000 },
       { id: 2, title: 'Note 2', content: 'Content 2', createdAt: 2000 },
     ];
-    (t.mockRepo.subscribe as jest.Mock).mockImplementation(
-      (_query: string, _sort: NoteSortOption, listener: (notes: Note[]) => void) => {
-        listener(notes);
-        return jest.fn();
-      },
-    );
+    (t.mockRepo.subscribe as jest.Mock).mockImplementation((_query: string, _sort: NoteSortOption, listener: (notes: Note[]) => void) => {
+      listener(notes);
+      return jest.fn();
+    });
 
     const onValue = jest.fn();
     const params: SearchNotesParams = { query: '', sortOption: NoteSortOption.TITLE_ASC };

@@ -7,14 +7,7 @@ import { useLoginViewModel } from './useLoginViewModel';
 import { useAppColors } from '../../foundation/theme';
 import { useStrings } from '../../foundation/strings';
 import { RootStackParamList } from '../../navigation/RootStackNavigator';
-import {
-  AppCard,
-  AppTextField,
-  ContainedButton,
-  AppTextButton,
-  ColumnSpacer2,
-  ColumnSpacer4,
-} from '../../components';
+import { AppCard, AppTextField, ContainedButton, AppTextButton, ColumnSpacer2, ColumnSpacer4 } from '../../components';
 import { TextHeadlineMedium } from '../../components/text/headlineMedium/TextHeadlineMedium';
 import { TextBodyMediumNeutral80 } from '../../components/text/bodyMedium/TextBodyMedium';
 import { TextLabelSmall } from '../../components/text/labelSmall/TextLabelSmall';
@@ -26,14 +19,7 @@ export const LoginScreen = () => {
   const colors = useAppColors();
   const { t } = useStrings();
   const navigation = useNavigation<LoginNavigationProp>();
-  const {
-    uiState,
-    onEmailChange,
-    onPasswordChange,
-    login,
-    authenticateWithBiometrics,
-    fillTestAccount,
-  } = useLoginViewModel();
+  const { uiState, onEmailChange, onPasswordChange, login, authenticateWithBiometrics, fillTestAccount } = useLoginViewModel();
 
   const handleLogin = useCallback(() => {
     login(() => navigation.replace('Main'));
@@ -49,26 +35,30 @@ export const LoginScreen = () => {
 
   const getEmailErrorText = (): string | undefined => {
     switch (uiState.emailError) {
-      case 'empty': return t('login_email_error_empty');
-      case 'invalid_format': return t('login_email_error_invalid');
-      default: return undefined;
+      case 'empty':
+        return t('login_email_error_empty');
+      case 'invalid_format':
+        return t('login_email_error_invalid');
+      default:
+        return undefined;
     }
   };
 
   const getPasswordErrorText = (): string | undefined => {
     switch (uiState.passwordError) {
-      case 'empty': return t('login_password_error_empty');
-      case 'too_short': return t('login_password_error_short');
-      case 'weak': return t('login_password_error_weak');
-      default: return undefined;
+      case 'empty':
+        return t('login_password_error_empty');
+      case 'too_short':
+        return t('login_password_error_short');
+      case 'weak':
+        return t('login_password_error_weak');
+      default:
+        return undefined;
     }
   };
 
   return (
-    <KeyboardAvoidingView
-      style={{ flex: 1, backgroundColor: colors.background }}
-      behavior={Platform.OS === 'ios' ? 'padding' : undefined}
-    >
+    <KeyboardAvoidingView style={{ flex: 1, backgroundColor: colors.background }} behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
       <ScrollView
         contentContainerStyle={{
           flexGrow: 1,
@@ -77,9 +67,7 @@ export const LoginScreen = () => {
         }}
         keyboardShouldPersistTaps="handled"
       >
-        <TextHeadlineMedium color={colors.primary}>
-          {t('login_title')}
-        </TextHeadlineMedium>
+        <TextHeadlineMedium color={colors.primary}>{t('login_title')}</TextHeadlineMedium>
         <ColumnSpacer2 />
         <TextBodyMediumNeutral80>{t('login_subtitle')}</TextBodyMediumNeutral80>
 
@@ -112,20 +100,13 @@ export const LoginScreen = () => {
           {uiState.loginFailed && (
             <>
               <ColumnSpacer4 />
-              <TextLabelSmall color={colors.error}>
-                {t('login_server_error')}
-              </TextLabelSmall>
+              <TextLabelSmall color={colors.error}>{t('login_server_error')}</TextLabelSmall>
             </>
           )}
 
           <ColumnSpacer4 />
 
-          <ContainedButton
-            text={t('login_button')}
-            onPress={handleLogin}
-            loading={uiState.isLoading}
-            disabled={uiState.isLoading}
-          />
+          <ContainedButton text={t('login_button')} onPress={handleLogin} loading={uiState.isLoading} disabled={uiState.isLoading} />
         </AppCard>
 
         {uiState.biometricsAvailable && (
@@ -140,15 +121,11 @@ export const LoginScreen = () => {
                   onPress={handleBiometricLogin}
                   loading={uiState.biometricsLoading}
                 />
-                <TextBodyMediumNeutral80>
-                  {t('login_biometric_label')}
-                </TextBodyMediumNeutral80>
+                <TextBodyMediumNeutral80>{t('login_biometric_label')}</TextBodyMediumNeutral80>
               </View>
               {uiState.biometricsResult && uiState.biometricsResult.type !== 'success' && (
                 <TextLabelSmall color={colors.error}>
-                  {uiState.biometricsResult.type === 'failed'
-                    ? uiState.biometricsResult.message
-                    : t('login_biometric_cancelled')}
+                  {uiState.biometricsResult.type === 'failed' ? uiState.biometricsResult.message : t('login_biometric_cancelled')}
                 </TextLabelSmall>
               )}
             </AppCard>
@@ -164,10 +141,7 @@ export const LoginScreen = () => {
 
         <ColumnSpacer2 />
 
-        <AppTextButton
-          text={t('login_to_register')}
-          onPress={() => navigation.navigate('Register')}
-        />
+        <AppTextButton text={t('login_to_register')} onPress={() => navigation.navigate('Register')} />
 
         <View style={{ height: space8 }} />
       </ScrollView>
