@@ -202,7 +202,7 @@ export const en = {
   notifications_send_reminder: 'Reminder',
   notifications_send_promo: 'Promo',
   notifications_reminder_title: 'Reminder',
-  notifications_reminder_message: 'Don\'t forget to check your tasks!',
+  notifications_reminder_message: "Don't forget to check your tasks!",
   notifications_promo_title: 'Special Offer',
   notifications_promo_message: 'Check out our latest deals and updates!',
   notifications_cancel_title: 'Manage',
@@ -227,7 +227,7 @@ export const en = {
   login_password_error_short: 'Password must be at least 8 characters',
   login_password_error_weak: 'Password must contain uppercase, lowercase, digit, and special character',
   login_server_error: 'Invalid email or password',
-  login_to_register: 'Don\'t have an account? Register',
+  login_to_register: "Don't have an account? Register",
 
   // Register
   register_title: 'Create Account',

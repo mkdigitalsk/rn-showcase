@@ -15,14 +15,8 @@ import { space4 } from '../../foundation/dimensions';
 export const NotificationsScreen = () => {
   const colors = useAppColors();
   const { t } = useStrings();
-  const {
-    uiState,
-    requestPermission,
-    sendReminderNotification,
-    sendPromoNotification,
-    cancelAllNotifications,
-    openSettings,
-  } = useNotificationsViewModel();
+  const { uiState, requestPermission, sendReminderNotification, sendPromoNotification, cancelAllNotifications, openSettings } =
+    useNotificationsViewModel();
 
   const permissionText = (() => {
     switch (uiState.permissionStatus) {
@@ -36,47 +30,29 @@ export const NotificationsScreen = () => {
   })();
 
   return (
-    <ScrollView
-      style={{ flex: 1, backgroundColor: colors.background }}
-      contentContainerStyle={{ padding: space4, paddingBottom: 100 }}
-    >
-      <TextHeadlineMedium color={colors.primary}>
-        {t('notifications_title')}
-      </TextHeadlineMedium>
+    <ScrollView style={{ flex: 1, backgroundColor: colors.background }} contentContainerStyle={{ padding: space4, paddingBottom: 100 }}>
+      <TextHeadlineMedium color={colors.primary}>{t('notifications_title')}</TextHeadlineMedium>
       <ColumnSpacer2 />
       <TextBodyMediumNeutral80>{t('notifications_subtitle')}</TextBodyMediumNeutral80>
 
       <ColumnSpacer4 />
 
       {/* Permission Card */}
-      <NotificationCard
-        icon="shield-outline"
-        title={t('notifications_permission_title')}
-        colors={colors}
-      >
+      <NotificationCard icon="shield-outline" title={t('notifications_permission_title')} colors={colors}>
         <TextBodyMediumNeutral80>{permissionText}</TextBodyMediumNeutral80>
         <ColumnSpacer2 />
         {uiState.permissionStatus !== PushPermissionStatus.GRANTED && (
-          <OutlinedButton
-            text={t('notifications_request_permission')}
-            onPress={requestPermission}
-          />
+          <OutlinedButton text={t('notifications_request_permission')} onPress={requestPermission} />
         )}
       </NotificationCard>
 
       <ColumnSpacer4 />
 
       {/* Send Notifications Card */}
-      <NotificationCard
-        icon="bell-ring-outline"
-        title={t('notifications_send_title')}
-        colors={colors}
-      >
+      <NotificationCard icon="bell-ring-outline" title={t('notifications_send_title')} colors={colors}>
         {uiState.lastSentNotification && (
           <>
-            <TextBodyMediumNeutral80>
-              {`${t('notifications_last_sent')}: ${uiState.lastSentNotification}`}
-            </TextBodyMediumNeutral80>
+            <TextBodyMediumNeutral80>{`${t('notifications_last_sent')}: ${uiState.lastSentNotification}`}</TextBodyMediumNeutral80>
             <ColumnSpacer2 />
           </>
         )}
@@ -84,23 +60,13 @@ export const NotificationsScreen = () => {
           <View style={{ flex: 1 }}>
             <OutlinedButton
               text={t('notifications_send_reminder')}
-              onPress={() =>
-                sendReminderNotification(
-                  t('notifications_reminder_title'),
-                  t('notifications_reminder_message'),
-                )
-              }
+              onPress={() => sendReminderNotification(t('notifications_reminder_title'), t('notifications_reminder_message'))}
             />
           </View>
           <View style={{ flex: 1 }}>
             <OutlinedButton
               text={t('notifications_send_promo')}
-              onPress={() =>
-                sendPromoNotification(
-                  t('notifications_promo_title'),
-                  t('notifications_promo_message'),
-                )
-              }
+              onPress={() => sendPromoNotification(t('notifications_promo_title'), t('notifications_promo_message'))}
             />
           </View>
         </View>
@@ -109,23 +75,13 @@ export const NotificationsScreen = () => {
       <ColumnSpacer4 />
 
       {/* Cancel & Settings Card */}
-      <NotificationCard
-        icon="bell-off-outline"
-        title={t('notifications_cancel_title')}
-        colors={colors}
-      >
+      <NotificationCard icon="bell-off-outline" title={t('notifications_cancel_title')} colors={colors}>
         <View style={{ flexDirection: 'row', gap: 12 }}>
           <View style={{ flex: 1 }}>
-            <OutlinedButton
-              text={t('notifications_open_settings')}
-              onPress={openSettings}
-            />
+            <OutlinedButton text={t('notifications_open_settings')} onPress={openSettings} />
           </View>
           <View style={{ flex: 1 }}>
-            <OutlinedButton
-              text={t('notifications_cancel_all')}
-              onPress={cancelAllNotifications}
-            />
+            <OutlinedButton text={t('notifications_cancel_all')} onPress={cancelAllNotifications} />
           </View>
         </View>
       </NotificationCard>

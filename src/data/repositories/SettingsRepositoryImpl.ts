@@ -11,15 +11,11 @@ const VALID_LANGUAGES: Language[] = ['en', 'sk'];
 
 @injectable()
 export class SettingsRepositoryImpl implements SettingsRepository {
-  constructor(
-    @inject(TYPES.PersistentPreferences) private persistentPreferences: PersistentPreferences,
-  ) {}
+  constructor(@inject(TYPES.PersistentPreferences) private persistentPreferences: PersistentPreferences) {}
 
   getThemeMode(): ThemeMode {
     const stored = this.persistentPreferences.getThemeMode();
-    return VALID_THEMES.includes(stored as ThemeMode)
-      ? (stored as ThemeMode)
-      : 'system';
+    return VALID_THEMES.includes(stored as ThemeMode) ? (stored as ThemeMode) : 'system';
   }
 
   setThemeMode(mode: ThemeMode): void {

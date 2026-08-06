@@ -23,11 +23,7 @@ const generateDisabledDates = (today: string): Set<string> => {
   return dates;
 };
 
-const hasDisabledDateInRange = (
-  start: string,
-  end: string,
-  disabledDates: Set<string>,
-): boolean => {
+const hasDisabledDateInRange = (start: string, end: string, disabledDates: Set<string>): boolean => {
   const startDate = new Date(start);
   const endDate = new Date(end);
   const current = new Date(startDate);
@@ -52,7 +48,7 @@ export const useCalendarViewModel = () => {
   useEffect(() => {
     execute({
       action: () => getTodayDateUseCase.execute(),
-      onSuccess: (today) => {
+      onSuccess: today => {
         const disabledDates = generateDisabledDates(today);
         setUiState(prev => ({ ...prev, today, disabledDates }));
       },

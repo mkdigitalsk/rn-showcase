@@ -40,64 +40,64 @@ import { TrackButtonClickUseCase } from '../../domain/useCases/analytics/TrackBu
 import { TYPES } from '../diTypes';
 
 export const domainModule = () => {
-    container.register<GetUsersUseCase>(TYPES.GetUsersUseCase, { useClass: GetUsersUseCase });
+  container.register<GetUsersUseCase>(TYPES.GetUsersUseCase, { useClass: GetUsersUseCase });
 
-    // Auth
-    container.register(TYPES.LoginUseCase, { useClass: LoginUseCase });
-    container.register(TYPES.RegisterUserUseCase, { useClass: RegisterUserUseCase });
-    container.register(TYPES.CheckEmailExistsUseCase, { useClass: CheckEmailExistsUseCase });
+  // Auth
+  container.register(TYPES.LoginUseCase, { useClass: LoginUseCase });
+  container.register(TYPES.RegisterUserUseCase, { useClass: RegisterUserUseCase });
+  container.register(TYPES.CheckEmailExistsUseCase, { useClass: CheckEmailExistsUseCase });
 
-    // Storage
-    container.register(TYPES.LoadStorageDataUseCase, { useClass: LoadStorageDataUseCase });
-    container.register(TYPES.ObserveStorageDataUseCase, { useClass: ObserveStorageDataUseCase });
-    container.register(TYPES.SetSessionCounterUseCase, { useClass: SetSessionCounterUseCase });
-    container.register(TYPES.SetPersistentCounterUseCase, { useClass: SetPersistentCounterUseCase });
-    container.register(TYPES.ClearSessionUseCase, { useClass: ClearSessionUseCase });
+  // Storage
+  container.register(TYPES.LoadStorageDataUseCase, { useClass: LoadStorageDataUseCase });
+  container.register(TYPES.ObserveStorageDataUseCase, { useClass: ObserveStorageDataUseCase });
+  container.register(TYPES.SetSessionCounterUseCase, { useClass: SetSessionCounterUseCase });
+  container.register(TYPES.SetPersistentCounterUseCase, { useClass: SetPersistentCounterUseCase });
+  container.register(TYPES.ClearSessionUseCase, { useClass: ClearSessionUseCase });
 
-    // Platform APIs
-    container.register(TYPES.ShareUseCase, { useClass: ShareUseCase });
-    container.register(TYPES.DialUseCase, { useClass: DialUseCase });
-    container.register(TYPES.OpenLinkUseCase, { useClass: OpenLinkUseCase });
-    container.register(TYPES.SendEmailUseCase, { useClass: SendEmailUseCase });
-    container.register(TYPES.CopyToClipboardUseCase, { useClass: CopyToClipboardUseCase });
+  // Platform APIs
+  container.register(TYPES.ShareUseCase, { useClass: ShareUseCase });
+  container.register(TYPES.DialUseCase, { useClass: DialUseCase });
+  container.register(TYPES.OpenLinkUseCase, { useClass: OpenLinkUseCase });
+  container.register(TYPES.SendEmailUseCase, { useClass: SendEmailUseCase });
+  container.register(TYPES.CopyToClipboardUseCase, { useClass: CopyToClipboardUseCase });
 
-    // Location
-    container.register(TYPES.GetLocationUseCase, { useClass: GetLocationUseCase });
-    container.register(TYPES.ObserveLocationUpdatesUseCase, { useClass: ObserveLocationUpdatesUseCase });
+  // Location
+  container.register(TYPES.GetLocationUseCase, { useClass: GetLocationUseCase });
+  container.register(TYPES.ObserveLocationUpdatesUseCase, { useClass: ObserveLocationUpdatesUseCase });
 
-    // Biometric
-    container.register(TYPES.IsBiometricEnabledUseCase, { useClass: IsBiometricEnabledUseCase });
-    container.register(TYPES.AuthenticateWithBiometricUseCase, { useClass: AuthenticateWithBiometricUseCase });
+  // Biometric
+  container.register(TYPES.IsBiometricEnabledUseCase, { useClass: IsBiometricEnabledUseCase });
+  container.register(TYPES.AuthenticateWithBiometricUseCase, { useClass: AuthenticateWithBiometricUseCase });
 
-    // Flashlight
-    container.register(TYPES.IsFlashlightAvailableUseCase, { useClass: IsFlashlightAvailableUseCase });
-    container.register(TYPES.ToggleFlashlightUseCase, { useClass: ToggleFlashlightUseCase });
-    container.register(TYPES.TurnOffFlashlightUseCase, { useClass: TurnOffFlashlightUseCase });
+  // Flashlight
+  container.register(TYPES.IsFlashlightAvailableUseCase, { useClass: IsFlashlightAvailableUseCase });
+  container.register(TYPES.ToggleFlashlightUseCase, { useClass: ToggleFlashlightUseCase });
+  container.register(TYPES.TurnOffFlashlightUseCase, { useClass: TurnOffFlashlightUseCase });
 
-    // Database
-    container.register(TYPES.SearchNotesUseCase, { useClass: SearchNotesUseCase });
-    container.register(TYPES.InsertNoteUseCase, { useClass: InsertNoteUseCase });
-    container.register(TYPES.UpdateNoteUseCase, { useClass: UpdateNoteUseCase });
-    container.register(TYPES.DeleteNoteUseCase, { useClass: DeleteNoteUseCase });
-    container.register(TYPES.DeleteAllNotesUseCase, { useClass: DeleteAllNotesUseCase });
+  // Database
+  container.register(TYPES.SearchNotesUseCase, { useClass: SearchNotesUseCase });
+  container.register(TYPES.InsertNoteUseCase, { useClass: InsertNoteUseCase });
+  container.register(TYPES.UpdateNoteUseCase, { useClass: UpdateNoteUseCase });
+  container.register(TYPES.DeleteNoteUseCase, { useClass: DeleteNoteUseCase });
+  container.register(TYPES.DeleteAllNotesUseCase, { useClass: DeleteAllNotesUseCase });
 
-    // Analytics
-    container.register(TYPES.TrackScreenUseCase, { useClass: TrackScreenUseCase });
-    container.register(TYPES.TrackButtonClickUseCase, { useClass: TrackButtonClickUseCase });
+  // Analytics
+  container.register(TYPES.TrackScreenUseCase, { useClass: TrackScreenUseCase });
+  container.register(TYPES.TrackButtonClickUseCase, { useClass: TrackButtonClickUseCase });
 
-    // Calendar
-    container.register(TYPES.GetTodayDateUseCase, { useClass: GetTodayDateUseCase });
+  // Calendar
+  container.register(TYPES.GetTodayDateUseCase, { useClass: GetTodayDateUseCase });
 
-    // Settings
-    container.register(TYPES.GetThemeModeUseCase, { useClass: GetThemeModeUseCase });
-    container.register(TYPES.SetThemeModeUseCase, { useClass: SetThemeModeUseCase });
-    container.register(TYPES.GetLanguageUseCase, { useClass: GetLanguageUseCase });
-    container.register(TYPES.SetLanguageUseCase, { useClass: SetLanguageUseCase });
+  // Settings
+  container.register(TYPES.GetThemeModeUseCase, { useClass: GetThemeModeUseCase });
+  container.register(TYPES.SetThemeModeUseCase, { useClass: SetThemeModeUseCase });
+  container.register(TYPES.GetLanguageUseCase, { useClass: GetLanguageUseCase });
+  container.register(TYPES.SetLanguageUseCase, { useClass: SetLanguageUseCase });
 
-    // Notifications
-    container.register(TYPES.GetPermissionStatusUseCase, { useClass: GetPermissionStatusUseCase });
-    container.register(TYPES.RequestPermissionUseCase, { useClass: RequestPermissionUseCase });
-    container.register(TYPES.ShowNotificationUseCase, { useClass: ShowNotificationUseCase });
-    container.register(TYPES.CancelAllNotificationsUseCase, { useClass: CancelAllNotificationsUseCase });
-    container.register(TYPES.OpenNotificationSettingsUseCase, { useClass: OpenNotificationSettingsUseCase });
+  // Notifications
+  container.register(TYPES.GetPermissionStatusUseCase, { useClass: GetPermissionStatusUseCase });
+  container.register(TYPES.RequestPermissionUseCase, { useClass: RequestPermissionUseCase });
+  container.register(TYPES.ShowNotificationUseCase, { useClass: ShowNotificationUseCase });
+  container.register(TYPES.CancelAllNotificationsUseCase, { useClass: CancelAllNotificationsUseCase });
+  container.register(TYPES.OpenNotificationSettingsUseCase, { useClass: OpenNotificationSettingsUseCase });
 };

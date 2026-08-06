@@ -31,21 +31,9 @@ const CounterCard = ({ label, hint, value, onIncrement, onDecrement }: CounterCa
       <TextBodyMediumNeutral80>{hint}</TextBodyMediumNeutral80>
       <ColumnSpacer4 />
       <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-        <IconButton
-          icon="minus"
-          size={COUNTER_ICON_SIZE}
-          iconColor={colors.primary}
-          onPress={onDecrement}
-        />
-        <TextHeadlineMedium color={colors.primary}>
-          {String(value)}
-        </TextHeadlineMedium>
-        <IconButton
-          icon="plus"
-          size={COUNTER_ICON_SIZE}
-          iconColor={colors.primary}
-          onPress={onIncrement}
-        />
+        <IconButton icon="minus" size={COUNTER_ICON_SIZE} iconColor={colors.primary} onPress={onDecrement} />
+        <TextHeadlineMedium color={colors.primary}>{String(value)}</TextHeadlineMedium>
+        <IconButton icon="plus" size={COUNTER_ICON_SIZE} iconColor={colors.primary} onPress={onIncrement} />
       </View>
     </AppCard>
   );
@@ -64,13 +52,8 @@ export const StorageScreen = () => {
   } = useStorageViewModel();
 
   return (
-    <ScrollView
-      style={{ flex: 1, backgroundColor: colors.background }}
-      contentContainerStyle={{ padding: space4, paddingBottom: 100 }}
-    >
-      <TextHeadlineMedium color={colors.primary}>
-        {t('storage_title')}
-      </TextHeadlineMedium>
+    <ScrollView style={{ flex: 1, backgroundColor: colors.background }} contentContainerStyle={{ padding: space4, paddingBottom: 100 }}>
+      <TextHeadlineMedium color={colors.primary}>{t('storage_title')}</TextHeadlineMedium>
       <ColumnSpacer2 />
       <TextBodyMediumNeutral80>{t('storage_subtitle')}</TextBodyMediumNeutral80>
 
@@ -96,10 +79,7 @@ export const StorageScreen = () => {
 
       <ColumnSpacer4 />
 
-      <OutlinedButton
-        text={t('storage_clear_session')}
-        onPress={clearSession}
-      />
+      <OutlinedButton text={t('storage_clear_session')} onPress={clearSession} />
     </ScrollView>
   );
 };

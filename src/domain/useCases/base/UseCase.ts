@@ -23,15 +23,9 @@ export interface Subscription {
  * Returns a stream of values over time.
  */
 export abstract class FlowUseCase<Params, Result> {
-  protected abstract doExecute(
-    params: Params,
-    emit: (value: Result) => void,
-    onError: (error: Error) => void
-  ): Subscription | (() => void);
+  protected abstract doExecute(params: Params, emit: (value: Result) => void, onError: (error: Error) => void): Subscription | (() => void);
 
-  execute(
-    ...args: Params extends void ? [] : [Params]
-  ): {
+  execute(...args: Params extends void ? [] : [Params]): {
     subscribe: (onValue: (value: Result) => void, onError?: (error: Error) => void) => Subscription;
   } {
     const params = (args[0] ?? undefined) as Params;
@@ -39,9 +33,7 @@ export abstract class FlowUseCase<Params, Result> {
     return {
       subscribe: (onValue, onError = () => {}) => {
         const result = this.doExecute(params, onValue, onError);
-        return typeof result === 'function'
-          ? { unsubscribe: result }
-          : result;
+        return typeof result === 'function' ? { unsubscribe: result } : result;
       },
     };
   }

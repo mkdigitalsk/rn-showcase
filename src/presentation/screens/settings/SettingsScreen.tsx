@@ -35,31 +35,36 @@ export const SettingsScreen = () => {
 
   const themeModeLabel = (mode: ThemeMode): string => {
     switch (mode) {
-      case 'light': return t('settings_theme_light');
-      case 'dark': return t('settings_theme_dark');
-      case 'system': return t('settings_theme_system');
+      case 'light':
+        return t('settings_theme_light');
+      case 'dark':
+        return t('settings_theme_dark');
+      case 'system':
+        return t('settings_theme_system');
     }
   };
 
   const languageLabel = (lang: Language): string => {
     switch (lang) {
-      case 'en': return t('language_en');
-      case 'sk': return t('language_sk');
+      case 'en':
+        return t('language_en');
+      case 'sk':
+        return t('language_sk');
     }
   };
 
   const LanguageFlag = ({ lang, size = 24 }: { lang: Language; size?: number }) => {
     switch (lang) {
-      case 'en': return <FlagEN size={size} />;
-      case 'sk': return <FlagSK size={size} />;
+      case 'en':
+        return <FlagEN size={size} />;
+      case 'sk':
+        return <FlagSK size={size} />;
     }
   };
 
   return (
     <View style={{ flex: 1, backgroundColor: colors.background }}>
-      <ScrollView
-        contentContainerStyle={{ padding: space4, gap: space4 }}
-      >
+      <ScrollView contentContainerStyle={{ padding: space4, gap: space4 }}>
         {/* Appearance Section */}
         <TextTitleLargePrimary>{t('settings_appearance')}</TextTitleLargePrimary>
 
@@ -92,19 +97,13 @@ export const SettingsScreen = () => {
 
         {/* Version Footer */}
         <View style={{ alignItems: 'flex-end', marginTop: space4 }}>
-          <TextBodySmallNeutral80>
-            {`${t('settings_version')} ${uiState.versionName}`}
-          </TextBodySmallNeutral80>
+          <TextBodySmallNeutral80>{`${t('settings_version')} ${uiState.versionName}`}</TextBodySmallNeutral80>
         </View>
       </ScrollView>
 
       {/* Theme Selection Dialog */}
       <Portal>
-        <Dialog
-          visible={uiState.showThemeDialog}
-          onDismiss={onThemeDialogDismiss}
-          style={{ backgroundColor: theme.colors.surface }}
-        >
+        <Dialog visible={uiState.showThemeDialog} onDismiss={onThemeDialogDismiss} style={{ backgroundColor: theme.colors.surface }}>
           <Dialog.Title>
             <TextTitleLargePrimary>{t('settings_theme')}</TextTitleLargePrimary>
           </Dialog.Title>
@@ -123,11 +122,7 @@ export const SettingsScreen = () => {
 
       {/* Language Selection Dialog */}
       <Portal>
-        <Dialog
-          visible={uiState.showLanguageDialog}
-          onDismiss={onLanguageDialogDismiss}
-          style={{ backgroundColor: theme.colors.surface }}
-        >
+        <Dialog visible={uiState.showLanguageDialog} onDismiss={onLanguageDialogDismiss} style={{ backgroundColor: theme.colors.surface }}>
           <Dialog.Title>
             <TextTitleLargePrimary>{t('settings_language')}</TextTitleLargePrimary>
           </Dialog.Title>

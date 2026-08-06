@@ -24,7 +24,7 @@ export const useNotificationsViewModel = () => {
   useEffect(() => {
     execute({
       action: () => getPermissionStatusUseCase.execute(),
-      onSuccess: (status) => setUiState(prev => ({ ...prev, permissionStatus: status })),
+      onSuccess: status => setUiState(prev => ({ ...prev, permissionStatus: status })),
     });
   }, [getPermissionStatusUseCase]);
 
@@ -32,36 +32,44 @@ export const useNotificationsViewModel = () => {
     execute({
       action: () => requestPermissionUseCase.execute(),
       onLoading: () => setUiState(prev => ({ ...prev, permissionLoading: true })),
-      onSuccess: (status) => setUiState(prev => ({ ...prev, permissionStatus: status, permissionLoading: false })),
+      onSuccess: status => setUiState(prev => ({ ...prev, permissionStatus: status, permissionLoading: false })),
       onError: () => setUiState(prev => ({ ...prev, permissionLoading: false })),
     });
   }, [requestPermissionUseCase]);
 
-  const sendReminderNotification = useCallback((title: string, message: string) => {
-    notificationCounter++;
-    execute({
-      action: () => showNotificationUseCase.execute({
-        id: `reminder-${notificationCounter}`,
-        title,
-        message,
-        channel: NotificationChannel.REMINDERS,
-      }),
-      onSuccess: () => setUiState(prev => ({ ...prev, lastSentNotification: title })),
-    });
-  }, [showNotificationUseCase]);
+  const sendReminderNotification = useCallback(
+    (title: string, message: string) => {
+      notificationCounter++;
+      execute({
+        action: () =>
+          showNotificationUseCase.execute({
+            id: `reminder-${notificationCounter}`,
+            title,
+            message,
+            channel: NotificationChannel.REMINDERS,
+          }),
+        onSuccess: () => setUiState(prev => ({ ...prev, lastSentNotification: title })),
+      });
+    },
+    [showNotificationUseCase]
+  );
 
-  const sendPromoNotification = useCallback((title: string, message: string) => {
-    notificationCounter++;
-    execute({
-      action: () => showNotificationUseCase.execute({
-        id: `promo-${notificationCounter}`,
-        title,
-        message,
-        channel: NotificationChannel.PROMOTIONS,
-      }),
-      onSuccess: () => setUiState(prev => ({ ...prev, lastSentNotification: title })),
-    });
-  }, [showNotificationUseCase]);
+  const sendPromoNotification = useCallback(
+    (title: string, message: string) => {
+      notificationCounter++;
+      execute({
+        action: () =>
+          showNotificationUseCase.execute({
+            id: `promo-${notificationCounter}`,
+            title,
+            message,
+            channel: NotificationChannel.PROMOTIONS,
+          }),
+        onSuccess: () => setUiState(prev => ({ ...prev, lastSentNotification: title })),
+      });
+    },
+    [showNotificationUseCase]
+  );
 
   const cancelAllNotifications = useCallback(() => {
     execute({

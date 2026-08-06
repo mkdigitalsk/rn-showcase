@@ -42,9 +42,7 @@ export const BottomTabNavigator = () => {
             tabBarStyle: screenRoute.showBottomNav
               ? { backgroundColor: colors.surface, borderTopColor: colors.neutral10 }
               : { display: 'none' as const },
-            tabBarIcon: ({ color, size }) => (
-              <Icon name="home-outline" size={size} color={color} />
-            ),
+            tabBarIcon: ({ color, size }) => <Icon name="home-outline" size={size} color={color} />,
           };
         }}
       />
@@ -53,9 +51,7 @@ export const BottomTabNavigator = () => {
         component={SettingsStackNavigator}
         options={{
           tabBarLabel: t('nav_settings'),
-          tabBarIcon: ({ color, size }) => (
-            <Icon name="cog-outline" size={size} color={color} />
-          ),
+          tabBarIcon: ({ color, size }) => <Icon name="cog-outline" size={size} color={color} />,
         }}
       />
     </Tab.Navigator>

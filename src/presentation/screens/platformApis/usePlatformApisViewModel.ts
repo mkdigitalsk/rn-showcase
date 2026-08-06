@@ -42,10 +42,7 @@ export const usePlatformApisViewModel = () => {
   // Check biometrics and flashlight availability on mount
   useEffect(() => {
     execute({
-      action: () => Promise.all([
-        isBiometricEnabledUseCase.execute(),
-        isFlashlightAvailableUseCase.execute(),
-      ]),
+      action: () => Promise.all([isBiometricEnabledUseCase.execute(), isFlashlightAvailableUseCase.execute()]),
       onSuccess: ([biometrics, flashlight]) => {
         setUiState(prev => ({
           ...prev,
@@ -79,11 +76,12 @@ export const usePlatformApisViewModel = () => {
 
   const sendEmail = useCallback(() => {
     execute({
-      action: () => sendEmailUseCase.execute({
-        to: DEMO_EMAIL,
-        subject: DEMO_EMAIL_SUBJECT,
-        body: DEMO_EMAIL_BODY,
-      }),
+      action: () =>
+        sendEmailUseCase.execute({
+          to: DEMO_EMAIL,
+          subject: DEMO_EMAIL_SUBJECT,
+          body: DEMO_EMAIL_BODY,
+        }),
     });
   }, [sendEmailUseCase]);
 
@@ -103,23 +101,25 @@ export const usePlatformApisViewModel = () => {
     execute({
       action: () => getLocationUseCase.execute(),
       onLoading: () => setUiState(prev => ({ ...prev, locationLoading: true, locationError: false })),
-      onSuccess: (location) => setUiState(prev => ({ ...prev, location, locationLoading: false })),
+      onSuccess: location => setUiState(prev => ({ ...prev, location, locationLoading: false })),
       onError: () => setUiState(prev => ({ ...prev, locationLoading: false, locationError: true })),
     });
   }, [getLocationUseCase]);
 
   const startLocationUpdates = useCallback(() => {
-    if (stopTrackingRef.current) {return;}
+    if (stopTrackingRef.current) {
+      return;
+    }
 
     setUiState(prev => ({ ...prev, isTrackingLocation: true, locationUpdatesError: false }));
     const subscription = observeLocationUpdatesUseCase.execute().subscribe(
-      (location) => {
+      location => {
         setUiState(prev => ({ ...prev, trackedLocation: location }));
       },
       () => {
         setUiState(prev => ({ ...prev, isTrackingLocation: false, locationUpdatesError: true }));
         stopTrackingRef.current = null;
-      },
+      }
     );
     stopTrackingRef.current = () => subscription.unsubscribe();
   }, [observeLocationUpdatesUseCase]);
@@ -144,19 +144,20 @@ export const usePlatformApisViewModel = () => {
     execute({
       action: () => authenticateWithBiometricUseCase.execute(),
       onLoading: () => setUiState(prev => ({ ...prev, biometricsLoading: true, biometricsResult: null })),
-      onSuccess: (result) => setUiState(prev => ({ ...prev, biometricsLoading: false, biometricsResult: result })),
-      onError: (error) => setUiState(prev => ({
-        ...prev,
-        biometricsLoading: false,
-        biometricsResult: { type: 'failed', message: error.userMessage },
-      })),
+      onSuccess: result => setUiState(prev => ({ ...prev, biometricsLoading: false, biometricsResult: result })),
+      onError: error =>
+        setUiState(prev => ({
+          ...prev,
+          biometricsLoading: false,
+          biometricsResult: { type: 'failed', message: error.userMessage },
+        })),
     });
   }, [authenticateWithBiometricUseCase]);
 
   const toggleFlashlight = useCallback(() => {
     execute({
       action: () => toggleFlashlightUseCase.execute(uiState.flashlightOn),
-      onSuccess: (newState) => setUiState(prev => ({ ...prev, flashlightOn: newState })),
+      onSuccess: newState => setUiState(prev => ({ ...prev, flashlightOn: newState })),
     });
   }, [toggleFlashlightUseCase, uiState.flashlightOn]);
 

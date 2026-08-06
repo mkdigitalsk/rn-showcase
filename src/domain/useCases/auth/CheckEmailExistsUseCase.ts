@@ -5,9 +5,7 @@ import { TYPES } from '../../../app/diTypes';
 
 @injectable()
 export class CheckEmailExistsUseCase extends UseCase<string, boolean> {
-  constructor(
-    @inject(TYPES.AuthRepository) private authRepository: AuthRepository,
-  ) {
+  constructor(@inject(TYPES.AuthRepository) private authRepository: AuthRepository) {
     super();
   }
 

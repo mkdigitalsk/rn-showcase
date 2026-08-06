@@ -33,7 +33,7 @@ describe('LoadStorageDataUseCase', () => {
 
     await test({
       whenAction: () => t.classUnderTest.execute(),
-      then: (result) => {
+      then: result => {
         expect(result).toEqual(expected);
         expect(t.mockRepo.loadInitialData).toHaveBeenCalled();
       },
@@ -48,7 +48,7 @@ describe('LoadStorageDataUseCase', () => {
         (t.mockRepo.loadInitialData as jest.Mock).mockResolvedValue(expected);
       },
       whenAction: () => t.classUnderTest.execute(),
-      then: (result) => {
+      then: result => {
         expect(result).toEqual(expected);
       },
     });

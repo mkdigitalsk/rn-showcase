@@ -10,7 +10,7 @@ export function test<T>({
   given();
   const result = whenAction();
   if (result instanceof Promise) {
-    return result.then((resolved) => then(resolved));
+    return result.then(resolved => then(resolved));
   }
   return then(result as T);
 }

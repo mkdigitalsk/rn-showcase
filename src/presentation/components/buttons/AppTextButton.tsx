@@ -7,10 +7,7 @@ interface AppTextButtonProps {
   onPress: () => void;
 }
 
-export const AppTextButton: React.FC<AppTextButtonProps> = ({
-  text,
-  onPress,
-}): React.JSX.Element => {
+export const AppTextButton: React.FC<AppTextButtonProps> = ({ text, onPress }): React.JSX.Element => {
   const theme = useAppTheme();
   return (
     <Button mode="text" onPress={onPress} textColor={theme.colors.primary} style={{ alignSelf: 'flex-start' }}>
@@ -19,10 +16,7 @@ export const AppTextButton: React.FC<AppTextButtonProps> = ({
   );
 };
 
-export const AppTextButtonError: React.FC<AppTextButtonProps> = ({
-  text,
-  onPress,
-}): React.JSX.Element => {
+export const AppTextButtonError: React.FC<AppTextButtonProps> = ({ text, onPress }): React.JSX.Element => {
   const theme = useAppTheme();
   return (
     <Button mode="text" onPress={onPress} textColor={theme.colors.error} style={{ alignSelf: 'flex-start' }}>

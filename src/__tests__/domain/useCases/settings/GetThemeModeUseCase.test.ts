@@ -34,7 +34,7 @@ describe('GetThemeModeUseCase', () => {
         (t.mockRepo.getThemeMode as jest.Mock).mockReturnValue('light');
       },
       whenAction: () => t.classUnderTest.execute(),
-      then: (result) => {
+      then: result => {
         expect(result).toBe('light');
         expect(t.mockRepo.getThemeMode).toHaveBeenCalled();
       },
@@ -47,7 +47,7 @@ describe('GetThemeModeUseCase', () => {
         (t.mockRepo.getThemeMode as jest.Mock).mockReturnValue('dark');
       },
       whenAction: () => t.classUnderTest.execute(),
-      then: (result) => expect(result).toBe('dark'),
+      then: result => expect(result).toBe('dark'),
     });
   });
 
@@ -57,7 +57,7 @@ describe('GetThemeModeUseCase', () => {
         (t.mockRepo.getThemeMode as jest.Mock).mockReturnValue('system');
       },
       whenAction: () => t.classUnderTest.execute(),
-      then: (result) => expect(result).toBe('system'),
+      then: result => expect(result).toBe('system'),
     });
   });
 });

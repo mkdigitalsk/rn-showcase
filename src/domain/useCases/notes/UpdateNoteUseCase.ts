@@ -6,9 +6,7 @@ import { TYPES } from '../../../app/diTypes';
 
 @injectable()
 export class UpdateNoteUseCase extends UseCase<Note, void> {
-  constructor(
-    @inject(TYPES.NoteRepository) private noteRepository: NoteRepository,
-  ) {
+  constructor(@inject(TYPES.NoteRepository) private noteRepository: NoteRepository) {
     super();
   }
 

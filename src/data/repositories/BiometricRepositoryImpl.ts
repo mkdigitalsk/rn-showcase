@@ -5,9 +5,7 @@ import { TYPES } from '../../app/diTypes';
 
 @injectable()
 export class BiometricRepositoryImpl implements BiometricRepository {
-  constructor(
-    @inject(TYPES.BiometricClient) private client: BiometricClient,
-  ) {}
+  constructor(@inject(TYPES.BiometricClient) private client: BiometricClient) {}
 
   async isAvailable(): Promise<boolean> {
     return this.client.isAvailable();

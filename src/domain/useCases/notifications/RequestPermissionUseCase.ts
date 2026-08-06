@@ -6,9 +6,7 @@ import { TYPES } from '../../../app/diTypes';
 
 @injectable()
 export class RequestPermissionUseCase extends UseCase<void, PushPermissionStatus> {
-  constructor(
-    @inject(TYPES.LocalNotificationService) private service: LocalNotificationService,
-  ) {
+  constructor(@inject(TYPES.LocalNotificationService) private service: LocalNotificationService) {
     super();
   }
 

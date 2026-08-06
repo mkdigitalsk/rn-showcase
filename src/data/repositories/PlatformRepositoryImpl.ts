@@ -5,9 +5,7 @@ import { TYPES } from '../../app/diTypes';
 
 @injectable()
 export class PlatformRepositoryImpl implements PlatformRepository {
-  constructor(
-    @inject(TYPES.PlatformClient) private client: PlatformClient,
-  ) {}
+  constructor(@inject(TYPES.PlatformClient) private client: PlatformClient) {}
 
   async share(text: string): Promise<void> {
     return this.client.share(text);

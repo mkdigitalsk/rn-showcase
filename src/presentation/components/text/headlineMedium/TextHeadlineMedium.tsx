@@ -4,7 +4,9 @@ import { useAppColors } from '../../../foundation/theme';
 import { TextBaseProps, TextVariantProps } from '../TextProps';
 
 export const TextHeadlineMedium = ({ children, color }: TextBaseProps) => (
-  <Text variant="headlineMedium" style={{ color }}>{children}</Text>
+  <Text variant="headlineMedium" style={{ color }}>
+    {children}
+  </Text>
 );
 
 export const TextHeadlineMediumPrimary = ({ children }: TextVariantProps) => {

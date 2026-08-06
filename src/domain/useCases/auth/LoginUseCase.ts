@@ -11,9 +11,7 @@ export interface LoginParams {
 
 @injectable()
 export class LoginUseCase extends UseCase<LoginParams, RegisteredUser> {
-  constructor(
-    @inject(TYPES.AuthRepository) private authRepository: AuthRepository,
-  ) {
+  constructor(@inject(TYPES.AuthRepository) private authRepository: AuthRepository) {
     super();
   }
 

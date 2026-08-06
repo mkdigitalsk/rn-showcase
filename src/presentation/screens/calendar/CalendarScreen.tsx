@@ -17,7 +17,7 @@ const buildMarkedDates = (
   endDate: string | null,
   disabledDates: Set<string>,
   primaryColor: string,
-  rangeColor: string,
+  rangeColor: string
 ) => {
   const marked: Record<string, Record<string, unknown>> = {};
 
@@ -26,7 +26,9 @@ const buildMarkedDates = (
     marked[date] = { disabled: true, disableTouchEvent: false };
   });
 
-  if (!startDate) { return marked; }
+  if (!startDate) {
+    return marked;
+  }
 
   if (!endDate) {
     // Single date selected
@@ -73,14 +75,15 @@ export const CalendarScreen = () => {
   const { uiState, onDateClick, clearSelection } = useCalendarViewModel();
 
   const markedDates = useMemo(
-    () => buildMarkedDates(
-      uiState.selectedRange.startDate,
-      uiState.selectedRange.endDate,
-      uiState.disabledDates,
-      colors.primary,
-      colors.primary + '30',
-    ),
-    [uiState.selectedRange, uiState.disabledDates, colors.primary],
+    () =>
+      buildMarkedDates(
+        uiState.selectedRange.startDate,
+        uiState.selectedRange.endDate,
+        uiState.disabledDates,
+        colors.primary,
+        colors.primary + '30'
+      ),
+    [uiState.selectedRange, uiState.disabledDates, colors.primary]
   );
 
   const handleDayPress = (day: DateData) => {
@@ -88,13 +91,8 @@ export const CalendarScreen = () => {
   };
 
   return (
-    <ScrollView
-      style={{ flex: 1, backgroundColor: colors.background }}
-      contentContainerStyle={{ padding: space4, paddingBottom: 100 }}
-    >
-      <TextHeadlineMedium color={colors.primary}>
-        {t('calendar_title')}
-      </TextHeadlineMedium>
+    <ScrollView style={{ flex: 1, backgroundColor: colors.background }} contentContainerStyle={{ padding: space4, paddingBottom: 100 }}>
+      <TextHeadlineMedium color={colors.primary}>{t('calendar_title')}</TextHeadlineMedium>
       <ColumnSpacer2 />
       <TextBodyMediumNeutral80>{t('calendar_subtitle')}</TextBodyMediumNeutral80>
 
@@ -132,14 +130,10 @@ export const CalendarScreen = () => {
           <TextBodyLargeNeutral80>{t('calendar_selected_range')}</TextBodyLargeNeutral80>
           <ColumnSpacer2 />
           {uiState.selectedRange.startDate && (
-            <TextBodyMediumNeutral80>
-              {`${t('calendar_start_date')}: ${uiState.selectedRange.startDate}`}
-            </TextBodyMediumNeutral80>
+            <TextBodyMediumNeutral80>{`${t('calendar_start_date')}: ${uiState.selectedRange.startDate}`}</TextBodyMediumNeutral80>
           )}
           {uiState.selectedRange.endDate && (
-            <TextBodyMediumNeutral80>
-              {`${t('calendar_end_date')}: ${uiState.selectedRange.endDate}`}
-            </TextBodyMediumNeutral80>
+            <TextBodyMediumNeutral80>{`${t('calendar_end_date')}: ${uiState.selectedRange.endDate}`}</TextBodyMediumNeutral80>
           )}
           <ColumnSpacer4 />
           <OutlinedButton text={t('calendar_clear_selection')} onPress={clearSelection} />

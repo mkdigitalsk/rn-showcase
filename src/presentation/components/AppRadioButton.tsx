@@ -7,10 +7,7 @@ interface AppRadioButtonProps {
   onPress?: () => void;
 }
 
-export const AppRadioButton: React.FC<AppRadioButtonProps> = ({
-  selected,
-  onPress,
-}): React.JSX.Element => {
+export const AppRadioButton: React.FC<AppRadioButtonProps> = ({ selected, onPress }): React.JSX.Element => {
   const theme = useAppTheme();
   return (
     <RadioButton

@@ -29,27 +29,27 @@ interface ThemeProviderProps {
 export const ThemeProvider = ({ children }: ThemeProviderProps) => {
   const systemColorScheme = useColorScheme();
 
-  const getThemeModeUseCase = useMemo(
-    () => container.resolve<GetThemeModeUseCase>(TYPES.GetThemeModeUseCase), [],
-  );
-  const setThemeModeUseCase = useMemo(
-    () => container.resolve<SetThemeModeUseCase>(TYPES.SetThemeModeUseCase), [],
-  );
+  const getThemeModeUseCase = useMemo(() => container.resolve<GetThemeModeUseCase>(TYPES.GetThemeModeUseCase), []);
+  const setThemeModeUseCase = useMemo(() => container.resolve<SetThemeModeUseCase>(TYPES.SetThemeModeUseCase), []);
 
-  const [themeMode, setThemeModeState] = useState<ThemeMode>(
-    () => getThemeModeUseCase.execute(),
-  );
+  const [themeMode, setThemeModeState] = useState<ThemeMode>(() => getThemeModeUseCase.execute());
 
-  const setThemeMode = useCallback((mode: ThemeMode) => {
-    setThemeModeUseCase.execute(mode);
-    setThemeModeState(mode);
-  }, [setThemeModeUseCase]);
+  const setThemeMode = useCallback(
+    (mode: ThemeMode) => {
+      setThemeModeUseCase.execute(mode);
+      setThemeModeState(mode);
+    },
+    [setThemeModeUseCase]
+  );
 
   const isDark = useMemo(() => {
     switch (themeMode) {
-      case 'light': return false;
-      case 'dark': return true;
-      case 'system': return systemColorScheme === 'dark';
+      case 'light':
+        return false;
+      case 'dark':
+        return true;
+      case 'system':
+        return systemColorScheme === 'dark';
     }
   }, [themeMode, systemColorScheme]);
 
@@ -71,16 +71,11 @@ export const ThemeProvider = ({ children }: ThemeProviderProps) => {
     };
   }, [isDark, theme]);
 
-  const value = useMemo(
-    () => ({ themeMode, setThemeMode, isDark, navigationTheme }),
-    [themeMode, setThemeMode, isDark, navigationTheme],
-  );
+  const value = useMemo(() => ({ themeMode, setThemeMode, isDark, navigationTheme }), [themeMode, setThemeMode, isDark, navigationTheme]);
 
   return (
     <ThemeContext.Provider value={value}>
-      <PaperProvider theme={theme}>
-        {children}
-      </PaperProvider>
+      <PaperProvider theme={theme}>{children}</PaperProvider>
     </ThemeContext.Provider>
   );
 };

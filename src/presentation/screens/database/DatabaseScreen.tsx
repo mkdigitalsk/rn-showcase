@@ -69,9 +69,7 @@ export const DatabaseScreen = () => {
       contentContainerStyle={{ padding: space4, paddingBottom: 100 }}
       keyboardShouldPersistTaps="handled"
     >
-      <TextHeadlineMedium color={colors.primary}>
-        {t('database_title')}
-      </TextHeadlineMedium>
+      <TextHeadlineMedium color={colors.primary}>{t('database_title')}</TextHeadlineMedium>
       <ColumnSpacer2 />
       <TextBodyMediumNeutral80>{t('database_subtitle')}</TextBodyMediumNeutral80>
 
@@ -96,7 +94,7 @@ export const DatabaseScreen = () => {
             </Pressable>
           }
         >
-          {Object.values(NoteSortOption).map((option) => (
+          {Object.values(NoteSortOption).map(option => (
             <Menu.Item
               key={option}
               onPress={() => onSortOptionChange(option)}
@@ -111,11 +109,7 @@ export const DatabaseScreen = () => {
 
       {/* Add Note Card */}
       <AppCard elevated>
-        <AppTextField
-          value={uiState.newNoteTitle}
-          onChangeText={onNewNoteTitleChange}
-          placeholder={t('database_add_title_placeholder')}
-        />
+        <AppTextField value={uiState.newNoteTitle} onChangeText={onNewNoteTitleChange} placeholder={t('database_add_title_placeholder')} />
         <ColumnSpacer2 />
         <AppTextField
           value={uiState.newNoteContent}
@@ -125,22 +119,17 @@ export const DatabaseScreen = () => {
           numberOfLines={3}
         />
         <ColumnSpacer4 />
-        <ContainedButton
-          text={t('database_add_button')}
-          onPress={addNote}
-        />
+        <ContainedButton text={t('database_add_button')} onPress={addNote} />
       </AppCard>
 
       <ColumnSpacer4 />
 
       {/* Notes List */}
       {uiState.notes.length === 0 ? (
-        <TextBodyMediumNeutral80>
-          {uiState.searchQuery ? t('database_no_results') : t('database_empty')}
-        </TextBodyMediumNeutral80>
+        <TextBodyMediumNeutral80>{uiState.searchQuery ? t('database_no_results') : t('database_empty')}</TextBodyMediumNeutral80>
       ) : (
         <>
-          {uiState.notes.map((note) => (
+          {uiState.notes.map(note => (
             <View key={note.id} style={{ marginBottom: space2 }}>
               <NoteCard note={note} onDelete={deleteNote} />
             </View>

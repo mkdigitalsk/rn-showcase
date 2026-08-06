@@ -3,12 +3,18 @@ jest.mock('react-native-mmkv', () => {
   const store = {};
   return {
     MMKV: jest.fn().mockImplementation(() => ({
-      getString: jest.fn((key) => store[key]),
-      set: jest.fn((key, value) => { store[key] = value; }),
-      getNumber: jest.fn((key) => store[key]),
-      getBoolean: jest.fn((key) => store[key]),
-      delete: jest.fn((key) => { delete store[key]; }),
-      clearAll: jest.fn(() => { Object.keys(store).forEach(k => delete store[k]); }),
+      getString: jest.fn(key => store[key]),
+      set: jest.fn((key, value) => {
+        store[key] = value;
+      }),
+      getNumber: jest.fn(key => store[key]),
+      getBoolean: jest.fn(key => store[key]),
+      delete: jest.fn(key => {
+        delete store[key];
+      }),
+      clearAll: jest.fn(() => {
+        Object.keys(store).forEach(k => delete store[k]);
+      }),
     })),
   };
 });
@@ -25,7 +31,7 @@ jest.mock('tsyringe', () => ({
     registerSingleton: jest.fn(),
     register: jest.fn(),
   },
-  injectable: () => (target) => target,
+  injectable: () => target => target,
   inject: () => () => {},
 }));
 

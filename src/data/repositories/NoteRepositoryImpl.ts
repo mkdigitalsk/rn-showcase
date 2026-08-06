@@ -14,15 +14,9 @@ interface Subscription {
 export class NoteRepositoryImpl implements NoteRepository {
   private subscriptions = new Set<Subscription>();
 
-  constructor(
-    @inject(TYPES.DatabaseClient) private client: DatabaseClient,
-  ) {}
+  constructor(@inject(TYPES.DatabaseClient) private client: DatabaseClient) {}
 
-  subscribe(
-    query: string,
-    sortOption: NoteSortOption,
-    listener: NoteListener,
-  ): () => void {
+  subscribe(query: string, sortOption: NoteSortOption, listener: NoteListener): () => void {
     const subscription: Subscription = { query, sortOption, listener };
     this.subscriptions.add(subscription);
 
