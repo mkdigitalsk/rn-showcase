@@ -1,0 +1,11 @@
+android/build
+android/app/build
+android/app/.cxx
+android/.gradle
+ios/Pods
+ios/build
+**/*.xcassets
+vendor/
+.bundle
+package-lock.json
+tsconfig.tsbuildinfo
