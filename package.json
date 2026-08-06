@@ -1,7 +1,6 @@
 {
   "name": "rn-showcase",
   "version": "1.0.0",
-  "versionCode": 1,
   "private": true,
   "scripts": {
     "android": "react-native run-android",
