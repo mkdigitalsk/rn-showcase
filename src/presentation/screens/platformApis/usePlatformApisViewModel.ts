@@ -18,7 +18,8 @@ import { PlatformApisUiState, initialPlatformApisUiState } from './PlatformApisU
 const DEMO_PHONE_NUMBER = '+1234567890';
 const DEMO_URL = 'https://mkdigital.sk';
 const DEMO_EMAIL = 'example@example.com';
-const DEMO_SHARE_TEXT = 'We build cross-platform apps end to end — iOS, Android, web and backend.\n\nhttps://mkdigital.sk';
+const DEMO_SHARE_TITLE = 'MK Digital — your product, shipped end-to-end';
+const DEMO_SHARE_TEXT = 'iOS, Android, web and backend — built once, properly, by one accountable partner.\n\nhttps://mkdigital.sk';
 const DEMO_EMAIL_SUBJECT = 'Hello from RN Showcase';
 const DEMO_EMAIL_BODY = 'This email was sent from the React Native Showcase app.';
 const DEMO_COPY_TEXT = 'This text was copied from RN Showcase!';
@@ -63,7 +64,7 @@ export const usePlatformApisViewModel = () => {
   }, []);
 
   const share = useCallback(() => {
-    execute({ action: () => shareUseCase.execute(DEMO_SHARE_TEXT) });
+    execute({ action: () => shareUseCase.execute({ text: DEMO_SHARE_TEXT, title: DEMO_SHARE_TITLE }) });
   }, [shareUseCase]);
 
   const dial = useCallback(() => {

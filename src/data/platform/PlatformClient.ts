@@ -4,8 +4,9 @@ import Clipboard from '@react-native-clipboard/clipboard';
 
 @injectable()
 export class PlatformClient {
-  async share(text: string): Promise<void> {
-    await Share.share({ message: text });
+  async share(text: string, title: string): Promise<void> {
+    // No thumbnail: this API exposes no ClipData slot.
+    await Share.share({ message: text, title }, { dialogTitle: title });
   }
 
   async dial(number: string): Promise<void> {

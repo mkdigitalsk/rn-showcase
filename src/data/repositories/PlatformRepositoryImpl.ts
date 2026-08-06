@@ -7,8 +7,8 @@ import { TYPES } from '../../app/diTypes';
 export class PlatformRepositoryImpl implements PlatformRepository {
   constructor(@inject(TYPES.PlatformClient) private client: PlatformClient) {}
 
-  async share(text: string): Promise<void> {
-    return this.client.share(text);
+  async share(text: string, title: string): Promise<void> {
+    return this.client.share(text, title);
   }
 
   async dial(number: string): Promise<void> {
