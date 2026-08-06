@@ -25,11 +25,7 @@ export const AppConfirmDialog: React.FC<AppConfirmDialogProps> = ({
   const theme = useAppTheme();
   return (
     <Portal>
-      <Dialog
-        visible={visible}
-        onDismiss={onDismiss}
-        style={{ backgroundColor: theme.colors.neutral0 }}
-      >
+      <Dialog visible={visible} onDismiss={onDismiss} style={{ backgroundColor: theme.colors.neutral0 }}>
         {title && (
           <Dialog.Title>
             <TextTitleLargePrimary>{title}</TextTitleLargePrimary>
@@ -68,11 +64,7 @@ export const AppAlertDialog: React.FC<AppAlertDialogProps> = ({
   const theme = useAppTheme();
   return (
     <Portal>
-      <Dialog
-        visible={visible}
-        onDismiss={onDismiss}
-        style={{ backgroundColor: theme.colors.neutral0 }}
-      >
+      <Dialog visible={visible} onDismiss={onDismiss} style={{ backgroundColor: theme.colors.neutral0 }}>
         {title && (
           <Dialog.Title>
             <TextTitleLargePrimary>{title}</TextTitleLargePrimary>

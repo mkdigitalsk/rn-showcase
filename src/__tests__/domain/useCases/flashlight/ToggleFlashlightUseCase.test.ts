@@ -31,7 +31,7 @@ describe('ToggleFlashlightUseCase', () => {
         (t.mockRepo.toggle as jest.Mock).mockResolvedValue(true);
       },
       whenAction: () => t.classUnderTest.execute(false),
-      then: (result) => {
+      then: result => {
         expect(result).toBe(true);
         expect(t.mockRepo.toggle).toHaveBeenCalledWith(false);
       },
@@ -44,7 +44,7 @@ describe('ToggleFlashlightUseCase', () => {
         (t.mockRepo.toggle as jest.Mock).mockResolvedValue(false);
       },
       whenAction: () => t.classUnderTest.execute(true),
-      then: (result) => {
+      then: result => {
         expect(result).toBe(false);
         expect(t.mockRepo.toggle).toHaveBeenCalledWith(true);
       },

@@ -24,11 +24,7 @@ export const FeatureCard = ({ feature, onClick }: FeatureCardProps) => {
   return (
     <AppCard elevated onPress={onClick}>
       <View style={styles.container}>
-        <Icon
-          name={feature.icon}
-          size={FEATURE_CARD_ICON_SIZE}
-          color={colors.primary}
-        />
+        <Icon name={feature.icon} size={FEATURE_CARD_ICON_SIZE} color={colors.primary} />
         <View style={styles.textContainer}>
           <TextTitleLarge color={colors.neutral80}>{t(feature.titleKey)}</TextTitleLarge>
           <ColumnSpacer2 />

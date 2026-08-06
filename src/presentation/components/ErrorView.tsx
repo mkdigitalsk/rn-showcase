@@ -13,11 +13,7 @@ interface ErrorViewProps {
   style?: StyleProp<ViewStyle>;
 }
 
-export const ErrorView: React.FC<ErrorViewProps> = ({
-  message,
-  onRetry,
-  style,
-}) => {
+export const ErrorView: React.FC<ErrorViewProps> = ({ message, onRetry, style }) => {
   const { t } = useStrings();
 
   return (

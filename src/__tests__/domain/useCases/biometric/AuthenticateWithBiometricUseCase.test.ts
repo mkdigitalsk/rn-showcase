@@ -27,7 +27,7 @@ describe('AuthenticateWithBiometricUseCase', () => {
   it('returns success when authentication succeeds', async () => {
     await test({
       whenAction: () => t.classUnderTest.execute(),
-      then: (result) => {
+      then: result => {
         expect(result).toEqual({ type: 'success' });
         expect(t.mockRepo.authenticate).toHaveBeenCalled();
       },
@@ -42,7 +42,7 @@ describe('AuthenticateWithBiometricUseCase', () => {
         (t.mockRepo.authenticate as jest.Mock).mockResolvedValue(expected);
       },
       whenAction: () => t.classUnderTest.execute(),
-      then: (result) => {
+      then: result => {
         expect(result).toEqual(expected);
       },
     });
@@ -54,7 +54,7 @@ describe('AuthenticateWithBiometricUseCase', () => {
         (t.mockRepo.authenticate as jest.Mock).mockResolvedValue({ type: 'cancelled' });
       },
       whenAction: () => t.classUnderTest.execute(),
-      then: (result) => {
+      then: result => {
         expect(result).toEqual({ type: 'cancelled' });
       },
     });
@@ -66,7 +66,7 @@ describe('AuthenticateWithBiometricUseCase', () => {
         (t.mockRepo.authenticate as jest.Mock).mockResolvedValue({ type: 'not_available' });
       },
       whenAction: () => t.classUnderTest.execute(),
-      then: (result) => {
+      then: result => {
         expect(result).toEqual({ type: 'not_available' });
       },
     });

@@ -7,9 +7,7 @@ import { TYPES } from '../../app/diTypes';
 
 @injectable()
 export class StorageRepositoryImpl implements StorageRepository {
-  constructor(
-    @inject(TYPES.StorageLocalStore) private localStore: StorageLocalStore
-  ) {}
+  constructor(@inject(TYPES.StorageLocalStore) private localStore: StorageLocalStore) {}
 
   async loadInitialData(): Promise<StorageData> {
     return this.localStore.load();

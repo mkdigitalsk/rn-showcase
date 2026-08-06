@@ -54,13 +54,8 @@ export const PlatformApisScreen = () => {
   } = usePlatformApisViewModel();
 
   return (
-    <ScrollView
-      style={{ flex: 1, backgroundColor: colors.background }}
-      contentContainerStyle={{ padding: space4, paddingBottom: 100 }}
-    >
-      <TextHeadlineMedium color={colors.primary}>
-        {t('platform_apis_title')}
-      </TextHeadlineMedium>
+    <ScrollView style={{ flex: 1, backgroundColor: colors.background }} contentContainerStyle={{ padding: space4, paddingBottom: 100 }}>
+      <TextHeadlineMedium color={colors.primary}>{t('platform_apis_title')}</TextHeadlineMedium>
       <ColumnSpacer2 />
       <TextBodyMediumNeutral80>{t('platform_apis_subtitle')}</TextBodyMediumNeutral80>
 
@@ -151,10 +146,7 @@ export const PlatformApisScreen = () => {
           </>
         )}
         <OutlinedButton
-          text={uiState.isTrackingLocation
-            ? t('platform_apis_location_updates_stop')
-            : t('platform_apis_location_updates_start')
-          }
+          text={uiState.isTrackingLocation ? t('platform_apis_location_updates_stop') : t('platform_apis_location_updates_start')}
           onPress={toggleLocationUpdates}
         />
       </PlatformApiCard>
@@ -203,10 +195,7 @@ export const PlatformApisScreen = () => {
           </>
         )}
         <OutlinedButton
-          text={uiState.flashlightOn
-            ? t('platform_apis_flashlight_off')
-            : t('platform_apis_flashlight_on')
-          }
+          text={uiState.flashlightOn ? t('platform_apis_flashlight_off') : t('platform_apis_flashlight_on')}
           onPress={toggleFlashlight}
         />
       </PlatformApiCard>

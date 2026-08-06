@@ -5,9 +5,7 @@ import { TYPES } from '../../app/diTypes';
 
 @injectable()
 export class FlashlightRepositoryImpl implements FlashlightRepository {
-  constructor(
-    @inject(TYPES.FlashlightClient) private client: FlashlightClient,
-  ) {}
+  constructor(@inject(TYPES.FlashlightClient) private client: FlashlightClient) {}
 
   isAvailable(): boolean {
     return this.client.isAvailable();

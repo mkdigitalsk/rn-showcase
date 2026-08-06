@@ -6,9 +6,7 @@ import { ThemeMode } from '../../../presentation/foundation/themeMode';
 
 @injectable()
 export class SetThemeModeUseCase {
-  constructor(
-    @inject(TYPES.SettingsRepository) private settingsRepository: SettingsRepository,
-  ) {}
+  constructor(@inject(TYPES.SettingsRepository) private settingsRepository: SettingsRepository) {}
 
   execute(mode: ThemeMode): void {
     this.settingsRepository.setThemeMode(mode);

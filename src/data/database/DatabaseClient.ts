@@ -26,32 +26,24 @@ export class DatabaseClient {
     const orderBy = this.getOrderBy(sortOption);
 
     if (query.trim().length === 0) {
-      const result = this.db.executeSync(
-        `SELECT * FROM Note ORDER BY ${orderBy}`,
-      );
+      const result = this.db.executeSync(`SELECT * FROM Note ORDER BY ${orderBy}`);
       return this.mapRows(result.rows ?? []);
     }
 
     const searchPattern = `%${query}%`;
-    const result = this.db.executeSync(
-      `SELECT * FROM Note WHERE title LIKE ? OR content LIKE ? ORDER BY ${orderBy}`,
-      [searchPattern, searchPattern],
-    );
+    const result = this.db.executeSync(`SELECT * FROM Note WHERE title LIKE ? OR content LIKE ? ORDER BY ${orderBy}`, [
+      searchPattern,
+      searchPattern,
+    ]);
     return this.mapRows(result.rows ?? []);
   }
 
   insert(title: string, content: string, createdAt: number): void {
-    this.db.executeSync(
-      'INSERT INTO Note (title, content, createdAt) VALUES (?, ?, ?)',
-      [title, content, createdAt],
-    );
+    this.db.executeSync('INSERT INTO Note (title, content, createdAt) VALUES (?, ?, ?)', [title, content, createdAt]);
   }
 
   update(id: number, title: string, content: string): void {
-    this.db.executeSync(
-      'UPDATE Note SET title = ?, content = ? WHERE id = ?',
-      [title, content, id],
-    );
+    this.db.executeSync('UPDATE Note SET title = ?, content = ? WHERE id = ?', [title, content, id]);
   }
 
   deleteById(id: number): void {
@@ -64,10 +56,14 @@ export class DatabaseClient {
 
   private getOrderBy(sortOption: NoteSortOption): string {
     switch (sortOption) {
-      case NoteSortOption.DATE_DESC: return 'createdAt DESC';
-      case NoteSortOption.DATE_ASC: return 'createdAt ASC';
-      case NoteSortOption.TITLE_ASC: return 'title ASC';
-      case NoteSortOption.TITLE_DESC: return 'title DESC';
+      case NoteSortOption.DATE_DESC:
+        return 'createdAt DESC';
+      case NoteSortOption.DATE_ASC:
+        return 'createdAt ASC';
+      case NoteSortOption.TITLE_ASC:
+        return 'title ASC';
+      case NoteSortOption.TITLE_DESC:
+        return 'title DESC';
     }
   }
 

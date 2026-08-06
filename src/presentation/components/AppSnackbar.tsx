@@ -44,7 +44,9 @@ export const AppSnackbar: React.FC<AppSnackbarProps> = ({
       duration={3000}
       action={actionLabel ? { label: actionLabel, onPress: onAction ?? onDismiss } : undefined}
       style={{ backgroundColor: backgroundColors[type] }}
-      theme={{ colors: { inverseSurface: backgroundColors[type], inverseOnSurface: contentColors[type], inversePrimary: contentColors[type] } }}
+      theme={{
+        colors: { inverseSurface: backgroundColors[type], inverseOnSurface: contentColors[type], inversePrimary: contentColors[type] },
+      }}
     >
       {message}
     </Snackbar>

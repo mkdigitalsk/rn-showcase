@@ -12,10 +12,7 @@ const HTTP_CONFLICT = 409;
 
 @injectable()
 export class AuthRepositoryImpl implements AuthRepository {
-  constructor(
-    @inject(TYPES.AuthApi) private api: AuthApi,
-    @inject(TYPES.SessionPreferences) private session: SessionPreferences,
-  ) {}
+  constructor(@inject(TYPES.AuthApi) private api: AuthApi, @inject(TYPES.SessionPreferences) private session: SessionPreferences) {}
 
   async login(email: string, password: string): Promise<RegisteredUser> {
     const response = await this.api.login(email, password);

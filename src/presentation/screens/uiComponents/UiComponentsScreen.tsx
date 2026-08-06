@@ -65,7 +65,11 @@ export const UiComponentsScreen = () => {
   const toggleChip = (index: number) => {
     setSelectedChips(prev => {
       const next = new Set(prev);
-      if (next.has(index)) { next.delete(index); } else { next.add(index); }
+      if (next.has(index)) {
+        next.delete(index);
+      } else {
+        next.add(index);
+      }
       return next;
     });
   };
@@ -75,10 +79,7 @@ export const UiComponentsScreen = () => {
 
   return (
     <View style={{ flex: 1, backgroundColor: colors.background }}>
-      <ScrollView
-        style={styles.container}
-        contentContainerStyle={styles.content}
-      >
+      <ScrollView style={styles.container} contentContainerStyle={styles.content}>
         {/* ===== BUTTONS ===== */}
         <SectionTitle title={t('ui_section_buttons')} />
         <ColumnSpacer2 />
@@ -150,9 +151,7 @@ export const UiComponentsScreen = () => {
         <ColumnSpacer2 />
         <View style={styles.row}>
           <AppCheckbox checked={checkboxChecked} onPress={() => setCheckboxChecked(!checkboxChecked)} />
-          <TextBodyMediumNeutral80>
-            {checkboxChecked ? t('ui_checked') : t('ui_unchecked')}
-          </TextBodyMediumNeutral80>
+          <TextBodyMediumNeutral80>{checkboxChecked ? t('ui_checked') : t('ui_unchecked')}</TextBodyMediumNeutral80>
         </View>
 
         <ColumnSpacer4 />
@@ -163,9 +162,7 @@ export const UiComponentsScreen = () => {
         <View style={styles.row}>
           <AppSwitch value={switchChecked} onValueChange={setSwitchChecked} />
           <RowSpacer2 />
-          <TextBodyMediumNeutral80>
-            {switchChecked ? t('ui_on') : t('ui_off')}
-          </TextBodyMediumNeutral80>
+          <TextBodyMediumNeutral80>{switchChecked ? t('ui_on') : t('ui_off')}</TextBodyMediumNeutral80>
         </View>
 
         <ColumnSpacer4 />
@@ -175,10 +172,7 @@ export const UiComponentsScreen = () => {
         <ColumnSpacer2 />
         {radioLabels.map((label, index) => (
           <View key={label} style={styles.row}>
-            <AppRadioButton
-              selected={selectedRadio === index}
-              onPress={() => setSelectedRadio(index)}
-            />
+            <AppRadioButton selected={selectedRadio === index} onPress={() => setSelectedRadio(index)} />
             <TextBodyMediumNeutral80>{label}</TextBodyMediumNeutral80>
           </View>
         ))}
@@ -191,11 +185,7 @@ export const UiComponentsScreen = () => {
         <View style={styles.chipRow}>
           {filterLabels.map((label, index) => (
             <React.Fragment key={label}>
-              <AppFilterChip
-                label={label}
-                selected={selectedChips.has(index)}
-                onPress={() => toggleChip(index)}
-              />
+              <AppFilterChip label={label} selected={selectedChips.has(index)} onPress={() => toggleChip(index)} />
               <RowSpacer2 />
             </React.Fragment>
           ))}
@@ -258,15 +248,27 @@ export const UiComponentsScreen = () => {
         <SectionTitle title={t('ui_section_snackbar')} />
         <ColumnSpacer2 />
         <View style={styles.chipRow}>
-          <ContainedButton text={t('ui_snackbar_default')} onPress={() => setSnackbar({ visible: true, message: t('ui_snackbar_default_message'), type: 'default' })} />
+          <ContainedButton
+            text={t('ui_snackbar_default')}
+            onPress={() => setSnackbar({ visible: true, message: t('ui_snackbar_default_message'), type: 'default' })}
+          />
           <RowSpacer2 />
-          <ContainedButton text={t('ui_snackbar_success')} onPress={() => setSnackbar({ visible: true, message: t('ui_snackbar_success_message'), type: 'success' })} />
+          <ContainedButton
+            text={t('ui_snackbar_success')}
+            onPress={() => setSnackbar({ visible: true, message: t('ui_snackbar_success_message'), type: 'success' })}
+          />
         </View>
         <ColumnSpacer2 />
         <View style={styles.chipRow}>
-          <ContainedButton text={t('ui_snackbar_error')} onPress={() => setSnackbar({ visible: true, message: t('ui_snackbar_error_message'), type: 'error' })} />
+          <ContainedButton
+            text={t('ui_snackbar_error')}
+            onPress={() => setSnackbar({ visible: true, message: t('ui_snackbar_error_message'), type: 'error' })}
+          />
           <RowSpacer2 />
-          <ContainedButton text={t('ui_snackbar_warning')} onPress={() => setSnackbar({ visible: true, message: t('ui_snackbar_warning_message'), type: 'warning' })} />
+          <ContainedButton
+            text={t('ui_snackbar_warning')}
+            onPress={() => setSnackbar({ visible: true, message: t('ui_snackbar_warning_message'), type: 'warning' })}
+          />
         </View>
 
         <ColumnSpacer4 />
@@ -299,15 +301,10 @@ export const UiComponentsScreen = () => {
         onDismiss={() => setShowDialog(false)}
       />
 
-      <AppBottomSheet
-        visible={showBottomSheet}
-        onDismiss={() => setShowBottomSheet(false)}
-      >
+      <AppBottomSheet visible={showBottomSheet} onDismiss={() => setShowBottomSheet(false)}>
         <TextTitleLargeNeutral80>{t('ui_bottom_sheet_title')}</TextTitleLargeNeutral80>
         <ColumnSpacer2 />
-        <TextBodyMediumNeutral80>
-          {t('ui_bottom_sheet_content')}
-        </TextBodyMediumNeutral80>
+        <TextBodyMediumNeutral80>{t('ui_bottom_sheet_content')}</TextBodyMediumNeutral80>
         <ColumnSpacer4 />
         <ContainedButton text={t('ui_close')} onPress={() => setShowBottomSheet(false)} />
       </AppBottomSheet>
@@ -323,9 +320,7 @@ export const UiComponentsScreen = () => {
 };
 
 // Section title component
-const SectionTitle = ({ title }: { title: string }) => (
-  <TextTitleLargeNeutral80>{title}</TextTitleLargeNeutral80>
-);
+const SectionTitle = ({ title }: { title: string }) => <TextTitleLargeNeutral80>{title}</TextTitleLargeNeutral80>;
 
 const styles = StyleSheet.create({
   container: {

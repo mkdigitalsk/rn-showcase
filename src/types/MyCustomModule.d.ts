@@ -4,9 +4,9 @@ type MyCustomModuleType = {
 };
 
 declare module 'react-native' {
-    interface NativeModulesStatic {
-      MyCustomModule: MyCustomModuleType;
-    }
+  interface NativeModulesStatic {
+    MyCustomModule: MyCustomModuleType;
   }
+}
 
 export {};

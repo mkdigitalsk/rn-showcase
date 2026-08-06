@@ -11,14 +11,17 @@ interface AppCardProps {
 export const AppCard: React.FC<AppCardProps> = ({ children, elevated = true, onPress }): React.JSX.Element => {
   const theme = useAppTheme();
   return (
-    <Card mode={elevated ? 'elevated' : 'contained'} style={{
-      borderStyle: 'solid',
-      borderWidth: elevated ? 0 : 1,
-      borderColor: theme.colors.neutral10,
-      backgroundColor: theme.colors.surface }} onPress={onPress}>
+    <Card
+      mode={elevated ? 'elevated' : 'contained'}
+      style={{
+        borderStyle: 'solid',
+        borderWidth: elevated ? 0 : 1,
+        borderColor: theme.colors.neutral10,
+        backgroundColor: theme.colors.surface,
+      }}
+      onPress={onPress}
+    >
       <Card.Content>{children}</Card.Content>
     </Card>
   );
 };
-
-

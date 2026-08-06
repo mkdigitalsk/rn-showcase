@@ -6,9 +6,7 @@ import { UseCase } from '../base/UseCase';
 
 @injectable()
 export class SetSessionCounterUseCase extends UseCase<number, void> {
-  constructor(
-    @inject(TYPES.StorageRepository) private storageRepository: StorageRepository
-  ) {
+  constructor(@inject(TYPES.StorageRepository) private storageRepository: StorageRepository) {
     super();
   }
 

@@ -35,21 +35,18 @@ interface StringsProviderProps {
 }
 
 export const StringsProvider = ({ children }: StringsProviderProps) => {
-  const getLanguageUseCase = useMemo(
-    () => container.resolve<GetLanguageUseCase>(TYPES.GetLanguageUseCase), [],
-  );
-  const setLanguageUseCase = useMemo(
-    () => container.resolve<SetLanguageUseCase>(TYPES.SetLanguageUseCase), [],
-  );
+  const getLanguageUseCase = useMemo(() => container.resolve<GetLanguageUseCase>(TYPES.GetLanguageUseCase), []);
+  const setLanguageUseCase = useMemo(() => container.resolve<SetLanguageUseCase>(TYPES.SetLanguageUseCase), []);
 
-  const [language, setLanguageState] = useState<Language>(
-    () => getLanguageUseCase.execute() ?? getDeviceLanguage(),
-  );
+  const [language, setLanguageState] = useState<Language>(() => getLanguageUseCase.execute() ?? getDeviceLanguage());
 
-  const setLanguage = useCallback((lang: Language) => {
-    setLanguageUseCase.execute(lang);
-    setLanguageState(lang);
-  }, [setLanguageUseCase]);
+  const setLanguage = useCallback(
+    (lang: Language) => {
+      setLanguageUseCase.execute(lang);
+      setLanguageState(lang);
+    },
+    [setLanguageUseCase]
+  );
 
   const t = useCallback(
     (key: StringKey): string => {
@@ -58,16 +55,9 @@ export const StringsProvider = ({ children }: StringsProviderProps) => {
     [language]
   );
 
-  const value = useMemo(
-    () => ({ language, setLanguage, t }),
-    [language, setLanguage, t]
-  );
+  const value = useMemo(() => ({ language, setLanguage, t }), [language, setLanguage, t]);
 
-  return (
-    <StringsContext.Provider value={value}>
-      {children}
-    </StringsContext.Provider>
-  );
+  return <StringsContext.Provider value={value}>{children}</StringsContext.Provider>;
 };
 
 export const useStrings = (): StringsContextType => {

@@ -43,11 +43,7 @@ export class ApiException extends BaseException {
   readonly errorCode: string;
   readonly userMessage: string;
 
-  constructor(
-    httpCode: number,
-    message: string = 'API error occurred',
-    userMessage: string = 'Something went wrong. Please try again.'
-  ) {
+  constructor(httpCode: number, message: string = 'API error occurred', userMessage: string = 'Something went wrong. Please try again.') {
     super(message);
     this.httpCode = httpCode;
     this.errorCode = `2-${httpCode}`;

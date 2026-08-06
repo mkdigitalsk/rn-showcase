@@ -35,7 +35,7 @@ describe('GetUsersUseCase', () => {
         (t.mockRepo.getUsers as jest.Mock).mockResolvedValue(users);
       },
       whenAction: () => t.classUnderTest.execute(),
-      then: (result) => {
+      then: result => {
         expect(result).toEqual(users);
         expect(result).toHaveLength(2);
         expect(result[0].name).toBe('John Doe');
@@ -46,7 +46,7 @@ describe('GetUsersUseCase', () => {
   it('returns empty list when no users', async () => {
     await test({
       whenAction: () => t.classUnderTest.execute(),
-      then: (result) => {
+      then: result => {
         expect(result).toEqual([]);
       },
     });

@@ -10,12 +10,7 @@ interface ContainedButtonProps {
   disabled?: boolean;
 }
 
-export const ContainedButton: React.FC<ContainedButtonProps> = ({
-  text,
-  onPress,
-  loading,
-  disabled,
-}) => {
+export const ContainedButton: React.FC<ContainedButtonProps> = ({ text, onPress, loading, disabled }) => {
   const theme = useAppTheme();
 
   return (

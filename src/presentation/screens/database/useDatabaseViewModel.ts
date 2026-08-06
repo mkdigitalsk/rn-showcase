@@ -21,14 +21,17 @@ export const useDatabaseViewModel = () => {
   const deleteNoteUseCase = useResolve<DeleteNoteUseCase>(TYPES.DeleteNoteUseCase);
   const deleteAllNotesUseCase = useResolve<DeleteAllNotesUseCase>(TYPES.DeleteAllNotesUseCase);
 
-  const subscribeToNotes = useCallback((query: string, sortOption: NoteSortOption) => {
-    subscriptionRef.current?.unsubscribe();
+  const subscribeToNotes = useCallback(
+    (query: string, sortOption: NoteSortOption) => {
+      subscriptionRef.current?.unsubscribe();
 
-    const { subscribe } = searchNotesUseCase.execute({ query, sortOption });
-    subscriptionRef.current = subscribe((notes) => {
-      setUiState(prev => ({ ...prev, notes }));
-    });
-  }, [searchNotesUseCase]);
+      const { subscribe } = searchNotesUseCase.execute({ query, sortOption });
+      subscriptionRef.current = subscribe(notes => {
+        setUiState(prev => ({ ...prev, notes }));
+      });
+    },
+    [searchNotesUseCase]
+  );
 
   // Initial subscription
   useEffect(() => {
@@ -40,28 +43,34 @@ export const useDatabaseViewModel = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const onSearchQueryChange = useCallback((query: string) => {
-    setUiState(prev => ({ ...prev, searchQuery: query }));
+  const onSearchQueryChange = useCallback(
+    (query: string) => {
+      setUiState(prev => ({ ...prev, searchQuery: query }));
 
-    if (debounceTimer.current) {
-      clearTimeout(debounceTimer.current);
-    }
+      if (debounceTimer.current) {
+        clearTimeout(debounceTimer.current);
+      }
 
-    debounceTimer.current = setTimeout(() => {
+      debounceTimer.current = setTimeout(() => {
+        setUiState(prev => {
+          subscribeToNotes(query, prev.sortOption);
+          return prev;
+        });
+      }, SEARCH_DEBOUNCE_MS);
+    },
+    [subscribeToNotes]
+  );
+
+  const onSortOptionChange = useCallback(
+    (sortOption: NoteSortOption) => {
+      setUiState(prev => ({ ...prev, sortOption, showSortMenu: false }));
       setUiState(prev => {
-        subscribeToNotes(query, prev.sortOption);
+        subscribeToNotes(prev.searchQuery, sortOption);
         return prev;
       });
-    }, SEARCH_DEBOUNCE_MS);
-  }, [subscribeToNotes]);
-
-  const onSortOptionChange = useCallback((sortOption: NoteSortOption) => {
-    setUiState(prev => ({ ...prev, sortOption, showSortMenu: false }));
-    setUiState(prev => {
-      subscribeToNotes(prev.searchQuery, sortOption);
-      return prev;
-    });
-  }, [subscribeToNotes]);
+    },
+    [subscribeToNotes]
+  );
 
   const toggleSortMenu = useCallback(() => {
     setUiState(prev => ({ ...prev, showSortMenu: !prev.showSortMenu }));
@@ -77,23 +86,29 @@ export const useDatabaseViewModel = () => {
 
   const addNote = useCallback(() => {
     const { newNoteTitle, newNoteContent } = uiState;
-    if (!newNoteTitle.trim() || !newNoteContent.trim()) { return; }
+    if (!newNoteTitle.trim() || !newNoteContent.trim()) {
+      return;
+    }
 
     execute({
-      action: () => insertNoteUseCase.execute({
-        title: newNoteTitle.trim(),
-        content: newNoteContent.trim(),
-        createdAt: Date.now(),
-      }),
+      action: () =>
+        insertNoteUseCase.execute({
+          title: newNoteTitle.trim(),
+          content: newNoteContent.trim(),
+          createdAt: Date.now(),
+        }),
       onSuccess: () => setUiState(prev => ({ ...prev, newNoteTitle: '', newNoteContent: '' })),
     });
   }, [uiState, insertNoteUseCase]);
 
-  const deleteNote = useCallback((id: number) => {
-    execute({
-      action: () => deleteNoteUseCase.execute(id),
-    });
-  }, [deleteNoteUseCase]);
+  const deleteNote = useCallback(
+    (id: number) => {
+      execute({
+        action: () => deleteNoteUseCase.execute(id),
+      });
+    },
+    [deleteNoteUseCase]
+  );
 
   const deleteAllNotes = useCallback(() => {
     execute({

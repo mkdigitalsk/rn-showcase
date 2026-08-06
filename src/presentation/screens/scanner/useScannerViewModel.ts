@@ -29,13 +29,17 @@ export const useScannerViewModel = () => {
   }, []);
 
   const generateCode = useCallback(() => {
-    if (!uiState.inputText.trim()) { return; }
+    if (!uiState.inputText.trim()) {
+      return;
+    }
     setUiState(prev => ({ ...prev, showGeneratedCode: true }));
   }, [uiState.inputText]);
 
   const onCodeScanned = useCallback((result: string) => {
     setUiState(prev => {
-      if (prev.scannedResult === result) { return prev; }
+      if (prev.scannedResult === result) {
+        return prev;
+      }
       return { ...prev, scannedResult: result };
     });
   }, []);

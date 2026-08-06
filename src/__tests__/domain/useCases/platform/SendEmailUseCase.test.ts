@@ -37,11 +37,7 @@ describe('SendEmailUseCase', () => {
     await test({
       whenAction: () => t.classUnderTest.execute(params),
       then: () => {
-        expect(t.mockRepo.sendEmail).toHaveBeenCalledWith(
-          'test@example.com',
-          'Test Subject',
-          'Test Body',
-        );
+        expect(t.mockRepo.sendEmail).toHaveBeenCalledWith('test@example.com', 'Test Subject', 'Test Body');
       },
     });
   });

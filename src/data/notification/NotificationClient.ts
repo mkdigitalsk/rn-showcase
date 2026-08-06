@@ -1,16 +1,8 @@
 import { injectable } from 'tsyringe';
-import notifee, {
-  AuthorizationStatus,
-  AndroidImportance,
-} from '@notifee/react-native';
+import notifee, { AuthorizationStatus, AndroidImportance } from '@notifee/react-native';
 import { Linking, Platform } from 'react-native';
 import { LocalNotificationService } from '../../domain/repositories/LocalNotificationService';
-import {
-  AppNotification,
-  NotificationChannel,
-  NotificationChannelConfig,
-  PushPermissionStatus,
-} from '../../domain/model/Notification';
+import { AppNotification, NotificationChannel, NotificationChannelConfig, PushPermissionStatus } from '../../domain/model/Notification';
 
 @injectable()
 export class NotificationClient implements LocalNotificationService {
@@ -68,7 +60,9 @@ export class NotificationClient implements LocalNotificationService {
   }
 
   private async ensureChannels(): Promise<void> {
-    if (this.channelsCreated) { return; }
+    if (this.channelsCreated) {
+      return;
+    }
 
     const importanceMap: Record<NotificationChannel, AndroidImportance> = {
       [NotificationChannel.GENERAL]: AndroidImportance.DEFAULT,

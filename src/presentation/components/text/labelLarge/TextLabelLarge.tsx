@@ -4,7 +4,9 @@ import { useAppColors } from '../../../foundation/theme';
 import { TextBaseProps, TextVariantProps } from '../TextProps';
 
 export const TextLabelLarge = ({ children, color }: TextBaseProps) => (
-  <Text variant="labelLarge" style={{ color }}>{children}</Text>
+  <Text variant="labelLarge" style={{ color }}>
+    {children}
+  </Text>
 );
 
 export const TextLabelLargePrimary = ({ children }: TextVariantProps) => {
