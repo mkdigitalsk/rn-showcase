@@ -112,6 +112,7 @@ android {
 
 dependencies {
     implementation("com.facebook.react:react-android")
+    implementation("androidx.core:core-splashscreen:1.2.0")
 
     val hermesEnabled: String by project
     if (hermesEnabled.toBoolean()) {
