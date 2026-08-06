@@ -16,9 +16,9 @@ import { execute } from '../../hooks/useExecute';
 import { PlatformApisUiState, initialPlatformApisUiState } from './PlatformApisUiState';
 
 const DEMO_PHONE_NUMBER = '+1234567890';
-const DEMO_URL = 'https://github.com/KusnirM';
+const DEMO_URL = 'https://mkdigital.sk';
 const DEMO_EMAIL = 'example@example.com';
-const DEMO_SHARE_TEXT = 'Check out this awesome app!';
+const DEMO_SHARE_TEXT = 'We build cross-platform apps end to end — iOS, Android, web and backend.\n\nhttps://mkdigital.sk';
 const DEMO_EMAIL_SUBJECT = 'Hello from RN Showcase';
 const DEMO_EMAIL_BODY = 'This email was sent from the React Native Showcase app.';
 const DEMO_COPY_TEXT = 'This text was copied from RN Showcase!';
