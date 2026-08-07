@@ -1,6 +1,7 @@
 import { useState, useCallback, useEffect } from 'react';
 import { TYPES } from '../../../app/diTypes';
 import { LoginUseCase } from '../../../domain/useCases/auth/LoginUseCase';
+import { LoginWithTokenUseCase } from '../../../domain/useCases/auth/LoginWithTokenUseCase';
 import { IsBiometricEnabledUseCase } from '../../../domain/useCases/biometric/IsBiometricEnabledUseCase';
 import { AuthenticateWithBiometricUseCase } from '../../../domain/useCases/biometric/AuthenticateWithBiometricUseCase';
 import { useResolve } from '../../hooks/useResolve';
@@ -15,6 +16,7 @@ export const useLoginViewModel = () => {
   const [uiState, setUiState] = useState<LoginUiState>(initialLoginUiState);
 
   const loginUseCase = useResolve<LoginUseCase>(TYPES.LoginUseCase);
+  const loginWithTokenUseCase = useResolve<LoginWithTokenUseCase>(TYPES.LoginWithTokenUseCase);
   const isBiometricEnabledUseCase = useResolve<IsBiometricEnabledUseCase>(TYPES.IsBiometricEnabledUseCase);
   const authenticateWithBiometricUseCase = useResolve<AuthenticateWithBiometricUseCase>(TYPES.AuthenticateWithBiometricUseCase);
 
@@ -105,6 +107,23 @@ export const useLoginViewModel = () => {
     [authenticateWithBiometricUseCase]
   );
 
+  const restoreSession = useCallback(
+    (onRestored?: () => void): void => {
+      execute({
+        action: () => loginWithTokenUseCase.execute(),
+        onLoading: () => setUiState(prev => ({ ...prev, isLoading: true })),
+        onSuccess: user => {
+          setUiState(prev => ({ ...prev, isLoading: false }));
+          if (user) {
+            onRestored?.();
+          }
+        },
+        onError: () => setUiState(prev => ({ ...prev, isLoading: false })),
+      });
+    },
+    [loginWithTokenUseCase]
+  );
+
   const fillTestAccount = useCallback(() => {
     setUiState(prev => ({
       ...prev,
@@ -120,6 +139,7 @@ export const useLoginViewModel = () => {
     onEmailChange,
     onPasswordChange,
     login,
+    restoreSession,
     authenticateWithBiometrics,
     fillTestAccount,
   };
