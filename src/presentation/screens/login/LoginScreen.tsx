@@ -1,22 +1,34 @@
 import React, { useCallback, useEffect } from 'react';
 import { View, ScrollView, KeyboardAvoidingView, Platform } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { IconButton } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { useLoginViewModel } from './useLoginViewModel';
+import { useLoginViewModel, TEST_EMAIL, TEST_PASSWORD } from './useLoginViewModel';
 import { useAppColors } from '../../foundation/theme';
 import { useStrings } from '../../foundation/strings';
 import { RootStackParamList } from '../../navigation/RootStackNavigator';
-import { AppCard, AppTextField, ContainedButton, AppTextButton, ColumnSpacer2, ColumnSpacer4 } from '../../components';
+import {
+  AppCard,
+  AppTextField,
+  AppPasswordTextField,
+  ContainedButton,
+  AppTextButton,
+  ColumnSpacer2,
+  ColumnSpacer4,
+  ColumnSpacer8,
+} from '../../components';
+import { TextBodySmallNeutral80 } from '../../components/text/bodySmall/TextBodySmall';
 import { TextHeadlineMedium } from '../../components/text/headlineMedium/TextHeadlineMedium';
 import { TextBodyMediumNeutral80 } from '../../components/text/bodyMedium/TextBodyMedium';
 import { TextLabelSmall } from '../../components/text/labelSmall/TextLabelSmall';
-import { space4, space8 } from '../../foundation/dimensions';
+import { space4, space8, cardCornerRadius6 } from '../../foundation/dimensions';
 
 type LoginNavigationProp = NativeStackNavigationProp<RootStackParamList>;
 
 export const LoginScreen = () => {
   const colors = useAppColors();
+  const insets = useSafeAreaInsets();
   const { t } = useStrings();
   const navigation = useNavigation<LoginNavigationProp>();
   const { uiState, onEmailChange, onPasswordChange, login, restoreSession, authenticateWithBiometrics, fillTestAccount } =
@@ -33,10 +45,6 @@ export const LoginScreen = () => {
   const handleBiometricLogin = useCallback(() => {
     authenticateWithBiometrics(() => navigation.replace('Main'));
   }, [authenticateWithBiometrics, navigation]);
-
-  const handleSkip = useCallback(() => {
-    navigation.replace('Main');
-  }, [navigation]);
 
   const getEmailErrorText = (): string | undefined => {
     switch (uiState.emailError) {
@@ -67,18 +75,21 @@ export const LoginScreen = () => {
       <ScrollView
         contentContainerStyle={{
           flexGrow: 1,
-          justifyContent: 'center',
           padding: space4,
+          paddingTop: insets.top + space4,
+          paddingBottom: insets.bottom + space4,
         }}
         keyboardShouldPersistTaps="handled"
       >
-        <TextHeadlineMedium color={colors.primary}>{t('login_title')}</TextHeadlineMedium>
-        <ColumnSpacer2 />
-        <TextBodyMediumNeutral80>{t('login_subtitle')}</TextBodyMediumNeutral80>
+        <View style={{ alignItems: 'center' }}>
+          <TextHeadlineMedium color={colors.primary}>{t('login_title')}</TextHeadlineMedium>
+          <ColumnSpacer2 />
+          <TextBodyMediumNeutral80>{t('login_subtitle')}</TextBodyMediumNeutral80>
+        </View>
 
-        <ColumnSpacer4 />
+        <ColumnSpacer8 />
 
-        <AppCard elevated>
+        <View>
           <AppTextField
             value={uiState.email}
             onChangeText={onEmailChange}
@@ -92,14 +103,13 @@ export const LoginScreen = () => {
 
           <ColumnSpacer4 />
 
-          <AppTextField
+          <AppPasswordTextField
             value={uiState.password}
             onChangeText={onPasswordChange}
             label={t('login_password_label')}
             placeholder={t('login_password_placeholder')}
             error={uiState.passwordError !== null}
             helperText={getPasswordErrorText()}
-            secureTextEntry
           />
 
           {uiState.loginFailed && (
@@ -111,8 +121,14 @@ export const LoginScreen = () => {
 
           <ColumnSpacer4 />
 
-          <ContainedButton text={t('login_button')} onPress={handleLogin} loading={uiState.isLoading} disabled={uiState.isLoading} />
-        </AppCard>
+          <ContainedButton
+            text={t('login_button')}
+            onPress={handleLogin}
+            loading={uiState.isLoading}
+            disabled={uiState.isLoading}
+            fullWidth
+          />
+        </View>
 
         {uiState.biometricsAvailable && (
           <>
@@ -139,16 +155,17 @@ export const LoginScreen = () => {
 
         <ColumnSpacer4 />
 
-        <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
-          <AppTextButton text={t('login_skip')} onPress={handleSkip} />
-          <AppTextButton text={t('login_fill_test')} onPress={fillTestAccount} />
+        <AppTextButton text={t('login_to_register')} onPress={() => navigation.navigate('Register')} align="center" />
+
+        <View style={{ flex: 1, minHeight: space8 }} />
+
+        <View style={{ backgroundColor: colors.neutral20, borderRadius: cardCornerRadius6, padding: space4, alignItems: 'center' }}>
+          <TextBodySmallNeutral80>{t('login_test_account_hint')}</TextBodySmallNeutral80>
+          <ColumnSpacer2 />
+          <TextBodyMediumNeutral80>{TEST_EMAIL}</TextBodyMediumNeutral80>
+          <TextBodyMediumNeutral80>{TEST_PASSWORD}</TextBodyMediumNeutral80>
+          <AppTextButton text={t('login_fill_test')} onPress={fillTestAccount} align="center" />
         </View>
-
-        <ColumnSpacer2 />
-
-        <AppTextButton text={t('login_to_register')} onPress={() => navigation.navigate('Register')} />
-
-        <View style={{ height: space8 }} />
       </ScrollView>
     </KeyboardAvoidingView>
   );
