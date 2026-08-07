@@ -19,14 +19,14 @@ export const sk: Record<StringKey, string> = {
   screen_settings: 'Nastavenia',
 
   // Feature subtitles (Home screen cards)
-  feature_ui_components_subtitle: 'Material Design 3 komponenty',
-  feature_networking_subtitle: 'REST API integrácia s Axios',
-  feature_storage_subtitle: 'Lokálne úložisko s MMKV',
-  feature_database_subtitle: 'SQLite databázová integrácia',
+  feature_ui_components_subtitle: 'React Native Paper, Material 3',
+  feature_networking_subtitle: 'Axios, REST API',
+  feature_storage_subtitle: 'MMKV, kľúč-hodnota úložisko',
+  feature_database_subtitle: 'op-sqlite, lokálne úložisko',
   feature_platform_apis_subtitle: 'Natívne platformové integrácie',
-  feature_scanner_subtitle: 'Skenovanie QR a čiarových kódov',
-  feature_calendar_subtitle: 'Integrácia kalendárových udalostí',
-  feature_notifications_subtitle: 'Push a lokálne notifikácie',
+  feature_scanner_subtitle: 'Vision Camera, QR a čiarové kódy',
+  feature_calendar_subtitle: 'react-native-calendars, výber rozsahu dátumov',
+  feature_notifications_subtitle: 'Notifee + FCM, push a lokálne',
 
   // UI Components
   ui_section_buttons: 'Tlačidlá',

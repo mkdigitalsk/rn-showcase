@@ -17,14 +17,14 @@ export const en = {
   screen_settings: 'Settings',
 
   // Feature subtitles (Home screen cards)
-  feature_ui_components_subtitle: 'Material Design 3 components',
-  feature_networking_subtitle: 'REST API integration with Axios',
-  feature_storage_subtitle: 'Local storage with MMKV',
-  feature_database_subtitle: 'SQLite database integration',
+  feature_ui_components_subtitle: 'React Native Paper, Material 3',
+  feature_networking_subtitle: 'Axios, REST API',
+  feature_storage_subtitle: 'MMKV, key-value storage',
+  feature_database_subtitle: 'op-sqlite, local persistence',
   feature_platform_apis_subtitle: 'Native platform integrations',
-  feature_scanner_subtitle: 'QR code and barcode scanning',
-  feature_calendar_subtitle: 'Calendar events integration',
-  feature_notifications_subtitle: 'Push and local notifications',
+  feature_scanner_subtitle: 'Vision Camera, QR and barcodes',
+  feature_calendar_subtitle: 'react-native-calendars, date range picker',
+  feature_notifications_subtitle: 'Notifee + FCM, push and local',
 
   // UI Components
   ui_section_buttons: 'Buttons',
