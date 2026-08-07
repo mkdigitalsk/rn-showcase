@@ -20,6 +20,10 @@ export class AuthRepositoryImpl implements AuthRepository {
     return toRegisteredUser(response);
   }
 
+  async logout(): Promise<void> {
+    this.session.clearAuthToken();
+  }
+
   async register(name: string, email: string, password: string): Promise<RegisteredUser> {
     try {
       const response = await this.api.register(email, password, name);

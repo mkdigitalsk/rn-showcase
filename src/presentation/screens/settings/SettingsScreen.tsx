@@ -2,6 +2,8 @@ import React from 'react';
 import { View, ScrollView, TouchableOpacity } from 'react-native';
 import { Dialog, Portal } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import {
   TextTitleLargePrimary,
   TextBodyLargePrimary,
@@ -10,7 +12,9 @@ import {
   TextBodyLargeNeutral100,
   AppCard,
   AppRadioButton,
+  AppTextButtonError,
 } from '../../components';
+import { RootStackParamList } from '../../navigation/RootStackNavigator';
 import { space4, space2 } from '../../foundation/dimensions';
 import { useAppColors, useAppTheme } from '../../foundation/theme';
 import { FlagSK, FlagEN } from '../../foundation/AppIcons';
@@ -21,6 +25,7 @@ import { Language } from '../../foundation/strings';
 export const SettingsScreen = () => {
   const colors = useAppColors();
   const theme = useAppTheme();
+  const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
   const {
     uiState,
     t,
@@ -31,7 +36,11 @@ export const SettingsScreen = () => {
     onLanguageSelected,
     onLanguageDialogDismiss,
     triggerTestCrash,
+    logout,
   } = useSettingsViewModel();
+
+  // Reset rather than navigate: the tabs stay on the stack otherwise, and Back returns to a signed-out Home.
+  const handleLogout = () => logout(() => navigation.reset({ index: 0, routes: [{ name: 'Login' }] }));
 
   const themeModeLabel = (mode: ThemeMode): string => {
     switch (mode) {
@@ -99,6 +108,8 @@ export const SettingsScreen = () => {
         <View style={{ alignItems: 'flex-end', marginTop: space4 }}>
           <TextBodySmallNeutral80>{`${t('settings_version')} ${uiState.versionName}`}</TextBodySmallNeutral80>
         </View>
+
+        <AppTextButtonError text={t('settings_logout')} onPress={handleLogout} align="center" />
       </ScrollView>
 
       {/* Theme Selection Dialog */}
