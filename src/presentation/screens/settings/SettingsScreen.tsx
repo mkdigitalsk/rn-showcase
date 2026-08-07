@@ -9,6 +9,7 @@ import {
   TextBodyLargePrimary,
   TextBodyMediumNeutral80,
   TextBodySmallNeutral80,
+  TextBodySmall,
   TextBodyLargeNeutral100,
   AppCard,
   AppRadioButton,
@@ -16,6 +17,8 @@ import {
 } from '../../components';
 import { RootStackParamList } from '../../navigation/RootStackNavigator';
 import { space4, space2 } from '../../foundation/dimensions';
+
+const LOCKUP_ASPECT = 732 / 180;
 import { useAppColors, useAppTheme } from '../../foundation/theme';
 import { FlagSK, FlagEN } from '../../foundation/AppIcons';
 import { useSettingsViewModel } from './useSettingsViewModel';
@@ -36,6 +39,7 @@ export const SettingsScreen = () => {
     onLanguageSelected,
     onLanguageDialogDismiss,
     triggerTestCrash,
+    openWeb,
     logout,
   } = useSettingsViewModel();
 
@@ -103,6 +107,17 @@ export const SettingsScreen = () => {
             />
           </AppCard>
         )}
+
+        <TextTitleLargePrimary>{t('settings_about')}</TextTitleLargePrimary>
+
+        <AppCard elevated onPress={openWeb} cover={require('../../assets/mk-digital-lockup.png')} coverAspectRatio={LOCKUP_ASPECT}>
+          <View style={{ paddingVertical: space4, gap: space2 }}>
+            <TextBodyLargeNeutral100 bold>{t('settings_about_tagline')}</TextBodyLargeNeutral100>
+            <TextBodySmall color={colors.primary} underline>
+              {t('settings_about_web')}
+            </TextBodySmall>
+          </View>
+        </AppCard>
 
         {/* Version Footer */}
         <View style={{ alignItems: 'flex-end', marginTop: space4 }}>

@@ -95,6 +95,8 @@ export const en = {
   settings_theme: 'Theme',
   settings_dark_mode: 'Dark Mode',
   settings_about: 'About',
+  settings_about_tagline: 'Your product, shipped end-to-end.',
+  settings_about_web: 'mkdigital.sk',
   settings_version: 'Version',
   settings_logout: 'Log out',
   settings_appearance: 'Appearance',
