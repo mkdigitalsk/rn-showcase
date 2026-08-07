@@ -98,7 +98,7 @@ export const en = {
   settings_about_tagline: 'Your product, shipped end-to-end.',
   settings_about_web: 'mkdigital.sk',
   settings_version: 'Version',
-  settings_logout: 'Log out',
+  settings_logout: 'Sign Out',
   settings_appearance: 'Appearance',
   settings_theme_light: 'Light',
   settings_theme_dark: 'Dark',
