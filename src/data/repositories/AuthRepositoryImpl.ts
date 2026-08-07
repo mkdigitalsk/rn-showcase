@@ -20,6 +20,20 @@ export class AuthRepositoryImpl implements AuthRepository {
     return toRegisteredUser(response);
   }
 
+  // The stored token is the whole session; the server decides whether it still holds.
+  async loginWithToken(): Promise<RegisteredUser | null> {
+    if (!this.session.getAuthToken()) {
+      return null;
+    }
+    try {
+      const response = await this.api.me();
+      this.session.setAuthToken(response.token);
+      return toRegisteredUser(response);
+    } catch {
+      return null;
+    }
+  }
+
   async logout(): Promise<void> {
     this.session.clearAuthToken();
   }
