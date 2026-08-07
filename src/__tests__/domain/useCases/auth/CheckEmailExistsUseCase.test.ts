@@ -6,6 +6,7 @@ import { AuthRepository } from '../../../../domain/repositories/AuthRepository';
 function createMockAuthRepository(): AuthRepository {
   return {
     login: jest.fn(),
+    logout: jest.fn(),
     register: jest.fn(),
     emailExists: jest.fn(),
   };

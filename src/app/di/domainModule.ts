@@ -6,6 +6,8 @@ import { SetSessionCounterUseCase } from '../../domain/useCases/storage/SetSessi
 import { SetPersistentCounterUseCase } from '../../domain/useCases/storage/SetPersistentCounterUseCase';
 import { ClearSessionUseCase } from '../../domain/useCases/storage/ClearSessionUseCase';
 import { LoginUseCase } from '../../domain/useCases/auth/LoginUseCase';
+import { LoginWithTokenUseCase } from '../../domain/useCases/auth/LoginWithTokenUseCase';
+import { LogoutUseCase } from '../../domain/useCases/auth/LogoutUseCase';
 import { RegisterUserUseCase } from '../../domain/useCases/auth/RegisterUserUseCase';
 import { CheckEmailExistsUseCase } from '../../domain/useCases/auth/CheckEmailExistsUseCase';
 import { ShareUseCase } from '../../domain/useCases/platform/ShareUseCase';
@@ -44,6 +46,8 @@ export const domainModule = () => {
 
   // Auth
   container.register(TYPES.LoginUseCase, { useClass: LoginUseCase });
+  container.register(TYPES.LoginWithTokenUseCase, { useClass: LoginWithTokenUseCase });
+  container.register(TYPES.LogoutUseCase, { useClass: LogoutUseCase });
   container.register(TYPES.RegisterUserUseCase, { useClass: RegisterUserUseCase });
   container.register(TYPES.CheckEmailExistsUseCase, { useClass: CheckEmailExistsUseCase });
 

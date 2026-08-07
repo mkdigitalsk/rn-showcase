@@ -95,6 +95,7 @@ export const en = {
   settings_dark_mode: 'Dark Mode',
   settings_about: 'About',
   settings_version: 'Version',
+  settings_logout: 'Log out',
   settings_appearance: 'Appearance',
   settings_theme_light: 'Light',
   settings_theme_dark: 'Dark',

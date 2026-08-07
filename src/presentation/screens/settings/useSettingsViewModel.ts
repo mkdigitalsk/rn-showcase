@@ -1,4 +1,8 @@
 import { useCallback, useMemo, useState } from 'react';
+import { TYPES } from '../../../app/diTypes';
+import { LogoutUseCase } from '../../../domain/useCases/auth/LogoutUseCase';
+import { useResolve } from '../../hooks/useResolve';
+import { execute } from '../../hooks/useExecute';
 import { ThemeMode } from '../../foundation/themeMode';
 import { useThemeMode } from '../../foundation/ThemeProvider';
 import { useStrings, Language } from '../../foundation/strings';
@@ -8,6 +12,7 @@ import { version } from '../../../../package.json';
 
 export const useSettingsViewModel = () => {
   const { themeMode, setThemeMode } = useThemeMode();
+  const logoutUseCase = useResolve<LogoutUseCase>(TYPES.LogoutUseCase);
   const { language, setLanguage, t } = useStrings();
   const [showThemeDialog, setShowThemeDialog] = useState(false);
   const [showLanguageDialog, setShowLanguageDialog] = useState(false);
@@ -56,6 +61,16 @@ export const useSettingsViewModel = () => {
     setShowLanguageDialog(false);
   }, []);
 
+  const logout = useCallback(
+    (onLoggedOut?: () => void): void => {
+      execute({
+        action: () => logoutUseCase.execute(),
+        onSuccess: () => onLoggedOut?.(),
+      });
+    },
+    [logoutUseCase]
+  );
+
   const triggerTestCrash = useCallback(() => {
     crash(getCrashlytics());
   }, []);
@@ -70,5 +85,6 @@ export const useSettingsViewModel = () => {
     onLanguageSelected,
     onLanguageDialogDismiss,
     triggerTestCrash,
+    logout,
   };
 };
