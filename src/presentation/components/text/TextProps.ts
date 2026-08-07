@@ -6,6 +6,8 @@ export interface TextBaseProps {
   children: string;
   color: string;
   numberOfLines?: number;
+  bold?: boolean;
+  underline?: boolean;
 }
 
 /**
