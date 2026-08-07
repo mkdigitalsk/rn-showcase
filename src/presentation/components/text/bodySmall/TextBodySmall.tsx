@@ -3,8 +3,8 @@ import { Text } from 'react-native-paper';
 import { useAppColors } from '../../../foundation/theme';
 import { TextBaseProps, TextVariantProps } from '../TextProps';
 
-export const TextBodySmall = ({ children, color }: TextBaseProps) => (
-  <Text variant="bodySmall" style={{ color }}>
+export const TextBodySmall = ({ children, color, underline }: TextBaseProps) => (
+  <Text variant="bodySmall" style={{ color, textDecorationLine: underline ? 'underline' : 'none' }}>
     {children}
   </Text>
 );

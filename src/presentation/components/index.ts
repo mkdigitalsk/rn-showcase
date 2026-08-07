@@ -22,6 +22,7 @@ export * from './spacers/Spacers';
 export * from './dividers/AppDivider';
 
 export * from './AppTextField';
+export * from './AppPasswordTextField';
 export * from './AppCheckbox';
 export * from './AppSwitch';
 export * from './AppRadioButton';

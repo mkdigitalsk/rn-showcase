@@ -1,5 +1,6 @@
 import { useCallback, useMemo, useState } from 'react';
 import { TYPES } from '../../../app/diTypes';
+import { OpenLinkUseCase } from '../../../domain/useCases/platform/OpenLinkUseCase';
 import { LogoutUseCase } from '../../../domain/useCases/auth/LogoutUseCase';
 import { useResolve } from '../../hooks/useResolve';
 import { execute } from '../../hooks/useExecute';
@@ -10,8 +11,11 @@ import { SettingsUiState } from './SettingsUiState';
 import { getCrashlytics, crash } from '@react-native-firebase/crashlytics';
 import { version } from '../../../../package.json';
 
+const STUDIO_URL = 'https://mkdigital.sk';
+
 export const useSettingsViewModel = () => {
   const { themeMode, setThemeMode } = useThemeMode();
+  const openLinkUseCase = useResolve<OpenLinkUseCase>(TYPES.OpenLinkUseCase);
   const logoutUseCase = useResolve<LogoutUseCase>(TYPES.LogoutUseCase);
   const { language, setLanguage, t } = useStrings();
   const [showThemeDialog, setShowThemeDialog] = useState(false);
@@ -75,6 +79,10 @@ export const useSettingsViewModel = () => {
     crash(getCrashlytics());
   }, []);
 
+  const openWeb = useCallback(() => {
+    execute({ action: () => openLinkUseCase.execute(STUDIO_URL) });
+  }, [openLinkUseCase]);
+
   return {
     uiState,
     t,
@@ -85,6 +93,7 @@ export const useSettingsViewModel = () => {
     onLanguageSelected,
     onLanguageDialogDismiss,
     triggerTestCrash,
+    openWeb,
     logout,
   };
 };

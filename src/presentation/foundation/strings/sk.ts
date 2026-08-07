@@ -97,6 +97,8 @@ export const sk: Record<StringKey, string> = {
   settings_theme: 'Téma',
   settings_dark_mode: 'Tmavý režim',
   settings_about: 'O aplikácii',
+  settings_about_tagline: 'Váš produkt, dodaný od začiatku do konca.',
+  settings_about_web: 'mkdigital.sk',
   settings_version: 'Verzia',
   settings_logout: 'Odhlásiť sa',
   settings_appearance: 'Vzhľad',
