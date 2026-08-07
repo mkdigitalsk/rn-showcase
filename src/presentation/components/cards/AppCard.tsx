@@ -1,14 +1,18 @@
 import React from 'react';
+import { ImageSourcePropType } from 'react-native';
 import { Card } from 'react-native-paper';
 import { useAppTheme } from '../../foundation/theme';
+import { space4 } from '../../foundation/dimensions';
 
 interface AppCardProps {
   children: React.ReactNode;
   elevated?: boolean;
   onPress?: () => void;
+  cover?: ImageSourcePropType;
+  coverAspectRatio?: number;
 }
 
-export const AppCard: React.FC<AppCardProps> = ({ children, elevated = true, onPress }): React.JSX.Element => {
+export const AppCard: React.FC<AppCardProps> = ({ children, elevated = true, onPress, cover, coverAspectRatio }): React.JSX.Element => {
   const theme = useAppTheme();
   return (
     <Card
@@ -21,7 +25,8 @@ export const AppCard: React.FC<AppCardProps> = ({ children, elevated = true, onP
       }}
       onPress={onPress}
     >
-      <Card.Content>{children}</Card.Content>
+      {cover && <Card.Cover source={cover} style={{ height: undefined, aspectRatio: coverAspectRatio }} />}
+      <Card.Content style={{ paddingVertical: space4 }}>{children}</Card.Content>
     </Card>
   );
 };
