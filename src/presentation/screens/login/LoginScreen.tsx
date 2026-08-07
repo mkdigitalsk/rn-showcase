@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { View, ScrollView, KeyboardAvoidingView, Platform } from 'react-native';
 import { IconButton } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
@@ -19,7 +19,12 @@ export const LoginScreen = () => {
   const colors = useAppColors();
   const { t } = useStrings();
   const navigation = useNavigation<LoginNavigationProp>();
-  const { uiState, onEmailChange, onPasswordChange, login, authenticateWithBiometrics, fillTestAccount } = useLoginViewModel();
+  const { uiState, onEmailChange, onPasswordChange, login, restoreSession, authenticateWithBiometrics, fillTestAccount } =
+    useLoginViewModel();
+
+  useEffect(() => {
+    restoreSession(() => navigation.replace('Main'));
+  }, [restoreSession, navigation]);
 
   const handleLogin = useCallback(() => {
     login(() => navigation.replace('Main'));
