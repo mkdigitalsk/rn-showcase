@@ -27,7 +27,8 @@ jest.mock('react-native-localize', () => ({
 // Mock tsyringe
 jest.mock('tsyringe', () => ({
   container: {
-    resolve: jest.fn(),
+    // Providers resolve use cases at mount; an undefined resolve would crash every screen render.
+    resolve: jest.fn(() => ({ execute: jest.fn() })),
     registerSingleton: jest.fn(),
     register: jest.fn(),
   },
@@ -35,5 +36,5 @@ jest.mock('tsyringe', () => ({
   inject: () => () => {},
 }));
 
-// Mock reflect-metadata
-jest.mock('reflect-metadata', () => {});
+// reflect-metadata stays real: the babel decorator transform emits Reflect.metadata() calls.
+require('reflect-metadata');
