@@ -8,9 +8,10 @@ interface ContainedButtonProps {
   onPress: () => void;
   loading?: boolean;
   disabled?: boolean;
+  fullWidth?: boolean;
 }
 
-export const ContainedButton: React.FC<ContainedButtonProps> = ({ text, onPress, loading, disabled }) => {
+export const ContainedButton: React.FC<ContainedButtonProps> = ({ text, onPress, loading, disabled, fullWidth }) => {
   const theme = useAppTheme();
 
   return (
@@ -18,16 +19,17 @@ export const ContainedButton: React.FC<ContainedButtonProps> = ({ text, onPress,
       mode="contained"
       onPress={onPress}
       loading={loading}
-      disabled={disabled}
+      disabled={disabled || loading}
       buttonColor={theme.colors.primary}
       textColor={theme.colors.onPrimary}
       style={{
-        alignSelf: 'flex-start',
+        alignSelf: fullWidth ? 'stretch' : 'flex-start',
         borderRadius: cardCornerRadius6,
       }}
       contentStyle={{ paddingHorizontal: space4 }}
+      labelStyle={loading ? { marginHorizontal: 0 } : undefined}
     >
-      {text}
+      {loading ? '' : text}
     </Button>
   );
 };
