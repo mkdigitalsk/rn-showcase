@@ -1,0 +1,1212 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SettingsScreen renders every section 1`] = `
+<RNCSafeAreaProvider
+  onInsetsChange={[Function]}
+  style={
+    [
+      {
+        "flex": 1,
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    style={
+      [
+        {
+          "flex": 1,
+        },
+        undefined,
+      ]
+    }
+  >
+    <View
+      collapsable={false}
+      pointerEvents="box-none"
+      style={
+        {
+          "flex": 1,
+        }
+      }
+    >
+      <View
+        style={
+          {
+            "backgroundColor": "#FFFFFF",
+            "flex": 1,
+          }
+        }
+      >
+        <RCTScrollView
+          contentContainerStyle={
+            {
+              "gap": 16,
+              "padding": 16,
+            }
+          }
+        >
+          <View>
+            <Text
+              style={
+                [
+                  {
+                    "textAlign": "left",
+                  },
+                  {
+                    "color": "#232323",
+                    "writingDirection": "ltr",
+                  },
+                  [
+                    {
+                      "fontFamily": "System",
+                      "fontSize": 22,
+                      "fontWeight": "400",
+                      "letterSpacing": 0,
+                      "lineHeight": 28,
+                    },
+                    {
+                      "color": "#0E2A47",
+                    },
+                  ],
+                ]
+              }
+            >
+              settings_appearance
+            </Text>
+            <View
+              collapsable={false}
+              style={
+                {
+                  "backgroundColor": "#FFFFFF",
+                  "borderRadius": 12,
+                  "shadowColor": "#000",
+                  "shadowOffset": {
+                    "height": 1,
+                    "width": 0,
+                  },
+                  "shadowOpacity": 0.15,
+                  "shadowRadius": 3,
+                }
+              }
+              testID="card-container-outer-layer"
+            >
+              <View
+                collapsable={false}
+                style={
+                  {
+                    "backgroundColor": "#FFFFFF",
+                    "borderColor": "#E4E4E4",
+                    "borderRadius": 12,
+                    "borderStyle": "solid",
+                    "borderWidth": 0,
+                    "flex": undefined,
+                    "shadowColor": "#000",
+                    "shadowOffset": {
+                      "height": 1,
+                      "width": 0,
+                    },
+                    "shadowOpacity": 0.3,
+                    "shadowRadius": 1,
+                  }
+                }
+                testID="card-container"
+              >
+                <View
+                  accessibilityState={
+                    {
+                      "busy": undefined,
+                      "checked": undefined,
+                      "disabled": undefined,
+                      "expanded": undefined,
+                      "selected": undefined,
+                    }
+                  }
+                  accessibilityValue={
+                    {
+                      "max": undefined,
+                      "min": undefined,
+                      "now": undefined,
+                      "text": undefined,
+                    }
+                  }
+                  accessible={true}
+                  collapsable={false}
+                  focusable={true}
+                  onBlur={[Function]}
+                  onClick={[Function]}
+                  onFocus={[Function]}
+                  onResponderGrant={[Function]}
+                  onResponderMove={[Function]}
+                  onResponderRelease={[Function]}
+                  onResponderTerminate={[Function]}
+                  onResponderTerminationRequest={[Function]}
+                  onStartShouldSetResponder={[Function]}
+                >
+                  <View
+                    style={
+                      [
+                        {
+                          "flexShrink": 1,
+                        },
+                        undefined,
+                      ]
+                    }
+                    testID="card"
+                  >
+                    <View
+                      borderRadiusStyles={{}}
+                      style={
+                        [
+                          {
+                            "paddingHorizontal": 16,
+                          },
+                          {
+                            "paddingBottom": 16,
+                          },
+                          {
+                            "paddingVertical": 16,
+                          },
+                        ]
+                      }
+                    >
+                      <View
+                        style={
+                          {
+                            "alignItems": "center",
+                            "flexDirection": "row",
+                            "gap": 16,
+                          }
+                        }
+                      >
+                        <Text
+                          allowFontScaling={false}
+                          selectable={false}
+                          style={
+                            [
+                              {
+                                "color": "#0E2A47",
+                                "fontSize": 24,
+                              },
+                              undefined,
+                              {
+                                "fontFamily": "Material Design Icons",
+                                "fontStyle": "normal",
+                                "fontWeight": "normal",
+                              },
+                              {},
+                            ]
+                          }
+                        >
+                          󰖔
+                        </Text>
+                        <View
+                          style={
+                            {
+                              "flex": 1,
+                            }
+                          }
+                        >
+                          <Text
+                            style={
+                              [
+                                {
+                                  "textAlign": "left",
+                                },
+                                {
+                                  "color": "#232323",
+                                  "writingDirection": "ltr",
+                                },
+                                [
+                                  {
+                                    "fontFamily": "System",
+                                    "fontSize": 16,
+                                    "fontWeight": "400",
+                                    "letterSpacing": 0.15,
+                                    "lineHeight": 24,
+                                  },
+                                  {
+                                    "color": "#0E2A47",
+                                    "fontWeight": undefined,
+                                  },
+                                ],
+                              ]
+                            }
+                          >
+                            settings_theme
+                          </Text>
+                          <View
+                            style={
+                              {
+                                "height": 8,
+                              }
+                            }
+                          />
+                          <Text
+                            style={
+                              [
+                                {
+                                  "textAlign": "left",
+                                },
+                                {
+                                  "color": "#232323",
+                                  "writingDirection": "ltr",
+                                },
+                                [
+                                  {
+                                    "fontFamily": "System",
+                                    "fontSize": 14,
+                                    "fontWeight": "400",
+                                    "letterSpacing": 0.25,
+                                    "lineHeight": 20,
+                                  },
+                                  {
+                                    "color": "#232323",
+                                  },
+                                ],
+                              ]
+                            }
+                          >
+                            settings_theme_system
+                          </Text>
+                        </View>
+                      </View>
+                    </View>
+                  </View>
+                </View>
+              </View>
+            </View>
+            <View
+              collapsable={false}
+              style={
+                {
+                  "backgroundColor": "#FFFFFF",
+                  "borderRadius": 12,
+                  "shadowColor": "#000",
+                  "shadowOffset": {
+                    "height": 1,
+                    "width": 0,
+                  },
+                  "shadowOpacity": 0.15,
+                  "shadowRadius": 3,
+                }
+              }
+              testID="card-container-outer-layer"
+            >
+              <View
+                collapsable={false}
+                style={
+                  {
+                    "backgroundColor": "#FFFFFF",
+                    "borderColor": "#E4E4E4",
+                    "borderRadius": 12,
+                    "borderStyle": "solid",
+                    "borderWidth": 0,
+                    "flex": undefined,
+                    "shadowColor": "#000",
+                    "shadowOffset": {
+                      "height": 1,
+                      "width": 0,
+                    },
+                    "shadowOpacity": 0.3,
+                    "shadowRadius": 1,
+                  }
+                }
+                testID="card-container"
+              >
+                <View
+                  accessibilityState={
+                    {
+                      "busy": undefined,
+                      "checked": undefined,
+                      "disabled": undefined,
+                      "expanded": undefined,
+                      "selected": undefined,
+                    }
+                  }
+                  accessibilityValue={
+                    {
+                      "max": undefined,
+                      "min": undefined,
+                      "now": undefined,
+                      "text": undefined,
+                    }
+                  }
+                  accessible={true}
+                  collapsable={false}
+                  focusable={true}
+                  onBlur={[Function]}
+                  onClick={[Function]}
+                  onFocus={[Function]}
+                  onResponderGrant={[Function]}
+                  onResponderMove={[Function]}
+                  onResponderRelease={[Function]}
+                  onResponderTerminate={[Function]}
+                  onResponderTerminationRequest={[Function]}
+                  onStartShouldSetResponder={[Function]}
+                >
+                  <View
+                    style={
+                      [
+                        {
+                          "flexShrink": 1,
+                        },
+                        undefined,
+                      ]
+                    }
+                    testID="card"
+                  >
+                    <View
+                      borderRadiusStyles={{}}
+                      style={
+                        [
+                          {
+                            "paddingHorizontal": 16,
+                          },
+                          {
+                            "paddingBottom": 16,
+                          },
+                          {
+                            "paddingVertical": 16,
+                          },
+                        ]
+                      }
+                    >
+                      <View
+                        style={
+                          {
+                            "alignItems": "center",
+                            "flexDirection": "row",
+                            "gap": 16,
+                          }
+                        }
+                      >
+                        <RNSVGSvgView
+                          align="xMidYMid"
+                          bbHeight={24}
+                          bbWidth={24}
+                          focusable={false}
+                          height={24}
+                          meetOrSlice={0}
+                          minX={0}
+                          minY={0}
+                          style={
+                            [
+                              {
+                                "backgroundColor": "transparent",
+                                "borderWidth": 0,
+                              },
+                              {
+                                "flex": 0,
+                                "height": 24,
+                                "width": 24,
+                              },
+                            ]
+                          }
+                          vbHeight={36}
+                          vbWidth={36}
+                          width={24}
+                        >
+                          <RNSVGGroup
+                            fill={
+                              {
+                                "payload": 4278190080,
+                                "type": 0,
+                              }
+                            }
+                          >
+                            <RNSVGPath
+                              d="M0 9.059V13h5.628zM4.664 31H13v-5.837zM23 25.164V31h8.335zM0 23v3.941L5.63 23zM31.337 5H23v5.837zM36 26.942V23h-5.631zM36 13V9.059L30.371 13zM13 5H4.664L13 10.837z"
+                              fill={
+                                {
+                                  "payload": 4278199421,
+                                  "type": 0,
+                                }
+                              }
+                              propList={
+                                [
+                                  "fill",
+                                ]
+                              }
+                            />
+                            <RNSVGPath
+                              d="M25.14 23l9.712 6.801a3.977 3.977 0 0 0 .99-1.749L28.627 23H25.14zM13 23h-2.141l-9.711 6.8c.521.53 1.189.909 1.938 1.085L13 23.943V23zm10-10h2.141l9.711-6.8a3.988 3.988 0 0 0-1.937-1.085L23 12.057V13zm-12.141 0L1.148 6.2a3.994 3.994 0 0 0-.991 1.749L7.372 13h3.487z"
+                              fill={
+                                {
+                                  "payload": 4291762987,
+                                  "type": 0,
+                                }
+                              }
+                              propList={
+                                [
+                                  "fill",
+                                ]
+                              }
+                            />
+                            <RNSVGPath
+                              d="M36 21H21v10h2v-5.836L31.335 31H32a3.99 3.99 0 0 0 2.852-1.199L25.14 23h3.487l7.215 5.052c.093-.337.158-.686.158-1.052v-.058L30.369 23H36v-2zM0 21v2h5.63L0 26.941V27c0 1.091.439 2.078 1.148 2.8l9.711-6.8H13v.943l-9.914 6.941c.294.07.598.116.914.116h.664L13 25.163V31h2V21H0zM36 9a3.983 3.983 0 0 0-1.148-2.8L25.141 13H23v-.943l9.915-6.942A4.001 4.001 0 0 0 32 5h-.663L23 10.837V5h-2v10h15v-2h-5.629L36 9.059V9zM13 5v5.837L4.664 5H4a3.985 3.985 0 0 0-2.852 1.2l9.711 6.8H7.372L.157 7.949A3.968 3.968 0 0 0 0 9v.059L5.628 13H0v2h15V5h-2z"
+                              fill={
+                                {
+                                  "payload": 4293848814,
+                                  "type": 0,
+                                }
+                              }
+                              propList={
+                                [
+                                  "fill",
+                                ]
+                              }
+                            />
+                            <RNSVGPath
+                              d="M21 15V5h-6v10H0v6h15v10h6V21h15v-6z"
+                              fill={
+                                {
+                                  "payload": 4291762987,
+                                  "type": 0,
+                                }
+                              }
+                              propList={
+                                [
+                                  "fill",
+                                ]
+                              }
+                            />
+                          </RNSVGGroup>
+                        </RNSVGSvgView>
+                        <View
+                          style={
+                            {
+                              "flex": 1,
+                            }
+                          }
+                        >
+                          <Text
+                            style={
+                              [
+                                {
+                                  "textAlign": "left",
+                                },
+                                {
+                                  "color": "#232323",
+                                  "writingDirection": "ltr",
+                                },
+                                [
+                                  {
+                                    "fontFamily": "System",
+                                    "fontSize": 16,
+                                    "fontWeight": "400",
+                                    "letterSpacing": 0.15,
+                                    "lineHeight": 24,
+                                  },
+                                  {
+                                    "color": "#0E2A47",
+                                    "fontWeight": undefined,
+                                  },
+                                ],
+                              ]
+                            }
+                          >
+                            settings_language
+                          </Text>
+                          <View
+                            style={
+                              {
+                                "height": 8,
+                              }
+                            }
+                          />
+                          <Text
+                            style={
+                              [
+                                {
+                                  "textAlign": "left",
+                                },
+                                {
+                                  "color": "#232323",
+                                  "writingDirection": "ltr",
+                                },
+                                [
+                                  {
+                                    "fontFamily": "System",
+                                    "fontSize": 14,
+                                    "fontWeight": "400",
+                                    "letterSpacing": 0.25,
+                                    "lineHeight": 20,
+                                  },
+                                  {
+                                    "color": "#232323",
+                                  },
+                                ],
+                              ]
+                            }
+                          >
+                            language_en
+                          </Text>
+                        </View>
+                      </View>
+                    </View>
+                  </View>
+                </View>
+              </View>
+            </View>
+            <View
+              collapsable={false}
+              style={
+                {
+                  "backgroundColor": "#FFFFFF",
+                  "borderRadius": 12,
+                  "shadowColor": "#000",
+                  "shadowOffset": {
+                    "height": 1,
+                    "width": 0,
+                  },
+                  "shadowOpacity": 0.15,
+                  "shadowRadius": 3,
+                }
+              }
+              testID="card-container-outer-layer"
+            >
+              <View
+                collapsable={false}
+                style={
+                  {
+                    "backgroundColor": "#FFFFFF",
+                    "borderColor": "#E4E4E4",
+                    "borderRadius": 12,
+                    "borderStyle": "solid",
+                    "borderWidth": 0,
+                    "flex": undefined,
+                    "shadowColor": "#000",
+                    "shadowOffset": {
+                      "height": 1,
+                      "width": 0,
+                    },
+                    "shadowOpacity": 0.3,
+                    "shadowRadius": 1,
+                  }
+                }
+                testID="card-container"
+              >
+                <View
+                  accessibilityState={
+                    {
+                      "busy": undefined,
+                      "checked": undefined,
+                      "disabled": undefined,
+                      "expanded": undefined,
+                      "selected": undefined,
+                    }
+                  }
+                  accessibilityValue={
+                    {
+                      "max": undefined,
+                      "min": undefined,
+                      "now": undefined,
+                      "text": undefined,
+                    }
+                  }
+                  accessible={true}
+                  collapsable={false}
+                  focusable={true}
+                  onBlur={[Function]}
+                  onClick={[Function]}
+                  onFocus={[Function]}
+                  onResponderGrant={[Function]}
+                  onResponderMove={[Function]}
+                  onResponderRelease={[Function]}
+                  onResponderTerminate={[Function]}
+                  onResponderTerminationRequest={[Function]}
+                  onStartShouldSetResponder={[Function]}
+                >
+                  <View
+                    style={
+                      [
+                        {
+                          "flexShrink": 1,
+                        },
+                        undefined,
+                      ]
+                    }
+                    testID="card"
+                  >
+                    <View
+                      borderRadiusStyles={{}}
+                      style={
+                        [
+                          {
+                            "paddingHorizontal": 16,
+                          },
+                          {
+                            "paddingBottom": 16,
+                          },
+                          {
+                            "paddingVertical": 16,
+                          },
+                        ]
+                      }
+                    >
+                      <View
+                        style={
+                          {
+                            "alignItems": "center",
+                            "flexDirection": "row",
+                            "gap": 16,
+                          }
+                        }
+                      >
+                        <Text
+                          allowFontScaling={false}
+                          selectable={false}
+                          style={
+                            [
+                              {
+                                "color": "#0E2A47",
+                                "fontSize": 24,
+                              },
+                              undefined,
+                              {
+                                "fontFamily": "Material Design Icons",
+                                "fontStyle": "normal",
+                                "fontWeight": "normal",
+                              },
+                              {},
+                            ]
+                          }
+                        >
+                          󰨰
+                        </Text>
+                        <View
+                          style={
+                            {
+                              "flex": 1,
+                            }
+                          }
+                        >
+                          <Text
+                            style={
+                              [
+                                {
+                                  "textAlign": "left",
+                                },
+                                {
+                                  "color": "#232323",
+                                  "writingDirection": "ltr",
+                                },
+                                [
+                                  {
+                                    "fontFamily": "System",
+                                    "fontSize": 16,
+                                    "fontWeight": "400",
+                                    "letterSpacing": 0.15,
+                                    "lineHeight": 24,
+                                  },
+                                  {
+                                    "color": "#0E2A47",
+                                    "fontWeight": undefined,
+                                  },
+                                ],
+                              ]
+                            }
+                          >
+                            settings_test_crash_title
+                          </Text>
+                          <View
+                            style={
+                              {
+                                "height": 8,
+                              }
+                            }
+                          />
+                          <Text
+                            style={
+                              [
+                                {
+                                  "textAlign": "left",
+                                },
+                                {
+                                  "color": "#232323",
+                                  "writingDirection": "ltr",
+                                },
+                                [
+                                  {
+                                    "fontFamily": "System",
+                                    "fontSize": 14,
+                                    "fontWeight": "400",
+                                    "letterSpacing": 0.25,
+                                    "lineHeight": 20,
+                                  },
+                                  {
+                                    "color": "#232323",
+                                  },
+                                ],
+                              ]
+                            }
+                          >
+                            settings_test_crash_subtitle
+                          </Text>
+                        </View>
+                      </View>
+                    </View>
+                  </View>
+                </View>
+              </View>
+            </View>
+            <Text
+              style={
+                [
+                  {
+                    "textAlign": "left",
+                  },
+                  {
+                    "color": "#232323",
+                    "writingDirection": "ltr",
+                  },
+                  [
+                    {
+                      "fontFamily": "System",
+                      "fontSize": 22,
+                      "fontWeight": "400",
+                      "letterSpacing": 0,
+                      "lineHeight": 28,
+                    },
+                    {
+                      "color": "#0E2A47",
+                    },
+                  ],
+                ]
+              }
+            >
+              settings_about
+            </Text>
+            <View
+              collapsable={false}
+              style={
+                {
+                  "backgroundColor": "#FFFFFF",
+                  "borderRadius": 12,
+                  "shadowColor": "#000",
+                  "shadowOffset": {
+                    "height": 1,
+                    "width": 0,
+                  },
+                  "shadowOpacity": 0.15,
+                  "shadowRadius": 3,
+                }
+              }
+              testID="card-container-outer-layer"
+            >
+              <View
+                collapsable={false}
+                style={
+                  {
+                    "backgroundColor": "#FFFFFF",
+                    "borderColor": "#E4E4E4",
+                    "borderRadius": 12,
+                    "borderStyle": "solid",
+                    "borderWidth": 0,
+                    "flex": undefined,
+                    "shadowColor": "#000",
+                    "shadowOffset": {
+                      "height": 1,
+                      "width": 0,
+                    },
+                    "shadowOpacity": 0.3,
+                    "shadowRadius": 1,
+                  }
+                }
+                testID="card-container"
+              >
+                <View
+                  accessibilityState={
+                    {
+                      "busy": undefined,
+                      "checked": undefined,
+                      "disabled": undefined,
+                      "expanded": undefined,
+                      "selected": undefined,
+                    }
+                  }
+                  accessibilityValue={
+                    {
+                      "max": undefined,
+                      "min": undefined,
+                      "now": undefined,
+                      "text": undefined,
+                    }
+                  }
+                  accessible={true}
+                  collapsable={false}
+                  focusable={true}
+                  onBlur={[Function]}
+                  onClick={[Function]}
+                  onFocus={[Function]}
+                  onResponderGrant={[Function]}
+                  onResponderMove={[Function]}
+                  onResponderRelease={[Function]}
+                  onResponderTerminate={[Function]}
+                  onResponderTerminationRequest={[Function]}
+                  onStartShouldSetResponder={[Function]}
+                >
+                  <View
+                    style={
+                      [
+                        {
+                          "flexShrink": 1,
+                        },
+                        undefined,
+                      ]
+                    }
+                    testID="card"
+                  >
+                    <View
+                      style={
+                        [
+                          {
+                            "backgroundColor": "#eeeeee",
+                            "height": 195,
+                            "overflow": "hidden",
+                          },
+                          {
+                            "borderRadius": 12,
+                          },
+                          {
+                            "aspectRatio": 4.066666666666666,
+                            "height": undefined,
+                          },
+                        ]
+                      }
+                    >
+                      <Image
+                        accessibilityIgnoresInvertColors={true}
+                        borderRadiusStyles={{}}
+                        siblings={
+                          [
+                            "Card.Cover",
+                            "Card.Content",
+                          ]
+                        }
+                        source={
+                          {
+                            "testUri": "../../../src/presentation/assets/mk-digital-lockup.png",
+                          }
+                        }
+                        style={
+                          [
+                            {
+                              "flex": 1,
+                              "height": undefined,
+                              "justifyContent": "flex-end",
+                              "width": undefined,
+                            },
+                            {
+                              "borderRadius": 12,
+                            },
+                          ]
+                        }
+                      />
+                    </View>
+                    <View
+                      borderRadiusStyles={{}}
+                      style={
+                        [
+                          {
+                            "paddingHorizontal": 16,
+                          },
+                          {
+                            "paddingBottom": 16,
+                          },
+                          {
+                            "paddingVertical": 16,
+                          },
+                        ]
+                      }
+                    >
+                      <View
+                        style={
+                          {
+                            "gap": 8,
+                            "paddingVertical": 16,
+                          }
+                        }
+                      >
+                        <Text
+                          style={
+                            [
+                              {
+                                "textAlign": "left",
+                              },
+                              {
+                                "color": "#232323",
+                                "writingDirection": "ltr",
+                              },
+                              [
+                                {
+                                  "fontFamily": "System",
+                                  "fontSize": 16,
+                                  "fontWeight": "400",
+                                  "letterSpacing": 0.15,
+                                  "lineHeight": 24,
+                                },
+                                {
+                                  "color": "#000000",
+                                  "fontWeight": "bold",
+                                },
+                              ],
+                            ]
+                          }
+                        >
+                          settings_about_tagline
+                        </Text>
+                        <Text
+                          style={
+                            [
+                              {
+                                "textAlign": "left",
+                              },
+                              {
+                                "color": "#232323",
+                                "writingDirection": "ltr",
+                              },
+                              [
+                                {
+                                  "fontFamily": "System",
+                                  "fontSize": 12,
+                                  "fontWeight": "400",
+                                  "letterSpacing": 0.4,
+                                  "lineHeight": 16,
+                                },
+                                {
+                                  "color": "#0E2A47",
+                                  "textDecorationLine": "underline",
+                                },
+                              ],
+                            ]
+                          }
+                        >
+                          settings_about_web
+                        </Text>
+                      </View>
+                    </View>
+                  </View>
+                </View>
+              </View>
+            </View>
+            <View
+              style={
+                {
+                  "alignItems": "flex-end",
+                  "marginTop": 16,
+                }
+              }
+            >
+              <Text
+                style={
+                  [
+                    {
+                      "textAlign": "left",
+                    },
+                    {
+                      "color": "#232323",
+                      "writingDirection": "ltr",
+                    },
+                    [
+                      {
+                        "fontFamily": "System",
+                        "fontSize": 12,
+                        "fontWeight": "400",
+                        "letterSpacing": 0.4,
+                        "lineHeight": 16,
+                      },
+                      {
+                        "color": "#232323",
+                        "textDecorationLine": "none",
+                      },
+                    ],
+                  ]
+                }
+              >
+                settings_version 1.0.0
+              </Text>
+            </View>
+            <View
+              collapsable={false}
+              style={
+                {
+                  "alignSelf": "center",
+                  "backgroundColor": "transparent",
+                  "borderRadius": 20,
+                  "shadowColor": "#000",
+                  "shadowOffset": {
+                    "height": 0,
+                    "width": 0,
+                  },
+                  "shadowOpacity": 0,
+                  "shadowRadius": 0,
+                }
+              }
+              testID="button-container-outer-layer"
+            >
+              <View
+                collapsable={false}
+                style={
+                  {
+                    "backgroundColor": "transparent",
+                    "borderColor": "transparent",
+                    "borderRadius": 20,
+                    "borderStyle": "solid",
+                    "borderWidth": 0,
+                    "flex": undefined,
+                    "minWidth": 64,
+                    "shadowColor": "#000",
+                    "shadowOffset": {
+                      "height": 0,
+                      "width": 0,
+                    },
+                    "shadowOpacity": 0,
+                    "shadowRadius": 0,
+                  }
+                }
+                testID="button-container"
+              >
+                <View
+                  accessibilityRole="button"
+                  accessibilityState={
+                    {
+                      "busy": undefined,
+                      "checked": undefined,
+                      "disabled": false,
+                      "expanded": undefined,
+                      "selected": undefined,
+                    }
+                  }
+                  accessibilityValue={
+                    {
+                      "max": undefined,
+                      "min": undefined,
+                      "now": undefined,
+                      "text": undefined,
+                    }
+                  }
+                  accessible={true}
+                  collapsable={false}
+                  focusable={true}
+                  onBlur={[Function]}
+                  onClick={[Function]}
+                  onFocus={[Function]}
+                  onResponderGrant={[Function]}
+                  onResponderMove={[Function]}
+                  onResponderRelease={[Function]}
+                  onResponderTerminate={[Function]}
+                  onResponderTerminationRequest={[Function]}
+                  onStartShouldSetResponder={[Function]}
+                  style={
+                    [
+                      {
+                        "overflow": "hidden",
+                      },
+                      {
+                        "borderRadius": 20,
+                      },
+                    ]
+                  }
+                  testID="button"
+                >
+                  <View
+                    style={
+                      [
+                        {
+                          "alignItems": "center",
+                          "flexDirection": "row",
+                          "justifyContent": "center",
+                        },
+                        undefined,
+                      ]
+                    }
+                  >
+                    <Text
+                      numberOfLines={1}
+                      selectable={false}
+                      style={
+                        [
+                          {
+                            "textAlign": "left",
+                          },
+                          {
+                            "color": "#232323",
+                            "writingDirection": "ltr",
+                          },
+                          [
+                            {
+                              "fontFamily": "System",
+                              "fontSize": 14,
+                              "fontWeight": "500",
+                              "letterSpacing": 0.1,
+                              "lineHeight": 20,
+                            },
+                            [
+                              {
+                                "marginHorizontal": 16,
+                                "marginVertical": 9,
+                                "textAlign": "center",
+                              },
+                              false,
+                              {
+                                "marginHorizontal": 12,
+                              },
+                              undefined,
+                              false,
+                              {
+                                "color": "#FF1A1A",
+                                "fontFamily": "System",
+                                "fontSize": 14,
+                                "fontWeight": "500",
+                                "letterSpacing": 0.1,
+                                "lineHeight": 20,
+                              },
+                              undefined,
+                            ],
+                          ],
+                        ]
+                      }
+                      testID="button-text"
+                    >
+                      settings_logout
+                    </Text>
+                  </View>
+                </View>
+              </View>
+            </View>
+          </View>
+        </RCTScrollView>
+      </View>
+    </View>
+    <View
+      collapsable={false}
+      pointerEvents="box-none"
+      style={
+        {
+          "bottom": 0,
+          "left": 0,
+          "position": "absolute",
+          "right": 0,
+          "top": 0,
+        }
+      }
+    />
+    <View
+      collapsable={false}
+      pointerEvents="box-none"
+      style={
+        {
+          "bottom": 0,
+          "left": 0,
+          "position": "absolute",
+          "right": 0,
+          "top": 0,
+        }
+      }
+    />
+  </View>
+</RNCSafeAreaProvider>
+`;
