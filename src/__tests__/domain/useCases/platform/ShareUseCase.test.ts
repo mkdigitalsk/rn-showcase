@@ -27,11 +27,11 @@ describe('ShareUseCase', () => {
   const t = new ShareUseCaseTest();
   beforeEach(() => t.setup());
 
-  it('calls repository with text and title', async () => {
+  it('calls repository with text, title and url', async () => {
     await test({
-      whenAction: () => t.classUnderTest.execute({ text: 'Check this out!', title: 'MK Digital' }),
+      whenAction: () => t.classUnderTest.execute({ text: 'Check this out!', title: 'MK Digital', url: 'https://mkdigital.sk' }),
       then: () => {
-        expect(t.mockRepo.share).toHaveBeenCalledWith('Check this out!', 'MK Digital');
+        expect(t.mockRepo.share).toHaveBeenCalledWith('Check this out!', 'MK Digital', 'https://mkdigital.sk');
       },
     });
   });
