@@ -18,6 +18,8 @@ export const NotificationsScreen = () => {
   const { uiState, requestPermission, sendReminderNotification, sendPromoNotification, cancelAllNotifications, openSettings } =
     useNotificationsViewModel();
 
+  const notificationsBlocked = uiState.permissionStatus !== PushPermissionStatus.GRANTED;
+
   const permissionText = (() => {
     switch (uiState.permissionStatus) {
       case PushPermissionStatus.GRANTED:
@@ -61,12 +63,14 @@ export const NotificationsScreen = () => {
             <OutlinedButton
               text={t('notifications_send_reminder')}
               onPress={() => sendReminderNotification(t('notifications_reminder_title'), t('notifications_reminder_message'))}
+              disabled={notificationsBlocked}
             />
           </View>
           <View style={{ flex: 1 }}>
             <OutlinedButton
               text={t('notifications_send_promo')}
               onPress={() => sendPromoNotification(t('notifications_promo_title'), t('notifications_promo_message'))}
+              disabled={notificationsBlocked}
             />
           </View>
         </View>
