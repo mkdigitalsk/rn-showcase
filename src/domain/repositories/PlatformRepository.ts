@@ -1,5 +1,5 @@
 export interface PlatformRepository {
-  share(text: string, title: string): Promise<void>;
+  share(text: string, title: string, url: string): Promise<void>;
   dial(number: string): Promise<void>;
   openLink(url: string): Promise<void>;
   sendEmail(to: string, subject: string, body: string): Promise<void>;

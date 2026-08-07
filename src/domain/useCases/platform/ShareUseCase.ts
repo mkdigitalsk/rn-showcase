@@ -6,6 +6,7 @@ import { TYPES } from '../../../app/diTypes';
 export interface ShareParams {
   text: string;
   title: string;
+  url: string;
 }
 
 @injectable()
@@ -14,7 +15,7 @@ export class ShareUseCase extends UseCase<ShareParams, void> {
     super();
   }
 
-  protected async run({ text, title }: ShareParams): Promise<void> {
-    return this.platformRepository.share(text, title);
+  protected async run({ text, title, url }: ShareParams): Promise<void> {
+    return this.platformRepository.share(text, title, url);
   }
 }
