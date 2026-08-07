@@ -7,6 +7,7 @@ export const en = {
   screen_home: 'Home',
   screen_ui_components: 'UI Components',
   screen_networking: 'Networking',
+  networking_title: 'Users',
   screen_storage: 'Storage',
   screen_database: 'Database',
   screen_platform_apis: 'Platform APIs',
