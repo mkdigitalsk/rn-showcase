@@ -14,4 +14,3 @@ export const space18 = 72;
 
 export const defaultIconSize = space6;
 export const cardCornerRadius6 = 6;
-export const floatingNavBarSpace = 100;
