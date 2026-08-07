@@ -9,6 +9,7 @@ export const sk: Record<StringKey, string> = {
   screen_home: 'Domov',
   screen_ui_components: 'UI Komponenty',
   screen_networking: 'Sieť',
+  networking_title: 'Používatelia',
   screen_storage: 'Úložisko',
   screen_database: 'Databáza',
   screen_platform_apis: 'Platformové API',
