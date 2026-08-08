@@ -2,6 +2,23 @@ import { injectable } from 'tsyringe';
 import Torch from 'react-native-torch';
 import { Platform } from 'react-native';
 
+// Android's native switchState invokes both callbacks without a null check, so omitting them throws
+// inside the module; iOS exports the one-argument form and ignores anything further.
+function switchTorch(state: boolean): Promise<void> {
+  return new Promise((resolve, reject) => {
+    if (Platform.OS === 'ios') {
+      Torch.switchState(state);
+      resolve();
+      return;
+    }
+    Torch.switchState(
+      state,
+      () => resolve(),
+      error => reject(new Error(error))
+    );
+  });
+}
+
 @injectable()
 export class FlashlightClient {
   isAvailable(): boolean {
@@ -12,20 +29,12 @@ export class FlashlightClient {
 
   async toggle(currentState: boolean): Promise<boolean> {
     const newState = !currentState;
-    if (Platform.OS === 'ios') {
-      Torch.switchState(newState);
-    } else {
-      await Torch.switchState(newState);
-    }
+    await switchTorch(newState);
     return newState;
   }
 
   async turnOff(): Promise<boolean> {
-    if (Platform.OS === 'ios') {
-      Torch.switchState(false);
-    } else {
-      await Torch.switchState(false);
-    }
+    await switchTorch(false);
     return false;
   }
 }
