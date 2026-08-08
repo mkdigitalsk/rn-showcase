@@ -9,7 +9,7 @@ export class FirebaseAnalyticsClient implements AnalyticsClient {
   private readonly analytics = getAnalytics();
 
   trackScreen(screenName: string): void {
-    logScreenView(this.analytics, { screen_name: screenName, screen_class: screenName });
+    void logScreenView(this.analytics, { screen_name: screenName, screen_class: screenName });
     crashlyticsLog(this.crashlytics, `Screen: ${screenName}`);
   }
 

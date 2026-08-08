@@ -204,6 +204,8 @@ const AboutSection = ({ title, tagline, webLabel, onPress }: AboutSectionProps) 
     <>
       <TextTitleLargePrimary>{title}</TextTitleLargePrimary>
 
+      {/* Metro resolves static assets through require, not import. */}
+      {/* eslint-disable-next-line @typescript-eslint/no-require-imports, @typescript-eslint/no-unsafe-assignment */}
       <AppCard elevated onPress={onPress} cover={require('../../assets/mk-digital-lockup.png')} coverAspectRatio={LOCKUP_ASPECT}>
         <View style={{ paddingVertical: space4, gap: space2 }}>
           <TextBodyLargeNeutral100 bold>{tagline}</TextBodyLargeNeutral100>

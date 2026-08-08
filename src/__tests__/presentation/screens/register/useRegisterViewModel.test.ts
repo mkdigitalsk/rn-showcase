@@ -20,7 +20,7 @@ jest.mock('tsyringe', () => ({
       return {};
     }),
   },
-  injectable: () => (target: any) => target,
+  injectable: () => (target: unknown) => target,
   inject: () => () => {},
 }));
 

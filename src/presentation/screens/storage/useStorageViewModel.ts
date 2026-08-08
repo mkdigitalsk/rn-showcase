@@ -27,7 +27,7 @@ export const useStorageViewModel = () => {
       });
     });
 
-    loadStorageDataUseCase.execute();
+    void loadStorageDataUseCase.execute();
 
     return () => {
       subscription.unsubscribe();

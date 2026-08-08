@@ -29,7 +29,7 @@ httpClient.interceptors.request.use(
     }
     return config;
   },
-  error => Promise.reject(error)
+  (error: unknown) => Promise.reject(error instanceof Error ? error : new Error(String(error)))
 );
 
 // Response interceptor
