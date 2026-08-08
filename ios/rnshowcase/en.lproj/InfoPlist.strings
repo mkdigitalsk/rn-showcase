@@ -1,0 +1,4 @@
+"NSCameraUsageDescription" = "Take a profile photo, and scan QR codes and barcodes.";
+"NSPhotoLibraryUsageDescription" = "Choose a profile photo from your library.";
+"NSFaceIDUsageDescription" = "Sign in without typing your password.";
+"NSLocationWhenInUseUsageDescription" = "Show your current location on the Platform APIs screen.";
