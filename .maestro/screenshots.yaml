@@ -1,0 +1,66 @@
+appId: sk.mkdigital.rnshowcase.debug
+name: README screenshots
+---
+# Captures the gallery the README embeds. Names match screenshots/ so the table keeps working.
+# clearState so the run always starts from the login screen rather than a persisted session.
+- launchApp:
+    clearState: true
+    permissions:
+      all: deny
+
+- assertVisible: 'Sign In'
+- takeScreenshot: screenshots/login
+- tapOn: 'Fill Test Account'
+- tapOn: 'Sign In'
+
+# Sign-in is a network round trip; wait for the home screen rather than racing it.
+- extendedWaitUntil:
+    visible: 'UI Components'
+    timeout: 20000
+- takeScreenshot: screenshots/home
+
+- tapOn: 'UI Components'
+- takeScreenshot: screenshots/ui_components
+- back
+
+- tapOn: 'Networking'
+- takeScreenshot: screenshots/networking
+- back
+
+- tapOn: 'Storage'
+- takeScreenshot: screenshots/storage
+- back
+
+# An empty list shows the empty state, which says less about the screen than a populated one.
+- tapOn: 'Database'
+- tapOn: 'Note title'
+- inputText: 'Groceries'
+- tapOn: 'Note content'
+- inputText: 'Milk, bread, coffee'
+- tapOn: 'Add Note'
+- tapOn: 'Note title'
+- inputText: 'Standup notes'
+- tapOn: 'Note content'
+- inputText: 'Ship the release build, then write the changelog'
+- tapOn: 'Add Note'
+# Blur the field so the keyboard leaves the shot. hideKeyboard presses Back on Android, which pops
+# the screen instead.
+- tapOn:
+    point: '50%,12%'
+- takeScreenshot: screenshots/database
+- back
+
+- tapOn: 'Platform APIs'
+- takeScreenshot: screenshots/platform_apis
+- back
+
+- tapOn: 'Calendar'
+- takeScreenshot: screenshots/calendar
+- back
+
+- tapOn: 'Notifications'
+- takeScreenshot: screenshots/notifications
+- back
+
+- tapOn: 'Settings'
+- takeScreenshot: screenshots/settings
