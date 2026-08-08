@@ -80,7 +80,6 @@ export const UiComponentsScreen = () => {
   return (
     <View style={{ flex: 1, backgroundColor: colors.background }}>
       <ScrollView style={styles.container} contentContainerStyle={styles.content}>
-        {/* ===== BUTTONS ===== */}
         <SectionTitle title={t('ui_section_buttons')} />
         <ColumnSpacer2 />
         <ContainedButton text={t('ui_contained_button')} onPress={() => {}} />
@@ -93,7 +92,6 @@ export const UiComponentsScreen = () => {
 
         <ColumnSpacer4 />
 
-        {/* ===== SEGMENTED BUTTON ===== */}
         <SectionTitle title={t('ui_section_segmented')} />
         <ColumnSpacer2 />
         <AppSegmentedButton
@@ -108,7 +106,6 @@ export const UiComponentsScreen = () => {
 
         <ColumnSpacer4 />
 
-        {/* ===== TYPOGRAPHY ===== */}
         <SectionTitle title={t('ui_section_typography')} />
         <ColumnSpacer2 />
         <TextHeadlineMediumPrimary>{t('ui_headline_medium')}</TextHeadlineMediumPrimary>
@@ -121,7 +118,6 @@ export const UiComponentsScreen = () => {
 
         <ColumnSpacer4 />
 
-        {/* ===== CARDS ===== */}
         <SectionTitle title={t('ui_section_cards')} />
         <ColumnSpacer2 />
         <AppCard elevated onPress={() => {}}>
@@ -134,7 +130,6 @@ export const UiComponentsScreen = () => {
 
         <ColumnSpacer4 />
 
-        {/* ===== TEXT FIELD ===== */}
         <SectionTitle title={t('ui_section_text_fields')} />
         <ColumnSpacer2 />
         <AppTextField
@@ -146,7 +141,6 @@ export const UiComponentsScreen = () => {
 
         <ColumnSpacer4 />
 
-        {/* ===== CHECKBOX ===== */}
         <SectionTitle title={t('ui_section_checkbox')} />
         <ColumnSpacer2 />
         <View style={styles.row}>
@@ -156,7 +150,6 @@ export const UiComponentsScreen = () => {
 
         <ColumnSpacer4 />
 
-        {/* ===== SWITCH ===== */}
         <SectionTitle title={t('ui_section_switch')} />
         <ColumnSpacer2 />
         <View style={styles.row}>
@@ -167,7 +160,6 @@ export const UiComponentsScreen = () => {
 
         <ColumnSpacer4 />
 
-        {/* ===== RADIO BUTTONS ===== */}
         <SectionTitle title={t('ui_section_radio')} />
         <ColumnSpacer2 />
         {radioLabels.map((label, index) => (
@@ -179,7 +171,6 @@ export const UiComponentsScreen = () => {
 
         <ColumnSpacer4 />
 
-        {/* ===== CHIPS ===== */}
         <SectionTitle title={t('ui_section_chips')} />
         <ColumnSpacer2 />
         <View style={styles.chipRow}>
@@ -201,7 +192,6 @@ export const UiComponentsScreen = () => {
 
         <ColumnSpacer4 />
 
-        {/* ===== SLIDER ===== */}
         <SectionTitle title={t('ui_section_slider')} />
         <ColumnSpacer2 />
         <AppSlider value={sliderValue} onValueChange={setSliderValue} />
@@ -209,14 +199,12 @@ export const UiComponentsScreen = () => {
 
         <ColumnSpacer4 />
 
-        {/* ===== DIVIDER ===== */}
         <SectionTitle title={t('ui_section_divider')} />
         <ColumnSpacer2 />
         <AppDividerPrimary />
 
         <ColumnSpacer4 />
 
-        {/* ===== LOADING / PROGRESS ===== */}
         <SectionTitle title={t('ui_section_loading')} />
         <ColumnSpacer2 />
         <View style={styles.row}>
@@ -231,7 +219,6 @@ export const UiComponentsScreen = () => {
 
         <ColumnSpacer4 />
 
-        {/* ===== BADGES ===== */}
         <SectionTitle title={t('ui_section_badges')} />
         <ColumnSpacer2 />
         <View style={styles.row}>
@@ -244,7 +231,6 @@ export const UiComponentsScreen = () => {
 
         <ColumnSpacer4 />
 
-        {/* ===== SNACKBAR ===== */}
         <SectionTitle title={t('ui_section_snackbar')} />
         <ColumnSpacer2 />
         <View style={styles.chipRow}>
@@ -273,26 +259,21 @@ export const UiComponentsScreen = () => {
 
         <ColumnSpacer4 />
 
-        {/* ===== BOTTOM SHEET ===== */}
         <SectionTitle title={t('ui_section_bottom_sheet')} />
         <ColumnSpacer2 />
         <ContainedButton text={t('ui_show_bottom_sheet')} onPress={() => setShowBottomSheet(true)} />
 
         <ColumnSpacer4 />
 
-        {/* ===== DIALOG ===== */}
         <SectionTitle title={t('ui_section_dialog')} />
         <ColumnSpacer2 />
         <ContainedButton text={t('ui_show_dialog')} onPress={() => setShowDialog(true)} />
 
-        {/* Bottom padding for FAB */}
-        <View style={{ height: 80 }} />
+        <View style={{ height: fabClearance }} />
       </ScrollView>
 
-      {/* FAB */}
       <AppFloatingActionButton icon="plus" onPress={() => {}} />
 
-      {/* Overlays */}
       <AppConfirmDialog
         visible={showDialog}
         title={t('ui_dialog_title')}
@@ -320,6 +301,8 @@ export const UiComponentsScreen = () => {
 };
 
 // Section title component
+const fabClearance = 80;
+
 const SectionTitle = ({ title }: { title: string }) => <TextTitleLargeNeutral80>{title}</TextTitleLargeNeutral80>;
 
 const styles = StyleSheet.create({

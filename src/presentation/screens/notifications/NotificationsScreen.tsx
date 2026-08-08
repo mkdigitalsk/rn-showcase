@@ -39,7 +39,6 @@ export const NotificationsScreen = () => {
 
       <ColumnSpacer4 />
 
-      {/* Permission Card */}
       <NotificationCard icon="shield-outline" title={t('notifications_permission_title')} colors={colors}>
         <TextBodyMediumNeutral80>{permissionText}</TextBodyMediumNeutral80>
         <ColumnSpacer2 />
@@ -50,7 +49,6 @@ export const NotificationsScreen = () => {
 
       <ColumnSpacer4 />
 
-      {/* Send Notifications Card */}
       <NotificationCard icon="bell-ring-outline" title={t('notifications_send_title')} colors={colors}>
         {uiState.lastSentNotification && (
           <>
@@ -78,7 +76,6 @@ export const NotificationsScreen = () => {
 
       <ColumnSpacer4 />
 
-      {/* Cancel & Settings Card */}
       <NotificationCard icon="bell-off-outline" title={t('notifications_cancel_title')} colors={colors}>
         <View style={{ flexDirection: 'row', gap: 12 }}>
           <View style={{ flex: 1 }}>
