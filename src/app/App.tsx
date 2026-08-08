@@ -22,7 +22,7 @@ const AppContent = () => {
       handleDeepLink(url);
     });
 
-    Linking.getInitialURL().then(url => {
+    void Linking.getInitialURL().then(url => {
       if (url) {
         handleDeepLink(url);
       }

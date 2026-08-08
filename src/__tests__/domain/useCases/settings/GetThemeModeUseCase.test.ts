@@ -2,11 +2,10 @@ import { BaseTest } from '../../../BaseTest';
 import { test } from '../../../TestFunctions';
 import { GetThemeModeUseCase } from '../../../../domain/useCases/settings/GetThemeModeUseCase';
 import { SettingsRepository } from '../../../../domain/repositories/SettingsRepository';
-import { ThemeMode } from '../../../../presentation/foundation/themeMode';
 
 function createMockSettingsRepository(overrides: Partial<SettingsRepository> = {}): SettingsRepository {
   return {
-    getThemeMode: jest.fn(() => 'system' as ThemeMode),
+    getThemeMode: jest.fn(() => 'system'),
     setThemeMode: jest.fn(),
     getLanguage: jest.fn(() => undefined),
     setLanguage: jest.fn(),

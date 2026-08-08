@@ -41,7 +41,7 @@ export const useHomeViewModel = () => {
           navigation.navigate('Notifications');
           break;
         default:
-          logger.d(`Feature not implemented: ${featureId}`);
+          logger.d(`Feature not implemented: ${String(featureId)}`);
       }
     },
     [navigation]

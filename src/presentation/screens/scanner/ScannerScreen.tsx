@@ -96,7 +96,7 @@ const ScanSection = ({
       <AppCard elevated>
         <TextBodyMediumNeutral80>{t('scanner_permission_denied')}</TextBodyMediumNeutral80>
         <ColumnSpacer4 />
-        <OutlinedButton text={t('scanner_request_permission')} onPress={requestPermission} />
+        <OutlinedButton text={t('scanner_request_permission')} onPress={() => void requestPermission()} />
       </AppCard>
     );
   }

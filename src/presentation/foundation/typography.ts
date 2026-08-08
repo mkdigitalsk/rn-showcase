@@ -1,9 +1,9 @@
 import { MD3LightTheme } from 'react-native-paper';
 
 export const FontWeights = {
-  Bold: '700' as '700',
-  Medium: '500' as '500',
-  Regular: '400' as '400',
+  Bold: '700' as const,
+  Medium: '500' as const,
+  Regular: '400' as const,
 };
 
 export const typography = {
