@@ -61,35 +61,30 @@ export const PlatformApisScreen = () => {
 
       <ColumnSpacer4 />
 
-      {/* Share */}
       <PlatformApiCard icon="share-variant-outline" title={t('platform_apis_share_title')}>
         <OutlinedButton text={t('platform_apis_share_action')} onPress={share} />
       </PlatformApiCard>
 
       <ColumnSpacer4 />
 
-      {/* Dial */}
       <PlatformApiCard icon="phone-outline" title={t('platform_apis_dial_title')}>
         <OutlinedButton text={t('platform_apis_dial_action')} onPress={dial} />
       </PlatformApiCard>
 
       <ColumnSpacer4 />
 
-      {/* Open Link */}
       <PlatformApiCard icon="link-variant" title={t('platform_apis_link_title')}>
         <OutlinedButton text={t('platform_apis_link_action')} onPress={openLink} />
       </PlatformApiCard>
 
       <ColumnSpacer4 />
 
-      {/* Send Email */}
       <PlatformApiCard icon="email-outline" title={t('platform_apis_email_title')}>
         <OutlinedButton text={t('platform_apis_email_action')} onPress={sendEmail} />
       </PlatformApiCard>
 
       <ColumnSpacer4 />
 
-      {/* Clipboard */}
       <PlatformApiCard icon="content-copy" title={t('platform_apis_copy_title')}>
         {uiState.copiedToClipboard && (
           <>
@@ -102,7 +97,6 @@ export const PlatformApisScreen = () => {
 
       <ColumnSpacer4 />
 
-      {/* Location */}
       <PlatformApiCard icon="map-marker-outline" title={t('platform_apis_location_title')}>
         {uiState.locationLoading && (
           <>
@@ -129,7 +123,6 @@ export const PlatformApisScreen = () => {
 
       <ColumnSpacer4 />
 
-      {/* Location Updates */}
       <PlatformApiCard icon="crosshairs-gps" title={t('platform_apis_location_updates_title')}>
         {uiState.locationUpdatesError && (
           <>
@@ -153,7 +146,6 @@ export const PlatformApisScreen = () => {
 
       <ColumnSpacer4 />
 
-      {/* Biometrics */}
       <PlatformApiCard icon="fingerprint" title={t('platform_apis_biometrics_title')}>
         {!uiState.biometricsAvailable && (
           <>
@@ -186,7 +178,6 @@ export const PlatformApisScreen = () => {
 
       <ColumnSpacer4 />
 
-      {/* Flashlight */}
       <PlatformApiCard icon="flashlight" title={t('platform_apis_flashlight_title')}>
         {!uiState.flashlightAvailable && (
           <>
