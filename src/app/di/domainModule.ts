@@ -5,10 +5,10 @@ import { ObserveStorageDataUseCase } from '../../domain/useCases/storage/Observe
 import { SetSessionCounterUseCase } from '../../domain/useCases/storage/SetSessionCounterUseCase';
 import { SetPersistentCounterUseCase } from '../../domain/useCases/storage/SetPersistentCounterUseCase';
 import { ClearSessionUseCase } from '../../domain/useCases/storage/ClearSessionUseCase';
-import { LoginUseCase } from '../../domain/useCases/auth/LoginUseCase';
-import { LoginWithTokenUseCase } from '../../domain/useCases/auth/LoginWithTokenUseCase';
-import { LogoutUseCase } from '../../domain/useCases/auth/LogoutUseCase';
-import { RegisterUserUseCase } from '../../domain/useCases/auth/RegisterUserUseCase';
+import { SignInUseCase } from '../../domain/useCases/auth/SignInUseCase';
+import { SignInWithTokenUseCase } from '../../domain/useCases/auth/SignInWithTokenUseCase';
+import { SignOutUseCase } from '../../domain/useCases/auth/SignOutUseCase';
+import { SignUpUseCase } from '../../domain/useCases/auth/SignUpUseCase';
 import { CheckEmailExistsUseCase } from '../../domain/useCases/auth/CheckEmailExistsUseCase';
 import { ShareUseCase } from '../../domain/useCases/platform/ShareUseCase';
 import { DialUseCase } from '../../domain/useCases/platform/DialUseCase';
@@ -45,10 +45,10 @@ export const domainModule = () => {
   container.register<GetUsersUseCase>(TYPES.GetUsersUseCase, { useClass: GetUsersUseCase });
 
   // Auth
-  container.register(TYPES.LoginUseCase, { useClass: LoginUseCase });
-  container.register(TYPES.LoginWithTokenUseCase, { useClass: LoginWithTokenUseCase });
-  container.register(TYPES.LogoutUseCase, { useClass: LogoutUseCase });
-  container.register(TYPES.RegisterUserUseCase, { useClass: RegisterUserUseCase });
+  container.register(TYPES.SignInUseCase, { useClass: SignInUseCase });
+  container.register(TYPES.SignInWithTokenUseCase, { useClass: SignInWithTokenUseCase });
+  container.register(TYPES.SignOutUseCase, { useClass: SignOutUseCase });
+  container.register(TYPES.SignUpUseCase, { useClass: SignUpUseCase });
   container.register(TYPES.CheckEmailExistsUseCase, { useClass: CheckEmailExistsUseCase });
 
   // Storage

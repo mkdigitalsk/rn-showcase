@@ -1,25 +1,25 @@
 import { useState, useCallback } from 'react';
 import {
-  RegisterUiState,
-  initialRegisterUiState,
-  RegisterNameError,
-  RegisterEmailError,
-  RegisterPasswordError,
-  RegisterConfirmPasswordError,
-} from './RegisterUiState';
+  SignUpUiState,
+  initialSignUpUiState,
+  SignUpNameError,
+  SignUpEmailError,
+  SignUpPasswordError,
+  SignUpConfirmPasswordError,
+} from './SignUpUiState';
 import { isValidEmail, isPasswordLongEnough, isValidPassword } from '../../foundation/ValidationPatterns';
 import { execute } from '../../hooks/useExecute';
 import { useResolve } from '../../hooks/useResolve';
 import { CheckEmailExistsUseCase } from '../../../domain/useCases/auth/CheckEmailExistsUseCase';
-import { RegisterUserUseCase } from '../../../domain/useCases/auth/RegisterUserUseCase';
+import { SignUpUseCase } from '../../../domain/useCases/auth/SignUpUseCase';
 import { EmailAlreadyExistsException } from '../../../domain/exceptions/AuthException';
 import { TYPES } from '../../../app/diTypes';
 
-export const useRegisterViewModel = () => {
-  const [uiState, setUiState] = useState<RegisterUiState>(initialRegisterUiState);
+export const useSignUpViewModel = () => {
+  const [uiState, setUiState] = useState<SignUpUiState>(initialSignUpUiState);
 
   const checkEmailExistsUseCase = useResolve<CheckEmailExistsUseCase>(TYPES.CheckEmailExistsUseCase);
-  const registerUserUseCase = useResolve<RegisterUserUseCase>(TYPES.RegisterUserUseCase);
+  const signUpUseCase = useResolve<SignUpUseCase>(TYPES.SignUpUseCase);
 
   const onNameChange = useCallback((name: string) => {
     setUiState(prev => ({ ...prev, name, nameError: null }));
@@ -37,14 +37,14 @@ export const useRegisterViewModel = () => {
     setUiState(prev => ({ ...prev, confirmPassword, confirmPasswordError: null }));
   }, []);
 
-  const validateName = useCallback((name: string): RegisterNameError | null => {
+  const validateName = useCallback((name: string): SignUpNameError | null => {
     if (name.trim().length === 0) {
       return 'empty';
     }
     return null;
   }, []);
 
-  const validateEmail = useCallback((email: string): RegisterEmailError | null => {
+  const validateEmail = useCallback((email: string): SignUpEmailError | null => {
     if (email.trim().length === 0) {
       return 'empty';
     }
@@ -54,7 +54,7 @@ export const useRegisterViewModel = () => {
     return null;
   }, []);
 
-  const validatePassword = useCallback((password: string): RegisterPasswordError | null => {
+  const validatePassword = useCallback((password: string): SignUpPasswordError | null => {
     if (password.length === 0) {
       return 'empty';
     }
@@ -67,7 +67,7 @@ export const useRegisterViewModel = () => {
     return null;
   }, []);
 
-  const validateConfirmPassword = useCallback((password: string, confirmPassword: string): RegisterConfirmPasswordError | null => {
+  const validateConfirmPassword = useCallback((password: string, confirmPassword: string): SignUpConfirmPasswordError | null => {
     if (confirmPassword.length === 0) {
       return 'empty';
     }
@@ -77,8 +77,8 @@ export const useRegisterViewModel = () => {
     return null;
   }, []);
 
-  const register = useCallback(
-    (onRegistered?: () => void): void => {
+  const signUp = useCallback(
+    (onSignedUp?: () => void): void => {
       const nameError = validateName(uiState.name);
       const emailError = validateEmail(uiState.email);
       const passwordError = validatePassword(uiState.password);
@@ -95,12 +95,12 @@ export const useRegisterViewModel = () => {
           if (exists) {
             throw new EmailAlreadyExistsException();
           }
-          return registerUserUseCase.execute({ name: uiState.name, email: uiState.email, password: uiState.password });
+          return signUpUseCase.execute({ name: uiState.name, email: uiState.email, password: uiState.password });
         },
         onLoading: () => setUiState(prev => ({ ...prev, isLoading: true })),
         onSuccess: () => {
           setUiState(prev => ({ ...prev, isLoading: false }));
-          onRegistered?.();
+          onSignedUp?.();
         },
         onError: error => {
           if (error instanceof EmailAlreadyExistsException) {
@@ -121,7 +121,7 @@ export const useRegisterViewModel = () => {
       validatePassword,
       validateConfirmPassword,
       checkEmailExistsUseCase,
-      registerUserUseCase,
+      signUpUseCase,
     ]
   );
 
@@ -131,6 +131,6 @@ export const useRegisterViewModel = () => {
     onEmailChange,
     onPasswordChange,
     onConfirmPasswordChange,
-    register,
+    signUp,
   };
 };

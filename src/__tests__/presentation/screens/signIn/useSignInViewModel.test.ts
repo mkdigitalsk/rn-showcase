@@ -2,7 +2,7 @@ import { renderHook, act, waitFor } from '@testing-library/react-native';
 import { test } from '../../../TestFunctions';
 
 // Mock tsyringe container.resolve before importing the hook
-const mockLogin = { execute: jest.fn().mockResolvedValue({ id: 1, name: 'Test', email: 'test@example.com' }) };
+const mockSignIn = { execute: jest.fn().mockResolvedValue({ id: 1, name: 'Test', email: 'test@example.com' }) };
 const mockIsBiometricEnabled = { execute: jest.fn().mockResolvedValue(false) };
 const mockAuthenticateWithBiometric = { execute: jest.fn().mockResolvedValue({ type: 'success' }) };
 
@@ -10,8 +10,8 @@ jest.mock('tsyringe', () => ({
   container: {
     resolve: jest.fn((token: symbol) => {
       const key = token.toString();
-      if (key.includes('LoginUseCase')) {
-        return mockLogin;
+      if (key.includes('SignInUseCase')) {
+        return mockSignIn;
       }
       if (key.includes('IsBiometricEnabled')) {
         return mockIsBiometricEnabled;
@@ -26,9 +26,9 @@ jest.mock('tsyringe', () => ({
   inject: () => () => {},
 }));
 
-import { useLoginViewModel } from '../../../../presentation/screens/login/useLoginViewModel';
+import { useSignInViewModel } from '../../../../presentation/screens/signIn/useSignInViewModel';
 
-describe('useLoginViewModel', () => {
+describe('useSignInViewModel', () => {
   beforeEach(() => {
     jest.clearAllMocks();
     mockIsBiometricEnabled.execute.mockResolvedValue(false);
@@ -38,7 +38,7 @@ describe('useLoginViewModel', () => {
   // === Default State ===
 
   it('default state has empty email', () => {
-    const { result } = renderHook(() => useLoginViewModel());
+    const { result } = renderHook(() => useSignInViewModel());
     test({
       whenAction: () => result.current.uiState,
       then: state => expect(state.email).toBe(''),
@@ -46,7 +46,7 @@ describe('useLoginViewModel', () => {
   });
 
   it('default state has empty password', () => {
-    const { result } = renderHook(() => useLoginViewModel());
+    const { result } = renderHook(() => useSignInViewModel());
     test({
       whenAction: () => result.current.uiState,
       then: state => expect(state.password).toBe(''),
@@ -54,7 +54,7 @@ describe('useLoginViewModel', () => {
   });
 
   it('default state has no errors', () => {
-    const { result } = renderHook(() => useLoginViewModel());
+    const { result } = renderHook(() => useSignInViewModel());
     test({
       whenAction: () => result.current.uiState,
       then: state => {
@@ -67,7 +67,7 @@ describe('useLoginViewModel', () => {
   // === Email Change ===
 
   it('onEmailChange updates email', () => {
-    const { result } = renderHook(() => useLoginViewModel());
+    const { result } = renderHook(() => useSignInViewModel());
     act(() => result.current.onEmailChange('test@example.com'));
 
     test({
@@ -77,8 +77,8 @@ describe('useLoginViewModel', () => {
   });
 
   it('onEmailChange clears email error', () => {
-    const { result } = renderHook(() => useLoginViewModel());
-    act(() => result.current.login());
+    const { result } = renderHook(() => useSignInViewModel());
+    act(() => result.current.signIn());
     expect(result.current.uiState.emailError).not.toBeNull();
 
     act(() => result.current.onEmailChange('test@example.com'));
@@ -92,7 +92,7 @@ describe('useLoginViewModel', () => {
   // === Password Change ===
 
   it('onPasswordChange updates password', () => {
-    const { result } = renderHook(() => useLoginViewModel());
+    const { result } = renderHook(() => useSignInViewModel());
     act(() => result.current.onPasswordChange('Test123!'));
 
     test({
@@ -102,8 +102,8 @@ describe('useLoginViewModel', () => {
   });
 
   it('onPasswordChange clears password error', () => {
-    const { result } = renderHook(() => useLoginViewModel());
-    act(() => result.current.login());
+    const { result } = renderHook(() => useSignInViewModel());
+    act(() => result.current.signIn());
     expect(result.current.uiState.passwordError).not.toBeNull();
 
     act(() => result.current.onPasswordChange('Test123!'));
@@ -117,7 +117,7 @@ describe('useLoginViewModel', () => {
   // === Fill Test Account ===
 
   it('fillTestAccount sets test credentials', () => {
-    const { result } = renderHook(() => useLoginViewModel());
+    const { result } = renderHook(() => useSignInViewModel());
 
     act(() => result.current.fillTestAccount());
 
@@ -131,8 +131,8 @@ describe('useLoginViewModel', () => {
   });
 
   it('fillTestAccount clears errors', () => {
-    const { result } = renderHook(() => useLoginViewModel());
-    act(() => result.current.login());
+    const { result } = renderHook(() => useSignInViewModel());
+    act(() => result.current.signIn());
 
     act(() => result.current.fillTestAccount());
 
@@ -145,13 +145,13 @@ describe('useLoginViewModel', () => {
     });
   });
 
-  // === Login Validation — Email ===
+  // === SignIn Validation — Email ===
 
-  it('login with empty email shows empty error', () => {
-    const { result } = renderHook(() => useLoginViewModel());
+  it('sign in with empty email shows empty error', () => {
+    const { result } = renderHook(() => useSignInViewModel());
     act(() => result.current.onPasswordChange('Test123!'));
 
-    act(() => result.current.login());
+    act(() => result.current.signIn());
 
     test({
       whenAction: () => result.current.uiState.emailError,
@@ -159,14 +159,14 @@ describe('useLoginViewModel', () => {
     });
   });
 
-  it('login with invalid email format shows invalid_format error', () => {
-    const { result } = renderHook(() => useLoginViewModel());
+  it('sign in with invalid email format shows invalid_format error', () => {
+    const { result } = renderHook(() => useSignInViewModel());
     act(() => {
       result.current.onEmailChange('invalid-email');
       result.current.onPasswordChange('Test123!');
     });
 
-    act(() => result.current.login());
+    act(() => result.current.signIn());
 
     test({
       whenAction: () => result.current.uiState.emailError,
@@ -174,13 +174,13 @@ describe('useLoginViewModel', () => {
     });
   });
 
-  // === Login Validation — Password ===
+  // === SignIn Validation — Password ===
 
-  it('login with empty password shows empty error', () => {
-    const { result } = renderHook(() => useLoginViewModel());
+  it('sign in with empty password shows empty error', () => {
+    const { result } = renderHook(() => useSignInViewModel());
     act(() => result.current.onEmailChange('test@example.com'));
 
-    act(() => result.current.login());
+    act(() => result.current.signIn());
 
     test({
       whenAction: () => result.current.uiState.passwordError,
@@ -188,14 +188,14 @@ describe('useLoginViewModel', () => {
     });
   });
 
-  it('login with short password shows too_short error', () => {
-    const { result } = renderHook(() => useLoginViewModel());
+  it('sign in with short password shows too_short error', () => {
+    const { result } = renderHook(() => useSignInViewModel());
     act(() => {
       result.current.onEmailChange('test@example.com');
       result.current.onPasswordChange('Te1!');
     });
 
-    act(() => result.current.login());
+    act(() => result.current.signIn());
 
     test({
       whenAction: () => result.current.uiState.passwordError,
@@ -203,14 +203,14 @@ describe('useLoginViewModel', () => {
     });
   });
 
-  it('login with weak password shows weak error', () => {
-    const { result } = renderHook(() => useLoginViewModel());
+  it('sign in with weak password shows weak error', () => {
+    const { result } = renderHook(() => useSignInViewModel());
     act(() => {
       result.current.onEmailChange('test@example.com');
       result.current.onPasswordChange('testtest');
     });
 
-    act(() => result.current.login());
+    act(() => result.current.signIn());
 
     test({
       whenAction: () => result.current.uiState.passwordError,
@@ -218,86 +218,86 @@ describe('useLoginViewModel', () => {
     });
   });
 
-  // === Successful Login ===
+  // === Successful SignIn ===
 
-  it('login with valid credentials calls use case and invokes callback', async () => {
-    const { result } = renderHook(() => useLoginViewModel());
+  it('sign in with valid credentials calls use case and invokes callback', async () => {
+    const { result } = renderHook(() => useSignInViewModel());
     act(() => {
       result.current.onEmailChange('test@example.com');
       result.current.onPasswordChange('Test123!');
     });
 
-    const onLoggedIn = jest.fn();
-    act(() => result.current.login(onLoggedIn));
+    const onSignedIn = jest.fn();
+    act(() => result.current.signIn(onSignedIn));
 
     await waitFor(() => {
-      expect(onLoggedIn).toHaveBeenCalled();
+      expect(onSignedIn).toHaveBeenCalled();
     });
 
-    expect(mockLogin.execute).toHaveBeenCalledWith({ email: 'test@example.com', password: 'Test123!' });
+    expect(mockSignIn.execute).toHaveBeenCalledWith({ email: 'test@example.com', password: 'Test123!' });
     expect(result.current.uiState.emailError).toBeNull();
     expect(result.current.uiState.passwordError).toBeNull();
-    expect(result.current.uiState.loginFailed).toBe(false);
+    expect(result.current.uiState.signInFailed).toBe(false);
   });
 
-  it('login with invalid credentials sets loginFailed', async () => {
-    mockLogin.execute.mockRejectedValueOnce(new Error('401'));
-    const { result } = renderHook(() => useLoginViewModel());
+  it('sign in with invalid credentials sets signInFailed', async () => {
+    mockSignIn.execute.mockRejectedValueOnce(new Error('401'));
+    const { result } = renderHook(() => useSignInViewModel());
     act(() => {
       result.current.onEmailChange('test@example.com');
       result.current.onPasswordChange('Test123!');
     });
 
-    const onLoggedIn = jest.fn();
-    act(() => result.current.login(onLoggedIn));
+    const onSignedIn = jest.fn();
+    act(() => result.current.signIn(onSignedIn));
 
     await waitFor(() => {
-      expect(result.current.uiState.loginFailed).toBe(true);
+      expect(result.current.uiState.signInFailed).toBe(true);
     });
 
-    expect(onLoggedIn).not.toHaveBeenCalled();
+    expect(onSignedIn).not.toHaveBeenCalled();
     expect(result.current.uiState.isLoading).toBe(false);
   });
 
   // === Password Strength Edge Cases ===
 
   it('password without uppercase is weak', () => {
-    const { result } = renderHook(() => useLoginViewModel());
+    const { result } = renderHook(() => useSignInViewModel());
     act(() => {
       result.current.onEmailChange('test@example.com');
       result.current.onPasswordChange('test123!');
     });
-    act(() => result.current.login());
+    act(() => result.current.signIn());
     expect(result.current.uiState.passwordError).toBe('weak');
   });
 
   it('password without lowercase is weak', () => {
-    const { result } = renderHook(() => useLoginViewModel());
+    const { result } = renderHook(() => useSignInViewModel());
     act(() => {
       result.current.onEmailChange('test@example.com');
       result.current.onPasswordChange('TEST123!');
     });
-    act(() => result.current.login());
+    act(() => result.current.signIn());
     expect(result.current.uiState.passwordError).toBe('weak');
   });
 
   it('password without digit is weak', () => {
-    const { result } = renderHook(() => useLoginViewModel());
+    const { result } = renderHook(() => useSignInViewModel());
     act(() => {
       result.current.onEmailChange('test@example.com');
       result.current.onPasswordChange('TestTest!');
     });
-    act(() => result.current.login());
+    act(() => result.current.signIn());
     expect(result.current.uiState.passwordError).toBe('weak');
   });
 
   it('password without special char is weak', () => {
-    const { result } = renderHook(() => useLoginViewModel());
+    const { result } = renderHook(() => useSignInViewModel());
     act(() => {
       result.current.onEmailChange('test@example.com');
       result.current.onPasswordChange('Test1234');
     });
-    act(() => result.current.login());
+    act(() => result.current.signIn());
     expect(result.current.uiState.passwordError).toBe('weak');
   });
 });
