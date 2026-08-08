@@ -92,6 +92,12 @@ export const en = {
 
   // Settings
   settings_language: 'Language',
+  settings_profile: 'My Profile',
+  settings_profile_photo: 'Profile Photo',
+  settings_profile_photo_hint: 'Tap to change',
+  imagepicker_title: 'Select Image Source',
+  imagepicker_camera: 'Camera',
+  imagepicker_gallery: 'Gallery',
   settings_theme: 'Theme',
   settings_dark_mode: 'Dark Mode',
   settings_about: 'About',

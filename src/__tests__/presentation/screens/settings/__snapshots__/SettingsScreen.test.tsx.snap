@@ -73,6 +73,249 @@ exports[`SettingsScreen renders every section 1`] = `
                 ]
               }
             >
+              settings_profile
+            </Text>
+            <View
+              collapsable={false}
+              style={
+                {
+                  "backgroundColor": "#FFFFFF",
+                  "borderRadius": 12,
+                  "shadowColor": "#000",
+                  "shadowOffset": {
+                    "height": 1,
+                    "width": 0,
+                  },
+                  "shadowOpacity": 0.15,
+                  "shadowRadius": 3,
+                }
+              }
+              testID="card-container-outer-layer"
+            >
+              <View
+                collapsable={false}
+                style={
+                  {
+                    "backgroundColor": "#FFFFFF",
+                    "borderColor": "#E4E4E4",
+                    "borderRadius": 12,
+                    "borderStyle": "solid",
+                    "borderWidth": 0,
+                    "flex": undefined,
+                    "shadowColor": "#000",
+                    "shadowOffset": {
+                      "height": 1,
+                      "width": 0,
+                    },
+                    "shadowOpacity": 0.3,
+                    "shadowRadius": 1,
+                  }
+                }
+                testID="card-container"
+              >
+                <View
+                  accessibilityState={
+                    {
+                      "busy": undefined,
+                      "checked": undefined,
+                      "disabled": undefined,
+                      "expanded": undefined,
+                      "selected": undefined,
+                    }
+                  }
+                  accessibilityValue={
+                    {
+                      "max": undefined,
+                      "min": undefined,
+                      "now": undefined,
+                      "text": undefined,
+                    }
+                  }
+                  accessible={true}
+                  collapsable={false}
+                  focusable={true}
+                  onBlur={[Function]}
+                  onClick={[Function]}
+                  onFocus={[Function]}
+                  onResponderGrant={[Function]}
+                  onResponderMove={[Function]}
+                  onResponderRelease={[Function]}
+                  onResponderTerminate={[Function]}
+                  onResponderTerminationRequest={[Function]}
+                  onStartShouldSetResponder={[Function]}
+                >
+                  <View
+                    style={
+                      [
+                        {
+                          "flexShrink": 1,
+                        },
+                        undefined,
+                      ]
+                    }
+                    testID="card"
+                  >
+                    <View
+                      borderRadiusStyles={{}}
+                      style={
+                        [
+                          {
+                            "paddingHorizontal": 16,
+                          },
+                          {
+                            "paddingBottom": 16,
+                          },
+                          {
+                            "paddingVertical": 16,
+                          },
+                        ]
+                      }
+                    >
+                      <View
+                        style={
+                          {
+                            "alignItems": "center",
+                            "flexDirection": "row",
+                            "gap": 16,
+                          }
+                        }
+                      >
+                        <View
+                          style={
+                            {
+                              "alignItems": "center",
+                              "backgroundColor": "#C8C8C8",
+                              "borderRadius": 16,
+                              "height": 120,
+                              "justifyContent": "center",
+                              "overflow": "hidden",
+                              "width": 120,
+                            }
+                          }
+                        >
+                          <Text
+                            allowFontScaling={false}
+                            selectable={false}
+                            style={
+                              [
+                                {
+                                  "color": "#232323",
+                                  "fontSize": 60,
+                                },
+                                undefined,
+                                {
+                                  "fontFamily": "Material Design Icons",
+                                  "fontStyle": "normal",
+                                  "fontWeight": "normal",
+                                },
+                                {},
+                              ]
+                            }
+                          >
+                            󰀄
+                          </Text>
+                        </View>
+                        <View
+                          style={
+                            {
+                              "flex": 1,
+                            }
+                          }
+                        >
+                          <Text
+                            style={
+                              [
+                                {
+                                  "textAlign": "left",
+                                },
+                                {
+                                  "color": "#232323",
+                                  "writingDirection": "ltr",
+                                },
+                                [
+                                  {
+                                    "fontFamily": "System",
+                                    "fontSize": 16,
+                                    "fontWeight": "400",
+                                    "letterSpacing": 0.15,
+                                    "lineHeight": 24,
+                                  },
+                                  {
+                                    "color": "#0E2A47",
+                                    "fontWeight": undefined,
+                                  },
+                                ],
+                              ]
+                            }
+                          >
+                            settings_profile_photo
+                          </Text>
+                          <View
+                            style={
+                              {
+                                "height": 8,
+                              }
+                            }
+                          />
+                          <Text
+                            style={
+                              [
+                                {
+                                  "textAlign": "left",
+                                },
+                                {
+                                  "color": "#232323",
+                                  "writingDirection": "ltr",
+                                },
+                                [
+                                  {
+                                    "fontFamily": "System",
+                                    "fontSize": 14,
+                                    "fontWeight": "400",
+                                    "letterSpacing": 0.25,
+                                    "lineHeight": 20,
+                                  },
+                                  {
+                                    "color": "#232323",
+                                  },
+                                ],
+                              ]
+                            }
+                          >
+                            settings_profile_photo_hint
+                          </Text>
+                        </View>
+                      </View>
+                    </View>
+                  </View>
+                </View>
+              </View>
+            </View>
+            <Text
+              style={
+                [
+                  {
+                    "textAlign": "left",
+                  },
+                  {
+                    "color": "#232323",
+                    "writingDirection": "ltr",
+                  },
+                  [
+                    {
+                      "fontFamily": "System",
+                      "fontSize": 22,
+                      "fontWeight": "400",
+                      "letterSpacing": 0,
+                      "lineHeight": 28,
+                    },
+                    {
+                      "color": "#0E2A47",
+                    },
+                  ],
+                ]
+              }
+            >
               settings_appearance
             </Text>
             <View
@@ -1181,6 +1424,19 @@ exports[`SettingsScreen renders every section 1`] = `
         </RCTScrollView>
       </View>
     </View>
+    <View
+      collapsable={false}
+      pointerEvents="box-none"
+      style={
+        {
+          "bottom": 0,
+          "left": 0,
+          "position": "absolute",
+          "right": 0,
+          "top": 0,
+        }
+      }
+    />
     <View
       collapsable={false}
       pointerEvents="box-none"

@@ -94,6 +94,12 @@ export const sk: Record<StringKey, string> = {
 
   // Settings
   settings_language: 'Jazyk',
+  settings_profile: 'Môj profil',
+  settings_profile_photo: 'Profilová fotka',
+  settings_profile_photo_hint: 'Klepni pre zmenu',
+  imagepicker_title: 'Vybrať zdroj obrázka',
+  imagepicker_camera: 'Fotoaparát',
+  imagepicker_gallery: 'Galéria',
   settings_theme: 'Téma',
   settings_dark_mode: 'Tmavý režim',
   settings_about: 'O aplikácii',

@@ -14,7 +14,11 @@ import {
   AppCard,
   AppRadioButton,
   AppTextButtonError,
+  ColumnSpacer2,
 } from '../../components';
+import { AvatarView } from '../../components/AvatarView';
+import { ImageSourceDialog } from '../../components/imagepicker/ImageSourceDialog';
+import { useImagePicker } from '../../components/imagepicker/useImagePicker';
 import { RootStackParamList } from '../../navigation/RootStackNavigator';
 import { space4, space2 } from '../../foundation/dimensions';
 import { useAppColors, useAppTheme } from '../../foundation/theme';
@@ -22,12 +26,14 @@ import { FlagSK, FlagEN } from '../../foundation/AppIcons';
 import { useSettingsViewModel } from './useSettingsViewModel';
 import { ThemeMode } from '../../foundation/themeMode';
 import { Language } from '../../foundation/strings';
+import type { AvatarState } from '../../components/AvatarView';
 
 const LOCKUP_ASPECT = 732 / 180;
 
 export const SettingsScreen = () => {
   const colors = useAppColors();
   const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
+  const { avatarState, dialogVisible, showDialog, dismissDialog, pick } = useImagePicker();
   const {
     uiState,
     t,
@@ -68,6 +74,13 @@ export const SettingsScreen = () => {
   return (
     <View style={{ flex: 1, backgroundColor: colors.background }}>
       <ScrollView contentContainerStyle={{ padding: space4, gap: space4 }}>
+        <ProfileSection
+          title={t('settings_profile')}
+          photoLabel={t('settings_profile_photo')}
+          photoHint={t('settings_profile_photo_hint')}
+          avatarState={avatarState}
+          onPress={showDialog}
+        />
 
         <TextTitleLargePrimary>{t('settings_appearance')}</TextTitleLargePrimary>
 
@@ -106,6 +119,14 @@ export const SettingsScreen = () => {
         <AppTextButtonError text={t('settings_logout')} onPress={handleLogout} align="center" />
       </ScrollView>
 
+      <ImageSourceDialog
+        visible={dialogVisible}
+        title={t('imagepicker_title')}
+        cameraLabel={t('imagepicker_camera')}
+        galleryLabel={t('imagepicker_gallery')}
+        onAction={pick}
+        onDismiss={dismissDialog}
+      />
 
       <SelectionDialog visible={uiState.showThemeDialog} title={t('settings_theme')} onDismiss={onThemeDialogDismiss}>
         {(['light', 'dark', 'system'] as ThemeMode[]).map(mode => (
@@ -140,6 +161,33 @@ const LanguageFlag = ({ lang, size = 24 }: { lang: Language; size?: number }) =>
     case 'sk':
       return <FlagSK size={size} />;
   }
+};
+
+interface ProfileSectionProps {
+  title: string;
+  photoLabel: string;
+  photoHint: string;
+  avatarState: AvatarState;
+  onPress: () => void;
+}
+
+const ProfileSection = ({ title, photoLabel, photoHint, avatarState, onPress }: ProfileSectionProps) => {
+  return (
+    <>
+      <TextTitleLargePrimary>{title}</TextTitleLargePrimary>
+
+      <AppCard elevated onPress={onPress}>
+        <View style={{ flexDirection: 'row', alignItems: 'center', gap: space4 }}>
+          <AvatarView state={avatarState} />
+          <View style={{ flex: 1 }}>
+            <TextBodyLargePrimary>{photoLabel}</TextBodyLargePrimary>
+            <ColumnSpacer2 />
+            <TextBodyMediumNeutral80>{photoHint}</TextBodyMediumNeutral80>
+          </View>
+        </View>
+      </AppCard>
+    </>
+  );
 };
 
 interface AboutSectionProps {
