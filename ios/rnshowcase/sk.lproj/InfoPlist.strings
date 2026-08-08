@@ -1,0 +1,4 @@
+"NSCameraUsageDescription" = "Odfoťte si profilovú fotku a skenujte QR a čiarové kódy.";
+"NSPhotoLibraryUsageDescription" = "Vyberte si profilovú fotku z galérie.";
+"NSFaceIDUsageDescription" = "Prihláste sa bez zadávania hesla.";
+"NSLocationWhenInUseUsageDescription" = "Zobrazte svoju aktuálnu polohu na obrazovke Platform APIs.";
