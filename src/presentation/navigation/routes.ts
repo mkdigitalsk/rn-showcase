@@ -82,22 +82,22 @@ export const Routes = {
     showBackArrow: false,
     analyticsName: 'settings_screen',
   },
-  Login: {
-    name: 'Login',
+  SignIn: {
+    name: 'SignIn',
     ...defaults,
-    title: 'Login',
+    title: 'SignIn',
     showBackArrow: false,
     showTopBar: false,
     showBottomNav: false,
-    analyticsName: 'login_screen',
+    analyticsName: 'sign_in_screen',
   },
-  Register: {
-    name: 'Register',
+  SignUp: {
+    name: 'SignUp',
     ...defaults,
-    title: 'Register',
+    title: 'SignUp',
     showTopBar: false,
     showBottomNav: false,
-    analyticsName: 'register_screen',
+    analyticsName: 'sign_up_screen',
   },
 } as const satisfies Record<string, Route>;
 

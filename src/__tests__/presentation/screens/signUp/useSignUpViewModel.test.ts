@@ -3,7 +3,7 @@ import { test } from '../../../TestFunctions';
 
 // Mock tsyringe container.resolve before importing the hook
 const mockCheckEmailExists = { execute: jest.fn().mockResolvedValue(false) };
-const mockRegisterUser = {
+const mockSignUpUseCase = {
   execute: jest.fn().mockResolvedValue({ id: 1, name: 'John', email: 'john@example.com', password: 'Test123!', createdAt: 1234567890 }),
 };
 
@@ -14,8 +14,8 @@ jest.mock('tsyringe', () => ({
       if (key.includes('CheckEmailExists')) {
         return mockCheckEmailExists;
       }
-      if (key.includes('RegisterUser')) {
-        return mockRegisterUser;
+      if (key.includes('SignUpUseCase')) {
+        return mockSignUpUseCase;
       }
       return {};
     }),
@@ -24,13 +24,13 @@ jest.mock('tsyringe', () => ({
   inject: () => () => {},
 }));
 
-import { useRegisterViewModel } from '../../../../presentation/screens/register/useRegisterViewModel';
+import { useSignUpViewModel } from '../../../../presentation/screens/signUp/useSignUpViewModel';
 
-describe('useRegisterViewModel', () => {
+describe('useSignUpViewModel', () => {
   beforeEach(() => {
     jest.clearAllMocks();
     mockCheckEmailExists.execute.mockResolvedValue(false);
-    mockRegisterUser.execute.mockResolvedValue({
+    mockSignUpUseCase.execute.mockResolvedValue({
       id: 1,
       name: 'John',
       email: 'john@example.com',
@@ -42,7 +42,7 @@ describe('useRegisterViewModel', () => {
   // === Default State ===
 
   it('default state has empty fields', () => {
-    const { result } = renderHook(() => useRegisterViewModel());
+    const { result } = renderHook(() => useSignUpViewModel());
     test({
       whenAction: () => result.current.uiState,
       then: state => {
@@ -55,7 +55,7 @@ describe('useRegisterViewModel', () => {
   });
 
   it('default state has no errors', () => {
-    const { result } = renderHook(() => useRegisterViewModel());
+    const { result } = renderHook(() => useSignUpViewModel());
     test({
       whenAction: () => result.current.uiState,
       then: state => {
@@ -70,8 +70,8 @@ describe('useRegisterViewModel', () => {
   // === Field Changes ===
 
   it('onNameChange updates name and clears error', () => {
-    const { result } = renderHook(() => useRegisterViewModel());
-    act(() => result.current.register());
+    const { result } = renderHook(() => useSignUpViewModel());
+    act(() => result.current.signUp());
     act(() => result.current.onNameChange('John'));
 
     test({
@@ -84,8 +84,8 @@ describe('useRegisterViewModel', () => {
   });
 
   it('onEmailChange updates email and clears error', () => {
-    const { result } = renderHook(() => useRegisterViewModel());
-    act(() => result.current.register());
+    const { result } = renderHook(() => useSignUpViewModel());
+    act(() => result.current.signUp());
     act(() => result.current.onEmailChange('test@example.com'));
 
     test({
@@ -98,8 +98,8 @@ describe('useRegisterViewModel', () => {
   });
 
   it('onPasswordChange updates password and clears error', () => {
-    const { result } = renderHook(() => useRegisterViewModel());
-    act(() => result.current.register());
+    const { result } = renderHook(() => useSignUpViewModel());
+    act(() => result.current.signUp());
     act(() => result.current.onPasswordChange('Test123!'));
 
     test({
@@ -112,8 +112,8 @@ describe('useRegisterViewModel', () => {
   });
 
   it('onConfirmPasswordChange updates confirmPassword and clears error', () => {
-    const { result } = renderHook(() => useRegisterViewModel());
-    act(() => result.current.register());
+    const { result } = renderHook(() => useSignUpViewModel());
+    act(() => result.current.signUp());
     act(() => result.current.onConfirmPasswordChange('Test123!'));
 
     test({
@@ -127,15 +127,15 @@ describe('useRegisterViewModel', () => {
 
   // === Registration Validation — Name ===
 
-  it('register with empty name shows empty error', () => {
-    const { result } = renderHook(() => useRegisterViewModel());
+  it('sign up with empty name shows empty error', () => {
+    const { result } = renderHook(() => useSignUpViewModel());
     act(() => {
       result.current.onEmailChange('test@example.com');
       result.current.onPasswordChange('Test123!');
       result.current.onConfirmPasswordChange('Test123!');
     });
 
-    act(() => result.current.register());
+    act(() => result.current.signUp());
 
     test({
       whenAction: () => result.current.uiState.nameError,
@@ -145,15 +145,15 @@ describe('useRegisterViewModel', () => {
 
   // === Registration Validation — Email ===
 
-  it('register with empty email shows empty error', () => {
-    const { result } = renderHook(() => useRegisterViewModel());
+  it('sign up with empty email shows empty error', () => {
+    const { result } = renderHook(() => useSignUpViewModel());
     act(() => {
       result.current.onNameChange('John');
       result.current.onPasswordChange('Test123!');
       result.current.onConfirmPasswordChange('Test123!');
     });
 
-    act(() => result.current.register());
+    act(() => result.current.signUp());
 
     test({
       whenAction: () => result.current.uiState.emailError,
@@ -161,8 +161,8 @@ describe('useRegisterViewModel', () => {
     });
   });
 
-  it('register with invalid email shows invalid_format error', () => {
-    const { result } = renderHook(() => useRegisterViewModel());
+  it('sign up with invalid email shows invalid_format error', () => {
+    const { result } = renderHook(() => useSignUpViewModel());
     act(() => {
       result.current.onNameChange('John');
       result.current.onEmailChange('invalid-email');
@@ -170,7 +170,7 @@ describe('useRegisterViewModel', () => {
       result.current.onConfirmPasswordChange('Test123!');
     });
 
-    act(() => result.current.register());
+    act(() => result.current.signUp());
 
     test({
       whenAction: () => result.current.uiState.emailError,
@@ -180,15 +180,15 @@ describe('useRegisterViewModel', () => {
 
   // === Registration Validation — Password ===
 
-  it('register with empty password shows empty error', () => {
-    const { result } = renderHook(() => useRegisterViewModel());
+  it('sign up with empty password shows empty error', () => {
+    const { result } = renderHook(() => useSignUpViewModel());
     act(() => {
       result.current.onNameChange('John');
       result.current.onEmailChange('test@example.com');
       result.current.onConfirmPasswordChange('Test123!');
     });
 
-    act(() => result.current.register());
+    act(() => result.current.signUp());
 
     test({
       whenAction: () => result.current.uiState.passwordError,
@@ -196,8 +196,8 @@ describe('useRegisterViewModel', () => {
     });
   });
 
-  it('register with short password shows too_short error', () => {
-    const { result } = renderHook(() => useRegisterViewModel());
+  it('sign up with short password shows too_short error', () => {
+    const { result } = renderHook(() => useSignUpViewModel());
     act(() => {
       result.current.onNameChange('John');
       result.current.onEmailChange('test@example.com');
@@ -205,7 +205,7 @@ describe('useRegisterViewModel', () => {
       result.current.onConfirmPasswordChange('Te1!');
     });
 
-    act(() => result.current.register());
+    act(() => result.current.signUp());
 
     test({
       whenAction: () => result.current.uiState.passwordError,
@@ -213,8 +213,8 @@ describe('useRegisterViewModel', () => {
     });
   });
 
-  it('register with weak password shows weak error', () => {
-    const { result } = renderHook(() => useRegisterViewModel());
+  it('sign up with weak password shows weak error', () => {
+    const { result } = renderHook(() => useSignUpViewModel());
     act(() => {
       result.current.onNameChange('John');
       result.current.onEmailChange('test@example.com');
@@ -222,7 +222,7 @@ describe('useRegisterViewModel', () => {
       result.current.onConfirmPasswordChange('testtest');
     });
 
-    act(() => result.current.register());
+    act(() => result.current.signUp());
 
     test({
       whenAction: () => result.current.uiState.passwordError,
@@ -232,15 +232,15 @@ describe('useRegisterViewModel', () => {
 
   // === Registration Validation — Confirm Password ===
 
-  it('register with empty confirm password shows empty error', () => {
-    const { result } = renderHook(() => useRegisterViewModel());
+  it('sign up with empty confirm password shows empty error', () => {
+    const { result } = renderHook(() => useSignUpViewModel());
     act(() => {
       result.current.onNameChange('John');
       result.current.onEmailChange('test@example.com');
       result.current.onPasswordChange('Test123!');
     });
 
-    act(() => result.current.register());
+    act(() => result.current.signUp());
 
     test({
       whenAction: () => result.current.uiState.confirmPasswordError,
@@ -248,8 +248,8 @@ describe('useRegisterViewModel', () => {
     });
   });
 
-  it('register with mismatched passwords shows mismatch error', () => {
-    const { result } = renderHook(() => useRegisterViewModel());
+  it('sign up with mismatched passwords shows mismatch error', () => {
+    const { result } = renderHook(() => useSignUpViewModel());
     act(() => {
       result.current.onNameChange('John');
       result.current.onEmailChange('test@example.com');
@@ -257,7 +257,7 @@ describe('useRegisterViewModel', () => {
       result.current.onConfirmPasswordChange('Different1!');
     });
 
-    act(() => result.current.register());
+    act(() => result.current.signUp());
 
     test({
       whenAction: () => result.current.uiState.confirmPasswordError,
@@ -267,8 +267,8 @@ describe('useRegisterViewModel', () => {
 
   // === Successful Registration ===
 
-  it('register with valid fields calls use cases and invokes callback', async () => {
-    const { result } = renderHook(() => useRegisterViewModel());
+  it('sign up with valid fields calls use cases and invokes callback', async () => {
+    const { result } = renderHook(() => useSignUpViewModel());
     act(() => {
       result.current.onNameChange('John Doe');
       result.current.onEmailChange('john@example.com');
@@ -276,15 +276,15 @@ describe('useRegisterViewModel', () => {
       result.current.onConfirmPasswordChange('Test123!');
     });
 
-    const onRegistered = jest.fn();
-    act(() => result.current.register(onRegistered));
+    const onSignedUp = jest.fn();
+    act(() => result.current.signUp(onSignedUp));
 
     await waitFor(() => {
-      expect(onRegistered).toHaveBeenCalled();
+      expect(onSignedUp).toHaveBeenCalled();
     });
 
     expect(mockCheckEmailExists.execute).toHaveBeenCalledWith('john@example.com');
-    expect(mockRegisterUser.execute).toHaveBeenCalledWith({
+    expect(mockSignUpUseCase.execute).toHaveBeenCalledWith({
       name: 'John Doe',
       email: 'john@example.com',
       password: 'Test123!',
@@ -294,10 +294,10 @@ describe('useRegisterViewModel', () => {
 
   // === Email Already Exists ===
 
-  it('register with existing email shows already_exists error', async () => {
+  it('sign up with existing email shows already_exists error', async () => {
     mockCheckEmailExists.execute.mockResolvedValue(true);
 
-    const { result } = renderHook(() => useRegisterViewModel());
+    const { result } = renderHook(() => useSignUpViewModel());
     act(() => {
       result.current.onNameChange('John Doe');
       result.current.onEmailChange('existing@example.com');
@@ -305,15 +305,15 @@ describe('useRegisterViewModel', () => {
       result.current.onConfirmPasswordChange('Test123!');
     });
 
-    const onRegistered = jest.fn();
-    act(() => result.current.register(onRegistered));
+    const onSignedUp = jest.fn();
+    act(() => result.current.signUp(onSignedUp));
 
     await waitFor(() => {
       expect(result.current.uiState.emailError).toBe('already_exists');
     });
 
-    expect(onRegistered).not.toHaveBeenCalled();
-    expect(mockRegisterUser.execute).not.toHaveBeenCalled();
+    expect(onSignedUp).not.toHaveBeenCalled();
+    expect(mockSignUpUseCase.execute).not.toHaveBeenCalled();
     expect(result.current.uiState.isLoading).toBe(false);
   });
 });

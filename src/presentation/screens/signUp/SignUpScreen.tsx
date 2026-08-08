@@ -2,7 +2,7 @@ import React, { useCallback } from 'react';
 import { View, ScrollView, KeyboardAvoidingView, Platform } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { useRegisterViewModel } from './useRegisterViewModel';
+import { useSignUpViewModel } from './useSignUpViewModel';
 import { useAppColors } from '../../foundation/theme';
 import { useStrings } from '../../foundation/strings';
 import { RootStackParamList } from '../../navigation/RootStackNavigator';
@@ -11,17 +11,17 @@ import { TextHeadlineMedium } from '../../components/text/headlineMedium/TextHea
 import { TextBodyMediumNeutral80 } from '../../components/text/bodyMedium/TextBodyMedium';
 import { space4, space8 } from '../../foundation/dimensions';
 
-type RegisterNavigationProp = NativeStackNavigationProp<RootStackParamList>;
+type SignUpNavigationProp = NativeStackNavigationProp<RootStackParamList>;
 
-export const RegisterScreen = () => {
+export const SignUpScreen = () => {
   const colors = useAppColors();
   const { t } = useStrings();
-  const navigation = useNavigation<RegisterNavigationProp>();
-  const { uiState, onNameChange, onEmailChange, onPasswordChange, onConfirmPasswordChange, register } = useRegisterViewModel();
+  const navigation = useNavigation<SignUpNavigationProp>();
+  const { uiState, onNameChange, onEmailChange, onPasswordChange, onConfirmPasswordChange, signUp } = useSignUpViewModel();
 
-  const handleRegister = useCallback(() => {
-    register(() => navigation.replace('Main'));
-  }, [register, navigation]);
+  const handleSignUp = useCallback(() => {
+    signUp(() => navigation.replace('Main'));
+  }, [signUp, navigation]);
 
   const handleToLogin = useCallback(() => {
     navigation.goBack();
@@ -30,7 +30,7 @@ export const RegisterScreen = () => {
   const getNameErrorText = (): string | undefined => {
     switch (uiState.nameError) {
       case 'empty':
-        return t('register_name_error_empty');
+        return t('sign_up_name_error_empty');
       default:
         return undefined;
     }
@@ -39,11 +39,11 @@ export const RegisterScreen = () => {
   const getEmailErrorText = (): string | undefined => {
     switch (uiState.emailError) {
       case 'empty':
-        return t('register_email_error_empty');
+        return t('sign_up_email_error_empty');
       case 'invalid_format':
-        return t('register_email_error_invalid');
+        return t('sign_up_email_error_invalid');
       case 'already_exists':
-        return t('register_email_error_already_exists');
+        return t('sign_up_email_error_already_exists');
       default:
         return undefined;
     }
@@ -52,11 +52,11 @@ export const RegisterScreen = () => {
   const getPasswordErrorText = (): string | undefined => {
     switch (uiState.passwordError) {
       case 'empty':
-        return t('register_password_error_empty');
+        return t('sign_up_password_error_empty');
       case 'too_short':
-        return t('register_password_error_short');
+        return t('sign_up_password_error_short');
       case 'weak':
-        return t('register_password_error_weak');
+        return t('sign_up_password_error_weak');
       default:
         return undefined;
     }
@@ -65,9 +65,9 @@ export const RegisterScreen = () => {
   const getConfirmPasswordErrorText = (): string | undefined => {
     switch (uiState.confirmPasswordError) {
       case 'empty':
-        return t('register_confirm_error_empty');
+        return t('sign_up_confirm_error_empty');
       case 'mismatch':
-        return t('register_confirm_error_mismatch');
+        return t('sign_up_confirm_error_mismatch');
       default:
         return undefined;
     }
@@ -83,9 +83,9 @@ export const RegisterScreen = () => {
         }}
         keyboardShouldPersistTaps="handled"
       >
-        <TextHeadlineMedium color={colors.primary}>{t('register_title')}</TextHeadlineMedium>
+        <TextHeadlineMedium color={colors.primary}>{t('sign_up_title')}</TextHeadlineMedium>
         <ColumnSpacer2 />
-        <TextBodyMediumNeutral80>{t('register_subtitle')}</TextBodyMediumNeutral80>
+        <TextBodyMediumNeutral80>{t('sign_up_subtitle')}</TextBodyMediumNeutral80>
 
         <ColumnSpacer4 />
 
@@ -93,8 +93,8 @@ export const RegisterScreen = () => {
           <AppTextField
             value={uiState.name}
             onChangeText={onNameChange}
-            label={t('register_name_label')}
-            placeholder={t('register_name_placeholder')}
+            label={t('sign_up_name_label')}
+            placeholder={t('sign_up_name_placeholder')}
             error={uiState.nameError !== null}
             helperText={getNameErrorText()}
             autoCapitalize="words"
@@ -105,8 +105,8 @@ export const RegisterScreen = () => {
           <AppTextField
             value={uiState.email}
             onChangeText={onEmailChange}
-            label={t('register_email_label')}
-            placeholder={t('register_email_placeholder')}
+            label={t('sign_up_email_label')}
+            placeholder={t('sign_up_email_placeholder')}
             error={uiState.emailError !== null}
             helperText={getEmailErrorText()}
             keyboardType="email-address"
@@ -118,8 +118,8 @@ export const RegisterScreen = () => {
           <AppTextField
             value={uiState.password}
             onChangeText={onPasswordChange}
-            label={t('register_password_label')}
-            placeholder={t('register_password_placeholder')}
+            label={t('sign_up_password_label')}
+            placeholder={t('sign_up_password_placeholder')}
             error={uiState.passwordError !== null}
             helperText={getPasswordErrorText()}
             secureTextEntry
@@ -130,8 +130,8 @@ export const RegisterScreen = () => {
           <AppTextField
             value={uiState.confirmPassword}
             onChangeText={onConfirmPasswordChange}
-            label={t('register_confirm_label')}
-            placeholder={t('register_confirm_placeholder')}
+            label={t('sign_up_confirm_label')}
+            placeholder={t('sign_up_confirm_placeholder')}
             error={uiState.confirmPasswordError !== null}
             helperText={getConfirmPasswordErrorText()}
             secureTextEntry
@@ -139,12 +139,12 @@ export const RegisterScreen = () => {
 
           <ColumnSpacer4 />
 
-          <ContainedButton text={t('register_button')} onPress={handleRegister} loading={uiState.isLoading} disabled={uiState.isLoading} />
+          <ContainedButton text={t('sign_up_button')} onPress={handleSignUp} loading={uiState.isLoading} disabled={uiState.isLoading} />
         </AppCard>
 
         <ColumnSpacer4 />
 
-        <AppTextButton text={t('register_to_login')} onPress={handleToLogin} />
+        <AppTextButton text={t('sign_up_to_sign_in')} onPress={handleToLogin} />
 
         <View style={{ height: space8 }} />
       </ScrollView>

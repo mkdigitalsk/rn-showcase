@@ -1,7 +1,7 @@
 import { AuthResponseDTO } from './AuthResponseDTO';
-import { RegisteredUser } from '../../../domain/model/RegisteredUser';
+import { SignedUpUser } from '../../../domain/model/SignedUpUser';
 
-export function toRegisteredUser(dto: AuthResponseDTO): RegisteredUser {
+export function toSignedUpUser(dto: AuthResponseDTO): SignedUpUser {
   return {
     id: dto.user.id,
     name: dto.user.name,

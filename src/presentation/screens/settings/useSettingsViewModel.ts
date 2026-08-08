@@ -1,7 +1,7 @@
 import { useCallback, useMemo, useState } from 'react';
 import { TYPES } from '../../../app/diTypes';
 import { OpenLinkUseCase } from '../../../domain/useCases/platform/OpenLinkUseCase';
-import { LogoutUseCase } from '../../../domain/useCases/auth/LogoutUseCase';
+import { SignOutUseCase } from '../../../domain/useCases/auth/SignOutUseCase';
 import { useResolve } from '../../hooks/useResolve';
 import { execute } from '../../hooks/useExecute';
 import { ThemeMode } from '../../foundation/themeMode';
@@ -16,7 +16,7 @@ const STUDIO_URL = 'https://mkdigital.sk';
 export const useSettingsViewModel = () => {
   const { themeMode, setThemeMode } = useThemeMode();
   const openLinkUseCase = useResolve<OpenLinkUseCase>(TYPES.OpenLinkUseCase);
-  const logoutUseCase = useResolve<LogoutUseCase>(TYPES.LogoutUseCase);
+  const signOutUseCase = useResolve<SignOutUseCase>(TYPES.SignOutUseCase);
   const { language, setLanguage, t } = useStrings();
   const [showThemeDialog, setShowThemeDialog] = useState(false);
   const [showLanguageDialog, setShowLanguageDialog] = useState(false);
@@ -65,14 +65,14 @@ export const useSettingsViewModel = () => {
     setShowLanguageDialog(false);
   }, []);
 
-  const logout = useCallback(
+  const signOut = useCallback(
     (onLoggedOut?: () => void): void => {
       execute({
-        action: () => logoutUseCase.execute(),
+        action: () => signOutUseCase.execute(),
         onSuccess: () => onLoggedOut?.(),
       });
     },
-    [logoutUseCase]
+    [signOutUseCase]
   );
 
   const triggerTestCrash = useCallback(() => {
@@ -94,6 +94,6 @@ export const useSettingsViewModel = () => {
     onLanguageDialogDismiss,
     triggerTestCrash,
     openWeb,
-    logout,
+    signOut,
   };
 };
