@@ -1,9 +1,9 @@
-import { RegisteredUser } from '../model/RegisteredUser';
+import { SignedUpUser } from '../model/SignedUpUser';
 
 export interface AuthRepository {
-  login(email: string, password: string): Promise<RegisteredUser>;
-  loginWithToken(): Promise<RegisteredUser | null>;
-  logout(): Promise<void>;
-  register(name: string, email: string, password: string): Promise<RegisteredUser>;
+  signIn(email: string, password: string): Promise<SignedUpUser>;
+  signInWithToken(): Promise<SignedUpUser | null>;
+  signOut(): Promise<void>;
+  signUp(name: string, email: string, password: string): Promise<SignedUpUser>;
   emailExists(email: string): Promise<boolean>;
 }

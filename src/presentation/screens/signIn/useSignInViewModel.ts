@@ -1,22 +1,22 @@
 import { useState, useCallback, useEffect } from 'react';
 import { TYPES } from '../../../app/diTypes';
-import { LoginUseCase } from '../../../domain/useCases/auth/LoginUseCase';
-import { LoginWithTokenUseCase } from '../../../domain/useCases/auth/LoginWithTokenUseCase';
+import { SignInUseCase } from '../../../domain/useCases/auth/SignInUseCase';
+import { SignInWithTokenUseCase } from '../../../domain/useCases/auth/SignInWithTokenUseCase';
 import { IsBiometricEnabledUseCase } from '../../../domain/useCases/biometric/IsBiometricEnabledUseCase';
 import { AuthenticateWithBiometricUseCase } from '../../../domain/useCases/biometric/AuthenticateWithBiometricUseCase';
 import { useResolve } from '../../hooks/useResolve';
 import { execute } from '../../hooks/useExecute';
-import { LoginUiState, initialLoginUiState, EmailError, PasswordError } from './LoginUiState';
+import { SignInUiState, initialSignInUiState, EmailError, PasswordError } from './SignInUiState';
 import { isValidEmail, isPasswordLongEnough, isValidPassword } from '../../foundation/ValidationPatterns';
 
 export const TEST_EMAIL = 'test01@mkdigital.sk';
 export const TEST_PASSWORD = 'MKDigitalTest1@';
 
-export const useLoginViewModel = () => {
-  const [uiState, setUiState] = useState<LoginUiState>(initialLoginUiState);
+export const useSignInViewModel = () => {
+  const [uiState, setUiState] = useState<SignInUiState>(initialSignInUiState);
 
-  const loginUseCase = useResolve<LoginUseCase>(TYPES.LoginUseCase);
-  const loginWithTokenUseCase = useResolve<LoginWithTokenUseCase>(TYPES.LoginWithTokenUseCase);
+  const signInUseCase = useResolve<SignInUseCase>(TYPES.SignInUseCase);
+  const signInWithTokenUseCase = useResolve<SignInWithTokenUseCase>(TYPES.SignInWithTokenUseCase);
   const isBiometricEnabledUseCase = useResolve<IsBiometricEnabledUseCase>(TYPES.IsBiometricEnabledUseCase);
   const authenticateWithBiometricUseCase = useResolve<AuthenticateWithBiometricUseCase>(TYPES.AuthenticateWithBiometricUseCase);
 
@@ -58,27 +58,27 @@ export const useLoginViewModel = () => {
     return null;
   }, []);
 
-  const login = useCallback(
-    (onLoggedIn?: () => void): void => {
+  const signIn = useCallback(
+    (onSignedIn?: () => void): void => {
       const emailError = validateEmail(uiState.email);
       const passwordError = validatePassword(uiState.password);
 
       if (emailError || passwordError) {
-        setUiState(prev => ({ ...prev, emailError, passwordError, loginFailed: false }));
+        setUiState(prev => ({ ...prev, emailError, passwordError, signInFailed: false }));
         return;
       }
 
       execute({
-        action: () => loginUseCase.execute({ email: uiState.email, password: uiState.password }),
-        onLoading: () => setUiState(prev => ({ ...prev, isLoading: true, loginFailed: false })),
+        action: () => signInUseCase.execute({ email: uiState.email, password: uiState.password }),
+        onLoading: () => setUiState(prev => ({ ...prev, isLoading: true, signInFailed: false })),
         onSuccess: () => {
           setUiState(prev => ({ ...prev, isLoading: false }));
-          onLoggedIn?.();
+          onSignedIn?.();
         },
-        onError: () => setUiState(prev => ({ ...prev, isLoading: false, loginFailed: true })),
+        onError: () => setUiState(prev => ({ ...prev, isLoading: false, signInFailed: true })),
       });
     },
-    [uiState.email, uiState.password, validateEmail, validatePassword, loginUseCase]
+    [uiState.email, uiState.password, validateEmail, validatePassword, signInUseCase]
   );
 
   const authenticateWithBiometrics = useCallback(
@@ -110,7 +110,7 @@ export const useLoginViewModel = () => {
   const restoreSession = useCallback(
     (onRestored?: () => void): void => {
       execute({
-        action: () => loginWithTokenUseCase.execute(),
+        action: () => signInWithTokenUseCase.execute(),
         onLoading: () => setUiState(prev => ({ ...prev, isLoading: true })),
         onSuccess: user => {
           setUiState(prev => ({ ...prev, isLoading: false }));
@@ -121,7 +121,7 @@ export const useLoginViewModel = () => {
         onError: () => setUiState(prev => ({ ...prev, isLoading: false })),
       });
     },
-    [loginWithTokenUseCase]
+    [signInWithTokenUseCase]
   );
 
   const fillTestAccount = useCallback(() => {
@@ -138,7 +138,7 @@ export const useLoginViewModel = () => {
     uiState,
     onEmailChange,
     onPasswordChange,
-    login,
+    signIn,
     restoreSession,
     authenticateWithBiometrics,
     fillTestAccount,

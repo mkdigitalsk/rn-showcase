@@ -17,10 +17,10 @@ export const TYPES = {
   // Auth
   AuthApi: Symbol.for('AuthApi'),
   AuthRepository: Symbol.for('AuthRepository'),
-  LoginUseCase: Symbol.for('LoginUseCase'),
-  LoginWithTokenUseCase: Symbol.for('LoginWithTokenUseCase'),
-  LogoutUseCase: Symbol.for('LogoutUseCase'),
-  RegisterUserUseCase: Symbol.for('RegisterUserUseCase'),
+  SignInUseCase: Symbol.for('SignInUseCase'),
+  SignInWithTokenUseCase: Symbol.for('SignInWithTokenUseCase'),
+  SignOutUseCase: Symbol.for('SignOutUseCase'),
+  SignUpUseCase: Symbol.for('SignUpUseCase'),
   CheckEmailExistsUseCase: Symbol.for('CheckEmailExistsUseCase'),
 
   // Platform APIs

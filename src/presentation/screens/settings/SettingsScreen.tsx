@@ -45,11 +45,11 @@ export const SettingsScreen = () => {
     onLanguageDialogDismiss,
     triggerTestCrash,
     openWeb,
-    logout,
+    signOut,
   } = useSettingsViewModel();
 
   // Reset rather than navigate: the tabs stay on the stack otherwise, and Back returns to a signed-out Home.
-  const handleLogout = () => logout(() => navigation.reset({ index: 0, routes: [{ name: 'Login' }] }));
+  const handleSignOut = () => signOut(() => navigation.reset({ index: 0, routes: [{ name: 'SignIn' }] }));
 
   const themeModeLabel = (mode: ThemeMode): string => {
     switch (mode) {
@@ -116,7 +116,7 @@ export const SettingsScreen = () => {
 
         <VersionFooter label={`${t('settings_version')} ${uiState.versionName}`} />
 
-        <AppTextButtonError text={t('settings_logout')} onPress={handleLogout} align="center" />
+        <AppTextButtonError text={t('settings_sign_out')} onPress={handleSignOut} align="center" />
       </ScrollView>
 
       <ImageSourceDialog

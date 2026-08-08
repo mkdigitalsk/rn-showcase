@@ -1,29 +1,29 @@
 import { injectable } from 'tsyringe';
 import { httpClient } from './httpClient';
 import { handleApiCall } from './apiCallHandler';
-import { LoginRequestDTO } from '../dto/auth/LoginRequestDTO';
-import { RegisterRequestDTO } from '../dto/auth/RegisterRequestDTO';
+import { SignInRequestDTO } from '../dto/auth/SignInRequestDTO';
+import { SignUpRequestDTO } from '../dto/auth/SignUpRequestDTO';
 import { AuthResponseDTO } from '../dto/auth/AuthResponseDTO';
 
 export interface AuthApi {
-  login(email: string, password: string): Promise<AuthResponseDTO>;
-  register(email: string, password: string, name: string): Promise<AuthResponseDTO>;
+  signIn(email: string, password: string): Promise<AuthResponseDTO>;
+  signUp(email: string, password: string, name: string): Promise<AuthResponseDTO>;
   me(): Promise<AuthResponseDTO>;
 }
 
 @injectable()
 export class AuthApiImpl implements AuthApi {
-  async login(email: string, password: string): Promise<AuthResponseDTO> {
+  async signIn(email: string, password: string): Promise<AuthResponseDTO> {
     return handleApiCall(async () => {
-      const body: LoginRequestDTO = { email, password };
+      const body: SignInRequestDTO = { email, password };
       const response = await httpClient.post('/auth/login', body);
       return response.data as AuthResponseDTO;
     });
   }
 
-  async register(email: string, password: string, name: string): Promise<AuthResponseDTO> {
+  async signUp(email: string, password: string, name: string): Promise<AuthResponseDTO> {
     return handleApiCall(async () => {
-      const body: RegisterRequestDTO = { email, password, name };
+      const body: SignUpRequestDTO = { email, password, name };
       const response = await httpClient.post('/auth/register', body);
       return response.data as AuthResponseDTO;
     });

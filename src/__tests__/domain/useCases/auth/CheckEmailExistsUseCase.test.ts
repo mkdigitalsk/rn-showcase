@@ -5,10 +5,10 @@ import { AuthRepository } from '../../../../domain/repositories/AuthRepository';
 
 function createMockAuthRepository(): AuthRepository {
   return {
-    login: jest.fn(),
-    loginWithToken: jest.fn(),
-    logout: jest.fn(),
-    register: jest.fn(),
+    signIn: jest.fn(),
+    signInWithToken: jest.fn(),
+    signOut: jest.fn(),
+    signUp: jest.fn(),
     emailExists: jest.fn(),
   };
 }
