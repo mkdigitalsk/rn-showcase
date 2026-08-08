@@ -17,17 +17,16 @@ import {
 } from '../../components';
 import { RootStackParamList } from '../../navigation/RootStackNavigator';
 import { space4, space2 } from '../../foundation/dimensions';
-
-const LOCKUP_ASPECT = 732 / 180;
 import { useAppColors, useAppTheme } from '../../foundation/theme';
 import { FlagSK, FlagEN } from '../../foundation/AppIcons';
 import { useSettingsViewModel } from './useSettingsViewModel';
 import { ThemeMode } from '../../foundation/themeMode';
 import { Language } from '../../foundation/strings';
 
+const LOCKUP_ASPECT = 732 / 180;
+
 export const SettingsScreen = () => {
   const colors = useAppColors();
-  const theme = useAppTheme();
   const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
   const {
     uiState,
@@ -66,106 +65,151 @@ export const SettingsScreen = () => {
     }
   };
 
-  const LanguageFlag = ({ lang, size = 24 }: { lang: Language; size?: number }) => {
-    switch (lang) {
-      case 'en':
-        return <FlagEN size={size} />;
-      case 'sk':
-        return <FlagSK size={size} />;
-    }
-  };
-
   return (
     <View style={{ flex: 1, backgroundColor: colors.background }}>
       <ScrollView contentContainerStyle={{ padding: space4, gap: space4 }}>
-        {/* Appearance Section */}
+
         <TextTitleLargePrimary>{t('settings_appearance')}</TextTitleLargePrimary>
 
-        <AppCard elevated onPress={onThemeClick}>
-          <SettingsItem
-            icon={<Icon name="weather-night" size={24} color={colors.primary} />}
-            title={t('settings_theme')}
-            value={themeModeLabel(uiState.themeMode)}
-          />
-        </AppCard>
+        <SettingsCard
+          icon={<Icon name="weather-night" size={24} color={colors.primary} />}
+          title={t('settings_theme')}
+          value={themeModeLabel(uiState.themeMode)}
+          onPress={onThemeClick}
+        />
 
-        <AppCard elevated onPress={onLanguageClick}>
-          <SettingsItem
-            icon={<LanguageFlag lang={uiState.language} />}
-            title={t('settings_language')}
-            value={languageLabel(uiState.language)}
-          />
-        </AppCard>
+        <SettingsCard
+          icon={<LanguageFlag lang={uiState.language} />}
+          title={t('settings_language')}
+          value={languageLabel(uiState.language)}
+          onPress={onLanguageClick}
+        />
 
-        {/* Debug Section */}
         {uiState.showCrashButton && (
-          <AppCard elevated onPress={triggerTestCrash}>
-            <SettingsItem
-              icon={<Icon name="bug-outline" size={24} color={colors.primary} />}
-              title={t('settings_test_crash_title')}
-              value={t('settings_test_crash_subtitle')}
-            />
-          </AppCard>
+          <SettingsCard
+            icon={<Icon name="bug-outline" size={24} color={colors.primary} />}
+            title={t('settings_test_crash_title')}
+            value={t('settings_test_crash_subtitle')}
+            onPress={triggerTestCrash}
+          />
         )}
 
-        <TextTitleLargePrimary>{t('settings_about')}</TextTitleLargePrimary>
+        <AboutSection
+          title={t('settings_about')}
+          tagline={t('settings_about_tagline')}
+          webLabel={t('settings_about_web')}
+          onPress={openWeb}
+        />
 
-        <AppCard elevated onPress={openWeb} cover={require('../../assets/mk-digital-lockup.png')} coverAspectRatio={LOCKUP_ASPECT}>
-          <View style={{ paddingVertical: space4, gap: space2 }}>
-            <TextBodyLargeNeutral100 bold>{t('settings_about_tagline')}</TextBodyLargeNeutral100>
-            <TextBodySmall color={colors.primary} underline>
-              {t('settings_about_web')}
-            </TextBodySmall>
-          </View>
-        </AppCard>
-
-        {/* Version Footer */}
-        <View style={{ alignItems: 'flex-end', marginTop: space4 }}>
-          <TextBodySmallNeutral80>{`${t('settings_version')} ${uiState.versionName}`}</TextBodySmallNeutral80>
-        </View>
+        <VersionFooter label={`${t('settings_version')} ${uiState.versionName}`} />
 
         <AppTextButtonError text={t('settings_logout')} onPress={handleLogout} align="center" />
       </ScrollView>
 
-      {/* Theme Selection Dialog */}
-      <Portal>
-        <Dialog visible={uiState.showThemeDialog} onDismiss={onThemeDialogDismiss} style={{ backgroundColor: theme.colors.surface }}>
-          <Dialog.Title>
-            <TextTitleLargePrimary>{t('settings_theme')}</TextTitleLargePrimary>
-          </Dialog.Title>
-          <Dialog.Content>
-            {(['light', 'dark', 'system'] as ThemeMode[]).map(mode => (
-              <SelectionOption
-                key={mode}
-                label={themeModeLabel(mode)}
-                selected={uiState.themeMode === mode}
-                onPress={() => onThemeSelected(mode)}
-              />
-            ))}
-          </Dialog.Content>
-        </Dialog>
-      </Portal>
 
-      {/* Language Selection Dialog */}
-      <Portal>
-        <Dialog visible={uiState.showLanguageDialog} onDismiss={onLanguageDialogDismiss} style={{ backgroundColor: theme.colors.surface }}>
-          <Dialog.Title>
-            <TextTitleLargePrimary>{t('settings_language')}</TextTitleLargePrimary>
-          </Dialog.Title>
-          <Dialog.Content>
-            {(['en', 'sk'] as Language[]).map(lang => (
-              <LanguageOption
-                key={lang}
-                flag={<LanguageFlag lang={lang} />}
-                label={languageLabel(lang)}
-                selected={uiState.language === lang}
-                onPress={() => onLanguageSelected(lang)}
-              />
-            ))}
-          </Dialog.Content>
-        </Dialog>
-      </Portal>
+      <SelectionDialog visible={uiState.showThemeDialog} title={t('settings_theme')} onDismiss={onThemeDialogDismiss}>
+        {(['light', 'dark', 'system'] as ThemeMode[]).map(mode => (
+          <SelectionOption
+            key={mode}
+            label={themeModeLabel(mode)}
+            selected={uiState.themeMode === mode}
+            onPress={() => onThemeSelected(mode)}
+          />
+        ))}
+      </SelectionDialog>
+
+      <SelectionDialog visible={uiState.showLanguageDialog} title={t('settings_language')} onDismiss={onLanguageDialogDismiss}>
+        {(['en', 'sk'] as Language[]).map(lang => (
+          <LanguageOption
+            key={lang}
+            flag={<LanguageFlag lang={lang} />}
+            label={languageLabel(lang)}
+            selected={uiState.language === lang}
+            onPress={() => onLanguageSelected(lang)}
+          />
+        ))}
+      </SelectionDialog>
     </View>
+  );
+};
+
+const LanguageFlag = ({ lang, size = 24 }: { lang: Language; size?: number }) => {
+  switch (lang) {
+    case 'en':
+      return <FlagEN size={size} />;
+    case 'sk':
+      return <FlagSK size={size} />;
+  }
+};
+
+interface AboutSectionProps {
+  title: string;
+  tagline: string;
+  webLabel: string;
+  onPress: () => void;
+}
+
+const AboutSection = ({ title, tagline, webLabel, onPress }: AboutSectionProps) => {
+  const colors = useAppColors();
+
+  return (
+    <>
+      <TextTitleLargePrimary>{title}</TextTitleLargePrimary>
+
+      <AppCard elevated onPress={onPress} cover={require('../../assets/mk-digital-lockup.png')} coverAspectRatio={LOCKUP_ASPECT}>
+        <View style={{ paddingVertical: space4, gap: space2 }}>
+          <TextBodyLargeNeutral100 bold>{tagline}</TextBodyLargeNeutral100>
+          <TextBodySmall color={colors.primary} underline>
+            {webLabel}
+          </TextBodySmall>
+        </View>
+      </AppCard>
+    </>
+  );
+};
+
+const VersionFooter = ({ label }: { label: string }) => {
+  return (
+    <View style={{ alignItems: 'flex-end', marginTop: space4 }}>
+      <TextBodySmallNeutral80>{label}</TextBodySmallNeutral80>
+    </View>
+  );
+};
+
+interface SelectionDialogProps {
+  visible: boolean;
+  title: string;
+  onDismiss: () => void;
+  children: React.ReactNode;
+}
+
+const SelectionDialog = ({ visible, title, onDismiss, children }: SelectionDialogProps) => {
+  const theme = useAppTheme();
+
+  return (
+    <Portal>
+      <Dialog visible={visible} onDismiss={onDismiss} style={{ backgroundColor: theme.colors.surface }}>
+        <Dialog.Title>
+          <TextTitleLargePrimary>{title}</TextTitleLargePrimary>
+        </Dialog.Title>
+        <Dialog.Content>{children}</Dialog.Content>
+      </Dialog>
+    </Portal>
+  );
+};
+
+interface SettingsCardProps {
+  icon: React.ReactNode;
+  title: string;
+  value: string;
+  onPress: () => void;
+}
+
+const SettingsCard = ({ icon, title, value, onPress }: SettingsCardProps) => {
+  return (
+    <AppCard elevated onPress={onPress}>
+      <SettingsItem icon={icon} title={title} value={value} />
+    </AppCard>
   );
 };
 
