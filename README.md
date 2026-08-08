@@ -67,23 +67,31 @@ A production-ready React Native demo app showcasing modern mobile development wi
 <td><img src="screenshots/login.png" width="180" alt="Login"/></td>
 <td><img src="screenshots/home.png" width="180" alt="Home"/></td>
 <td><img src="screenshots/ui_components.png" width="180" alt="UI Components"/></td>
-<td><img src="screenshots/storage.png" width="180" alt="Storage"/></td>
+<td><img src="screenshots/networking.png" width="180" alt="Networking"/></td>
 </tr>
 <tr>
 <td style="text-align:center">Login</td>
 <td style="text-align:center">Home</td>
 <td style="text-align:center">UI Components</td>
-<td style="text-align:center">Storage</td>
+<td style="text-align:center">Networking</td>
 </tr>
 <tr>
-<td><img src="screenshots/platform_apis_1.png" width="180" alt="Platform APIs"/></td>
-<td><img src="screenshots/platform_apis_2.png" width="180" alt="Platform APIs"/></td>
+<td><img src="screenshots/storage.png" width="180" alt="Storage"/></td>
+<td><img src="screenshots/database.png" width="180" alt="Database"/></td>
+<td><img src="screenshots/platform_apis.png" width="180" alt="Platform APIs"/></td>
+<td><img src="screenshots/calendar.png" width="180" alt="Calendar"/></td>
+</tr>
+<tr>
+<td style="text-align:center">Storage</td>
+<td style="text-align:center">Database</td>
+<td style="text-align:center">Platform APIs</td>
+<td style="text-align:center">Calendar</td>
+</tr>
+<tr>
 <td><img src="screenshots/notifications.png" width="180" alt="Notifications"/></td>
 <td><img src="screenshots/settings.png" width="180" alt="Settings"/></td>
 </tr>
 <tr>
-<td style="text-align:center">Platform APIs</td>
-<td style="text-align:center">Platform APIs</td>
 <td style="text-align:center">Notifications</td>
 <td style="text-align:center">Settings</td>
 </tr>
