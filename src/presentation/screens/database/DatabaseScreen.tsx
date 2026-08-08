@@ -75,71 +75,154 @@ export const DatabaseScreen = () => {
 
       <ColumnSpacer4 />
 
-      {/* Search + Sort */}
-      <View style={{ flexDirection: 'row', alignItems: 'center', gap: space2 }}>
-        <View style={{ flex: 1 }}>
-          <AppTextField
-            value={uiState.searchQuery}
-            onChangeText={onSearchQueryChange}
-            placeholder={t('database_search_placeholder')}
-            left={<Icon name="magnify" size={20} color={colors.neutral40} />}
-          />
-        </View>
-        <Menu
-          visible={uiState.showSortMenu}
-          onDismiss={toggleSortMenu}
-          anchor={
-            <Pressable onPress={toggleSortMenu} hitSlop={8}>
-              <Icon name="filter-variant" size={defaultIconSize} color={colors.neutral80} />
-            </Pressable>
-          }
-        >
-          {Object.values(NoteSortOption).map(option => (
-            <Menu.Item
-              key={option}
-              onPress={() => onSortOptionChange(option)}
-              title={sortLabels[option]}
-              leadingIcon={uiState.sortOption === option ? 'check' : undefined}
-            />
-          ))}
-        </Menu>
-      </View>
+      <SearchAndSortRow
+        query={uiState.searchQuery}
+        placeholder={t('database_search_placeholder')}
+        sortOption={uiState.sortOption}
+        sortLabels={sortLabels}
+        menuVisible={uiState.showSortMenu}
+        onQueryChange={onSearchQueryChange}
+        onToggleMenu={toggleSortMenu}
+        onSortOptionChange={onSortOptionChange}
+      />
 
       <ColumnSpacer4 />
 
-      {/* Add Note Card */}
-      <AppCard elevated>
-        <AppTextField value={uiState.newNoteTitle} onChangeText={onNewNoteTitleChange} placeholder={t('database_add_title_placeholder')} />
-        <ColumnSpacer2 />
-        <AppTextField
-          value={uiState.newNoteContent}
-          onChangeText={onNewNoteContentChange}
-          placeholder={t('database_add_content_placeholder')}
-          multiline
-          numberOfLines={3}
-        />
-        <ColumnSpacer4 />
-        <ContainedButton text={t('database_add_button')} onPress={addNote} />
-      </AppCard>
+      <AddNoteCard
+        title={uiState.newNoteTitle}
+        content={uiState.newNoteContent}
+        titlePlaceholder={t('database_add_title_placeholder')}
+        contentPlaceholder={t('database_add_content_placeholder')}
+        submitText={t('database_add_button')}
+        onTitleChange={onNewNoteTitleChange}
+        onContentChange={onNewNoteContentChange}
+        onSubmit={addNote}
+      />
 
       <ColumnSpacer4 />
 
-      {/* Notes List */}
-      {uiState.notes.length === 0 ? (
-        <TextBodyMediumNeutral80>{uiState.searchQuery ? t('database_no_results') : t('database_empty')}</TextBodyMediumNeutral80>
-      ) : (
-        <>
-          {uiState.notes.map(note => (
-            <View key={note.id} style={{ marginBottom: space2 }}>
-              <NoteCard note={note} onDelete={deleteNote} />
-            </View>
-          ))}
-
-          <ColumnSpacer4 />
-
-          <OutlinedButton text={t('database_delete_all')} onPress={deleteAllNotes} />
-        </>
-      )}
+      <NotesList
+        notes={uiState.notes}
+        emptyText={uiState.searchQuery ? t('database_no_results') : t('database_empty')}
+        deleteAllText={t('database_delete_all')}
+        onDelete={deleteNote}
+        onDeleteAll={deleteAllNotes}
+      />
     </ScrollView>
+  );
+};
+
+interface SearchAndSortRowProps {
+  query: string;
+  placeholder: string;
+  sortOption: NoteSortOption;
+  sortLabels: Record<NoteSortOption, string>;
+  menuVisible: boolean;
+  onQueryChange: (value: string) => void;
+  onToggleMenu: () => void;
+  onSortOptionChange: (option: NoteSortOption) => void;
+}
+
+const SearchAndSortRow = ({
+  query,
+  placeholder,
+  sortOption,
+  sortLabels,
+  menuVisible,
+  onQueryChange,
+  onToggleMenu,
+  onSortOptionChange,
+}: SearchAndSortRowProps) => {
+  const colors = useAppColors();
+
+  return (
+    <View style={{ flexDirection: 'row', alignItems: 'center', gap: space2 }}>
+      <View style={{ flex: 1 }}>
+        <AppTextField
+          value={query}
+          onChangeText={onQueryChange}
+          placeholder={placeholder}
+          left={<Icon name="magnify" size={20} color={colors.neutral40} />}
+        />
+      </View>
+      <Menu
+        visible={menuVisible}
+        onDismiss={onToggleMenu}
+        anchor={
+          <Pressable onPress={onToggleMenu} hitSlop={8}>
+            <Icon name="filter-variant" size={defaultIconSize} color={colors.neutral80} />
+          </Pressable>
+        }
+      >
+        {Object.values(NoteSortOption).map(option => (
+          <Menu.Item
+            key={option}
+            onPress={() => onSortOptionChange(option)}
+            title={sortLabels[option]}
+            leadingIcon={sortOption === option ? 'check' : undefined}
+          />
+        ))}
+      </Menu>
+    </View>
+  );
+};
+
+interface AddNoteCardProps {
+  title: string;
+  content: string;
+  titlePlaceholder: string;
+  contentPlaceholder: string;
+  submitText: string;
+  onTitleChange: (value: string) => void;
+  onContentChange: (value: string) => void;
+  onSubmit: () => void;
+}
+
+const AddNoteCard = ({
+  title,
+  content,
+  titlePlaceholder,
+  contentPlaceholder,
+  submitText,
+  onTitleChange,
+  onContentChange,
+  onSubmit,
+}: AddNoteCardProps) => {
+  return (
+    <AppCard elevated>
+      <AppTextField value={title} onChangeText={onTitleChange} placeholder={titlePlaceholder} />
+      <ColumnSpacer2 />
+      <AppTextField value={content} onChangeText={onContentChange} placeholder={contentPlaceholder} multiline numberOfLines={3} />
+      <ColumnSpacer4 />
+      <ContainedButton text={submitText} onPress={onSubmit} />
+    </AppCard>
+  );
+};
+
+interface NotesListProps {
+  notes: Note[];
+  emptyText: string;
+  deleteAllText: string;
+  onDelete: (id: number) => void;
+  onDeleteAll: () => void;
+}
+
+const NotesList = ({ notes, emptyText, deleteAllText, onDelete, onDeleteAll }: NotesListProps) => {
+  if (notes.length === 0) {
+    return <TextBodyMediumNeutral80>{emptyText}</TextBodyMediumNeutral80>;
+  }
+
+  return (
+    <>
+      {notes.map(note => (
+        <View key={note.id} style={{ marginBottom: space2 }}>
+          <NoteCard note={note} onDelete={onDelete} />
+        </View>
+      ))}
+
+      <ColumnSpacer4 />
+
+      <OutlinedButton text={deleteAllText} onPress={onDeleteAll} />
+    </>
   );
 };
