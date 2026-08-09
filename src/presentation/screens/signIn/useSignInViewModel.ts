@@ -96,11 +96,11 @@ export const useSignInViewModel = () => {
             onAuthenticated?.();
           }
         },
-        onError: error =>
+        onError: () =>
           setUiState(prev => ({
             ...prev,
             biometricsLoading: false,
-            biometricsResult: { type: 'failed', message: error.userMessage },
+            biometricsResult: { type: 'failed' },
           })),
       });
     },

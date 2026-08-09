@@ -12,7 +12,7 @@ export enum DataErrorCode {
 
 export abstract class BaseException extends Error {
   abstract readonly errorCode: string;
-  abstract readonly userMessage: string;
+  abstract readonly logMessage: string;
   readonly shouldReport: boolean = true;
   readonly originalCause?: Error;
 
@@ -24,16 +24,16 @@ export abstract class BaseException extends Error {
 }
 
 export class NetworkException extends BaseException {
-  readonly errorCode: string;
-  readonly userMessage: string;
+  readonly errorCode: NetworkErrorCode;
+  readonly logMessage: string;
 
   constructor(
     message: string = 'Network error occurred',
-    userMessage: string = 'Please check your internet connection',
-    errorCode: string = NetworkErrorCode.UNKNOWN
+    logMessage: string = 'Please check your internet connection',
+    errorCode: NetworkErrorCode = NetworkErrorCode.UNKNOWN
   ) {
     super(message);
-    this.userMessage = userMessage;
+    this.logMessage = logMessage;
     this.errorCode = errorCode;
   }
 }
@@ -41,34 +41,34 @@ export class NetworkException extends BaseException {
 export class ApiException extends BaseException {
   readonly httpCode: number;
   readonly errorCode: string;
-  readonly userMessage: string;
+  readonly logMessage: string;
 
-  constructor(httpCode: number, message: string = 'API error occurred', userMessage: string = 'Something went wrong. Please try again.') {
+  constructor(httpCode: number, message: string = 'API error occurred', logMessage: string = 'Something went wrong. Please try again.') {
     super(message);
     this.httpCode = httpCode;
     this.errorCode = `2-${httpCode}`;
-    this.userMessage = userMessage;
+    this.logMessage = logMessage;
   }
 }
 
 export class DataException extends BaseException {
-  readonly errorCode: string;
-  readonly userMessage: string;
+  readonly errorCode: DataErrorCode;
+  readonly logMessage: string;
 
   constructor(
     message: string = 'Data parsing error',
-    userMessage: string = 'Unable to process data',
-    errorCode: string = DataErrorCode.PARSING
+    logMessage: string = 'Unable to process data',
+    errorCode: DataErrorCode = DataErrorCode.PARSING
   ) {
     super(message);
-    this.userMessage = userMessage;
+    this.logMessage = logMessage;
     this.errorCode = errorCode;
   }
 }
 
 export class UnknownException extends BaseException {
   readonly errorCode: string = '9000';
-  readonly userMessage: string = 'An unexpected error occurred';
+  readonly logMessage: string = 'An unexpected error occurred';
 
   constructor(cause?: Error) {
     super(cause?.message ?? 'Unknown error', cause);

@@ -162,7 +162,7 @@ export const PlatformApisScreen = () => {
         {uiState.biometricsResult?.type === 'failed' && (
           <>
             <TextBodyMediumNeutral80>
-              {`${t('platform_apis_biometrics_failed')}: ${uiState.biometricsResult.message}`}
+              {`${t('platform_apis_biometrics_failed')}: ${uiState.biometricsResult.message ?? t('error_generic')}`}
             </TextBodyMediumNeutral80>
             <ColumnSpacer2 />
           </>

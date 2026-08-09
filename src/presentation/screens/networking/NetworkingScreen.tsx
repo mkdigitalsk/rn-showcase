@@ -1,4 +1,5 @@
 import React from 'react';
+import { appErrorKey } from '../../foundation/errors/appErrorKey';
 import { View, FlatList } from 'react-native';
 import { IconButton, ActivityIndicator } from 'react-native-paper';
 import { useNetworkingViewModel } from './useNetworkingViewModel';
@@ -21,7 +22,7 @@ export const NetworkingScreen = () => {
   const keyExtractor = (item: User) => item.id.toString();
 
   if (uiState.error) {
-    return <ErrorView message={uiState.error} onRetry={onRetry} />;
+    return <ErrorView message={t(appErrorKey(uiState.error))} onRetry={onRetry} />;
   }
 
   return (
