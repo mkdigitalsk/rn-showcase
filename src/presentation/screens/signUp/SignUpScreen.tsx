@@ -1,4 +1,5 @@
 import React, { useCallback } from 'react';
+import { appErrorKey } from '../../foundation/errors/appErrorKey';
 import { View, ScrollView, KeyboardAvoidingView, Platform } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
@@ -8,7 +9,7 @@ import { useStrings } from '../../foundation/strings';
 import { RootStackParamList } from '../../navigation/RootStackNavigator';
 import { AppCard, AppTextField, ContainedButton, AppTextButton, ColumnSpacer2, ColumnSpacer4 } from '../../components';
 import { TextHeadlineMedium } from '../../components/text/headlineMedium/TextHeadlineMedium';
-import { TextBodyMediumNeutral80 } from '../../components/text/bodyMedium/TextBodyMedium';
+import { TextBodyMediumError, TextBodyMediumNeutral80 } from '../../components/text/bodyMedium/TextBodyMedium';
 import { space4, space8 } from '../../foundation/dimensions';
 
 type SignUpNavigationProp = NativeStackNavigationProp<RootStackParamList>;
@@ -117,6 +118,8 @@ export const SignUpScreen = () => {
           />
 
           <ColumnSpacer4 />
+
+          {uiState.error && <TextBodyMediumError>{t(appErrorKey(uiState.error))}</TextBodyMediumError>}
 
           <ContainedButton text={t('sign_up_button')} onPress={handleSignUp} loading={uiState.isLoading} disabled={uiState.isLoading} />
         </AppCard>

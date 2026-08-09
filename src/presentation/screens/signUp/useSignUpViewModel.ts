@@ -1,4 +1,5 @@
 import { useState, useCallback } from 'react';
+import { toAppError } from '../../foundation/errors/AppError';
 import { SignUpUiState, initialSignUpUiState, SignUpEmailError, SignUpPasswordError, SignUpConfirmPasswordError } from './SignUpUiState';
 import { isValidEmail, isPasswordLongEnough, isValidPassword } from '../../foundation/ValidationPatterns';
 import { execute } from '../../hooks/useExecute';
@@ -84,10 +85,12 @@ export const useSignUpViewModel = () => {
           onSignedUp?.();
         },
         onError: error => {
+          // A taken email belongs on the email field; anything else is not about one field, so it
+          // goes to the form-level error rather than being dropped.
           if (error instanceof EmailAlreadyExistsException) {
-            setUiState(prev => ({ ...prev, isLoading: false, emailError: 'already_exists' }));
+            setUiState(prev => ({ ...prev, isLoading: false, emailError: 'already_exists', error: null }));
           } else {
-            setUiState(prev => ({ ...prev, isLoading: false }));
+            setUiState(prev => ({ ...prev, isLoading: false, error: toAppError(error) }));
           }
         },
       });

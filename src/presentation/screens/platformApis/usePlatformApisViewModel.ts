@@ -141,11 +141,11 @@ export const usePlatformApisViewModel = () => {
       action: () => authenticateWithBiometricUseCase.execute(),
       onLoading: () => setUiState(prev => ({ ...prev, biometricsLoading: true, biometricsResult: null })),
       onSuccess: result => setUiState(prev => ({ ...prev, biometricsLoading: false, biometricsResult: result })),
-      onError: error =>
+      onError: () =>
         setUiState(prev => ({
           ...prev,
           biometricsLoading: false,
-          biometricsResult: { type: 'failed', message: error.userMessage },
+          biometricsResult: { type: 'failed' },
         })),
     });
   }, [authenticateWithBiometricUseCase]);

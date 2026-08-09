@@ -1,4 +1,4 @@
-export const ErrorStrings = {
+export const ErrorLogMessages = {
   // Network errors
   NETWORK_CHECK_CONNECTION: 'Please check your internet connection.',
   NETWORK_TIMEOUT: 'Request timed out. Please try again.',

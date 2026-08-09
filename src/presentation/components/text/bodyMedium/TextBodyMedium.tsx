@@ -26,3 +26,12 @@ export const TextBodyMediumNeutral80 = ({ children, numberOfLines }: TextVariant
     </TextBodyMedium>
   );
 };
+
+export const TextBodyMediumError = ({ children, numberOfLines }: TextVariantProps) => {
+  const colors = useAppColors();
+  return (
+    <TextBodyMedium color={colors.error} numberOfLines={numberOfLines}>
+      {children}
+    </TextBodyMedium>
+  );
+};

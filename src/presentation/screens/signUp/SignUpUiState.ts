@@ -1,3 +1,4 @@
+import type { AppError } from '../../foundation/errors/AppError';
 export type SignUpNameError = 'empty';
 export type SignUpEmailError = 'empty' | 'invalid_format' | 'already_exists';
 export type SignUpPasswordError = 'empty' | 'too_short' | 'weak';
@@ -11,6 +12,7 @@ export interface SignUpUiState {
   passwordError: SignUpPasswordError | null;
   confirmPasswordError: SignUpConfirmPasswordError | null;
   isLoading: boolean;
+  error: AppError | null;
 }
 
 export const initialSignUpUiState: SignUpUiState = {
@@ -21,4 +23,5 @@ export const initialSignUpUiState: SignUpUiState = {
   passwordError: null,
   confirmPasswordError: null,
   isLoading: false,
+  error: null,
 };

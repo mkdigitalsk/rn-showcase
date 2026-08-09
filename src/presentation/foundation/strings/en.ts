@@ -266,6 +266,15 @@ export const en = {
   common_cancel: 'Cancel',
   common_ok: 'OK',
   common_save: 'Save',
+  // Errors
+  error_no_connection: 'Please check your internet connection.',
+  error_timeout: 'Request timed out. Please try again.',
+  error_generic: 'Something went wrong. Please try again.',
+  error_unauthorized: 'Please sign in again.',
+  error_not_found: 'That could not be found.',
+  error_server: 'Server error. Please try again later.',
+  error_data: 'Unable to read the server response.',
+  error_email_exists: 'This email is already in use.',
 } as const;
 
 export type StringKey = keyof typeof en;
