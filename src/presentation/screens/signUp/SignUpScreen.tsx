@@ -23,7 +23,7 @@ export const SignUpScreen = () => {
     signUp(() => navigation.replace('Main'));
   }, [signUp, navigation]);
 
-  const handleToLogin = useCallback(() => {
+  const handleToSignIn = useCallback(() => {
     navigation.goBack();
   }, [navigation]);
 
@@ -144,7 +144,7 @@ export const SignUpScreen = () => {
 
         <ColumnSpacer4 />
 
-        <AppTextButton text={t('sign_up_to_sign_in')} onPress={handleToLogin} />
+        <AppTextButton text={t('sign_up_to_sign_in')} onPress={handleToSignIn} />
 
         <View style={{ height: space8 }} />
       </ScrollView>

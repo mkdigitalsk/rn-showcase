@@ -2,14 +2,14 @@ appId: sk.mkdigital.rnshowcase.debug
 name: README screenshots
 ---
 # Captures the gallery the README embeds. Names match screenshots/ so the table keeps working.
-# clearState so the run always starts from the login screen rather than a persisted session.
+# clearState so the run always starts from the sign-in screen rather than a persisted session.
 - launchApp:
     clearState: true
     permissions:
       all: deny
 
 - assertVisible: 'Sign In'
-- takeScreenshot: screenshots/login
+- takeScreenshot: screenshots/sign-in
 - tapOn: 'Fill Test Account'
 - tapOn: 'Sign In'
 

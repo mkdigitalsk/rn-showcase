@@ -16,7 +16,7 @@ export class AuthApiImpl implements AuthApi {
   async signIn(email: string, password: string): Promise<AuthResponseDTO> {
     return handleApiCall(async () => {
       const body: SignInRequestDTO = { email, password };
-      const response = await httpClient.post('/auth/login', body);
+      const response = await httpClient.post('/auth/sign-in', body);
       return response.data as AuthResponseDTO;
     });
   }
@@ -24,7 +24,7 @@ export class AuthApiImpl implements AuthApi {
   async signUp(email: string, password: string, name: string): Promise<AuthResponseDTO> {
     return handleApiCall(async () => {
       const body: SignUpRequestDTO = { email, password, name };
-      const response = await httpClient.post('/auth/register', body);
+      const response = await httpClient.post('/auth/sign-up', body);
       return response.data as AuthResponseDTO;
     });
   }

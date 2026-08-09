@@ -125,7 +125,7 @@ describe('useSignUpViewModel', () => {
     });
   });
 
-  // === Registration Validation — Name ===
+  // === Sign-up validation — Name ===
 
   it('sign up with empty name shows empty error', () => {
     const { result } = renderHook(() => useSignUpViewModel());
@@ -143,7 +143,7 @@ describe('useSignUpViewModel', () => {
     });
   });
 
-  // === Registration Validation — Email ===
+  // === Sign-up validation — Email ===
 
   it('sign up with empty email shows empty error', () => {
     const { result } = renderHook(() => useSignUpViewModel());
@@ -178,7 +178,7 @@ describe('useSignUpViewModel', () => {
     });
   });
 
-  // === Registration Validation — Password ===
+  // === Sign-up validation — Password ===
 
   it('sign up with empty password shows empty error', () => {
     const { result } = renderHook(() => useSignUpViewModel());
@@ -230,7 +230,7 @@ describe('useSignUpViewModel', () => {
     });
   });
 
-  // === Registration Validation — Confirm Password ===
+  // === Sign-up validation — Confirm Password ===
 
   it('sign up with empty confirm password shows empty error', () => {
     const { result } = renderHook(() => useSignUpViewModel());
@@ -265,7 +265,7 @@ describe('useSignUpViewModel', () => {
     });
   });
 
-  // === Successful Registration ===
+  // === Successful sign-up ===
 
   it('sign up with valid fields calls use cases and invokes callback', async () => {
     const { result } = renderHook(() => useSignUpViewModel());
