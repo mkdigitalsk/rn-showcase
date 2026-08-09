@@ -13,7 +13,7 @@ const logger = new Logger();
  *       action: () => getUsersUseCase.execute(),
  *       onLoading: () => setUiState(prev => ({ ...prev, isLoading: true, error: null })),
  *       onSuccess: (users) => setUiState({ users, isLoading: false, error: null }),
- *       onError: (e) => setUiState(prev => ({ ...prev, isLoading: false, error: e.userMessage })),
+ *       onError: (e) => setUiState(prev => ({ ...prev, isLoading: false, error: toAppError(e) })),
  *     });
  *   }, [getUsersUseCase]);
  */

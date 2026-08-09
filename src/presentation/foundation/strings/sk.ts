@@ -268,4 +268,13 @@ export const sk: Record<StringKey, string> = {
   common_cancel: 'Zrušiť',
   common_ok: 'OK',
   common_save: 'Uložiť',
+  // Errors
+  error_no_connection: 'Skontrolujte pripojenie na internet.',
+  error_timeout: 'Časový limit vypršal. Skúste to znova.',
+  error_generic: 'Niečo sa pokazilo. Skúste to znova.',
+  error_unauthorized: 'Prihláste sa znova.',
+  error_not_found: 'Položka sa nenašla.',
+  error_server: 'Chyba servera. Skúste to neskôr.',
+  error_data: 'Odpoveď servera sa nepodarilo spracovať.',
+  error_email_exists: 'Tento email sa už používa.',
 };
