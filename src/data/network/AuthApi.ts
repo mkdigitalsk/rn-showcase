@@ -7,7 +7,7 @@ import { AuthResponseDTO } from '../dto/auth/AuthResponseDTO';
 
 export interface AuthApi {
   signIn(email: string, password: string): Promise<AuthResponseDTO>;
-  signUp(email: string, password: string, name: string): Promise<AuthResponseDTO>;
+  signUp(email: string, password: string): Promise<AuthResponseDTO>;
   me(): Promise<AuthResponseDTO>;
 }
 
@@ -21,9 +21,9 @@ export class AuthApiImpl implements AuthApi {
     });
   }
 
-  async signUp(email: string, password: string, name: string): Promise<AuthResponseDTO> {
+  async signUp(email: string, password: string): Promise<AuthResponseDTO> {
     return handleApiCall(async () => {
-      const body: SignUpRequestDTO = { email, password, name };
+      const body: SignUpRequestDTO = { email, password };
       const response = await httpClient.post('/auth/sign-up', body);
       return response.data as AuthResponseDTO;
     });

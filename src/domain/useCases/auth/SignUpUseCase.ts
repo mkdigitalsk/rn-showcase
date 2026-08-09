@@ -5,7 +5,6 @@ import { SignedUpUser } from '../../model/SignedUpUser';
 import { TYPES } from '../../../app/diTypes';
 
 export interface SignUpParams {
-  name: string;
   email: string;
   password: string;
 }
@@ -17,6 +16,6 @@ export class SignUpUseCase extends UseCase<SignUpParams, SignedUpUser> {
   }
 
   protected async run(params: SignUpParams): Promise<SignedUpUser> {
-    return this.authRepository.signUp(params.name, params.email, params.password);
+    return this.authRepository.signUp(params.email, params.password);
   }
 }

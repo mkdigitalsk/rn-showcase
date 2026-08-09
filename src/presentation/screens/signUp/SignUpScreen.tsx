@@ -17,7 +17,7 @@ export const SignUpScreen = () => {
   const colors = useAppColors();
   const { t } = useStrings();
   const navigation = useNavigation<SignUpNavigationProp>();
-  const { uiState, onNameChange, onEmailChange, onPasswordChange, onConfirmPasswordChange, signUp } = useSignUpViewModel();
+  const { uiState, onEmailChange, onPasswordChange, onConfirmPasswordChange, signUp } = useSignUpViewModel();
 
   const handleSignUp = useCallback(() => {
     signUp(() => navigation.replace('Main'));
@@ -26,15 +26,6 @@ export const SignUpScreen = () => {
   const handleToSignIn = useCallback(() => {
     navigation.goBack();
   }, [navigation]);
-
-  const getNameErrorText = (): string | undefined => {
-    switch (uiState.nameError) {
-      case 'empty':
-        return t('sign_up_name_error_empty');
-      default:
-        return undefined;
-    }
-  };
 
   const getEmailErrorText = (): string | undefined => {
     switch (uiState.emailError) {
@@ -90,18 +81,6 @@ export const SignUpScreen = () => {
         <ColumnSpacer4 />
 
         <AppCard elevated>
-          <AppTextField
-            value={uiState.name}
-            onChangeText={onNameChange}
-            label={t('sign_up_name_label')}
-            placeholder={t('sign_up_name_placeholder')}
-            error={uiState.nameError !== null}
-            helperText={getNameErrorText()}
-            autoCapitalize="words"
-          />
-
-          <ColumnSpacer4 />
-
           <AppTextField
             value={uiState.email}
             onChangeText={onEmailChange}

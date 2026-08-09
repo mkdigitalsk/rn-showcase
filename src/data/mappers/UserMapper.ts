@@ -6,7 +6,6 @@ export const UserMapper: Mapper<UserDTO, User> = {
   map(from: UserDTO): User {
     return {
       id: from.id,
-      name: from.name,
       email: from.email,
       createdAt: from.createdAt,
     };

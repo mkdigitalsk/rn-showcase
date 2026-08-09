@@ -1,12 +1,5 @@
 import { useState, useCallback } from 'react';
-import {
-  SignUpUiState,
-  initialSignUpUiState,
-  SignUpNameError,
-  SignUpEmailError,
-  SignUpPasswordError,
-  SignUpConfirmPasswordError,
-} from './SignUpUiState';
+import { SignUpUiState, initialSignUpUiState, SignUpEmailError, SignUpPasswordError, SignUpConfirmPasswordError } from './SignUpUiState';
 import { isValidEmail, isPasswordLongEnough, isValidPassword } from '../../foundation/ValidationPatterns';
 import { execute } from '../../hooks/useExecute';
 import { useResolve } from '../../hooks/useResolve';
@@ -21,10 +14,6 @@ export const useSignUpViewModel = () => {
   const checkEmailExistsUseCase = useResolve<CheckEmailExistsUseCase>(TYPES.CheckEmailExistsUseCase);
   const signUpUseCase = useResolve<SignUpUseCase>(TYPES.SignUpUseCase);
 
-  const onNameChange = useCallback((name: string) => {
-    setUiState(prev => ({ ...prev, name, nameError: null }));
-  }, []);
-
   const onEmailChange = useCallback((email: string) => {
     setUiState(prev => ({ ...prev, email, emailError: null }));
   }, []);
@@ -35,13 +24,6 @@ export const useSignUpViewModel = () => {
 
   const onConfirmPasswordChange = useCallback((confirmPassword: string) => {
     setUiState(prev => ({ ...prev, confirmPassword, confirmPasswordError: null }));
-  }, []);
-
-  const validateName = useCallback((name: string): SignUpNameError | null => {
-    if (name.trim().length === 0) {
-      return 'empty';
-    }
-    return null;
   }, []);
 
   const validateEmail = useCallback((email: string): SignUpEmailError | null => {
@@ -79,13 +61,12 @@ export const useSignUpViewModel = () => {
 
   const signUp = useCallback(
     (onSignedUp?: () => void): void => {
-      const nameError = validateName(uiState.name);
       const emailError = validateEmail(uiState.email);
       const passwordError = validatePassword(uiState.password);
       const confirmPasswordError = validateConfirmPassword(uiState.password, uiState.confirmPassword);
 
-      if (nameError || emailError || passwordError || confirmPasswordError) {
-        setUiState(prev => ({ ...prev, nameError, emailError, passwordError, confirmPasswordError }));
+      if (emailError || passwordError || confirmPasswordError) {
+        setUiState(prev => ({ ...prev, emailError, passwordError, confirmPasswordError }));
         return;
       }
 
@@ -95,7 +76,7 @@ export const useSignUpViewModel = () => {
           if (exists) {
             throw new EmailAlreadyExistsException();
           }
-          return signUpUseCase.execute({ name: uiState.name, email: uiState.email, password: uiState.password });
+          return signUpUseCase.execute({ email: uiState.email, password: uiState.password });
         },
         onLoading: () => setUiState(prev => ({ ...prev, isLoading: true })),
         onSuccess: () => {
@@ -112,11 +93,9 @@ export const useSignUpViewModel = () => {
       });
     },
     [
-      uiState.name,
       uiState.email,
       uiState.password,
       uiState.confirmPassword,
-      validateName,
       validateEmail,
       validatePassword,
       validateConfirmPassword,
@@ -127,7 +106,6 @@ export const useSignUpViewModel = () => {
 
   return {
     uiState,
-    onNameChange,
     onEmailChange,
     onPasswordChange,
     onConfirmPasswordChange,

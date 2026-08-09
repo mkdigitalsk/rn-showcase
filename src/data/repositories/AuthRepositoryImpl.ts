@@ -38,9 +38,9 @@ export class AuthRepositoryImpl implements AuthRepository {
     this.session.clearAuthToken();
   }
 
-  async signUp(name: string, email: string, password: string): Promise<SignedUpUser> {
+  async signUp(email: string, password: string): Promise<SignedUpUser> {
     try {
-      const response = await this.api.signUp(email, password, name);
+      const response = await this.api.signUp(email, password);
       this.session.setAuthToken(response.token);
       return toSignedUpUser(response);
     } catch (error) {
