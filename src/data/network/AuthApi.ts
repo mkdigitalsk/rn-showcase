@@ -31,7 +31,7 @@ export class AuthApiImpl implements AuthApi {
 
   async me(): Promise<AuthResponseDTO> {
     return handleApiCall(async () => {
-      const response = await httpClient.get('/auth/me');
+      const response = await httpClient.post('/auth/token');
       return response.data as AuthResponseDTO;
     });
   }
