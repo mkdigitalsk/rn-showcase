@@ -242,8 +242,6 @@ export const en = {
   // SignUp
   sign_up_title: 'Create Account',
   sign_up_subtitle: 'Fill in your details to sign up',
-  sign_up_name_label: 'Name',
-  sign_up_name_placeholder: 'Enter your name',
   sign_up_email_label: 'Email',
   sign_up_email_placeholder: 'Enter your email',
   sign_up_password_label: 'Password',
@@ -252,7 +250,6 @@ export const en = {
   sign_up_confirm_placeholder: 'Confirm your password',
   sign_up_button: 'Sign Up',
   sign_up_to_sign_in: 'Already have an account? Sign In',
-  sign_up_name_error_empty: 'Name is required',
   sign_up_email_error_empty: 'Email is required',
   sign_up_email_error_invalid: 'Invalid email format',
   sign_up_email_error_already_exists: 'This email is already registered',

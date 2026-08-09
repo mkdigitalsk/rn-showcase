@@ -4,7 +4,7 @@ import { test } from '../../../TestFunctions';
 // Mock tsyringe container.resolve before importing the hook
 const mockCheckEmailExists = { execute: jest.fn().mockResolvedValue(false) };
 const mockSignUpUseCase = {
-  execute: jest.fn().mockResolvedValue({ id: 1, name: 'John', email: 'john@example.com', password: 'Test123!', createdAt: 1234567890 }),
+  execute: jest.fn().mockResolvedValue({ id: 1, email: 'john@example.com', password: 'Test123!', createdAt: 1234567890 }),
 };
 
 jest.mock('tsyringe', () => ({
@@ -32,7 +32,6 @@ describe('useSignUpViewModel', () => {
     mockCheckEmailExists.execute.mockResolvedValue(false);
     mockSignUpUseCase.execute.mockResolvedValue({
       id: 1,
-      name: 'John',
       email: 'john@example.com',
       password: 'Test123!',
       createdAt: 1234567890,
@@ -46,7 +45,6 @@ describe('useSignUpViewModel', () => {
     test({
       whenAction: () => result.current.uiState,
       then: state => {
-        expect(state.name).toBe('');
         expect(state.email).toBe('');
         expect(state.password).toBe('');
         expect(state.confirmPassword).toBe('');
@@ -59,7 +57,6 @@ describe('useSignUpViewModel', () => {
     test({
       whenAction: () => result.current.uiState,
       then: state => {
-        expect(state.nameError).toBeNull();
         expect(state.emailError).toBeNull();
         expect(state.passwordError).toBeNull();
         expect(state.confirmPasswordError).toBeNull();
@@ -68,20 +65,6 @@ describe('useSignUpViewModel', () => {
   });
 
   // === Field Changes ===
-
-  it('onNameChange updates name and clears error', () => {
-    const { result } = renderHook(() => useSignUpViewModel());
-    act(() => result.current.signUp());
-    act(() => result.current.onNameChange('John'));
-
-    test({
-      whenAction: () => result.current.uiState,
-      then: state => {
-        expect(state.name).toBe('John');
-        expect(state.nameError).toBeNull();
-      },
-    });
-  });
 
   it('onEmailChange updates email and clears error', () => {
     const { result } = renderHook(() => useSignUpViewModel());
@@ -125,30 +108,11 @@ describe('useSignUpViewModel', () => {
     });
   });
 
-  // === Sign-up validation — Name ===
-
-  it('sign up with empty name shows empty error', () => {
-    const { result } = renderHook(() => useSignUpViewModel());
-    act(() => {
-      result.current.onEmailChange('test@example.com');
-      result.current.onPasswordChange('Test123!');
-      result.current.onConfirmPasswordChange('Test123!');
-    });
-
-    act(() => result.current.signUp());
-
-    test({
-      whenAction: () => result.current.uiState.nameError,
-      then: error => expect(error).toBe('empty'),
-    });
-  });
-
   // === Sign-up validation — Email ===
 
   it('sign up with empty email shows empty error', () => {
     const { result } = renderHook(() => useSignUpViewModel());
     act(() => {
-      result.current.onNameChange('John');
       result.current.onPasswordChange('Test123!');
       result.current.onConfirmPasswordChange('Test123!');
     });
@@ -164,7 +128,6 @@ describe('useSignUpViewModel', () => {
   it('sign up with invalid email shows invalid_format error', () => {
     const { result } = renderHook(() => useSignUpViewModel());
     act(() => {
-      result.current.onNameChange('John');
       result.current.onEmailChange('invalid-email');
       result.current.onPasswordChange('Test123!');
       result.current.onConfirmPasswordChange('Test123!');
@@ -183,7 +146,6 @@ describe('useSignUpViewModel', () => {
   it('sign up with empty password shows empty error', () => {
     const { result } = renderHook(() => useSignUpViewModel());
     act(() => {
-      result.current.onNameChange('John');
       result.current.onEmailChange('test@example.com');
       result.current.onConfirmPasswordChange('Test123!');
     });
@@ -199,7 +161,6 @@ describe('useSignUpViewModel', () => {
   it('sign up with short password shows too_short error', () => {
     const { result } = renderHook(() => useSignUpViewModel());
     act(() => {
-      result.current.onNameChange('John');
       result.current.onEmailChange('test@example.com');
       result.current.onPasswordChange('Te1!');
       result.current.onConfirmPasswordChange('Te1!');
@@ -216,7 +177,6 @@ describe('useSignUpViewModel', () => {
   it('sign up with weak password shows weak error', () => {
     const { result } = renderHook(() => useSignUpViewModel());
     act(() => {
-      result.current.onNameChange('John');
       result.current.onEmailChange('test@example.com');
       result.current.onPasswordChange('testtest');
       result.current.onConfirmPasswordChange('testtest');
@@ -235,7 +195,6 @@ describe('useSignUpViewModel', () => {
   it('sign up with empty confirm password shows empty error', () => {
     const { result } = renderHook(() => useSignUpViewModel());
     act(() => {
-      result.current.onNameChange('John');
       result.current.onEmailChange('test@example.com');
       result.current.onPasswordChange('Test123!');
     });
@@ -251,7 +210,6 @@ describe('useSignUpViewModel', () => {
   it('sign up with mismatched passwords shows mismatch error', () => {
     const { result } = renderHook(() => useSignUpViewModel());
     act(() => {
-      result.current.onNameChange('John');
       result.current.onEmailChange('test@example.com');
       result.current.onPasswordChange('Test123!');
       result.current.onConfirmPasswordChange('Different1!');
@@ -270,7 +228,6 @@ describe('useSignUpViewModel', () => {
   it('sign up with valid fields calls use cases and invokes callback', async () => {
     const { result } = renderHook(() => useSignUpViewModel());
     act(() => {
-      result.current.onNameChange('John Doe');
       result.current.onEmailChange('john@example.com');
       result.current.onPasswordChange('Test123!');
       result.current.onConfirmPasswordChange('Test123!');
@@ -285,7 +242,6 @@ describe('useSignUpViewModel', () => {
 
     expect(mockCheckEmailExists.execute).toHaveBeenCalledWith('john@example.com');
     expect(mockSignUpUseCase.execute).toHaveBeenCalledWith({
-      name: 'John Doe',
       email: 'john@example.com',
       password: 'Test123!',
     });
@@ -299,7 +255,6 @@ describe('useSignUpViewModel', () => {
 
     const { result } = renderHook(() => useSignUpViewModel());
     act(() => {
-      result.current.onNameChange('John Doe');
       result.current.onEmailChange('existing@example.com');
       result.current.onPasswordChange('Test123!');
       result.current.onConfirmPasswordChange('Test123!');

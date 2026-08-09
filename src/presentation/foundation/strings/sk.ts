@@ -244,8 +244,6 @@ export const sk: Record<StringKey, string> = {
   // SignUp
   sign_up_title: 'Vytvoriť účet',
   sign_up_subtitle: 'Vyplňte údaje pre registráciu',
-  sign_up_name_label: 'Meno',
-  sign_up_name_placeholder: 'Zadajte vaše meno',
   sign_up_email_label: 'Email',
   sign_up_email_placeholder: 'Zadajte váš email',
   sign_up_password_label: 'Heslo',
@@ -254,7 +252,6 @@ export const sk: Record<StringKey, string> = {
   sign_up_confirm_placeholder: 'Potvrďte vaše heslo',
   sign_up_button: 'Zaregistrovať sa',
   sign_up_to_sign_in: 'Už máte účet? Prihláste sa',
-  sign_up_name_error_empty: 'Meno je povinné',
   sign_up_email_error_empty: 'Email je povinný',
   sign_up_email_error_invalid: 'Neplatný formát emailu',
   sign_up_email_error_already_exists: 'Tento email je už zaregistrovaný',

@@ -31,7 +31,6 @@ describe('SignUpUseCase', () => {
   it('calls repository sign up with params and returns user', async () => {
     const expectedUser: SignedUpUser = {
       id: 1,
-      name: 'John',
       email: 'john@example.com',
     };
     (t.mockRepo.signUp as jest.Mock).mockResolvedValue(expectedUser);
@@ -39,12 +38,11 @@ describe('SignUpUseCase', () => {
     await test({
       whenAction: () =>
         t.classUnderTest.execute({
-          name: 'John',
           email: 'john@example.com',
           password: 'Test123!',
         }),
       then: result => {
-        expect(t.mockRepo.signUp).toHaveBeenCalledWith('John', 'john@example.com', 'Test123!');
+        expect(t.mockRepo.signUp).toHaveBeenCalledWith('john@example.com', 'Test123!');
         expect(result).toEqual(expectedUser);
       },
     });

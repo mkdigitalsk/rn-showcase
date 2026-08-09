@@ -26,8 +26,8 @@ describe('GetUsersUseCase', () => {
 
   it('returns list of users from repository', async () => {
     const users: User[] = [
-      { id: 1, name: 'John Doe', email: 'john@example.com', createdAt: 1781638908169 },
-      { id: 2, name: 'Jane Doe', email: 'jane@example.com', createdAt: 1781638908542 },
+      { id: 1, email: 'john@example.com', createdAt: 1781638908169 },
+      { id: 2, email: 'jane@example.com', createdAt: 1781638908542 },
     ];
 
     await test({
@@ -38,7 +38,6 @@ describe('GetUsersUseCase', () => {
       then: result => {
         expect(result).toEqual(users);
         expect(result).toHaveLength(2);
-        expect(result[0].name).toBe('John Doe');
       },
     });
   });
