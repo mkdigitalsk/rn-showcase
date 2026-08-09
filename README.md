@@ -64,13 +64,13 @@ A production-ready React Native demo app showcasing modern mobile development wi
 
 <table>
 <tr>
-<td><img src="screenshots/login.png" width="180" alt="Login"/></td>
+<td><img src="screenshots/sign-in.png" width="180" alt="Sign In"/></td>
 <td><img src="screenshots/home.png" width="180" alt="Home"/></td>
 <td><img src="screenshots/ui_components.png" width="180" alt="UI Components"/></td>
 <td><img src="screenshots/networking.png" width="180" alt="Networking"/></td>
 </tr>
 <tr>
-<td style="text-align:center">Login</td>
+<td style="text-align:center">Sign In</td>
 <td style="text-align:center">Home</td>
 <td style="text-align:center">UI Components</td>
 <td style="text-align:center">Networking</td>

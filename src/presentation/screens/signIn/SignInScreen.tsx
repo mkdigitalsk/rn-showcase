@@ -42,7 +42,7 @@ export const SignInScreen = () => {
     signIn(() => navigation.replace('Main'));
   }, [signIn, navigation]);
 
-  const handleBiometricLogin = useCallback(() => {
+  const handleBiometricSignIn = useCallback(() => {
     authenticateWithBiometrics(() => navigation.replace('Main'));
   }, [authenticateWithBiometrics, navigation]);
 
@@ -139,7 +139,7 @@ export const SignInScreen = () => {
                   icon="fingerprint"
                   size={32}
                   iconColor={colors.primary}
-                  onPress={handleBiometricLogin}
+                  onPress={handleBiometricSignIn}
                   loading={uiState.biometricsLoading}
                 />
                 <TextBodyMediumNeutral80>{t('sign_in_biometric_label')}</TextBodyMediumNeutral80>
