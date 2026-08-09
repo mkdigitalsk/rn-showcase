@@ -16,10 +16,10 @@ README="README.md"
 COLUMNS=4
 
 # Screen order in the table, and the caption each file gets. A name absent from screenshots/ is skipped.
-ORDER="login home ui_components networking storage database platform_apis calendar notifications settings"
+ORDER="sign-in home ui_components networking storage database platform_apis calendar notifications settings"
 caption() {
     case "$1" in
-        login) echo "Login" ;;
+        sign-in) echo "Sign In" ;;
         home) echo "Home" ;;
         ui_components) echo "UI Components" ;;
         networking) echo "Networking" ;;

@@ -6,7 +6,7 @@ export const ErrorStrings = {
 
   // API errors
   API_INVALID_REQUEST: 'Invalid request. Please check your input.',
-  API_UNAUTHORIZED: 'Please log in again.',
+  API_UNAUTHORIZED: 'Please sign in again.',
   API_FORBIDDEN: "You don't have permission to access this.",
   API_NOT_FOUND: 'The requested resource was not found.',
   API_SERVER_ERROR: 'Server error. Please try again later.',
