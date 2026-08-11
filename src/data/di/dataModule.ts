@@ -22,7 +22,7 @@ import { NoteRepositoryImpl } from '../repositories/NoteRepositoryImpl';
 import { DateRepositoryImpl } from '../repositories/DateRepositoryImpl';
 import { NotificationClient } from '../notification/NotificationClient';
 import { SettingsRepositoryImpl } from '../repositories/SettingsRepositoryImpl';
-import { FirebaseAnalyticsClient } from '../analytics/FirebaseAnalyticsClient';
+import { FirebaseCrashReporter } from '../crashReporting/FirebaseCrashReporter';
 import { TYPES } from '../../app/diTypes';
 
 export const dataModule = () => {
@@ -60,8 +60,8 @@ export const dataModule = () => {
   container.registerSingleton(TYPES.DatabaseClient, DatabaseClient);
   container.registerSingleton(TYPES.NoteRepository, NoteRepositoryImpl);
 
-  // Analytics
-  container.registerSingleton(TYPES.AnalyticsClient, FirebaseAnalyticsClient);
+  // Crash reporting
+  container.registerSingleton(TYPES.CrashReporter, FirebaseCrashReporter);
 
   // Calendar
   container.registerSingleton(TYPES.DateRepository, DateRepositoryImpl);

@@ -4,7 +4,6 @@ export interface Route<T extends string = string> {
   readonly showBackArrow: boolean;
   readonly showTopBar: boolean;
   readonly showBottomNav: boolean;
-  readonly analyticsName: string;
 }
 
 const defaults = {
@@ -20,55 +19,46 @@ export const HomeSection = {
     ...defaults,
     title: 'Home',
     showBackArrow: false,
-    analyticsName: 'home_screen',
   },
   UiComponents: {
     name: 'UiComponents',
     ...defaults,
     title: 'UI Components',
-    analyticsName: 'ui_components_screen',
   },
   Networking: {
     name: 'Networking',
     ...defaults,
     title: 'Networking',
-    analyticsName: 'networking_screen',
   },
   Storage: {
     name: 'Storage',
     ...defaults,
     title: 'Storage',
-    analyticsName: 'storage_screen',
   },
   PlatformApis: {
     name: 'PlatformApis',
     ...defaults,
     title: 'Platform APIs',
-    analyticsName: 'platform_apis_screen',
   },
   Database: {
     name: 'Database',
     ...defaults,
     title: 'Database',
-    analyticsName: 'database_screen',
   },
   Scanner: {
     name: 'Scanner',
     ...defaults,
     title: 'Scanner',
-    analyticsName: 'scanner_screen',
   },
   Calendar: {
     name: 'Calendar',
     ...defaults,
     title: 'Calendar',
-    analyticsName: 'calendar_screen',
   },
   Notifications: {
     name: 'Notifications',
     ...defaults,
     title: 'Notifications',
-    analyticsName: 'notifications_screen',
   },
 } as const satisfies Record<string, Route>;
 
@@ -80,7 +70,6 @@ export const Routes = {
     ...defaults,
     title: 'Settings',
     showBackArrow: false,
-    analyticsName: 'settings_screen',
   },
   SignIn: {
     name: 'SignIn',
@@ -89,7 +78,6 @@ export const Routes = {
     showBackArrow: false,
     showTopBar: false,
     showBottomNav: false,
-    analyticsName: 'sign_in_screen',
   },
   SignUp: {
     name: 'SignUp',
@@ -97,7 +85,6 @@ export const Routes = {
     title: 'SignUp',
     showTopBar: false,
     showBottomNav: false,
-    analyticsName: 'sign_up_screen',
   },
 } as const satisfies Record<string, Route>;
 
@@ -105,5 +92,5 @@ export type RouteName = keyof typeof Routes;
 export type HomeSectionName = keyof typeof HomeSection;
 
 export const getRoute = (name: string): Route => {
-  return Routes[name as RouteName] ?? { name, ...defaults, title: name, analyticsName: name };
+  return Routes[name as RouteName] ?? { name, ...defaults, title: name };
 };
