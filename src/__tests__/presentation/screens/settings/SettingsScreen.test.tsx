@@ -11,6 +11,9 @@ jest.mock('../../../../presentation/screens/settings/useSettingsViewModel', () =
       showThemeDialog: false,
       showLanguageDialog: false,
       showCrashButton: true,
+      showDeleteAccountDialog: false,
+      isDeletingAccount: false,
+      deleteAccountFailed: false,
     },
     t: (key: string) => key,
     onThemeClick: jest.fn(),
@@ -21,6 +24,10 @@ jest.mock('../../../../presentation/screens/settings/useSettingsViewModel', () =
     onLanguageDialogDismiss: jest.fn(),
     triggerTestCrash: jest.fn(),
     openWeb: jest.fn(),
+    signOut: jest.fn(),
+    onDeleteAccountClick: jest.fn(),
+    onDeleteAccountDialogDismiss: jest.fn(),
+    confirmDeleteAccount: jest.fn(),
   }),
 }));
 

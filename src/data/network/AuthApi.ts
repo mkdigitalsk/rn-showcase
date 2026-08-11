@@ -9,6 +9,7 @@ export interface AuthApi {
   signIn(email: string, password: string): Promise<AuthResponseDTO>;
   signUp(email: string, password: string): Promise<AuthResponseDTO>;
   me(): Promise<AuthResponseDTO>;
+  deleteAccount(): Promise<void>;
 }
 
 @injectable()
@@ -33,6 +34,12 @@ export class AuthApiImpl implements AuthApi {
     return handleApiCall(async () => {
       const response = await httpClient.post('/auth/token');
       return response.data as AuthResponseDTO;
+    });
+  }
+
+  async deleteAccount(): Promise<void> {
+    return handleApiCall(async () => {
+      await httpClient.delete('/users/me');
     });
   }
 }

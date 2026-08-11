@@ -3,7 +3,7 @@ import { Dialog, Portal } from 'react-native-paper';
 import { useAppTheme } from '../foundation/theme';
 import { TextTitleLargePrimary } from './text/titleLarge/TextTitleLarge';
 import { TextBodyMediumNeutral80 } from './text/bodyMedium/TextBodyMedium';
-import { AppTextButton } from './buttons/AppTextButton';
+import { AppTextButton, AppTextButtonError } from './buttons/AppTextButton';
 
 interface AppConfirmDialogProps {
   visible: boolean;
@@ -48,6 +48,8 @@ interface AppAlertDialogProps {
   text: string;
   confirmText?: string;
   dismissText?: string;
+  confirmPending?: boolean;
+  confirmDestructive?: boolean;
   onConfirm: () => void;
   onDismiss: () => void;
 }
@@ -58,13 +60,15 @@ export const AppAlertDialog: React.FC<AppAlertDialogProps> = ({
   text,
   confirmText = 'OK',
   dismissText = 'Cancel',
+  confirmPending,
+  confirmDestructive,
   onConfirm,
   onDismiss,
 }): React.JSX.Element => {
   const theme = useAppTheme();
   return (
     <Portal>
-      <Dialog visible={visible} onDismiss={onDismiss} style={{ backgroundColor: theme.colors.neutral0 }}>
+      <Dialog visible={visible} onDismiss={onDismiss} dismissable={!confirmPending} style={{ backgroundColor: theme.colors.neutral0 }}>
         {title && (
           <Dialog.Title>
             <TextTitleLargePrimary>{title}</TextTitleLargePrimary>
@@ -74,8 +78,12 @@ export const AppAlertDialog: React.FC<AppAlertDialogProps> = ({
           <TextBodyMediumNeutral80>{text}</TextBodyMediumNeutral80>
         </Dialog.Content>
         <Dialog.Actions>
-          <AppTextButton text={dismissText} onPress={onDismiss} />
-          <AppTextButton text={confirmText} onPress={onConfirm} />
+          <AppTextButton text={dismissText} onPress={onDismiss} disabled={confirmPending} />
+          {confirmDestructive ? (
+            <AppTextButtonError text={confirmText} onPress={onConfirm} loading={confirmPending} />
+          ) : (
+            <AppTextButton text={confirmText} onPress={onConfirm} loading={confirmPending} />
+          )}
         </Dialog.Actions>
       </Dialog>
     </Portal>

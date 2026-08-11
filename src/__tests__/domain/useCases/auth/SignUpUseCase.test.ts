@@ -9,6 +9,7 @@ function createMockAuthRepository(): AuthRepository {
     signIn: jest.fn(),
     signInWithToken: jest.fn(),
     signOut: jest.fn(),
+    deleteAccount: jest.fn(),
     signUp: jest.fn(),
     emailExists: jest.fn(),
   };

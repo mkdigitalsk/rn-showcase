@@ -11,8 +11,11 @@ import {
   TextBodySmallNeutral80,
   TextBodySmall,
   TextBodyLargeNeutral100,
+  TextLabelSmall,
+  AppAlertDialog,
   AppCard,
   AppRadioButton,
+  AppTextButton,
   AppTextButtonError,
   ColumnSpacer2,
 } from '../../components';
@@ -46,10 +49,15 @@ export const SettingsScreen = () => {
     triggerTestCrash,
     openWeb,
     signOut,
+    onDeleteAccountClick,
+    onDeleteAccountDialogDismiss,
+    confirmDeleteAccount,
   } = useSettingsViewModel();
 
   // Reset rather than navigate: the tabs stay on the stack otherwise, and Back returns to a signed-out Home.
-  const handleSignOut = () => signOut(() => navigation.reset({ index: 0, routes: [{ name: 'SignIn' }] }));
+  const toSignIn = () => navigation.reset({ index: 0, routes: [{ name: 'SignIn' }] });
+  const handleSignOut = () => signOut(toSignIn);
+  const handleDeleteAccount = () => confirmDeleteAccount(toSignIn);
 
   const themeModeLabel = (mode: ThemeMode): string => {
     switch (mode) {
@@ -116,7 +124,15 @@ export const SettingsScreen = () => {
 
         <VersionFooter label={`${t('settings_version')} ${uiState.versionName}`} />
 
-        <AppTextButtonError text={t('settings_sign_out')} onPress={handleSignOut} align="center" />
+        <AppTextButton text={t('settings_sign_out')} onPress={handleSignOut} align="center" />
+
+        <AppTextButtonError text={t('settings_delete_account')} onPress={onDeleteAccountClick} align="center" />
+
+        {uiState.deleteAccountFailed && (
+          <View style={{ alignItems: 'center' }}>
+            <TextLabelSmall color={colors.error}>{t('settings_delete_account_error')}</TextLabelSmall>
+          </View>
+        )}
       </ScrollView>
 
       <ImageSourceDialog
@@ -150,6 +166,18 @@ export const SettingsScreen = () => {
           />
         ))}
       </SelectionDialog>
+
+      <AppAlertDialog
+        visible={uiState.showDeleteAccountDialog}
+        title={t('settings_delete_account_title')}
+        text={t('settings_delete_account_text')}
+        confirmText={t('settings_delete_account_confirm')}
+        dismissText={t('common_cancel')}
+        confirmPending={uiState.isDeletingAccount}
+        confirmDestructive
+        onConfirm={handleDeleteAccount}
+        onDismiss={onDeleteAccountDialogDismiss}
+      />
     </View>
   );
 };
