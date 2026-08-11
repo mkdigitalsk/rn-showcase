@@ -9,6 +9,7 @@ const LANGUAGE_KEY = 'language';
 export interface PersistentPreferences {
   getPersistentCounter(): number;
   setPersistentCounter(value: number): void;
+  clearPersistentCounter(): void;
   getThemeMode(): string;
   setThemeMode(mode: string): void;
   getLanguage(): string | undefined;
@@ -29,6 +30,10 @@ export class PersistentPreferencesImpl implements PersistentPreferences {
 
   setPersistentCounter(value: number): void {
     this.preferences.setInt(PERSISTENT_COUNTER_KEY, value);
+  }
+
+  clearPersistentCounter(): void {
+    this.preferences.remove(PERSISTENT_COUNTER_KEY);
   }
 
   getThemeMode(): string {

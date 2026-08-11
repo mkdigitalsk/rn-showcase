@@ -8,4 +8,7 @@ export interface SettingsUiState {
   showThemeDialog: boolean;
   showLanguageDialog: boolean;
   showCrashButton: boolean;
+  showDeleteAccountDialog: boolean;
+  isDeletingAccount: boolean;
+  deleteAccountFailed: boolean;
 }

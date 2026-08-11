@@ -6,14 +6,18 @@ interface AppTextButtonProps {
   text: string;
   onPress: () => void;
   align?: 'start' | 'center';
+  loading?: boolean;
+  disabled?: boolean;
 }
 
-export const AppTextButton: React.FC<AppTextButtonProps> = ({ text, onPress, align = 'start' }): React.JSX.Element => {
+export const AppTextButton: React.FC<AppTextButtonProps> = ({ text, onPress, align = 'start', loading, disabled }): React.JSX.Element => {
   const theme = useAppTheme();
   return (
     <Button
       mode="text"
       onPress={onPress}
+      loading={loading}
+      disabled={loading === true || disabled === true}
       textColor={theme.colors.primary}
       style={{ alignSelf: align === 'center' ? 'center' : 'flex-start' }}
     >
@@ -22,12 +26,14 @@ export const AppTextButton: React.FC<AppTextButtonProps> = ({ text, onPress, ali
   );
 };
 
-export const AppTextButtonError: React.FC<AppTextButtonProps> = ({ text, onPress, align = 'start' }): React.JSX.Element => {
+export const AppTextButtonError: React.FC<AppTextButtonProps> = ({ text, onPress, align = 'start', loading }): React.JSX.Element => {
   const theme = useAppTheme();
   return (
     <Button
       mode="text"
       onPress={onPress}
+      loading={loading}
+      disabled={loading}
       textColor={theme.colors.error}
       style={{ alignSelf: align === 'center' ? 'center' : 'flex-start' }}
     >
