@@ -268,6 +268,7 @@ export const en = {
   sign_up_confirm_placeholder: 'Confirm your password',
   sign_up_button: 'Sign Up',
   sign_up_to_sign_in: 'Already have an account? Sign In',
+  sign_up_privacy: 'Privacy',
   sign_up_email_error_empty: 'Email is required',
   sign_up_email_error_invalid: 'Invalid email format',
   sign_up_email_error_already_exists: 'This email is already registered',
