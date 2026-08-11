@@ -1,7 +1,8 @@
-import { useCallback, useMemo, useState } from 'react';
+import { useCallback, useMemo, useRef, useState } from 'react';
 import { TYPES } from '../../../app/diTypes';
 import { OpenLinkUseCase } from '../../../domain/useCases/platform/OpenLinkUseCase';
 import { SignOutUseCase } from '../../../domain/useCases/auth/SignOutUseCase';
+import { DeleteAccountUseCase } from '../../../domain/useCases/auth/DeleteAccountUseCase';
 import { useResolve } from '../../hooks/useResolve';
 import { execute } from '../../hooks/useExecute';
 import { ThemeMode } from '../../foundation/themeMode';
@@ -17,9 +18,15 @@ export const useSettingsViewModel = () => {
   const { themeMode, setThemeMode } = useThemeMode();
   const openLinkUseCase = useResolve<OpenLinkUseCase>(TYPES.OpenLinkUseCase);
   const signOutUseCase = useResolve<SignOutUseCase>(TYPES.SignOutUseCase);
+  const deleteAccountUseCase = useResolve<DeleteAccountUseCase>(TYPES.DeleteAccountUseCase);
   const { language, setLanguage, t } = useStrings();
   const [showThemeDialog, setShowThemeDialog] = useState(false);
   const [showLanguageDialog, setShowLanguageDialog] = useState(false);
+  const [showDeleteAccountDialog, setShowDeleteAccountDialog] = useState(false);
+  const [isDeletingAccount, setIsDeletingAccount] = useState(false);
+  const [deleteAccountFailed, setDeleteAccountFailed] = useState(false);
+  // A second tap lands before the state re-render, so the guard has to be readable in the same tick.
+  const deletionInFlight = useRef(false);
 
   const uiState: SettingsUiState = useMemo(
     () => ({
@@ -29,8 +36,11 @@ export const useSettingsViewModel = () => {
       showThemeDialog,
       showLanguageDialog,
       showCrashButton: __DEV__,
+      showDeleteAccountDialog,
+      isDeletingAccount,
+      deleteAccountFailed,
     }),
-    [themeMode, language, showThemeDialog, showLanguageDialog]
+    [themeMode, language, showThemeDialog, showLanguageDialog, showDeleteAccountDialog, isDeletingAccount, deleteAccountFailed]
   );
 
   const onThemeClick = useCallback(() => {
@@ -75,6 +85,45 @@ export const useSettingsViewModel = () => {
     [signOutUseCase]
   );
 
+  const onDeleteAccountClick = useCallback(() => {
+    setDeleteAccountFailed(false);
+    setShowDeleteAccountDialog(true);
+  }, []);
+
+  const onDeleteAccountDialogDismiss = useCallback(() => {
+    setShowDeleteAccountDialog(false);
+  }, []);
+
+  const confirmDeleteAccount = useCallback(
+    (onDeleted?: () => void): void => {
+      if (deletionInFlight.current) {
+        return;
+      }
+      deletionInFlight.current = true;
+
+      execute({
+        action: () => deleteAccountUseCase.execute(),
+        onLoading: () => {
+          setIsDeletingAccount(true);
+          setDeleteAccountFailed(false);
+        },
+        onSuccess: () => {
+          deletionInFlight.current = false;
+          setIsDeletingAccount(false);
+          setShowDeleteAccountDialog(false);
+          onDeleted?.();
+        },
+        onError: () => {
+          deletionInFlight.current = false;
+          setIsDeletingAccount(false);
+          setShowDeleteAccountDialog(false);
+          setDeleteAccountFailed(true);
+        },
+      });
+    },
+    [deleteAccountUseCase]
+  );
+
   const triggerTestCrash = useCallback(() => {
     crash(getCrashlytics());
   }, []);
@@ -95,5 +144,8 @@ export const useSettingsViewModel = () => {
     triggerTestCrash,
     openWeb,
     signOut,
+    onDeleteAccountClick,
+    onDeleteAccountDialogDismiss,
+    confirmDeleteAccount,
   };
 };

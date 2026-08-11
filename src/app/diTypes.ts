@@ -9,6 +9,7 @@ export const TYPES = {
   // Storage
   SessionPreferences: Symbol.for('SessionPreferences'),
   PersistentPreferences: Symbol.for('PersistentPreferences'),
+  LocalUserDataCleaner: Symbol.for('LocalUserDataCleaner'),
   StorageLocalStore: Symbol.for('StorageLocalStore'),
   StorageRepository: Symbol.for('StorageRepository'),
   LoadStorageDataUseCase: Symbol.for('LoadStorageDataUseCase'),
@@ -23,6 +24,7 @@ export const TYPES = {
   SignInUseCase: Symbol.for('SignInUseCase'),
   SignInWithTokenUseCase: Symbol.for('SignInWithTokenUseCase'),
   SignOutUseCase: Symbol.for('SignOutUseCase'),
+  DeleteAccountUseCase: Symbol.for('DeleteAccountUseCase'),
   SignUpUseCase: Symbol.for('SignUpUseCase'),
   CheckEmailExistsUseCase: Symbol.for('CheckEmailExistsUseCase'),
 

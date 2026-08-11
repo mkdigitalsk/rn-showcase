@@ -11,6 +11,7 @@ import { ClearSessionUseCase } from '../../domain/useCases/storage/ClearSessionU
 import { SignInUseCase } from '../../domain/useCases/auth/SignInUseCase';
 import { SignInWithTokenUseCase } from '../../domain/useCases/auth/SignInWithTokenUseCase';
 import { SignOutUseCase } from '../../domain/useCases/auth/SignOutUseCase';
+import { DeleteAccountUseCase } from '../../domain/useCases/auth/DeleteAccountUseCase';
 import { SignUpUseCase } from '../../domain/useCases/auth/SignUpUseCase';
 import { CheckEmailExistsUseCase } from '../../domain/useCases/auth/CheckEmailExistsUseCase';
 import { ShareUseCase } from '../../domain/useCases/platform/ShareUseCase';
@@ -54,6 +55,7 @@ export const domainModule = () => {
   container.register(TYPES.SignInUseCase, { useClass: SignInUseCase });
   container.register(TYPES.SignInWithTokenUseCase, { useClass: SignInWithTokenUseCase });
   container.register(TYPES.SignOutUseCase, { useClass: SignOutUseCase });
+  container.register(TYPES.DeleteAccountUseCase, { useClass: DeleteAccountUseCase });
   container.register(TYPES.SignUpUseCase, { useClass: SignUpUseCase });
   container.register(TYPES.CheckEmailExistsUseCase, { useClass: CheckEmailExistsUseCase });
 

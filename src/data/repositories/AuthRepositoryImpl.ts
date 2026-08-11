@@ -5,6 +5,7 @@ import { ApiException } from '../../domain/exceptions/BaseException';
 import { EmailAlreadyExistsException } from '../../domain/exceptions/AuthException';
 import { AuthApi } from '../network/AuthApi';
 import { SessionPreferences } from '../local/SessionPreferences';
+import { LocalUserDataCleaner } from '../local/LocalUserDataCleaner';
 import { toSignedUpUser } from '../dto/auth/AuthResponseMapper';
 import { TYPES } from '../../app/diTypes';
 
@@ -12,7 +13,11 @@ const HTTP_CONFLICT = 409;
 
 @injectable()
 export class AuthRepositoryImpl implements AuthRepository {
-  constructor(@inject(TYPES.AuthApi) private api: AuthApi, @inject(TYPES.SessionPreferences) private session: SessionPreferences) {}
+  constructor(
+    @inject(TYPES.AuthApi) private api: AuthApi,
+    @inject(TYPES.SessionPreferences) private session: SessionPreferences,
+    @inject(TYPES.LocalUserDataCleaner) private localUserData: LocalUserDataCleaner
+  ) {}
 
   async signIn(email: string, password: string): Promise<SignedUpUser> {
     const response = await this.api.signIn(email, password);
@@ -20,7 +25,6 @@ export class AuthRepositoryImpl implements AuthRepository {
     return toSignedUpUser(response);
   }
 
-  // The stored token is the whole session; the server decides whether it still holds.
   async signInWithToken(): Promise<SignedUpUser | null> {
     if (!this.session.getAuthToken()) {
       return null;
@@ -35,7 +39,15 @@ export class AuthRepositoryImpl implements AuthRepository {
   }
 
   async signOut(): Promise<void> {
-    this.session.clearAuthToken();
+    await this.localUserData.clear();
+  }
+
+  // The bearer has to still be there when the request goes out, so the teardown follows the call. Once
+  // the server answers, the account is gone — a store that will not clear cannot turn that into a
+  // failure and leave the person on an account that no longer exists.
+  async deleteAccount(): Promise<void> {
+    await this.api.deleteAccount();
+    await this.localUserData.clear().catch(() => undefined);
   }
 
   async signUp(email: string, password: string): Promise<SignedUpUser> {

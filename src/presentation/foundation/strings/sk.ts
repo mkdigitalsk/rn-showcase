@@ -118,6 +118,12 @@ export const sk: Record<StringKey, string> = {
   settings_about_web: 'mkdigital.sk',
   settings_version: 'Verzia',
   settings_sign_out: 'Odhlásiť sa',
+  settings_delete_account: 'Zmazať účet',
+  settings_delete_account_title: 'Zmazať účet?',
+  settings_delete_account_text:
+    'Zmaže sa váš účet aj poznámky na serveri. Poznámky uložené v tomto zariadení zmiznú tiež. Túto akciu nie je možné vrátiť späť.',
+  settings_delete_account_confirm: 'Zmazať',
+  settings_delete_account_error: 'Váš účet sa nepodarilo zmazať. Skúste to znova.',
   settings_appearance: 'Vzhľad',
   settings_theme_light: 'Svetlý',
   settings_theme_dark: 'Tmavý',

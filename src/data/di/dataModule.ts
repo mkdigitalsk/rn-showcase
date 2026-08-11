@@ -5,6 +5,7 @@ import { RemoteNoteRepositoryImpl } from '../repositories/RemoteNoteRepositoryIm
 import { SessionPreferencesImpl } from '../local/SessionPreferences';
 import { PersistentPreferencesImpl } from '../local/PersistentPreferences';
 import { StorageLocalStoreImpl } from '../local/StorageLocalStore';
+import { LocalUserDataCleanerImpl } from '../local/LocalUserDataCleaner';
 import { StorageRepositoryImpl } from '../repositories/StorageRepositoryImpl';
 import { PlatformClient } from '../platform/PlatformClient';
 import { PlatformRepositoryImpl } from '../repositories/PlatformRepositoryImpl';
@@ -33,6 +34,7 @@ export const dataModule = () => {
   container.registerSingleton(TYPES.PersistentPreferences, PersistentPreferencesImpl);
   container.registerSingleton(TYPES.StorageLocalStore, StorageLocalStoreImpl);
   container.registerSingleton(TYPES.StorageRepository, StorageRepositoryImpl);
+  container.registerSingleton(TYPES.LocalUserDataCleaner, LocalUserDataCleanerImpl);
 
   // Platform APIs
   container.registerSingleton(TYPES.PlatformClient, PlatformClient);

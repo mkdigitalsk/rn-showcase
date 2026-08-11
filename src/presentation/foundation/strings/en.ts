@@ -116,6 +116,12 @@ export const en = {
   settings_about_web: 'mkdigital.sk',
   settings_version: 'Version',
   settings_sign_out: 'Sign Out',
+  settings_delete_account: 'Delete account',
+  settings_delete_account_title: 'Delete your account?',
+  settings_delete_account_text:
+    'This deletes your account and the notes on the server. Notes saved on this device go too. It cannot be undone.',
+  settings_delete_account_confirm: 'Delete',
+  settings_delete_account_error: 'Your account could not be deleted. Try again.',
   settings_appearance: 'Appearance',
   settings_theme_light: 'Light',
   settings_theme_dark: 'Dark',
