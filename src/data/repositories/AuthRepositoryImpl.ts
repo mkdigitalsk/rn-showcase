@@ -6,6 +6,7 @@ import { EmailAlreadyExistsException } from '../../domain/exceptions/AuthExcepti
 import { AuthApi } from '../network/AuthApi';
 import { SessionPreferences } from '../local/SessionPreferences';
 import { LocalUserDataCleaner } from '../local/LocalUserDataCleaner';
+import { AuthResponseDTO } from '../dto/auth/AuthResponseDTO';
 import { toSignedUpUser } from '../dto/auth/AuthResponseMapper';
 import { TYPES } from '../../app/diTypes';
 
@@ -21,8 +22,7 @@ export class AuthRepositoryImpl implements AuthRepository {
 
   async signIn(email: string, password: string): Promise<SignedUpUser> {
     const response = await this.api.signIn(email, password);
-    this.session.setAuthToken(response.token);
-    return toSignedUpUser(response);
+    return this.startSession(response);
   }
 
   async signInWithToken(): Promise<SignedUpUser | null> {
@@ -31,8 +31,7 @@ export class AuthRepositoryImpl implements AuthRepository {
     }
     try {
       const response = await this.api.me();
-      this.session.setAuthToken(response.token);
-      return toSignedUpUser(response);
+      return this.startSession(response);
     } catch {
       return null;
     }
@@ -53,8 +52,7 @@ export class AuthRepositoryImpl implements AuthRepository {
   async signUp(email: string, password: string): Promise<SignedUpUser> {
     try {
       const response = await this.api.signUp(email, password);
-      this.session.setAuthToken(response.token);
-      return toSignedUpUser(response);
+      return this.startSession(response);
     } catch (error) {
       if (error instanceof ApiException && error.httpCode === HTTP_CONFLICT) {
         throw new EmailAlreadyExistsException();
@@ -66,5 +64,17 @@ export class AuthRepositoryImpl implements AuthRepository {
   // Server is the source of truth — a duplicate email is rejected at signUp (409).
   async emailExists(_email: string): Promise<boolean> {
     return false;
+  }
+
+  // Undefined where no session was established — a biometric entry reaches Settings without one.
+  async isDemoAccount(): Promise<boolean | undefined> {
+    return this.session.getDemoAccount();
+  }
+
+  private startSession(response: AuthResponseDTO): SignedUpUser {
+    this.session.setAuthToken(response.token);
+    const user = toSignedUpUser(response);
+    this.session.setDemoAccount(user.demo);
+    return user;
   }
 }

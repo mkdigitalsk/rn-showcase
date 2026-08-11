@@ -124,6 +124,7 @@ export const sk: Record<StringKey, string> = {
     'Zmaže sa váš účet aj poznámky na serveri. Poznámky uložené v tomto zariadení zmiznú tiež. Túto akciu nie je možné vrátiť späť.',
   settings_delete_account_confirm: 'Zmazať',
   settings_delete_account_error: 'Váš účet sa nepodarilo zmazať. Skúste to znova.',
+  settings_delete_account_demo: 'Toto je ukážkový účet, preto ho nie je možné zmazať.',
   settings_appearance: 'Vzhľad',
   settings_theme_light: 'Svetlý',
   settings_theme_dark: 'Tmavý',

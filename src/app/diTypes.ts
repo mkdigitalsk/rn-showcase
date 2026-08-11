@@ -27,6 +27,7 @@ export const TYPES = {
   DeleteAccountUseCase: Symbol.for('DeleteAccountUseCase'),
   SignUpUseCase: Symbol.for('SignUpUseCase'),
   CheckEmailExistsUseCase: Symbol.for('CheckEmailExistsUseCase'),
+  IsDemoAccountUseCase: Symbol.for('IsDemoAccountUseCase'),
 
   // Platform APIs
   PlatformClient: Symbol.for('PlatformClient'),

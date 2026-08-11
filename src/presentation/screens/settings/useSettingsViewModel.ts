@@ -1,8 +1,9 @@
-import { useCallback, useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { TYPES } from '../../../app/diTypes';
 import { OpenLinkUseCase } from '../../../domain/useCases/platform/OpenLinkUseCase';
 import { SignOutUseCase } from '../../../domain/useCases/auth/SignOutUseCase';
 import { DeleteAccountUseCase } from '../../../domain/useCases/auth/DeleteAccountUseCase';
+import { IsDemoAccountUseCase } from '../../../domain/useCases/auth/IsDemoAccountUseCase';
 import { useResolve } from '../../hooks/useResolve';
 import { execute } from '../../hooks/useExecute';
 import { ThemeMode } from '../../foundation/themeMode';
@@ -19,14 +20,23 @@ export const useSettingsViewModel = () => {
   const openLinkUseCase = useResolve<OpenLinkUseCase>(TYPES.OpenLinkUseCase);
   const signOutUseCase = useResolve<SignOutUseCase>(TYPES.SignOutUseCase);
   const deleteAccountUseCase = useResolve<DeleteAccountUseCase>(TYPES.DeleteAccountUseCase);
+  const isDemoAccountUseCase = useResolve<IsDemoAccountUseCase>(TYPES.IsDemoAccountUseCase);
   const { language, setLanguage, t } = useStrings();
   const [showThemeDialog, setShowThemeDialog] = useState(false);
   const [showLanguageDialog, setShowLanguageDialog] = useState(false);
   const [showDeleteAccountDialog, setShowDeleteAccountDialog] = useState(false);
   const [isDeletingAccount, setIsDeletingAccount] = useState(false);
   const [deleteAccountFailed, setDeleteAccountFailed] = useState(false);
+  const [isDemoAccount, setIsDemoAccount] = useState<boolean | undefined>(undefined);
   // A second tap lands before the state re-render, so the guard has to be readable in the same tick.
   const deletionInFlight = useRef(false);
+
+  useEffect(() => {
+    execute({
+      action: () => isDemoAccountUseCase.execute(),
+      onSuccess: demo => setIsDemoAccount(demo),
+    });
+  }, [isDemoAccountUseCase]);
 
   const uiState: SettingsUiState = useMemo(
     () => ({
@@ -39,8 +49,18 @@ export const useSettingsViewModel = () => {
       showDeleteAccountDialog,
       isDeletingAccount,
       deleteAccountFailed,
+      isDemoAccount,
     }),
-    [themeMode, language, showThemeDialog, showLanguageDialog, showDeleteAccountDialog, isDeletingAccount, deleteAccountFailed]
+    [
+      themeMode,
+      language,
+      showThemeDialog,
+      showLanguageDialog,
+      showDeleteAccountDialog,
+      isDeletingAccount,
+      deleteAccountFailed,
+      isDemoAccount,
+    ]
   );
 
   const onThemeClick = useCallback(() => {

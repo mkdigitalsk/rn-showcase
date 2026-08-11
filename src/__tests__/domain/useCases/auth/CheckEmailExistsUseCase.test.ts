@@ -11,6 +11,7 @@ function createMockAuthRepository(): AuthRepository {
     deleteAccount: jest.fn(),
     signUp: jest.fn(),
     emailExists: jest.fn(),
+    isDemoAccount: jest.fn(),
   };
 }
 

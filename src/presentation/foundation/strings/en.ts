@@ -122,6 +122,7 @@ export const en = {
     'This deletes your account and the notes on the server. Notes saved on this device go too. It cannot be undone.',
   settings_delete_account_confirm: 'Delete',
   settings_delete_account_error: 'Your account could not be deleted. Try again.',
+  settings_delete_account_demo: 'This is a demo account, so it cannot be deleted.',
   settings_appearance: 'Appearance',
   settings_theme_light: 'Light',
   settings_theme_dark: 'Dark',

@@ -16,11 +16,15 @@ const SERVER_ERROR = 500;
 class FakeAuthApi implements AuthApi {
   tokenSeenByDeleteAccount: string | undefined = undefined;
   deleteAccountFails = false;
+  demo = false;
 
   constructor(private session: FakeSessionPreferences) {}
 
   async signIn(): Promise<AuthResponseDTO> {
-    throw new Error('not part of these tests');
+    return {
+      token: 'token-of-the-person-signed-in',
+      user: { id: 1, email: 'someone@mkdigital.sk', themeMode: 'system', locale: 'en', demo: this.demo },
+    };
   }
 
   async signUp(): Promise<AuthResponseDTO> {
@@ -81,6 +85,31 @@ describe('AuthRepositoryImpl', () => {
           expect(t.persistent.getPersistentCounter()).toBe(0);
           expect(t.notes.storedNotes()).toEqual([]);
         },
+      });
+    });
+  });
+
+  describe('isDemoAccount', () => {
+    it('answers with the flag the server sent at sign in', async () => {
+      await test({
+        given: () => {
+          t.api.demo = true;
+        },
+        whenAction: async () => {
+          await t.classUnderTest.signIn('someone@mkdigital.sk', 'MKDigitalTest1@');
+          return t.classUnderTest.isDemoAccount();
+        },
+        then: isDemo => expect(isDemo).toBe(true),
+      });
+    });
+
+    it('answers false for an account the server did not flag', async () => {
+      await test({
+        whenAction: async () => {
+          await t.classUnderTest.signIn('someone@mkdigital.sk', 'MKDigitalTest1@');
+          return t.classUnderTest.isDemoAccount();
+        },
+        then: isDemo => expect(isDemo).toBe(false),
       });
     });
   });

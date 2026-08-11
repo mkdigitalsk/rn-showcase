@@ -11,4 +11,5 @@ export interface SettingsUiState {
   showDeleteAccountDialog: boolean;
   isDeletingAccount: boolean;
   deleteAccountFailed: boolean;
+  isDemoAccount: boolean | undefined;
 }
