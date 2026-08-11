@@ -165,7 +165,7 @@ src/
 └── data/                   # Data Layer
     ├── repositories/       # Repository implementations
     ├── network/            # API clients (Axios)
-    ├── analytics/          # Firebase Analytics & Crashlytics
+    ├── crashReporting/     # Firebase Crashlytics
     ├── dto/                # Data Transfer Objects
     └── local/              # MMKV, SQLite
 ```
