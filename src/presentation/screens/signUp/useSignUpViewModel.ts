@@ -6,14 +6,18 @@ import { execute } from '../../hooks/useExecute';
 import { useResolve } from '../../hooks/useResolve';
 import { CheckEmailExistsUseCase } from '../../../domain/useCases/auth/CheckEmailExistsUseCase';
 import { SignUpUseCase } from '../../../domain/useCases/auth/SignUpUseCase';
+import { OpenLinkUseCase } from '../../../domain/useCases/platform/OpenLinkUseCase';
 import { EmailAlreadyExistsException } from '../../../domain/exceptions/AuthException';
 import { TYPES } from '../../../app/diTypes';
+
+const PRIVACY_URL = 'https://showcase.mkdigital.sk/privacy';
 
 export const useSignUpViewModel = () => {
   const [uiState, setUiState] = useState<SignUpUiState>(initialSignUpUiState);
 
   const checkEmailExistsUseCase = useResolve<CheckEmailExistsUseCase>(TYPES.CheckEmailExistsUseCase);
   const signUpUseCase = useResolve<SignUpUseCase>(TYPES.SignUpUseCase);
+  const openLinkUseCase = useResolve<OpenLinkUseCase>(TYPES.OpenLinkUseCase);
 
   const onEmailChange = useCallback((email: string) => {
     setUiState(prev => ({ ...prev, email, emailError: null }));
@@ -107,11 +111,16 @@ export const useSignUpViewModel = () => {
     ]
   );
 
+  const openPrivacy = useCallback(() => {
+    execute({ action: () => openLinkUseCase.execute(PRIVACY_URL) });
+  }, [openLinkUseCase]);
+
   return {
     uiState,
     onEmailChange,
     onPasswordChange,
     onConfirmPasswordChange,
+    openPrivacy,
     signUp,
   };
 };

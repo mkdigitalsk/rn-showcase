@@ -18,7 +18,7 @@ export const SignUpScreen = () => {
   const colors = useAppColors();
   const { t } = useStrings();
   const navigation = useNavigation<SignUpNavigationProp>();
-  const { uiState, onEmailChange, onPasswordChange, onConfirmPasswordChange, signUp } = useSignUpViewModel();
+  const { uiState, onEmailChange, onPasswordChange, onConfirmPasswordChange, signUp, openPrivacy } = useSignUpViewModel();
 
   const handleSignUp = useCallback(() => {
     signUp(() => navigation.replace('Main'));
@@ -127,6 +127,8 @@ export const SignUpScreen = () => {
         <ColumnSpacer4 />
 
         <AppTextButton text={t('sign_up_to_sign_in')} onPress={handleToSignIn} />
+
+        <AppTextButton text={t('sign_up_privacy')} onPress={openPrivacy} />
 
         <View style={{ height: space8 }} />
       </ScrollView>

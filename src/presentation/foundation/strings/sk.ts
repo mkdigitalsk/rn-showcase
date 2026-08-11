@@ -270,6 +270,7 @@ export const sk: Record<StringKey, string> = {
   sign_up_confirm_placeholder: 'Potvrďte heslo',
   sign_up_button: 'Vytvoriť účet',
   sign_up_to_sign_in: 'Už máte účet? Prihláste sa',
+  sign_up_privacy: 'Ochrana osobných údajov',
   sign_up_email_error_empty: 'Email je povinný',
   sign_up_email_error_invalid: 'Neplatný formát emailu',
   sign_up_email_error_already_exists: 'Tento email sa už používa',
