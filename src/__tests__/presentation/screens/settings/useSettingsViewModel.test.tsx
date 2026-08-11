@@ -10,6 +10,7 @@ const SERVER_ERROR = 500;
 jest.mock('@react-native-firebase/crashlytics', () => ({ getCrashlytics: jest.fn(), crash: jest.fn() }));
 
 const mockDeleteAccount = { execute: jest.fn().mockResolvedValue(undefined) };
+const mockIsDemoAccount = { execute: jest.fn().mockResolvedValue(false) };
 
 jest.mock('tsyringe', () => ({
   container: {
@@ -17,6 +18,9 @@ jest.mock('tsyringe', () => ({
       const key = token.toString();
       if (key.includes('DeleteAccountUseCase')) {
         return mockDeleteAccount;
+      }
+      if (key.includes('IsDemoAccountUseCase')) {
+        return mockIsDemoAccount;
       }
       if (key.includes('GetThemeModeUseCase')) {
         return { execute: () => 'system' };
@@ -47,6 +51,15 @@ describe('useSettingsViewModel', () => {
   beforeEach(() => {
     jest.clearAllMocks();
     mockDeleteAccount.execute.mockResolvedValue(undefined);
+    mockIsDemoAccount.execute.mockResolvedValue(false);
+  });
+
+  it('carries the demo flag the server sent into the state the screen reads', async () => {
+    mockIsDemoAccount.execute.mockResolvedValue(true);
+
+    const { result } = renderHook(() => useSettingsViewModel(), { wrapper });
+
+    await waitFor(() => expect(result.current.uiState.isDemoAccount).toBe(true));
   });
 
   it('deletes the account before it leaves the screen', async () => {

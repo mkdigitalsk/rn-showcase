@@ -12,6 +12,7 @@ function createMockAuthRepository(): AuthRepository {
     deleteAccount: jest.fn(),
     signUp: jest.fn(),
     emailExists: jest.fn(),
+    isDemoAccount: jest.fn(),
   };
 }
 
@@ -33,6 +34,7 @@ describe('SignUpUseCase', () => {
     const expectedUser: SignedUpUser = {
       id: 1,
       email: 'john@example.com',
+      demo: false,
     };
     (t.mockRepo.signUp as jest.Mock).mockResolvedValue(expectedUser);
 

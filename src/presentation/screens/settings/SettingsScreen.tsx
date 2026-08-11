@@ -126,7 +126,14 @@ export const SettingsScreen = () => {
 
         <AppTextButton text={t('settings_sign_out')} onPress={handleSignOut} align="center" />
 
-        <AppTextButtonError text={t('settings_delete_account')} onPress={onDeleteAccountClick} align="center" />
+        {uiState.isDemoAccount === true && (
+          <View style={{ alignItems: 'center' }}>
+            <TextBodySmallNeutral80>{t('settings_delete_account_demo')}</TextBodySmallNeutral80>
+          </View>
+        )}
+        {uiState.isDemoAccount === false && (
+          <AppTextButtonError text={t('settings_delete_account')} onPress={onDeleteAccountClick} align="center" />
+        )}
 
         {uiState.deleteAccountFailed && (
           <View style={{ alignItems: 'center' }}>

@@ -14,6 +14,7 @@ import { SignOutUseCase } from '../../domain/useCases/auth/SignOutUseCase';
 import { DeleteAccountUseCase } from '../../domain/useCases/auth/DeleteAccountUseCase';
 import { SignUpUseCase } from '../../domain/useCases/auth/SignUpUseCase';
 import { CheckEmailExistsUseCase } from '../../domain/useCases/auth/CheckEmailExistsUseCase';
+import { IsDemoAccountUseCase } from '../../domain/useCases/auth/IsDemoAccountUseCase';
 import { ShareUseCase } from '../../domain/useCases/platform/ShareUseCase';
 import { DialUseCase } from '../../domain/useCases/platform/DialUseCase';
 import { OpenLinkUseCase } from '../../domain/useCases/platform/OpenLinkUseCase';
@@ -58,6 +59,7 @@ export const domainModule = () => {
   container.register(TYPES.DeleteAccountUseCase, { useClass: DeleteAccountUseCase });
   container.register(TYPES.SignUpUseCase, { useClass: SignUpUseCase });
   container.register(TYPES.CheckEmailExistsUseCase, { useClass: CheckEmailExistsUseCase });
+  container.register(TYPES.IsDemoAccountUseCase, { useClass: IsDemoAccountUseCase });
 
   // Storage
   container.register(TYPES.LoadStorageDataUseCase, { useClass: LoadStorageDataUseCase });

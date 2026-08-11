@@ -3,6 +3,7 @@ export interface AuthUserDTO {
   email: string;
   themeMode: string;
   locale: string;
+  demo: boolean;
 }
 
 export interface AuthResponseDTO {
