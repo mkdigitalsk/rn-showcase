@@ -22,15 +22,7 @@ interface NoteCardProps {
   onDelete: (id: number) => void;
 }
 
-export const NoteCard = ({
-  note,
-  isEditing,
-  isSaving,
-  onStartEditing,
-  onCancelEditing,
-  onSave,
-  onDelete,
-}: NoteCardProps) => {
+export const NoteCard = ({ note, isEditing, isSaving, onStartEditing, onCancelEditing, onSave, onDelete }: NoteCardProps) => {
   const colors = useAppColors();
   const { t } = useStrings();
   const [title, setTitle] = useState(note.title);
