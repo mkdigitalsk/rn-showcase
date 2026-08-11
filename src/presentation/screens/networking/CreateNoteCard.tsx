@@ -29,12 +29,7 @@ export const CreateNoteCard = ({ isSaving, isLoading, onCreate }: CreateNoteCard
       <AppTextField value={content} onChangeText={setContent} label={t('networking_content')} />
       <ColumnSpacer2 />
       <View style={{ alignItems: 'flex-start' }}>
-        <ContainedButton
-          text={t('networking_add')}
-          onPress={submit}
-          loading={isSaving}
-          disabled={!title.trim() || isSaving || isLoading}
-        />
+        <ContainedButton text={t('networking_add')} onPress={submit} loading={isSaving} disabled={!title.trim() || isSaving || isLoading} />
       </View>
     </AppCard>
   );

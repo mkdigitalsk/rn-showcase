@@ -19,17 +19,8 @@ import { useStrings } from '../../foundation/strings';
 export const NetworkingScreen = () => {
   const colors = useAppColors();
   const { t } = useStrings();
-  const {
-    uiState,
-    onRetry,
-    onCreate,
-    onSave,
-    onDelete,
-    onStartEditing,
-    onCancelEditing,
-    onKeepMine,
-    onDiscardMine,
-  } = useNetworkingViewModel();
+  const { uiState, onRetry, onCreate, onSave, onDelete, onStartEditing, onCancelEditing, onKeepMine, onDiscardMine } =
+    useNetworkingViewModel();
 
   const renderItem = ({ item }: { item: RemoteNote }) => (
     <NoteCard
