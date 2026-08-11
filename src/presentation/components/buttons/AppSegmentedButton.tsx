@@ -5,15 +5,15 @@ import { useAppTheme } from '../../foundation/theme';
 interface AppSegmentedButtonProps {
   options: { value: string; label: string }[];
   selectedValue: string;
-  onValueChanged: (value: string) => void;
+  onValueChange: (value: string) => void;
 }
 
-export const AppSegmentedButton: React.FC<AppSegmentedButtonProps> = ({ options, selectedValue, onValueChanged }): React.JSX.Element => {
+export const AppSegmentedButton: React.FC<AppSegmentedButtonProps> = ({ options, selectedValue, onValueChange }): React.JSX.Element => {
   const theme = useAppTheme();
   return (
     <SegmentedButtons
       value={selectedValue}
-      onValueChange={onValueChanged}
+      onValueChange={onValueChange}
       buttons={options.map(opt => ({
         value: opt.value,
         label: opt.label,

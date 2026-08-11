@@ -4,7 +4,7 @@ import { ScannerUiState, initialScannerUiState, ScannerMode, CodeFormat } from '
 export const useScannerViewModel = () => {
   const [uiState, setUiState] = useState<ScannerUiState>(initialScannerUiState);
 
-  const onModeChanged = useCallback((mode: string) => {
+  const onModeChange = useCallback((mode: string) => {
     setUiState(prev => ({
       ...prev,
       mode: mode as ScannerMode,
@@ -12,7 +12,7 @@ export const useScannerViewModel = () => {
     }));
   }, []);
 
-  const onFormatChanged = useCallback((format: string) => {
+  const onFormatChange = useCallback((format: string) => {
     setUiState(prev => ({
       ...prev,
       format: format as CodeFormat,
@@ -20,7 +20,7 @@ export const useScannerViewModel = () => {
     }));
   }, []);
 
-  const onTextChanged = useCallback((text: string) => {
+  const onTextChange = useCallback((text: string) => {
     setUiState(prev => ({
       ...prev,
       inputText: text,
@@ -35,7 +35,7 @@ export const useScannerViewModel = () => {
     setUiState(prev => ({ ...prev, showGeneratedCode: true }));
   }, [uiState.inputText]);
 
-  const onCodeScanned = useCallback((result: string) => {
+  const onCodeScan = useCallback((result: string) => {
     setUiState(prev => {
       if (prev.scannedResult === result) {
         return prev;
@@ -50,11 +50,11 @@ export const useScannerViewModel = () => {
 
   return {
     uiState,
-    onModeChanged,
-    onFormatChanged,
-    onTextChanged,
+    onModeChange,
+    onFormatChange,
+    onTextChange,
     generateCode,
-    onCodeScanned,
+    onCodeScan,
     clearScannedResult,
   };
 };

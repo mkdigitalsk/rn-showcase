@@ -82,7 +82,7 @@ export const useSignInViewModel = () => {
   );
 
   const authenticateWithBiometrics = useCallback(
-    (onAuthenticated?: () => void): void => {
+    (onAuthSuccess?: () => void): void => {
       execute({
         action: () => authenticateWithBiometricUseCase.execute(),
         onLoading: () => setUiState(prev => ({ ...prev, biometricsLoading: true })),
@@ -93,7 +93,7 @@ export const useSignInViewModel = () => {
             biometricsResult: result,
           }));
           if (result.type === 'success') {
-            onAuthenticated?.();
+            onAuthSuccess?.();
           }
         },
         onError: () =>
@@ -108,14 +108,14 @@ export const useSignInViewModel = () => {
   );
 
   const restoreSession = useCallback(
-    (onRestored?: () => void): void => {
+    (onRestoreSuccess?: () => void): void => {
       execute({
         action: () => signInWithTokenUseCase.execute(),
         onLoading: () => setUiState(prev => ({ ...prev, isLoading: true })),
         onSuccess: user => {
           setUiState(prev => ({ ...prev, isLoading: false }));
           if (user) {
-            onRestored?.();
+            onRestoreSuccess?.();
           }
         },
         onError: () => setUiState(prev => ({ ...prev, isLoading: false })),
