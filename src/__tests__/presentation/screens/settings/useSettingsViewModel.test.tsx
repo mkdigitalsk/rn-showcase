@@ -80,16 +80,16 @@ describe('useSettingsViewModel', () => {
 
   it('surfaces the failure and stays on the screen', async () => {
     mockDeleteAccount.execute.mockRejectedValue(new ApiException(SERVER_ERROR, 'Request failed', 'error_server'));
-    const onDeleted = jest.fn();
+    const onDeleteSuccess = jest.fn();
 
     const { result } = renderHook(() => useSettingsViewModel(), { wrapper });
 
     await act(async () => {
-      result.current.confirmDeleteAccount(onDeleted);
+      result.current.confirmDeleteAccount(onDeleteSuccess);
     });
 
     await waitFor(() => expect(result.current.uiState.deleteAccountFailed).toBe(true));
-    expect(onDeleted).not.toHaveBeenCalled();
+    expect(onDeleteSuccess).not.toHaveBeenCalled();
     expect(result.current.uiState.isDeletingAccount).toBe(false);
   });
 
