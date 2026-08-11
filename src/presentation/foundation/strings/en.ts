@@ -28,7 +28,7 @@ export const en = {
   screen_settings: 'Settings',
 
   // Feature subtitles (Home screen cards)
-  feature_ui_components_subtitle: 'React Native Paper, Material 3',
+  feature_ui_components_subtitle: 'Buttons, Cards, Dialogs, Typography',
   feature_networking_subtitle: 'Axios, REST API',
   feature_storage_subtitle: 'MMKV, key-value storage',
   feature_database_subtitle: 'op-sqlite, local persistence',
