@@ -30,7 +30,7 @@ export const sk: Record<StringKey, string> = {
   screen_settings: 'Nastavenia',
 
   // Feature subtitles (Home screen cards)
-  feature_ui_components_subtitle: 'React Native Paper, Material 3',
+  feature_ui_components_subtitle: 'Tlačidlá, Karty, Dialógy, Typografia',
   feature_networking_subtitle: 'Axios, REST API',
   feature_storage_subtitle: 'MMKV, kľúč-hodnota úložisko',
   feature_database_subtitle: 'op-sqlite, lokálne úložisko',
