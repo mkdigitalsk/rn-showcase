@@ -1,7 +1,7 @@
 import { container } from 'tsyringe';
-import { UserApi, UserApiImpl } from '../network/UserApi';
-import { UserRepository } from '../../domain/repositories/UserRepository';
-import { UserRepositoryImpl } from '../repositories/UserRepositoryImpl';
+import { RemoteNoteApi, RemoteNoteApiImpl } from '../network/RemoteNoteApi';
+import { RemoteNoteRepository } from '../../domain/repositories/RemoteNoteRepository';
+import { RemoteNoteRepositoryImpl } from '../repositories/RemoteNoteRepositoryImpl';
 import { SessionPreferencesImpl } from '../local/SessionPreferences';
 import { PersistentPreferencesImpl } from '../local/PersistentPreferences';
 import { StorageLocalStoreImpl } from '../local/StorageLocalStore';
@@ -25,8 +25,8 @@ import { FirebaseAnalyticsClient } from '../analytics/FirebaseAnalyticsClient';
 import { TYPES } from '../../app/diTypes';
 
 export const dataModule = () => {
-  container.register<UserApi>(TYPES.UserApi, { useClass: UserApiImpl });
-  container.register<UserRepository>(TYPES.UserRepository, { useClass: UserRepositoryImpl });
+  container.register<RemoteNoteApi>(TYPES.RemoteNoteApi, { useClass: RemoteNoteApiImpl });
+  container.register<RemoteNoteRepository>(TYPES.RemoteNoteRepository, { useClass: RemoteNoteRepositoryImpl });
 
   // Storage
   container.registerSingleton(TYPES.SessionPreferences, SessionPreferencesImpl);
