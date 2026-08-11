@@ -66,10 +66,8 @@ export const TYPES = {
   DeleteNoteUseCase: Symbol.for('DeleteNoteUseCase'),
   DeleteAllNotesUseCase: Symbol.for('DeleteAllNotesUseCase'),
 
-  // Analytics
-  AnalyticsClient: Symbol.for('AnalyticsClient'),
-  TrackScreenUseCase: Symbol.for('TrackScreenUseCase'),
-  TrackButtonClickUseCase: Symbol.for('TrackButtonClickUseCase'),
+  // Crash reporting
+  CrashReporter: Symbol.for('CrashReporter'),
 
   // Calendar
   DateRepository: Symbol.for('DateRepository'),
