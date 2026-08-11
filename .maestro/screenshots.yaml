@@ -8,7 +8,10 @@ name: README screenshots
     permissions:
       all: deny
 
-- assertVisible: 'Sign In'
+# A debug build fetches its bundle from Metro on launch, so the first screen is not there at once.
+- extendedWaitUntil:
+    visible: 'Sign In'
+    timeout: 60000
 - takeScreenshot: screenshots/sign-in
 - tapOn: 'Fill Test Account'
 - tapOn: 'Sign In'
