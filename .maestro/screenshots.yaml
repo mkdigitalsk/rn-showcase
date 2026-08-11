@@ -23,7 +23,16 @@ name: README screenshots
 - takeScreenshot: screenshots/ui_components
 - back
 
+# Notes come from the API, so the list starts empty on a fresh account — add one, same reason as
+# Database below.
 - tapOn: 'Networking'
+- tapOn: 'Title'
+- inputText: 'Buy milk'
+- tapOn: 'Content'
+- inputText: 'two litres'
+- tapOn: 'Add note'
+- tapOn:
+    point: '50%,12%'
 - takeScreenshot: screenshots/networking
 - back
 

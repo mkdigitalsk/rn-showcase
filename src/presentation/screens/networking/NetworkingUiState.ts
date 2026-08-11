@@ -1,14 +1,20 @@
-import { User } from '../../../domain/model/User';
+import { RemoteNote } from '../../../domain/model/RemoteNote';
 import type { AppError } from '../../foundation/errors/AppError';
 
 export interface NetworkingUiState {
-  users: User[];
+  notes: RemoteNote[];
+  editing: RemoteNote | null;
+  conflict: RemoteNote | null;
   isLoading: boolean;
+  isSaving: boolean;
   error: AppError | null;
 }
 
 export const initialNetworkingUiState: NetworkingUiState = {
-  users: [],
+  notes: [],
+  editing: null,
+  conflict: null,
   isLoading: false,
+  isSaving: false,
   error: null,
 };

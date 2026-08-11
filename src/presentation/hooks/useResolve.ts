@@ -6,7 +6,7 @@ import { container } from 'tsyringe';
  * Wraps the common useMemo + container.resolve pattern.
  *
  * Usage:
- *   const getUsersUseCase = useResolve<GetUsersUseCase>(TYPES.GetUsersUseCase);
+ *   const getRemoteNotesUseCase = useResolve<GetRemoteNotesUseCase>(TYPES.GetRemoteNotesUseCase);
  */
 export function useResolve<T>(type: symbol): T {
   return useMemo(() => container.resolve<T>(type), [type]);
