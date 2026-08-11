@@ -1,7 +1,10 @@
 export const TYPES = {
-  UserApi: Symbol.for('UserApi'),
-  UserRepository: Symbol.for('UserRepository'),
-  GetUsersUseCase: Symbol.for('GetUsersUseCase'),
+  RemoteNoteApi: Symbol.for('RemoteNoteApi'),
+  RemoteNoteRepository: Symbol.for('RemoteNoteRepository'),
+  GetRemoteNotesUseCase: Symbol.for('GetRemoteNotesUseCase'),
+  CreateRemoteNoteUseCase: Symbol.for('CreateRemoteNoteUseCase'),
+  UpdateRemoteNoteUseCase: Symbol.for('UpdateRemoteNoteUseCase'),
+  DeleteRemoteNoteUseCase: Symbol.for('DeleteRemoteNoteUseCase'),
 
   // Storage
   SessionPreferences: Symbol.for('SessionPreferences'),

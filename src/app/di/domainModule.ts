@@ -1,5 +1,8 @@
 import { container } from 'tsyringe';
-import { GetUsersUseCase } from '../../domain/useCases/GetUsersUseCase';
+import { GetRemoteNotesUseCase } from '../../domain/useCases/GetRemoteNotesUseCase';
+import { CreateRemoteNoteUseCase } from '../../domain/useCases/CreateRemoteNoteUseCase';
+import { UpdateRemoteNoteUseCase } from '../../domain/useCases/UpdateRemoteNoteUseCase';
+import { DeleteRemoteNoteUseCase } from '../../domain/useCases/DeleteRemoteNoteUseCase';
 import { LoadStorageDataUseCase } from '../../domain/useCases/storage/LoadStorageDataUseCase';
 import { ObserveStorageDataUseCase } from '../../domain/useCases/storage/ObserveStorageDataUseCase';
 import { SetSessionCounterUseCase } from '../../domain/useCases/storage/SetSessionCounterUseCase';
@@ -42,7 +45,10 @@ import { TrackButtonClickUseCase } from '../../domain/useCases/analytics/TrackBu
 import { TYPES } from '../diTypes';
 
 export const domainModule = () => {
-  container.register<GetUsersUseCase>(TYPES.GetUsersUseCase, { useClass: GetUsersUseCase });
+  container.register<GetRemoteNotesUseCase>(TYPES.GetRemoteNotesUseCase, { useClass: GetRemoteNotesUseCase });
+  container.register<CreateRemoteNoteUseCase>(TYPES.CreateRemoteNoteUseCase, { useClass: CreateRemoteNoteUseCase });
+  container.register<UpdateRemoteNoteUseCase>(TYPES.UpdateRemoteNoteUseCase, { useClass: UpdateRemoteNoteUseCase });
+  container.register<DeleteRemoteNoteUseCase>(TYPES.DeleteRemoteNoteUseCase, { useClass: DeleteRemoteNoteUseCase });
 
   // Auth
   container.register(TYPES.SignInUseCase, { useClass: SignInUseCase });
