@@ -20,15 +20,15 @@ const GenerateSection = ({
   format,
   inputText,
   showGeneratedCode,
-  onFormatChanged,
-  onTextChanged,
+  onFormatChange,
+  onTextChange,
   generateCode,
 }: {
   format: CodeFormat;
   inputText: string;
   showGeneratedCode: boolean;
-  onFormatChanged: (format: string) => void;
-  onTextChanged: (text: string) => void;
+  onFormatChange: (format: string) => void;
+  onTextChange: (text: string) => void;
   generateCode: () => void;
 }) => {
   const { t } = useStrings();
@@ -42,11 +42,11 @@ const GenerateSection = ({
           { value: CodeFormat.BARCODE, label: t('scanner_format_barcode') },
         ]}
         selectedValue={format}
-        onValueChanged={onFormatChanged}
+        onValueChange={onFormatChange}
       />
       <ColumnSpacer4 />
       <AppCard elevated>
-        <AppTextField value={inputText} onChangeText={onTextChanged} placeholder={t('scanner_input_placeholder')} />
+        <AppTextField value={inputText} onChangeText={onTextChange} placeholder={t('scanner_input_placeholder')} />
         <ColumnSpacer4 />
         <ContainedButton text={t('scanner_generate_button')} onPress={generateCode} />
       </AppCard>
@@ -65,11 +65,11 @@ const GenerateSection = ({
 };
 
 const ScanSection = ({
-  onCodeScanned,
+  onCodeScan,
   scannedResult,
   clearScannedResult,
 }: {
-  onCodeScanned: (result: string) => void;
+  onCodeScan: (result: string) => void;
   scannedResult: string | null;
   clearScannedResult: () => void;
 }) => {
@@ -84,10 +84,10 @@ const ScanSection = ({
       codes => {
         const value = codes[0]?.value;
         if (value) {
-          onCodeScanned(value);
+          onCodeScan(value);
         }
       },
-      [onCodeScanned]
+      [onCodeScan]
     ),
   });
 
@@ -133,7 +133,7 @@ const ScanSection = ({
 export const ScannerScreen = () => {
   const colors = useAppColors();
   const { t } = useStrings();
-  const { uiState, onModeChanged, onFormatChanged, onTextChanged, generateCode, onCodeScanned, clearScannedResult } = useScannerViewModel();
+  const { uiState, onModeChange, onFormatChange, onTextChange, generateCode, onCodeScan, clearScannedResult } = useScannerViewModel();
 
   return (
     <ScrollView
@@ -153,7 +153,7 @@ export const ScannerScreen = () => {
           { value: ScannerMode.SCAN, label: t('scanner_mode_scan') },
         ]}
         selectedValue={uiState.mode}
-        onValueChanged={onModeChanged}
+        onValueChange={onModeChange}
       />
 
       <ColumnSpacer4 />
@@ -163,12 +163,12 @@ export const ScannerScreen = () => {
           format={uiState.format}
           inputText={uiState.inputText}
           showGeneratedCode={uiState.showGeneratedCode}
-          onFormatChanged={onFormatChanged}
-          onTextChanged={onTextChanged}
+          onFormatChange={onFormatChange}
+          onTextChange={onTextChange}
           generateCode={generateCode}
         />
       ) : (
-        <ScanSection onCodeScanned={onCodeScanned} scannedResult={uiState.scannedResult} clearScannedResult={clearScannedResult} />
+        <ScanSection onCodeScan={onCodeScan} scannedResult={uiState.scannedResult} clearScannedResult={clearScannedResult} />
       )}
     </ScrollView>
   );

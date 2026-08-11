@@ -41,10 +41,10 @@ export const SettingsScreen = () => {
     uiState,
     t,
     onThemeClick,
-    onThemeSelected,
+    onThemeSelect,
     onThemeDialogDismiss,
     onLanguageClick,
-    onLanguageSelected,
+    onLanguageSelect,
     onLanguageDialogDismiss,
     triggerTestCrash,
     openWeb,
@@ -157,7 +157,7 @@ export const SettingsScreen = () => {
             key={mode}
             label={themeModeLabel(mode)}
             selected={uiState.themeMode === mode}
-            onPress={() => onThemeSelected(mode)}
+            onPress={() => onThemeSelect(mode)}
           />
         ))}
       </SelectionDialog>
@@ -169,7 +169,7 @@ export const SettingsScreen = () => {
             flag={<LanguageFlag lang={lang} />}
             label={languageLabel(lang)}
             selected={uiState.language === lang}
-            onPress={() => onLanguageSelected(lang)}
+            onPress={() => onLanguageSelect(lang)}
           />
         ))}
       </SelectionDialog>

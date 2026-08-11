@@ -67,7 +67,7 @@ export const useSettingsViewModel = () => {
     setShowThemeDialog(true);
   }, []);
 
-  const onThemeSelected = useCallback(
+  const onThemeSelect = useCallback(
     (mode: ThemeMode) => {
       setThemeMode(mode);
       setShowThemeDialog(false);
@@ -83,7 +83,7 @@ export const useSettingsViewModel = () => {
     setShowLanguageDialog(true);
   }, []);
 
-  const onLanguageSelected = useCallback(
+  const onLanguageSelect = useCallback(
     (lang: Language) => {
       setLanguage(lang);
       setShowLanguageDialog(false);
@@ -115,7 +115,7 @@ export const useSettingsViewModel = () => {
   }, []);
 
   const confirmDeleteAccount = useCallback(
-    (onDeleted?: () => void): void => {
+    (onDeleteSuccess?: () => void): void => {
       if (deletionInFlight.current) {
         return;
       }
@@ -131,7 +131,7 @@ export const useSettingsViewModel = () => {
           deletionInFlight.current = false;
           setIsDeletingAccount(false);
           setShowDeleteAccountDialog(false);
-          onDeleted?.();
+          onDeleteSuccess?.();
         },
         onError: () => {
           deletionInFlight.current = false;
@@ -156,10 +156,10 @@ export const useSettingsViewModel = () => {
     uiState,
     t,
     onThemeClick,
-    onThemeSelected,
+    onThemeSelect,
     onThemeDialogDismiss,
     onLanguageClick,
-    onLanguageSelected,
+    onLanguageSelect,
     onLanguageDialogDismiss,
     triggerTestCrash,
     openWeb,

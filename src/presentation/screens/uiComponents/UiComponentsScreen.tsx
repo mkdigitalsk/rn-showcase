@@ -101,7 +101,7 @@ export const UiComponentsScreen = () => {
             { value: 'month', label: t('ui_segment_month') },
           ]}
           selectedValue={selectedSegment}
-          onValueChanged={setSelectedSegment}
+          onValueChange={setSelectedSegment}
         />
 
         <ColumnSpacer4 />
