@@ -9,7 +9,7 @@ import { RemoteNote } from '../../../domain/model/RemoteNote';
 import { ErrorView } from '../../components/ErrorView';
 import { LoadingView } from '../../components/LoadingView';
 import { AppConfirmDialog } from '../../components/AppDialog';
-import { TextHeadlineMedium } from '../../components/text/headlineMedium/TextHeadlineMedium';
+import { TextBodyLargeNeutral80 } from '../../components/text/bodyLarge/TextBodyLarge';
 import { TextBodyMediumNeutral80 } from '../../components/text/bodyMedium/TextBodyMedium';
 import { ColumnSpacer4 } from '../../components/spacers/Spacers';
 import { space4 } from '../../foundation/dimensions';
@@ -38,8 +38,7 @@ export const NetworkingScreen = () => {
     <View>
       <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
         <View style={{ flex: 1 }}>
-          <TextHeadlineMedium color={colors.primary}>{t('networking_title')}</TextHeadlineMedium>
-          <TextBodyMediumNeutral80>{t('networking_subtitle')}</TextBodyMediumNeutral80>
+          <TextBodyLargeNeutral80>{t('networking_subtitle')}</TextBodyLargeNeutral80>
         </View>
         <IconButton
           icon="refresh"
