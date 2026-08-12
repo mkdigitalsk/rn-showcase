@@ -7,7 +7,6 @@ import { ScannerMode, CodeFormat } from './ScannerUiState';
 import { useAppColors } from '../../foundation/theme';
 import { useStrings } from '../../foundation/strings';
 import { AppCard, AppTextField, AppSegmentedButton, ContainedButton, OutlinedButton } from '../../components';
-import { TextHeadlineMedium } from '../../components/text/headlineMedium/TextHeadlineMedium';
 import { TextBodyMediumNeutral80 } from '../../components/text/bodyMedium/TextBodyMedium';
 import { TextBodyLargeNeutral80 } from '../../components/text/bodyLarge/TextBodyLarge';
 import { ColumnSpacer2, ColumnSpacer4 } from '../../components/spacers/Spacers';
@@ -141,9 +140,8 @@ export const ScannerScreen = () => {
       contentContainerStyle={{ padding: space4, paddingBottom: 100 }}
       keyboardShouldPersistTaps="handled"
     >
-      <TextHeadlineMedium color={colors.primary}>{t('scanner_title')}</TextHeadlineMedium>
       <ColumnSpacer2 />
-      <TextBodyMediumNeutral80>{t('scanner_subtitle')}</TextBodyMediumNeutral80>
+      <TextBodyLargeNeutral80>{t('scanner_subtitle')}</TextBodyLargeNeutral80>
 
       <ColumnSpacer4 />
 

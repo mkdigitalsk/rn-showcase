@@ -5,6 +5,7 @@ import { useStorageViewModel } from './useStorageViewModel';
 import { useAppColors } from '../../foundation/theme';
 import { useStrings } from '../../foundation/strings';
 import { AppCard, OutlinedButton } from '../../components';
+import { TextBodyLargeNeutral80 } from '../../components/text/bodyLarge/TextBodyLarge';
 import { TextHeadlineMedium } from '../../components/text/headlineMedium/TextHeadlineMedium';
 import { TextBodyMediumNeutral80 } from '../../components/text/bodyMedium/TextBodyMedium';
 import { TextTitleLargeNeutral80 } from '../../components/text/titleLarge/TextTitleLarge';
@@ -53,9 +54,8 @@ export const StorageScreen = () => {
 
   return (
     <ScrollView style={{ flex: 1, backgroundColor: colors.background }} contentContainerStyle={{ padding: space4, paddingBottom: 100 }}>
-      <TextHeadlineMedium color={colors.primary}>{t('storage_title')}</TextHeadlineMedium>
       <ColumnSpacer2 />
-      <TextBodyMediumNeutral80>{t('storage_subtitle')}</TextBodyMediumNeutral80>
+      <TextBodyLargeNeutral80>{t('storage_subtitle')}</TextBodyLargeNeutral80>
 
       <ColumnSpacer4 />
 
