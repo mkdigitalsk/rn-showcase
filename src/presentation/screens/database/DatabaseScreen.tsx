@@ -7,7 +7,7 @@ import { useAppColors } from '../../foundation/theme';
 import { useStrings } from '../../foundation/strings';
 import { Note, NoteSortOption } from '../../../domain/model/Note';
 import { AppCard, AppTextField, AppSearchField, OutlinedButton, ContainedButton } from '../../components';
-import { TextHeadlineMedium } from '../../components/text/headlineMedium/TextHeadlineMedium';
+import { TextBodyLargeNeutral80 } from '../../components/text/bodyLarge/TextBodyLarge';
 import { TextBodyMediumNeutral80 } from '../../components/text/bodyMedium/TextBodyMedium';
 import { TextBodySmallNeutral80 } from '../../components/text/bodySmall/TextBodySmall';
 import { TextTitleLargeNeutral80 } from '../../components/text/titleLarge/TextTitleLarge';
@@ -69,9 +69,8 @@ export const DatabaseScreen = () => {
       contentContainerStyle={{ padding: space4, paddingBottom: 100 }}
       keyboardShouldPersistTaps="handled"
     >
-      <TextHeadlineMedium color={colors.primary}>{t('database_title')}</TextHeadlineMedium>
       <ColumnSpacer2 />
-      <TextBodyMediumNeutral80>{t('database_subtitle')}</TextBodyMediumNeutral80>
+      <TextBodyLargeNeutral80>{t('database_subtitle')}</TextBodyLargeNeutral80>
 
       <ColumnSpacer4 />
 

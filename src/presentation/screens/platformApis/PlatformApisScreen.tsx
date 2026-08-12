@@ -5,7 +5,6 @@ import { usePlatformApisViewModel } from './usePlatformApisViewModel';
 import { useAppColors } from '../../foundation/theme';
 import { useStrings } from '../../foundation/strings';
 import { AppCard, OutlinedButton } from '../../components';
-import { TextHeadlineMedium } from '../../components/text/headlineMedium/TextHeadlineMedium';
 import { TextBodyMediumNeutral80 } from '../../components/text/bodyMedium/TextBodyMedium';
 import { TextBodyLargeNeutral80 } from '../../components/text/bodyLarge/TextBodyLarge';
 import { ColumnSpacer2, ColumnSpacer4, RowSpacer4 } from '../../components/spacers/Spacers';
@@ -55,9 +54,8 @@ export const PlatformApisScreen = () => {
 
   return (
     <ScrollView style={{ flex: 1, backgroundColor: colors.background }} contentContainerStyle={{ padding: space4, paddingBottom: 100 }}>
-      <TextHeadlineMedium color={colors.primary}>{t('platform_apis_title')}</TextHeadlineMedium>
       <ColumnSpacer2 />
-      <TextBodyMediumNeutral80>{t('platform_apis_subtitle')}</TextBodyMediumNeutral80>
+      <TextBodyLargeNeutral80>{t('platform_apis_subtitle')}</TextBodyLargeNeutral80>
 
       <ColumnSpacer4 />
 
