@@ -7,7 +7,6 @@ export const en = {
   screen_home: 'Home',
   screen_ui_components: 'UI Components',
   screen_networking: 'Networking',
-  networking_title: 'Notes on the server',
   networking_subtitle: 'A remote server demonstration — these notes live in the API and follow your account to any device.',
   networking_empty: 'No notes yet — add one above',
   networking_note_title: 'Title',
@@ -135,7 +134,6 @@ export const en = {
   language_sk: 'Slovak',
 
   // Storage
-  storage_title: 'Local Storage',
   storage_subtitle: 'Demonstrates session vs persistent storage using MMKV',
   storage_session_label: 'Session Counter',
   storage_session_hint: 'Resets when app is killed or session is cleared',
@@ -144,7 +142,6 @@ export const en = {
   storage_clear_session: 'Clear Session',
 
   // Platform APIs
-  platform_apis_title: 'Platform APIs',
   platform_apis_subtitle: 'Native platform integrations and device features',
   platform_apis_share_title: 'Share',
   platform_apis_share_action: 'Share Text',
@@ -178,7 +175,6 @@ export const en = {
   platform_apis_flashlight_not_available: 'Flashlight not available',
 
   // Database
-  database_title: 'Database',
   database_subtitle: 'SQLite database with CRUD operations, search, and sorting',
   database_search_placeholder: 'Search notes...',
   database_sort_date_desc: 'Newest first',
@@ -193,7 +189,6 @@ export const en = {
   database_no_results: 'No notes match your search.',
 
   // Scanner
-  scanner_title: 'Scanner',
   scanner_subtitle: 'QR code and barcode scanning and generation',
   scanner_mode_generate: 'Generate',
   scanner_mode_scan: 'Scan',
@@ -208,7 +203,6 @@ export const en = {
   scanner_request_permission: 'Grant permission',
 
   // Calendar
-  calendar_title: 'Calendar',
   calendar_subtitle: 'Date range picker with disabled dates and selection validation',
   calendar_selected_range: 'Selected range',
   calendar_start_date: 'Start',
@@ -218,7 +212,6 @@ export const en = {
   calendar_disabled_in_range: 'Range contains disabled dates, selection reset',
 
   // Notifications
-  notifications_title: 'Notifications',
   notifications_subtitle: 'Local notifications with channels, permissions, and settings',
   notifications_permission_title: 'Permission',
   notifications_permission_granted: 'Notification permission granted',
