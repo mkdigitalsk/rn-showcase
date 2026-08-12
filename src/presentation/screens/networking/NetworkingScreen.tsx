@@ -36,11 +36,10 @@ export const NetworkingScreen = () => {
 
   const header = (
     <View>
-      <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
-        <View style={{ flex: 1 }}>
-          <TextBodyLargeNeutral80>{t('networking_subtitle')}</TextBodyLargeNeutral80>
-        </View>
+      <View>
+        <TextBodyLargeNeutral80>{t('networking_subtitle')}</TextBodyLargeNeutral80>
         <IconButton
+          style={{ alignSelf: 'flex-end' }}
           icon="refresh"
           iconColor={colors.primary}
           disabled={uiState.isLoading}
