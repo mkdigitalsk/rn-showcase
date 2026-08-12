@@ -9,7 +9,6 @@ export const sk: Record<StringKey, string> = {
   screen_home: 'Domov',
   screen_ui_components: 'UI Komponenty',
   screen_networking: 'Sieť',
-  networking_title: 'Poznámky na serveri',
   networking_subtitle: 'Ukážka práce so vzdialeným serverom — tieto poznámky žijú v API a sprevádzajú váš účet na každom zariadení.',
   networking_empty: 'Zatiaľ žiadne poznámky — pridajte ju vyššie',
   networking_note_title: 'Názov',
@@ -137,7 +136,6 @@ export const sk: Record<StringKey, string> = {
   language_sk: 'Slovenčina',
 
   // Storage
-  storage_title: 'Lokálne úložisko',
   storage_subtitle: 'Demonštrácia session vs perzistentného úložiska pomocou MMKV',
   storage_session_label: 'Session počítadlo',
   storage_session_hint: 'Resetuje sa pri zatvorení aplikácie alebo vyčistení session',
@@ -146,7 +144,6 @@ export const sk: Record<StringKey, string> = {
   storage_clear_session: 'Vyčistiť session',
 
   // Platform APIs
-  platform_apis_title: 'Platformové API',
   platform_apis_subtitle: 'Natívne integrácie a funkcie zariadenia',
   platform_apis_share_title: 'Zdieľanie',
   platform_apis_share_action: 'Zdieľať text',
@@ -180,7 +177,6 @@ export const sk: Record<StringKey, string> = {
   platform_apis_flashlight_not_available: 'Baterka nie je dostupná',
 
   // Database
-  database_title: 'Databáza',
   database_subtitle: 'SQLite databáza s CRUD operáciami, vyhľadávaním a triedením',
   database_search_placeholder: 'Hľadať poznámky...',
   database_sort_date_desc: 'Najnovšie',
@@ -195,7 +191,6 @@ export const sk: Record<StringKey, string> = {
   database_no_results: 'Žiadne poznámky nezodpovedajú vyhľadávaniu.',
 
   // Scanner
-  scanner_title: 'Skener',
   scanner_subtitle: 'Skenovanie a generovanie QR kódov a čiarových kódov',
   scanner_mode_generate: 'Generovať',
   scanner_mode_scan: 'Skenovať',
@@ -210,7 +205,6 @@ export const sk: Record<StringKey, string> = {
   scanner_request_permission: 'Povoliť prístup',
 
   // Calendar
-  calendar_title: 'Kalendár',
   calendar_subtitle: 'Výber rozsahu dátumov s deaktivovanými dňami a validáciou',
   calendar_selected_range: 'Vybraný rozsah',
   calendar_start_date: 'Začiatok',
@@ -220,7 +214,6 @@ export const sk: Record<StringKey, string> = {
   calendar_disabled_in_range: 'Rozsah obsahuje deaktivované dátumy, výber resetovaný',
 
   // Notifications
-  notifications_title: 'Notifikácie',
   notifications_subtitle: 'Lokálne notifikácie s kanálmi, povoleniami a nastaveniami',
   notifications_permission_title: 'Povolenie',
   notifications_permission_granted: 'Povolenie pre notifikácie udelené',
