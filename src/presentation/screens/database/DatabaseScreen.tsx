@@ -6,7 +6,7 @@ import { useDatabaseViewModel } from './useDatabaseViewModel';
 import { useAppColors } from '../../foundation/theme';
 import { useStrings } from '../../foundation/strings';
 import { Note, NoteSortOption } from '../../../domain/model/Note';
-import { AppCard, AppTextField, OutlinedButton, ContainedButton } from '../../components';
+import { AppCard, AppTextField, AppSearchField, OutlinedButton, ContainedButton } from '../../components';
 import { TextHeadlineMedium } from '../../components/text/headlineMedium/TextHeadlineMedium';
 import { TextBodyMediumNeutral80 } from '../../components/text/bodyMedium/TextBodyMedium';
 import { TextBodySmallNeutral80 } from '../../components/text/bodySmall/TextBodySmall';
@@ -138,12 +138,7 @@ const SearchAndSortRow = ({
   return (
     <View style={{ flexDirection: 'row', alignItems: 'center', gap: space2 }}>
       <View style={{ flex: 1 }}>
-        <AppTextField
-          value={query}
-          onChangeText={onQueryChange}
-          placeholder={placeholder}
-          left={<Icon name="magnify" size={20} color={colors.neutral40} />}
-        />
+        <AppSearchField value={query} onChangeText={onQueryChange} placeholder={placeholder} />
       </View>
       <Menu
         visible={menuVisible}
@@ -192,7 +187,7 @@ const AddNoteCard = ({
     <AppCard elevated>
       <AppTextField value={title} onChangeText={onTitleChange} placeholder={titlePlaceholder} />
       <ColumnSpacer2 />
-      <AppTextField value={content} onChangeText={onContentChange} placeholder={contentPlaceholder} multiline numberOfLines={3} />
+      <AppTextField value={content} onChangeText={onContentChange} placeholder={contentPlaceholder} />
       <ColumnSpacer4 />
       <ContainedButton text={submitText} onPress={onSubmit} />
     </AppCard>

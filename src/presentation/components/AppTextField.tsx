@@ -14,7 +14,7 @@ interface AppTextFieldProps {
   error?: boolean;
   multiline?: boolean;
   numberOfLines?: number;
-  left?: React.ReactNode;
+  leftIcon?: string;
   right?: React.ReactNode;
   showClearButton?: boolean;
   onClear?: () => void;
@@ -36,7 +36,7 @@ export const AppTextField: React.FC<AppTextFieldProps> = ({
   error = false,
   multiline = false,
   numberOfLines = 1,
-  left,
+  leftIcon,
   right,
   showClearButton = true,
   onClear,
@@ -71,7 +71,7 @@ export const AppTextField: React.FC<AppTextFieldProps> = ({
       error={error}
       multiline={multiline}
       numberOfLines={numberOfLines}
-      left={left}
+      left={leftIcon ? <TextInput.Icon icon={leftIcon} color={theme.colors.neutral40} /> : undefined}
       right={clearButton}
       style={style}
       secureTextEntry={secureTextEntry}
