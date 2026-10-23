@@ -19,5 +19,5 @@
     "emitDecoratorMetadata": true,
     "strictPropertyInitialization": false
   },
-  "exclude": ["node_modules", "**/Pods/**"]
+  "exclude": ["node_modules", "**/Pods/**", ".claude"]
 }
