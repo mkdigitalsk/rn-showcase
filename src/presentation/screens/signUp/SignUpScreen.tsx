@@ -129,9 +129,14 @@ export const SignUpScreen = () => {
 
         <AppTextButton text={t('sign_up_to_sign_in')} onPress={handleToSignIn} />
 
+        <ColumnSpacer4 />
+
         <TextBodySmallNeutral80>{t('sign_up_terms')}</TextBodySmallNeutral80>
         <AppTextButton text={t('sign_up_terms_link')} onPress={openTerms} />
 
+        <ColumnSpacer4 />
+
+        <TextBodySmallNeutral80>{t('sign_up_privacy_summary')}</TextBodySmallNeutral80>
         <AppTextButton text={t('sign_up_privacy')} onPress={openPrivacy} />
 
         <View style={{ height: space8 }} />

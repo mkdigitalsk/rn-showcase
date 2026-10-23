@@ -265,6 +265,8 @@ export const sk: Record<StringKey, string> = {
   sign_up_to_sign_in: 'Už máte účet? Prihláste sa',
   sign_up_terms: 'Vytvorením účtu uzatvárate s nami zmluvu o používaní aplikácie podľa podmienok používania.',
   sign_up_terms_link: 'Podmienky používania',
+  sign_up_privacy_summary:
+    'MK Digital s. r. o. zodpovedá za vaše údaje. Uchovávame váš email a podobu vášho hesla, ktorú nikto nedokáže prečítať. Potrebujeme ich na vytvorenie a vedenie vášho účtu v rámci našej zmluvy s vami. Ak váš účet nikto neotvorí 30 dní, zmažeme ho aj s poznámkami v ňom. Pod odkazom nižšie nájdete celé oznámenie vrátane vášho práva údaje vidieť, opraviť či vymazať.',
   sign_up_privacy: 'Ochrana osobných údajov',
   sign_up_email_error_empty: 'Email je povinný',
   sign_up_email_error_invalid: 'Neplatný formát emailu',

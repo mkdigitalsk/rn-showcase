@@ -263,6 +263,8 @@ export const en = {
   sign_up_to_sign_in: 'Already have an account? Sign In',
   sign_up_terms: 'By creating an account you enter into a contract with us to use the app on the terms of use.',
   sign_up_terms_link: 'Terms of use',
+  sign_up_privacy_summary:
+    'MK Digital s. r. o. is responsible for your data. We store your email and a form of your password that no one can read. We need them to create and run your account, as part of our contract with you. If nobody opens your account for 30 days, we delete it and the notes in it. The link below opens the full notice, including your right to see, correct or delete your data.',
   sign_up_privacy: 'Privacy',
   sign_up_email_error_empty: 'Email is required',
   sign_up_email_error_invalid: 'Invalid email format',
