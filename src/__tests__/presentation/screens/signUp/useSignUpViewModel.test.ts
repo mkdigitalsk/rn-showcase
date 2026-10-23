@@ -6,6 +6,7 @@ const mockCheckEmailExists = { execute: jest.fn().mockResolvedValue(false) };
 const mockSignUpUseCase = {
   execute: jest.fn().mockResolvedValue({ id: 1, email: 'john@example.com', password: 'Test123!', createdAt: 1234567890 }),
 };
+const mockOpenLinkUseCase = { execute: jest.fn().mockResolvedValue(undefined) };
 
 jest.mock('tsyringe', () => ({
   container: {
@@ -16,6 +17,9 @@ jest.mock('tsyringe', () => ({
       }
       if (key.includes('SignUpUseCase')) {
         return mockSignUpUseCase;
+      }
+      if (key.includes('OpenLinkUseCase')) {
+        return mockOpenLinkUseCase;
       }
       return {};
     }),
@@ -38,237 +42,259 @@ describe('useSignUpViewModel', () => {
     });
   });
 
-  // === Default State ===
+  describe('default state', () => {
+    it('default state has empty fields', () => {
+      const { result } = renderHook(() => useSignUpViewModel());
+      test({
+        whenAction: () => result.current.uiState,
+        then: state => {
+          expect(state.email).toBe('');
+          expect(state.password).toBe('');
+          expect(state.confirmPassword).toBe('');
+        },
+      });
+    });
 
-  it('default state has empty fields', () => {
-    const { result } = renderHook(() => useSignUpViewModel());
-    test({
-      whenAction: () => result.current.uiState,
-      then: state => {
-        expect(state.email).toBe('');
-        expect(state.password).toBe('');
-        expect(state.confirmPassword).toBe('');
-      },
+    it('default state has no errors', () => {
+      const { result } = renderHook(() => useSignUpViewModel());
+      test({
+        whenAction: () => result.current.uiState,
+        then: state => {
+          expect(state.emailError).toBeNull();
+          expect(state.passwordError).toBeNull();
+          expect(state.confirmPasswordError).toBeNull();
+        },
+      });
     });
   });
 
-  it('default state has no errors', () => {
-    const { result } = renderHook(() => useSignUpViewModel());
-    test({
-      whenAction: () => result.current.uiState,
-      then: state => {
-        expect(state.emailError).toBeNull();
-        expect(state.passwordError).toBeNull();
-        expect(state.confirmPasswordError).toBeNull();
-      },
+  describe('field changes', () => {
+    it('onEmailChange updates email and clears error', () => {
+      const { result } = renderHook(() => useSignUpViewModel());
+      act(() => result.current.signUp());
+      act(() => result.current.onEmailChange('test@example.com'));
+
+      test({
+        whenAction: () => result.current.uiState,
+        then: state => {
+          expect(state.email).toBe('test@example.com');
+          expect(state.emailError).toBeNull();
+        },
+      });
+    });
+
+    it('onPasswordChange updates password and clears error', () => {
+      const { result } = renderHook(() => useSignUpViewModel());
+      act(() => result.current.signUp());
+      act(() => result.current.onPasswordChange('Test123!'));
+
+      test({
+        whenAction: () => result.current.uiState,
+        then: state => {
+          expect(state.password).toBe('Test123!');
+          expect(state.passwordError).toBeNull();
+        },
+      });
+    });
+
+    it('onConfirmPasswordChange updates confirmPassword and clears error', () => {
+      const { result } = renderHook(() => useSignUpViewModel());
+      act(() => result.current.signUp());
+      act(() => result.current.onConfirmPasswordChange('Test123!'));
+
+      test({
+        whenAction: () => result.current.uiState,
+        then: state => {
+          expect(state.confirmPassword).toBe('Test123!');
+          expect(state.confirmPasswordError).toBeNull();
+        },
+      });
     });
   });
 
-  // === Field Changes ===
+  describe('sign-up validation — email', () => {
+    it('sign up with empty email shows empty error', () => {
+      const { result } = renderHook(() => useSignUpViewModel());
+      act(() => {
+        result.current.onPasswordChange('Test123!');
+        result.current.onConfirmPasswordChange('Test123!');
+      });
 
-  it('onEmailChange updates email and clears error', () => {
-    const { result } = renderHook(() => useSignUpViewModel());
-    act(() => result.current.signUp());
-    act(() => result.current.onEmailChange('test@example.com'));
+      act(() => result.current.signUp());
 
-    test({
-      whenAction: () => result.current.uiState,
-      then: state => {
-        expect(state.email).toBe('test@example.com');
-        expect(state.emailError).toBeNull();
-      },
+      test({
+        whenAction: () => result.current.uiState.emailError,
+        then: error => expect(error).toBe('empty'),
+      });
+    });
+
+    it('sign up with invalid email shows invalid_format error', () => {
+      const { result } = renderHook(() => useSignUpViewModel());
+      act(() => {
+        result.current.onEmailChange('invalid-email');
+        result.current.onPasswordChange('Test123!');
+        result.current.onConfirmPasswordChange('Test123!');
+      });
+
+      act(() => result.current.signUp());
+
+      test({
+        whenAction: () => result.current.uiState.emailError,
+        then: error => expect(error).toBe('invalid_format'),
+      });
     });
   });
 
-  it('onPasswordChange updates password and clears error', () => {
-    const { result } = renderHook(() => useSignUpViewModel());
-    act(() => result.current.signUp());
-    act(() => result.current.onPasswordChange('Test123!'));
+  describe('sign-up validation — password', () => {
+    it('sign up with empty password shows empty error', () => {
+      const { result } = renderHook(() => useSignUpViewModel());
+      act(() => {
+        result.current.onEmailChange('test@example.com');
+        result.current.onConfirmPasswordChange('Test123!');
+      });
 
-    test({
-      whenAction: () => result.current.uiState,
-      then: state => {
-        expect(state.password).toBe('Test123!');
-        expect(state.passwordError).toBeNull();
-      },
+      act(() => result.current.signUp());
+
+      test({
+        whenAction: () => result.current.uiState.passwordError,
+        then: error => expect(error).toBe('empty'),
+      });
+    });
+
+    it('sign up with short password shows too_short error', () => {
+      const { result } = renderHook(() => useSignUpViewModel());
+      act(() => {
+        result.current.onEmailChange('test@example.com');
+        result.current.onPasswordChange('Te1!');
+        result.current.onConfirmPasswordChange('Te1!');
+      });
+
+      act(() => result.current.signUp());
+
+      test({
+        whenAction: () => result.current.uiState.passwordError,
+        then: error => expect(error).toBe('too_short'),
+      });
+    });
+
+    it('sign up with weak password shows weak error', () => {
+      const { result } = renderHook(() => useSignUpViewModel());
+      act(() => {
+        result.current.onEmailChange('test@example.com');
+        result.current.onPasswordChange('testtest');
+        result.current.onConfirmPasswordChange('testtest');
+      });
+
+      act(() => result.current.signUp());
+
+      test({
+        whenAction: () => result.current.uiState.passwordError,
+        then: error => expect(error).toBe('weak'),
+      });
     });
   });
 
-  it('onConfirmPasswordChange updates confirmPassword and clears error', () => {
-    const { result } = renderHook(() => useSignUpViewModel());
-    act(() => result.current.signUp());
-    act(() => result.current.onConfirmPasswordChange('Test123!'));
+  describe('sign-up validation — confirm password', () => {
+    it('sign up with empty confirm password shows empty error', () => {
+      const { result } = renderHook(() => useSignUpViewModel());
+      act(() => {
+        result.current.onEmailChange('test@example.com');
+        result.current.onPasswordChange('Test123!');
+      });
 
-    test({
-      whenAction: () => result.current.uiState,
-      then: state => {
-        expect(state.confirmPassword).toBe('Test123!');
-        expect(state.confirmPasswordError).toBeNull();
-      },
+      act(() => result.current.signUp());
+
+      test({
+        whenAction: () => result.current.uiState.confirmPasswordError,
+        then: error => expect(error).toBe('empty'),
+      });
+    });
+
+    it('sign up with mismatched passwords shows mismatch error', () => {
+      const { result } = renderHook(() => useSignUpViewModel());
+      act(() => {
+        result.current.onEmailChange('test@example.com');
+        result.current.onPasswordChange('Test123!');
+        result.current.onConfirmPasswordChange('Different1!');
+      });
+
+      act(() => result.current.signUp());
+
+      test({
+        whenAction: () => result.current.uiState.confirmPasswordError,
+        then: error => expect(error).toBe('mismatch'),
+      });
     });
   });
 
-  // === Sign-up validation — Email ===
+  describe('successful sign-up', () => {
+    it('sign up with valid fields calls use cases and invokes callback', async () => {
+      const { result } = renderHook(() => useSignUpViewModel());
+      act(() => {
+        result.current.onEmailChange('john@example.com');
+        result.current.onPasswordChange('Test123!');
+        result.current.onConfirmPasswordChange('Test123!');
+      });
 
-  it('sign up with empty email shows empty error', () => {
-    const { result } = renderHook(() => useSignUpViewModel());
-    act(() => {
-      result.current.onPasswordChange('Test123!');
-      result.current.onConfirmPasswordChange('Test123!');
-    });
+      const onSignedUp = jest.fn();
+      act(() => result.current.signUp(onSignedUp));
 
-    act(() => result.current.signUp());
+      await waitFor(() => {
+        expect(onSignedUp).toHaveBeenCalled();
+      });
 
-    test({
-      whenAction: () => result.current.uiState.emailError,
-      then: error => expect(error).toBe('empty'),
-    });
-  });
-
-  it('sign up with invalid email shows invalid_format error', () => {
-    const { result } = renderHook(() => useSignUpViewModel());
-    act(() => {
-      result.current.onEmailChange('invalid-email');
-      result.current.onPasswordChange('Test123!');
-      result.current.onConfirmPasswordChange('Test123!');
-    });
-
-    act(() => result.current.signUp());
-
-    test({
-      whenAction: () => result.current.uiState.emailError,
-      then: error => expect(error).toBe('invalid_format'),
+      expect(mockCheckEmailExists.execute).toHaveBeenCalledWith('john@example.com');
+      expect(mockSignUpUseCase.execute).toHaveBeenCalledWith({
+        email: 'john@example.com',
+        password: 'Test123!',
+      });
+      expect(result.current.uiState.isLoading).toBe(false);
     });
   });
 
-  // === Sign-up validation — Password ===
+  describe('email already exists', () => {
+    it('sign up with existing email shows already_exists error', async () => {
+      mockCheckEmailExists.execute.mockResolvedValue(true);
 
-  it('sign up with empty password shows empty error', () => {
-    const { result } = renderHook(() => useSignUpViewModel());
-    act(() => {
-      result.current.onEmailChange('test@example.com');
-      result.current.onConfirmPasswordChange('Test123!');
-    });
+      const { result } = renderHook(() => useSignUpViewModel());
+      act(() => {
+        result.current.onEmailChange('existing@example.com');
+        result.current.onPasswordChange('Test123!');
+        result.current.onConfirmPasswordChange('Test123!');
+      });
 
-    act(() => result.current.signUp());
+      const onSignedUp = jest.fn();
+      act(() => result.current.signUp(onSignedUp));
 
-    test({
-      whenAction: () => result.current.uiState.passwordError,
-      then: error => expect(error).toBe('empty'),
-    });
-  });
+      await waitFor(() => {
+        expect(result.current.uiState.emailError).toBe('already_exists');
+      });
 
-  it('sign up with short password shows too_short error', () => {
-    const { result } = renderHook(() => useSignUpViewModel());
-    act(() => {
-      result.current.onEmailChange('test@example.com');
-      result.current.onPasswordChange('Te1!');
-      result.current.onConfirmPasswordChange('Te1!');
-    });
-
-    act(() => result.current.signUp());
-
-    test({
-      whenAction: () => result.current.uiState.passwordError,
-      then: error => expect(error).toBe('too_short'),
+      expect(onSignedUp).not.toHaveBeenCalled();
+      expect(mockSignUpUseCase.execute).not.toHaveBeenCalled();
+      expect(result.current.uiState.isLoading).toBe(false);
     });
   });
 
-  it('sign up with weak password shows weak error', () => {
-    const { result } = renderHook(() => useSignUpViewModel());
-    act(() => {
-      result.current.onEmailChange('test@example.com');
-      result.current.onPasswordChange('testtest');
-      result.current.onConfirmPasswordChange('testtest');
+  describe('legal pages', () => {
+    it('openTerms opens the terms of use the sign-up concludes a contract on', async () => {
+      const { result } = renderHook(() => useSignUpViewModel());
+
+      act(() => result.current.openTerms());
+
+      await waitFor(() => {
+        expect(mockOpenLinkUseCase.execute).toHaveBeenCalledWith('https://showcase.mkdigital.sk/terms');
+      });
     });
 
-    act(() => result.current.signUp());
+    it('openPrivacy opens the privacy notice', async () => {
+      const { result } = renderHook(() => useSignUpViewModel());
 
-    test({
-      whenAction: () => result.current.uiState.passwordError,
-      then: error => expect(error).toBe('weak'),
+      act(() => result.current.openPrivacy());
+
+      await waitFor(() => {
+        expect(mockOpenLinkUseCase.execute).toHaveBeenCalledWith('https://showcase.mkdigital.sk/privacy');
+      });
     });
-  });
-
-  // === Sign-up validation — Confirm Password ===
-
-  it('sign up with empty confirm password shows empty error', () => {
-    const { result } = renderHook(() => useSignUpViewModel());
-    act(() => {
-      result.current.onEmailChange('test@example.com');
-      result.current.onPasswordChange('Test123!');
-    });
-
-    act(() => result.current.signUp());
-
-    test({
-      whenAction: () => result.current.uiState.confirmPasswordError,
-      then: error => expect(error).toBe('empty'),
-    });
-  });
-
-  it('sign up with mismatched passwords shows mismatch error', () => {
-    const { result } = renderHook(() => useSignUpViewModel());
-    act(() => {
-      result.current.onEmailChange('test@example.com');
-      result.current.onPasswordChange('Test123!');
-      result.current.onConfirmPasswordChange('Different1!');
-    });
-
-    act(() => result.current.signUp());
-
-    test({
-      whenAction: () => result.current.uiState.confirmPasswordError,
-      then: error => expect(error).toBe('mismatch'),
-    });
-  });
-
-  // === Successful sign-up ===
-
-  it('sign up with valid fields calls use cases and invokes callback', async () => {
-    const { result } = renderHook(() => useSignUpViewModel());
-    act(() => {
-      result.current.onEmailChange('john@example.com');
-      result.current.onPasswordChange('Test123!');
-      result.current.onConfirmPasswordChange('Test123!');
-    });
-
-    const onSignedUp = jest.fn();
-    act(() => result.current.signUp(onSignedUp));
-
-    await waitFor(() => {
-      expect(onSignedUp).toHaveBeenCalled();
-    });
-
-    expect(mockCheckEmailExists.execute).toHaveBeenCalledWith('john@example.com');
-    expect(mockSignUpUseCase.execute).toHaveBeenCalledWith({
-      email: 'john@example.com',
-      password: 'Test123!',
-    });
-    expect(result.current.uiState.isLoading).toBe(false);
-  });
-
-  // === Email Already Exists ===
-
-  it('sign up with existing email shows already_exists error', async () => {
-    mockCheckEmailExists.execute.mockResolvedValue(true);
-
-    const { result } = renderHook(() => useSignUpViewModel());
-    act(() => {
-      result.current.onEmailChange('existing@example.com');
-      result.current.onPasswordChange('Test123!');
-      result.current.onConfirmPasswordChange('Test123!');
-    });
-
-    const onSignedUp = jest.fn();
-    act(() => result.current.signUp(onSignedUp));
-
-    await waitFor(() => {
-      expect(result.current.uiState.emailError).toBe('already_exists');
-    });
-
-    expect(onSignedUp).not.toHaveBeenCalled();
-    expect(mockSignUpUseCase.execute).not.toHaveBeenCalled();
-    expect(result.current.uiState.isLoading).toBe(false);
   });
 });

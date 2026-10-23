@@ -61,5 +61,12 @@ target 'rnshowcase' do
       :mac_catalyst_enabled => false,
       # :ccache_enabled => true
     )
+    # Xcode 26 refuses a deployment target below 15.0, and several pods' resource bundles still declare 9.0–12.4
+    # — every pod target takes the app's own minimum.
+    installer.pods_project.targets.each do |target|
+      target.build_configurations.each do |build_configuration|
+        build_configuration.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = min_ios_version_supported
+      end
+    end
   end
 end

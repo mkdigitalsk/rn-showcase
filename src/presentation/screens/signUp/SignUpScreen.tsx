@@ -10,6 +10,7 @@ import { RootStackParamList } from '../../navigation/RootStackNavigator';
 import { AppCard, AppTextField, ContainedButton, AppTextButton, ColumnSpacer2, ColumnSpacer4 } from '../../components';
 import { TextHeadlineMedium } from '../../components/text/headlineMedium/TextHeadlineMedium';
 import { TextBodyMediumError, TextBodyMediumNeutral80 } from '../../components/text/bodyMedium/TextBodyMedium';
+import { TextBodySmallNeutral80 } from '../../components/text/bodySmall/TextBodySmall';
 import { space4, space8 } from '../../foundation/dimensions';
 
 type SignUpNavigationProp = NativeStackNavigationProp<RootStackParamList>;
@@ -18,7 +19,7 @@ export const SignUpScreen = () => {
   const colors = useAppColors();
   const { t } = useStrings();
   const navigation = useNavigation<SignUpNavigationProp>();
-  const { uiState, onEmailChange, onPasswordChange, onConfirmPasswordChange, signUp, openPrivacy } = useSignUpViewModel();
+  const { uiState, onEmailChange, onPasswordChange, onConfirmPasswordChange, signUp, openPrivacy, openTerms } = useSignUpViewModel();
 
   const handleSignUp = useCallback(() => {
     signUp(() => navigation.replace('Main'));
@@ -127,6 +128,9 @@ export const SignUpScreen = () => {
         <ColumnSpacer4 />
 
         <AppTextButton text={t('sign_up_to_sign_in')} onPress={handleToSignIn} />
+
+        <TextBodySmallNeutral80>{t('sign_up_terms')}</TextBodySmallNeutral80>
+        <AppTextButton text={t('sign_up_terms_link')} onPress={openTerms} />
 
         <AppTextButton text={t('sign_up_privacy')} onPress={openPrivacy} />
 

@@ -11,6 +11,7 @@ import { EmailAlreadyExistsException } from '../../../domain/exceptions/AuthExce
 import { TYPES } from '../../../app/diTypes';
 
 const PRIVACY_URL = 'https://showcase.mkdigital.sk/privacy';
+const TERMS_URL = 'https://showcase.mkdigital.sk/terms';
 
 export const useSignUpViewModel = () => {
   const [uiState, setUiState] = useState<SignUpUiState>(initialSignUpUiState);
@@ -115,12 +116,17 @@ export const useSignUpViewModel = () => {
     execute({ action: () => openLinkUseCase.execute(PRIVACY_URL) });
   }, [openLinkUseCase]);
 
+  const openTerms = useCallback(() => {
+    execute({ action: () => openLinkUseCase.execute(TERMS_URL) });
+  }, [openLinkUseCase]);
+
   return {
     uiState,
     onEmailChange,
     onPasswordChange,
     onConfirmPasswordChange,
     openPrivacy,
+    openTerms,
     signUp,
   };
 };
