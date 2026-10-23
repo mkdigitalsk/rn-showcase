@@ -138,6 +138,9 @@ npx react-native run-ios
 
 # Run tests
 npx jest
+
+# Regenerate the API types from ../kmp-showcase's spec
+npm run types:api
 ```
 
 ---
