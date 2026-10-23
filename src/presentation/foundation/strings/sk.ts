@@ -106,7 +106,7 @@ export const sk: Record<StringKey, string> = {
   settings_language: 'Jazyk',
   settings_profile: 'Môj profil',
   settings_profile_photo: 'Profilová fotka',
-  settings_profile_photo_hint: 'Klepni pre zmenu',
+  settings_profile_photo_hint: 'Klepnite pre zmenu',
   imagepicker_title: 'Vybrať zdroj obrázka',
   imagepicker_camera: 'Fotoaparát',
   imagepicker_gallery: 'Galéria',
