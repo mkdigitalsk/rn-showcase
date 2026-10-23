@@ -6,6 +6,7 @@ const mockCheckEmailExists = { execute: jest.fn().mockResolvedValue(false) };
 const mockSignUpUseCase = {
   execute: jest.fn().mockResolvedValue({ id: 1, email: 'john@example.com', password: 'Test123!', createdAt: 1234567890 }),
 };
+const mockOpenLinkUseCase = { execute: jest.fn().mockResolvedValue(undefined) };
 
 jest.mock('tsyringe', () => ({
   container: {
@@ -16,6 +17,9 @@ jest.mock('tsyringe', () => ({
       }
       if (key.includes('SignUpUseCase')) {
         return mockSignUpUseCase;
+      }
+      if (key.includes('OpenLinkUseCase')) {
+        return mockOpenLinkUseCase;
       }
       return {};
     }),
@@ -270,5 +274,27 @@ describe('useSignUpViewModel', () => {
     expect(onSignedUp).not.toHaveBeenCalled();
     expect(mockSignUpUseCase.execute).not.toHaveBeenCalled();
     expect(result.current.uiState.isLoading).toBe(false);
+  });
+
+  // === Legal pages ===
+
+  it('openTerms opens the terms of use the sign-up concludes a contract on', async () => {
+    const { result } = renderHook(() => useSignUpViewModel());
+
+    act(() => result.current.openTerms());
+
+    await waitFor(() => {
+      expect(mockOpenLinkUseCase.execute).toHaveBeenCalledWith('https://showcase.mkdigital.sk/terms');
+    });
+  });
+
+  it('openPrivacy opens the privacy notice', async () => {
+    const { result } = renderHook(() => useSignUpViewModel());
+
+    act(() => result.current.openPrivacy());
+
+    await waitFor(() => {
+      expect(mockOpenLinkUseCase.execute).toHaveBeenCalledWith('https://showcase.mkdigital.sk/privacy');
+    });
   });
 });
