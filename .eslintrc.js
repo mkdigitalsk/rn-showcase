@@ -1,6 +1,7 @@
 module.exports = {
   root: true,
   extends: '@react-native',
+  ignorePatterns: ['src/data/dto/generated/'],
   overrides: [
     {
       files: ['jest.setup.js', 'jest.config.js', '**/*.test.{ts,tsx,js,jsx}', 'src/__tests__/**'],

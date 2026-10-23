@@ -1,4 +1,3 @@
-export interface SignUpRequestDTO {
-  email: string;
-  password: string;
-}
+import type { components } from '../generated/schema';
+
+export type SignUpRequestDTO = components['schemas']['SignUpRequestDTO'];

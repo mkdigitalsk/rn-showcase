@@ -1,8 +1,3 @@
-export interface RemoteNoteDTO {
-  id: number;
-  title: string;
-  content: string;
-  createdAt: number;
-  updatedAt: number;
-  etag: string;
-}
+import type { components } from './generated/schema';
+
+export type RemoteNoteDTO = components['schemas']['NoteResponseDTO'];

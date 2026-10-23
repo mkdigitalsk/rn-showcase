@@ -11,7 +11,9 @@
     "start": "react-native start",
     "test": "jest",
     "typecheck": "tsc --noEmit",
-    "test:ci": "jest src/__tests__ --no-coverage"
+    "test:ci": "jest src/__tests__ --no-coverage",
+    "types:api": "spec=\"$(./scripts/api-spec.sh)\" && openapi-typescript \"$spec\" --output src/data/dto/generated/schema.d.ts",
+    "types:check": "npm run types:api && git diff --exit-code -- src/data/dto/generated/schema.d.ts"
   },
   "dependencies": {
     "@babel/plugin-proposal-decorators": "^7.25.9",
@@ -72,6 +74,7 @@
     "babel-plugin-transform-typescript-metadata": "^0.4.0",
     "eslint": "^8.19.0",
     "jest": "^29.7.0",
+    "openapi-typescript": "^7.13.0",
     "prettier": "2.8.8",
     "react-test-renderer": "19.2.3",
     "ts-jest": "^29.4.11",
