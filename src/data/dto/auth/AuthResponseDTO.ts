@@ -1,12 +1,3 @@
-export interface AuthUserDTO {
-  id: number;
-  email: string;
-  themeMode: string;
-  locale: string;
-  demo: boolean;
-}
+import type { components } from '../generated/schema';
 
-export interface AuthResponseDTO {
-  token: string;
-  user: AuthUserDTO;
-}
+export type AuthResponseDTO = components['schemas']['AuthResponseDTO'];
