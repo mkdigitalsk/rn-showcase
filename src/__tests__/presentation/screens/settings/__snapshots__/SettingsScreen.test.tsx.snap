@@ -1548,7 +1548,7 @@ exports[`SettingsScreen renders every section 1`] = `
                               undefined,
                               false,
                               {
-                                "color": "#FF1A1A",
+                                "color": "#DE0000",
                                 "fontFamily": "System",
                                 "fontSize": 14,
                                 "fontWeight": "500",
