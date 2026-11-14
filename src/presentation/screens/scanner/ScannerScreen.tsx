@@ -1,8 +1,9 @@
-import React, { useCallback } from 'react';
+import React from 'react';
 import { View, ScrollView, StyleSheet } from 'react-native';
-import { Camera, useCameraDevice, useCameraPermission, useCodeScanner } from 'react-native-vision-camera';
+import { Camera, useCameraDevice, useCameraPermission } from 'react-native-vision-camera';
 import QRCode from 'react-native-qrcode-svg';
 import { useScannerViewModel } from './useScannerViewModel';
+import { useCodeScannerOutput } from './useCodeScannerOutput';
 import { ScannerMode, CodeFormat } from './ScannerUiState';
 import { useAppColors } from '../../foundation/theme';
 import { useStrings } from '../../foundation/strings';
@@ -77,18 +78,7 @@ const ScanSection = ({
   const { hasPermission, requestPermission } = useCameraPermission();
   const device = useCameraDevice('back');
 
-  const codeScanner = useCodeScanner({
-    codeTypes: ['qr', 'ean-13', 'ean-8', 'code-128', 'code-39'],
-    onCodeScanned: useCallback(
-      codes => {
-        const value = codes[0]?.value;
-        if (value) {
-          onCodeScan(value);
-        }
-      },
-      [onCodeScan]
-    ),
-  });
+  const codeOutput = useCodeScannerOutput(onCodeScan);
 
   if (!hasPermission) {
     return (
@@ -111,7 +101,7 @@ const ScanSection = ({
   return (
     <>
       <View style={[styles.cameraContainer, { borderColor: colors.outline }]}>
-        <Camera style={StyleSheet.absoluteFill} device={device} isActive={true} codeScanner={codeScanner} />
+        <Camera style={StyleSheet.absoluteFill} device={device} isActive={true} outputs={[codeOutput]} />
       </View>
       {scannedResult && (
         <>

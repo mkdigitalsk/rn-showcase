@@ -43,8 +43,8 @@ describe('useSignUpViewModel', () => {
   });
 
   describe('default state', () => {
-    it('default state has empty fields', () => {
-      const { result } = renderHook(() => useSignUpViewModel());
+    it('default state has empty fields', async () => {
+      const { result } = await renderHook(() => useSignUpViewModel());
       test({
         whenAction: () => result.current.uiState,
         then: state => {
@@ -55,8 +55,8 @@ describe('useSignUpViewModel', () => {
       });
     });
 
-    it('default state has no errors', () => {
-      const { result } = renderHook(() => useSignUpViewModel());
+    it('default state has no errors', async () => {
+      const { result } = await renderHook(() => useSignUpViewModel());
       test({
         whenAction: () => result.current.uiState,
         then: state => {
@@ -69,10 +69,10 @@ describe('useSignUpViewModel', () => {
   });
 
   describe('field changes', () => {
-    it('onEmailChange updates email and clears error', () => {
-      const { result } = renderHook(() => useSignUpViewModel());
-      act(() => result.current.signUp());
-      act(() => result.current.onEmailChange('test@example.com'));
+    it('onEmailChange updates email and clears error', async () => {
+      const { result } = await renderHook(() => useSignUpViewModel());
+      await act(() => result.current.signUp());
+      await act(() => result.current.onEmailChange('test@example.com'));
 
       test({
         whenAction: () => result.current.uiState,
@@ -83,10 +83,10 @@ describe('useSignUpViewModel', () => {
       });
     });
 
-    it('onPasswordChange updates password and clears error', () => {
-      const { result } = renderHook(() => useSignUpViewModel());
-      act(() => result.current.signUp());
-      act(() => result.current.onPasswordChange('Test123!'));
+    it('onPasswordChange updates password and clears error', async () => {
+      const { result } = await renderHook(() => useSignUpViewModel());
+      await act(() => result.current.signUp());
+      await act(() => result.current.onPasswordChange('Test123!'));
 
       test({
         whenAction: () => result.current.uiState,
@@ -97,10 +97,10 @@ describe('useSignUpViewModel', () => {
       });
     });
 
-    it('onConfirmPasswordChange updates confirmPassword and clears error', () => {
-      const { result } = renderHook(() => useSignUpViewModel());
-      act(() => result.current.signUp());
-      act(() => result.current.onConfirmPasswordChange('Test123!'));
+    it('onConfirmPasswordChange updates confirmPassword and clears error', async () => {
+      const { result } = await renderHook(() => useSignUpViewModel());
+      await act(() => result.current.signUp());
+      await act(() => result.current.onConfirmPasswordChange('Test123!'));
 
       test({
         whenAction: () => result.current.uiState,
@@ -113,14 +113,14 @@ describe('useSignUpViewModel', () => {
   });
 
   describe('sign-up validation — email', () => {
-    it('sign up with empty email shows empty error', () => {
-      const { result } = renderHook(() => useSignUpViewModel());
-      act(() => {
+    it('sign up with empty email shows empty error', async () => {
+      const { result } = await renderHook(() => useSignUpViewModel());
+      await act(() => {
         result.current.onPasswordChange('Test123!');
         result.current.onConfirmPasswordChange('Test123!');
       });
 
-      act(() => result.current.signUp());
+      await act(() => result.current.signUp());
 
       test({
         whenAction: () => result.current.uiState.emailError,
@@ -128,15 +128,15 @@ describe('useSignUpViewModel', () => {
       });
     });
 
-    it('sign up with invalid email shows invalid_format error', () => {
-      const { result } = renderHook(() => useSignUpViewModel());
-      act(() => {
+    it('sign up with invalid email shows invalid_format error', async () => {
+      const { result } = await renderHook(() => useSignUpViewModel());
+      await act(() => {
         result.current.onEmailChange('invalid-email');
         result.current.onPasswordChange('Test123!');
         result.current.onConfirmPasswordChange('Test123!');
       });
 
-      act(() => result.current.signUp());
+      await act(() => result.current.signUp());
 
       test({
         whenAction: () => result.current.uiState.emailError,
@@ -146,14 +146,14 @@ describe('useSignUpViewModel', () => {
   });
 
   describe('sign-up validation — password', () => {
-    it('sign up with empty password shows empty error', () => {
-      const { result } = renderHook(() => useSignUpViewModel());
-      act(() => {
+    it('sign up with empty password shows empty error', async () => {
+      const { result } = await renderHook(() => useSignUpViewModel());
+      await act(() => {
         result.current.onEmailChange('test@example.com');
         result.current.onConfirmPasswordChange('Test123!');
       });
 
-      act(() => result.current.signUp());
+      await act(() => result.current.signUp());
 
       test({
         whenAction: () => result.current.uiState.passwordError,
@@ -161,15 +161,15 @@ describe('useSignUpViewModel', () => {
       });
     });
 
-    it('sign up with short password shows too_short error', () => {
-      const { result } = renderHook(() => useSignUpViewModel());
-      act(() => {
+    it('sign up with short password shows too_short error', async () => {
+      const { result } = await renderHook(() => useSignUpViewModel());
+      await act(() => {
         result.current.onEmailChange('test@example.com');
         result.current.onPasswordChange('Te1!');
         result.current.onConfirmPasswordChange('Te1!');
       });
 
-      act(() => result.current.signUp());
+      await act(() => result.current.signUp());
 
       test({
         whenAction: () => result.current.uiState.passwordError,
@@ -177,15 +177,15 @@ describe('useSignUpViewModel', () => {
       });
     });
 
-    it('sign up with weak password shows weak error', () => {
-      const { result } = renderHook(() => useSignUpViewModel());
-      act(() => {
+    it('sign up with weak password shows weak error', async () => {
+      const { result } = await renderHook(() => useSignUpViewModel());
+      await act(() => {
         result.current.onEmailChange('test@example.com');
         result.current.onPasswordChange('testtest');
         result.current.onConfirmPasswordChange('testtest');
       });
 
-      act(() => result.current.signUp());
+      await act(() => result.current.signUp());
 
       test({
         whenAction: () => result.current.uiState.passwordError,
@@ -195,14 +195,14 @@ describe('useSignUpViewModel', () => {
   });
 
   describe('sign-up validation — confirm password', () => {
-    it('sign up with empty confirm password shows empty error', () => {
-      const { result } = renderHook(() => useSignUpViewModel());
-      act(() => {
+    it('sign up with empty confirm password shows empty error', async () => {
+      const { result } = await renderHook(() => useSignUpViewModel());
+      await act(() => {
         result.current.onEmailChange('test@example.com');
         result.current.onPasswordChange('Test123!');
       });
 
-      act(() => result.current.signUp());
+      await act(() => result.current.signUp());
 
       test({
         whenAction: () => result.current.uiState.confirmPasswordError,
@@ -210,15 +210,15 @@ describe('useSignUpViewModel', () => {
       });
     });
 
-    it('sign up with mismatched passwords shows mismatch error', () => {
-      const { result } = renderHook(() => useSignUpViewModel());
-      act(() => {
+    it('sign up with mismatched passwords shows mismatch error', async () => {
+      const { result } = await renderHook(() => useSignUpViewModel());
+      await act(() => {
         result.current.onEmailChange('test@example.com');
         result.current.onPasswordChange('Test123!');
         result.current.onConfirmPasswordChange('Different1!');
       });
 
-      act(() => result.current.signUp());
+      await act(() => result.current.signUp());
 
       test({
         whenAction: () => result.current.uiState.confirmPasswordError,
@@ -229,15 +229,15 @@ describe('useSignUpViewModel', () => {
 
   describe('successful sign-up', () => {
     it('sign up with valid fields calls use cases and invokes callback', async () => {
-      const { result } = renderHook(() => useSignUpViewModel());
-      act(() => {
+      const { result } = await renderHook(() => useSignUpViewModel());
+      await act(() => {
         result.current.onEmailChange('john@example.com');
         result.current.onPasswordChange('Test123!');
         result.current.onConfirmPasswordChange('Test123!');
       });
 
       const onSignedUp = jest.fn();
-      act(() => result.current.signUp(onSignedUp));
+      await act(() => result.current.signUp(onSignedUp));
 
       await waitFor(() => {
         expect(onSignedUp).toHaveBeenCalled();
@@ -256,15 +256,15 @@ describe('useSignUpViewModel', () => {
     it('sign up with existing email shows already_exists error', async () => {
       mockCheckEmailExists.execute.mockResolvedValue(true);
 
-      const { result } = renderHook(() => useSignUpViewModel());
-      act(() => {
+      const { result } = await renderHook(() => useSignUpViewModel());
+      await act(() => {
         result.current.onEmailChange('existing@example.com');
         result.current.onPasswordChange('Test123!');
         result.current.onConfirmPasswordChange('Test123!');
       });
 
       const onSignedUp = jest.fn();
-      act(() => result.current.signUp(onSignedUp));
+      await act(() => result.current.signUp(onSignedUp));
 
       await waitFor(() => {
         expect(result.current.uiState.emailError).toBe('already_exists');
@@ -278,9 +278,9 @@ describe('useSignUpViewModel', () => {
 
   describe('legal pages', () => {
     it('openTerms opens the terms of use the sign-up concludes a contract on', async () => {
-      const { result } = renderHook(() => useSignUpViewModel());
+      const { result } = await renderHook(() => useSignUpViewModel());
 
-      act(() => result.current.openTerms());
+      await act(() => result.current.openTerms());
 
       await waitFor(() => {
         expect(mockOpenLinkUseCase.execute).toHaveBeenCalledWith('https://showcase.mkdigital.sk/terms');
@@ -288,9 +288,9 @@ describe('useSignUpViewModel', () => {
     });
 
     it('openPrivacy opens the privacy notice', async () => {
-      const { result } = renderHook(() => useSignUpViewModel());
+      const { result } = await renderHook(() => useSignUpViewModel());
 
-      act(() => result.current.openPrivacy());
+      await act(() => result.current.openPrivacy());
 
       await waitFor(() => {
         expect(mockOpenLinkUseCase.execute).toHaveBeenCalledWith('https://showcase.mkdigital.sk/privacy');

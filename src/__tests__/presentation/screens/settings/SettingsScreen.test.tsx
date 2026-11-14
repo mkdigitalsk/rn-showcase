@@ -39,31 +39,31 @@ describe('SettingsScreen', () => {
     mockIsDemoAccount = false;
   });
 
-  it('renders every section', () => {
-    const { toJSON } = renderScreen(<SettingsScreen />);
+  it('renders every section', async () => {
+    const { toJSON } = await renderScreen(<SettingsScreen />);
     expect(toJSON()).toMatchSnapshot();
   });
 
-  it('offers a normal account the delete control', () => {
-    const { queryByText } = renderScreen(<SettingsScreen />);
+  it('offers a normal account the delete control', async () => {
+    const { queryByText } = await renderScreen(<SettingsScreen />);
 
     expect(queryByText('settings_delete_account')).not.toBeNull();
     expect(queryByText('settings_delete_account_demo')).toBeNull();
   });
 
-  it('tells a demo account why instead of offering the delete control', () => {
+  it('tells a demo account why instead of offering the delete control', async () => {
     mockIsDemoAccount = true;
 
-    const { queryByText } = renderScreen(<SettingsScreen />);
+    const { queryByText } = await renderScreen(<SettingsScreen />);
 
     expect(queryByText('settings_delete_account')).toBeNull();
     expect(queryByText('settings_delete_account_demo')).not.toBeNull();
   });
 
-  it('leaves sign out alone on a demo account', () => {
+  it('leaves sign out alone on a demo account', async () => {
     mockIsDemoAccount = true;
 
-    const { queryByText } = renderScreen(<SettingsScreen />);
+    const { queryByText } = await renderScreen(<SettingsScreen />);
 
     expect(queryByText('settings_sign_out')).not.toBeNull();
   });

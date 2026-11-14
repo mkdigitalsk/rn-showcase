@@ -57,7 +57,7 @@ describe('useSettingsViewModel', () => {
   it('carries the demo flag the server sent into the state the screen reads', async () => {
     mockIsDemoAccount.execute.mockResolvedValue(true);
 
-    const { result } = renderHook(() => useSettingsViewModel(), { wrapper });
+    const { result } = await renderHook(() => useSettingsViewModel(), { wrapper });
 
     await waitFor(() => expect(result.current.uiState.isDemoAccount).toBe(true));
   });
@@ -68,7 +68,7 @@ describe('useSettingsViewModel', () => {
       order.push('delete');
     });
 
-    const { result } = renderHook(() => useSettingsViewModel(), { wrapper });
+    const { result } = await renderHook(() => useSettingsViewModel(), { wrapper });
 
     await act(async () => {
       result.current.confirmDeleteAccount(() => order.push('navigate'));
@@ -82,7 +82,7 @@ describe('useSettingsViewModel', () => {
     mockDeleteAccount.execute.mockRejectedValue(new ApiException(SERVER_ERROR, 'Request failed', 'error_server'));
     const onDeleteSuccess = jest.fn();
 
-    const { result } = renderHook(() => useSettingsViewModel(), { wrapper });
+    const { result } = await renderHook(() => useSettingsViewModel(), { wrapper });
 
     await act(async () => {
       result.current.confirmDeleteAccount(onDeleteSuccess);
@@ -96,7 +96,7 @@ describe('useSettingsViewModel', () => {
   it('ignores a second confirm while the first is in flight', async () => {
     mockDeleteAccount.execute.mockReturnValue(new Promise(() => {}));
 
-    const { result } = renderHook(() => useSettingsViewModel(), { wrapper });
+    const { result } = await renderHook(() => useSettingsViewModel(), { wrapper });
 
     await act(async () => {
       result.current.confirmDeleteAccount();
