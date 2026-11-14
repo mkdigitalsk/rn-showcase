@@ -3,8 +3,8 @@
 A production-ready React Native demo app showcasing modern mobile development with MVVM + Clean Architecture, TypeScript, and native platform integrations.
 
 [![CI](https://github.com/mkdigitalsk/rn-showcase/actions/workflows/ci.yml/badge.svg)](https://github.com/mkdigitalsk/rn-showcase/actions/workflows/ci.yml)
-[![React Native](https://img.shields.io/badge/React_Native-0.76-61DAFB.svg?logo=react&logoColor=white)](https://reactnative.dev)
-[![TypeScript](https://img.shields.io/badge/TypeScript-5.0-3178C6.svg?logo=typescript&logoColor=white)](https://www.typescriptlang.org)
+[![React Native](https://img.shields.io/badge/React_Native-61DAFB.svg?logo=react&logoColor=white)](https://reactnative.dev)
+[![TypeScript](https://img.shields.io/badge/TypeScript-3178C6.svg?logo=typescript&logoColor=white)](https://www.typescriptlang.org)
 ![Android](https://img.shields.io/badge/Android-26-3DDC84.svg?logo=android&logoColor=white)
 ![iOS](https://img.shields.io/badge/iOS-15+-000000.svg?logo=apple&logoColor=white)
 

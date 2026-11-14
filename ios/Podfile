@@ -14,6 +14,16 @@ use_modular_headers!
 # https://rnfirebase.io/ios-spm.
 use_frameworks! :linkage => :dynamic
 
+# A dynamic framework links on its own, and these pods' podspecs leave out the two frameworks their UTType calls
+# need — the app's static link used to bring them.
+def link_uttype_frameworks(installer)
+  installer.pods_project.targets.select { |target| ['react-native-image-picker', 'RNCClipboard'].include?(target.name) }.each do |target|
+    target.build_configurations.each do |build_configuration|
+      build_configuration.build_settings['OTHER_LDFLAGS'] = ['$(inherited)', '-framework', 'MobileCoreServices', '-framework', 'UniformTypeIdentifiers']
+    end
+  end
+end
+
 target 'rnshowcase' do
   config = use_native_modules!
 
@@ -66,12 +76,6 @@ target 'rnshowcase' do
         build_configuration.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = min_ios_version_supported
       end
     end
-    # A dynamic framework links on its own, and these pods' podspecs leave out the two frameworks their UTType calls
-    # need — the app's static link used to bring them.
-    installer.pods_project.targets.select { |target| ['react-native-image-picker', 'RNCClipboard'].include?(target.name) }.each do |target|
-      target.build_configurations.each do |build_configuration|
-        build_configuration.build_settings['OTHER_LDFLAGS'] = ['$(inherited)', '-framework', 'MobileCoreServices', '-framework', 'UniformTypeIdentifiers']
-      end
-    end
+    link_uttype_frameworks(installer)
   end
 end

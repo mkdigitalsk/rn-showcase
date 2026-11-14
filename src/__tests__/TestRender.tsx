@@ -10,8 +10,8 @@ const IPHONE_17_PRO_METRICS = {
   insets: { top: 62, left: 0, right: 0, bottom: 34 },
 };
 
-export const renderScreen = async (ui: ReactElement) =>
-  await render(
+export const renderScreen = (ui: ReactElement) =>
+  render(
     <StringsProvider>
       <SafeAreaProvider initialMetrics={IPHONE_17_PRO_METRICS}>
         <ThemeProvider>
