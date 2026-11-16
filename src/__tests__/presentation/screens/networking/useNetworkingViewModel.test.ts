@@ -48,14 +48,14 @@ describe('useNetworkingViewModel', () => {
   });
 
   it('loads the notes the account owns', async () => {
-    const { result } = renderHook(() => useNetworkingViewModel());
+    const { result } = await renderHook(() => useNetworkingViewModel());
 
     await waitFor(() => expect(result.current.uiState.notes).toEqual([milk]));
     expect(result.current.uiState.isLoading).toBe(false);
   });
 
   it('sends the tag it read when saving an edit', async () => {
-    const { result } = renderHook(() => useNetworkingViewModel());
+    const { result } = await renderHook(() => useNetworkingViewModel());
     await waitFor(() => expect(result.current.uiState.notes).toHaveLength(1));
 
     await act(async () => {
@@ -74,7 +74,7 @@ describe('useNetworkingViewModel', () => {
     const theirs = { ...milk, title: 'Someone else won', etag: '"7"' };
     mockUpdateNote.execute.mockRejectedValueOnce(new NoteConflictException(theirs));
 
-    const { result } = renderHook(() => useNetworkingViewModel());
+    const { result } = await renderHook(() => useNetworkingViewModel());
     await waitFor(() => expect(result.current.uiState.notes).toHaveLength(1));
 
     await act(async () => {
@@ -89,7 +89,7 @@ describe('useNetworkingViewModel', () => {
     const theirs = { ...milk, title: 'Someone else won', etag: '"7"' };
     mockUpdateNote.execute.mockRejectedValueOnce(new NoteConflictException(theirs));
 
-    const { result } = renderHook(() => useNetworkingViewModel());
+    const { result } = await renderHook(() => useNetworkingViewModel());
     await waitFor(() => expect(result.current.uiState.notes).toHaveLength(1));
 
     await act(async () => {

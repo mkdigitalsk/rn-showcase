@@ -147,7 +147,7 @@ export const SignInScreen = () => {
               {uiState.biometricsResult && uiState.biometricsResult.type !== 'success' && (
                 <TextLabelSmall color={colors.error}>
                   {uiState.biometricsResult.type === 'failed'
-                    ? uiState.biometricsResult.message ?? t('error_generic')
+                    ? (uiState.biometricsResult.message ?? t('error_generic'))
                     : t('sign_in_biometric_cancelled')}
                 </TextLabelSmall>
               )}

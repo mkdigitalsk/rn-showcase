@@ -33,7 +33,7 @@ const AppContent = () => {
 
   return (
     <>
-      <StatusBar barStyle="light-content" backgroundColor={navigationTheme.colors.primary} />
+      <StatusBar barStyle="light-content" />
       <NavigationContainer theme={navigationTheme}>
         <RootStackNavigator />
       </NavigationContainer>
