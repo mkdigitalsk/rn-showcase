@@ -17,13 +17,21 @@ class FakeAuthApi implements AuthApi {
   tokenSeenByDeleteAccount: string | undefined = undefined;
   deleteAccountFails = false;
   demo = false;
+  /** What the server answers — a string, so a test can send a key this build does not know. */
+  language: string | undefined = 'EN';
 
   constructor(private session: FakeSessionPreferences) {}
 
   async signIn(): Promise<AuthResponseDTO> {
     return {
       token: 'token-of-the-person-signed-in',
-      user: { id: 1, email: 'someone@mkdigital.sk', themeMode: 'system', locale: 'en', demo: this.demo },
+      user: {
+        id: 1,
+        email: 'someone@mkdigital.sk',
+        themeMode: 'system',
+        language: this.language as AuthResponseDTO['user']['language'],
+        demo: this.demo,
+      },
     };
   }
 
@@ -84,6 +92,25 @@ describe('AuthRepositoryImpl', () => {
           expect(t.session.getSessionCounter()).toBe(0);
           expect(t.persistent.getPersistentCounter()).toBe(0);
           expect(t.notes.storedNotes()).toEqual([]);
+        },
+      });
+    });
+  });
+
+  describe('signIn', () => {
+    it.each([
+      ['the account’s language by its key', 'SK'],
+      ['a language this build does not know', 'FR'],
+      ['no language', undefined],
+    ])('starts the session on an answer with %s', async (_, language) => {
+      await test({
+        given: () => {
+          t.api.language = language;
+        },
+        whenAction: () => t.classUnderTest.signIn('someone@mkdigital.sk', 'MKDigitalTest1@'),
+        then: user => {
+          expect(user).toEqual({ id: 1, email: 'someone@mkdigital.sk', demo: false });
+          expect(t.session.getAuthToken()).toBe('token-of-the-person-signed-in');
         },
       });
     });
